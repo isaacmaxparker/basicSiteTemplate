@@ -3,12 +3,34 @@
     <head>
         <script src="scripts/global.js"></script>
         <link rel="stylesheet" href="styles/global.css">
+        <link rel="stylesheet" href="styles/home.css">
     </head>
     <body class="back-image-1">
-        <div class="content">
-            <div class="header xxl"> 
-                FAMILY FUED
+        <div class="content flex flex-column">
+            <div class="home_title_image flex">
+                <img src="images/Title.png">
+            </div>
+            <div class="header xs theme-text-1" style="margin-top:0px;"> 
+                HOME VERSION
+            </div>
+
+            <div id="play" class="header md white-text" style="margin-top:25px;" onclick="Global.playGame()"> 
+                PLAY
             </div>
         </div>
     </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+        });
+    </script>
 </html>

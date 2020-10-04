@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../scripts/global.js"></script>
+        <script src="../scripts/games.js"></script>
+        <link rel="stylesheet" href="../styles/global.css">
+        <link rel="stylesheet" href="../styles/home.css">
+    </head>
+    <body class="back-image-2">
+        <div class="content flex flex-column">
+            <div id="games_grid" class="grid-3" style="font-size: 4rem;">
+                <div class="grid-card blue_card header white-text flex-column">
+                    <div class="header md">Game Name</div>
+                    <p class="header xs pointer" onclick="selectGame(1)" style="margin-bottom: 0px;">Select</p>
+                </div>
+                <div class="grid-card blue_card header white-text flex-column">
+                    <div class="header md">Game Name</div>
+                    <p class="header xs pointer" onclick="selectGame(1)" style="margin-bottom: 0px;">Select</p>
+                </div>
+                <div class="grid-card blue_card header white-text flex-column">
+                    <div class="header md">Game Name</div>
+                    <p class="header xs pointer" onclick="selectGame(1)" style="margin-bottom: 0px;">Select</p>
+                </div>
+                <div class="grid-card blue_card header white-text flex-column">
+                    <div class="header md">Game Name</div>
+                    <p class="header xs pointer" onclick="selectGame(1)" style="margin-bottom: 0px;">Select</p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+            Games.init();
+            selectGame = Games.selectGame
+        });
+    </script>
+</html>

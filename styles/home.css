@@ -1,0 +1,10 @@
+.home_title_image{
+    width: 100vw;
+}
+.home_title_image img{
+    max-width: 90%;
+    max-height:70vh;
+}
+#play{
+    cursor: pointer;
+}
