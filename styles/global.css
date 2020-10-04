@@ -1,0 +1,132 @@
+/* FONTS */
+@font-face {
+    font-family: 'rifficons';
+    src: url('fonts/rifftideicons.woff') format('woff'),
+         url('fonts/rifftideicons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RennerLight';
+    src: url('fonts/renner-light-webfont.woff2') format('woff2'),
+         url('fonts/renner-light-webfont.woff') format('woff');
+    font-weight: lighter;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Renner';
+    src: url('fonts/renner-lightitalic-webfont.woff2') format('woff2'),
+         url('fonts/renner-lightitalic-webfont.woff') format('woff');
+    font-weight: lighter;
+    font-style: italic;
+
+}
+@font-face {
+    font-family: 'Renner';
+    src: url('fonts/renner-medium-webfont.woff2') format('woff2'),
+         url('fonts/renner-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Renner';
+    src: url('fonts/renner-mediumitalic-webfont.woff2') format('woff2'),
+         url('fonts/renner-mediumitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+body{
+    overflow-x: hidden
+}
+
+.icon{
+    font-family: 'rifficons' !important;
+}
+
+.content{
+    font-size: 5rem;
+}
+
+.black_cover{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: black;
+    opacity: .4;
+}
+.white_cover{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: white;
+    opacity: .4;
+}
+
+/* FLEXES */
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-row{
+    flex-direction: row;
+}
+.flex-column{
+    flex-direction: column;
+}
+
+/* HEADERS */
+.header{
+    font-family: 'Renner','RennerLight','Century Gothic';
+}
+
+.xxs{
+    font-size:25%;
+}
+.xs{
+    font-size: 50%;
+}
+.sm{
+    font-size: 85%;
+}
+.med{
+    font-size:100%;
+}
+.lg{
+    font-sizE:125%;
+}
+.xl{
+    font-size: 150%;
+}
+.xxl{
+    font-size: 175%;
+}
+.xxxl{
+    font-size: 200%;
+}
+
+/* COLORS */ 
+/* Set main color themes here:  */
+.whiteText{
+    color:white;
+}
+
+/* BACKGROUND IMAGES */
+/* Set main backgroudn images here */
+.back-image-1{
+    background-image:url('../images/farstage.jpg');
+    background-size:100%;
+}
+.back-image-2{
+    background-image:url('../images/blue_stage.jpg');
+    background-size:100%;
+}
