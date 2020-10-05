@@ -41,7 +41,8 @@
 }
 
 body{
-    overflow-x: hidden
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .icon{
@@ -49,7 +50,10 @@ body{
 }
 
 .content{
+    position: relative;
     font-size: 5rem;
+    width: 100vw;
+    height: 100vh;
 }
 
 .pointer{
@@ -193,7 +197,7 @@ body{
 /* Set main backgroudn images here */
 .back-image-1{
     background-image:url('../images/farstage.jpg');
-    background-position: center;
+    background-position: top;
     background-size:cover;
 
 }
@@ -203,4 +207,67 @@ body{
     background-size:cover;
 }
 
+/* CONTENT LAYOUT */ 
+.left-aside{
+    position: absolute;
+    width: 33vw;
+    top:-10px;
+    left: -10px;
+    height: calc(100vh - 20px);
+    transition:left 1s;
+}
+.right-aside{
+    position: absolute;
+    width: 33vw;
+    top:-10px;
+    right: 30px;
+    height: calc(100vh - 20px);
+    transition:right 1s;
+}
+.left-aside-container{
+    border: 10px solid rgb(6, 6, 104);
+    background-color: rgba(0, 0, 0, 0.767);
+width: 100%;
+position: relative;
+height: 100%;
+}
+.left-aside-button{
+    background-color: rgb(6, 6, 104);
+    width:50px;
+    height: 50px;
+    position: absolute;
+    right: -60px;
+    border-radius: 0px 5px 5px 0px;
+    top:0;
+    font-size: 2rem;
+}
+
+.right-aside-button{
+    background-color: rgb(6, 6, 104);
+    width:50px;
+    height: 50px;
+    position: absolute;
+    left: -60px;
+    border-radius: 0px 5px 5px 0px;
+    top:0;
+    font-size: 2rem;
+    font-family: 'Renner';
+}
+
+.left-aside-content{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:-10px;
+}
+
+.hidden-left-aside{
+    left: calc(-33vw - 20px);
+    transition:left 1s;
+}
+
+.hidden-right-aside{
+    right: calc(-33vw + 20px);
+    transition:right 1s;
+}
 

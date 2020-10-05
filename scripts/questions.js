@@ -12,12 +12,17 @@ const Games = (function() {
     const ANIMATION_DURATION = 800;
     const CURRENT_GAME_COOKIE = 'current-game';
     const GAMES_URL = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Misc/FamilyFued/games.json'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Misc/FamilyFued/games/'
   
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
      */
-    let games;
-    let gamesLoaded = false;
+    let questions;
+    let game;
+    let gameloaded;
+    let current_question = 0;
+    let questionsLoaded = false;
+    let current_game;
   
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -25,8 +30,10 @@ const Games = (function() {
 
     let init;  
     let loadGames;
-    let showGames;
-    let selectGame;
+    let loadQuestions;
+    let removeLoader;
+    let showQuestion;
+
 
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -42,32 +49,38 @@ const Games = (function() {
     loadGames = function(){
         Global.ajax(GAMES_URL, function(data) {
             games = data;
+            games.forEach(element => {
+                if(element.id == current_game){
+                    game = element
+                }
+            });
             gamesLoaded = true;
-            showGames();
+            loadQuestions;
             })
     }
-    showGames = function(){
-        if(gamesLoaded){
-            let grid = document.getElementById('games_grid');
-            let gridContent = ''
-            games.forEach(element =>{  
-                let divcontent = Global.htmlDiv(null,'header md',null,null,element.name)
-                divcontent += Global.htmlp(null,'header xs pointer','maring-bottom:0px;',`onclick="selectGame(${element.id})"`,"Select")
-                let div = Global.htmlDiv(null,`grid-card ${element.color ? element.color : 'white'}_card header white-text flex-column`,null,null,divcontent)
 
-                gridContent+=div
-                console.log(gridContent)
-            });
-            grid.innerHTML = gridContent;
+    loadQuestions = function(){
+        if(gameloaded){
+            let url = QUESTIONS_URL_PREFIX + game
+            Global.ajax(url, function(data) {
+                questions = data;
+                console.log(questions);
+                quesitonsLoaded = true;
+                removeLoader()
+                })
         }
         else{
-            loadGames()
+            loadGames;
         }
 
     }
-    selectGame = function(id){
-        Global.setCookie(CURRENT_GAME_COOKIE,id)
-        setTimeout(function(){location.replace("questions.html")},750);
+
+    removeLoader = function(){
+
+    }
+    showQuestion = function(question_id){
+        current_question = question_id;
+
     }
   
     /*------------------------------------------------------------------------
@@ -75,7 +88,6 @@ const Games = (function() {
      */
     return {
         init,
-        selectGame,
     };
   }());
   

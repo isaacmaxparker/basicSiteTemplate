@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../scripts/global.js"></script>
+        <script src="../scripts/questions.js"></script>
+        <link rel="stylesheet" href="../styles/global.css">
+        <link rel="stylesheet" href="../styles/questions.css">
+    </head>
+    <body class="back-image-1">
+        <div class="content">
+            <div id="left-aside" class="left-aside hidden-left-aside">
+                <div class="left-aside-container">
+                    <div class="left-aside-button icon whitetext flex"  onclick="Global.toggleAside(this.parentElement.parentElement)">
+                        <p class="icon white-text" style="opacity: .8;">!</p>
+                    </div>
+                    <div class="left-aside-content header flex-column white-text" style="justify-content: flex-start;padding:10px;padding-top:25px;">
+                        <div>
+                            SCORES
+                        </div>
+                        <div class="team_score_container flex-column">
+                            <input id="team_1_name" class="team_name xs team_one_back" value="Team One">
+                            <input id="team_1_scores" class="team_score xl team_one_back" value="0" >
+                        </div>
+                        <div class="team_score_container flex-column" style="margin-top: 10px;">
+                            <input id="team_2_name" class="team_name xs team_two_back" value="Team Two">
+                            <input id="team_2_scores" class="team_score xl team_two_back" value="0" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content header white-text flex">
+                <div class="question_container flex-column">
+                    <div id="question_div" class="question_div">Sample Question Text</div>
+                    <div class="answers_container flex-column">
+                        <div class="answers_row flex-row">
+                            <div id="answer_1" class="answer_div flex-row">
+                                <div class="answer_points">25</div>
+                                <div class="answer_text">Answer 1</div>
+                            </div>
+                            <div id="answer_2" class="answer_div flex-row">
+                                <div class="answer_points">25</div>
+                                <div class="answer_text">Answer 2</div>
+                            </div>
+                        </div>
+                        <div class="answers_row flex-row">
+                            <div id="answer_3" class="answer_div flex-row">
+                                <div class="answer_points">25</div>
+                                <div class="answer_text">Answer 3</div>
+                            </div>
+                            <div id="answer_4" class="answer_div flex-row">
+                                <div class="answer_points">25</div>
+                                <div class="answer_text">Answer 4</div>
+                            </div>
+                        </div>
+                        <div class="answers_row flex-row">
+                            <div id="answer_5" class="answer_div flex-row">
+                                <div class="answer_points">25</div>
+                                <div class="answer_text">Answer 5</div>
+                            </div>
+                            <div id="answer_6" class="answer_div flex-row">
+                                <div class="answer_points">25</div>
+                                <div class="answer_text">Answer 6</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="right-aside" class="right-aside hidden-right-aside">
+                <div class="left-aside-container">
+                    <div class="right-aside-button whitetext flex"  onclick="Global.toggleAside(this.parentElement.parentElement)">
+                        <p class="white-text" style="opacity: .8;">?</p>
+                    </div>
+                    <div class="left-aside-content header flex-column white-text" style="justify-content: flex-start;padding:10px;padding-top:25px;">
+                        <div class="sm">
+                            HOW TO PLAY:
+                        </div>
+                        <div class="team_score_container xs">
+                            Instructions Go here;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+            Questions.init();
+        });
+    </script>
+</html>

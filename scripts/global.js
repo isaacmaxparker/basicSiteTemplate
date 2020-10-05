@@ -28,6 +28,7 @@ const Global = (function() {
     let playGame;
     let getCookie;
     let setCookie;
+    let toggleAside;
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
      */
@@ -110,6 +111,28 @@ const Global = (function() {
         document.cookie = name + '=' + value + expires + '; path=/';
       }
 
+      toggleAside = function(aside){
+          if(aside.classList.contains('left-aside')){
+            if(aside.classList.contains('hidden-left-aside')){
+                aside.classList.remove('hidden-left-aside')
+                aside.children[0].children[0].children[0].innerHTML = '9';
+            }
+            else{
+                aside.classList.add('hidden-left-aside')
+                aside.children[0].children[0].children[0].innerHTML = '!';
+            }
+          }
+          else{
+            if(aside.classList.contains('hidden-right-aside')){
+                aside.classList.remove('hidden-right-aside')
+            }
+            else{
+                aside.classList.add('hidden-right-aside')
+            }
+          }
+      }
+
+
     /*------------------------------------------------------------------------
      *              PUBLIC METHODS
      */
@@ -121,6 +144,7 @@ const Global = (function() {
         playGame,
         getCookie,
         setCookie,
+        toggleAside,
     };
   }());
   
