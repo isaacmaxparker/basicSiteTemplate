@@ -15,19 +15,34 @@ html, body{
 .listItem{
     width: calc(100% - 35px);
     margin: 10px 10px;
-    border: solid 7px;
+    border: solid 3px;
+    border-radius: 10px;
     height: 75px;
     justify-content: left;
 }
 
+.listItemIcon img{
+ height: 100%;
+}
+
 .listItemDetails{
     justify-content: right;
-    width: 400px;
+    width: 350px;
     margin-right:25px;
+    margin-left:auto;
+}
+
+.listItemTime{
+    font-size: 1.25rem !important;
 }
 
 .listItemDetail{
     font-size: 2rem;
+}
+
+.listItemType{
+    text-transform: capitalize;
+    margin-right: auto;
 }
 
 .listItemSpacer{
@@ -45,7 +60,6 @@ html, body{
 .listItemIcon{
     width: 60px;
     height: 60px;
-    margin-left: auto;
 }
 
 .listSeparatorLine{
@@ -71,6 +85,7 @@ html, body{
     padding: 0px 15px;
     height: 100%; 
     text-align: center;
+    text-transform: capitalize;
 } 
 .postLine { 
     width: 100%; 
@@ -110,4 +125,160 @@ html, body{
     background-color: black;
     height: 2px;
     margin: 5px 20px;
+}
+
+.filterBox{
+    width: 32%;
+    margin-left:.5%;
+    margin-right: .5%
+}
+
+.mealFilterBoxes .filterBox{
+    width: 24%;
+}
+
+.filterBoxRow{
+    width: 100%;
+}
+
+.filterCheckbox{
+    height: 0;
+    width: 0;
+    display: none;
+}
+.filterTypeImageDiv{
+    width: 100%;;
+}
+
+.filterTypeImageDiv img{
+    width: 100%;;
+}
+
+.filterCheckbox:not(:checked) ~ .active_filter_image{
+    filter: grayscale(100%) brightness(50%);
+}
+
+#MealAll, #MealNone, #TypeAll, #TypeNone{
+    cursor: pointer;
+}
+
+.disabled {
+    opacity: .3;
+}
+
+.filterSelectBox{
+    margin-bottom: 10px;
+}
+
+.filterSelectBox p{
+    margin:0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.filterSelectBox p:hover{
+    opacity: .9;
+}
+
+.FormFilters{
+ width: 90%;
+}
+
+.listRange{
+    width: 100%;
+}
+#timeRangeLabel{
+    width: 100%;
+    text-align:center;
+}
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 255px;
+      -webkit-appearance: none;
+      background-color: #adadadad;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 20px;
+      -webkit-appearance: none;
+      color: #006310;
+      margin-top: -1px;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 20px;
+      -webkit-appearance: none;
+      height: 20px;
+      cursor: ew-resize;
+      background: #434343;
+      box-shadow: -255px 0 0 255px #43f779;
+    }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}
+
+#sortby{
+    width: 100%;
+    font-family: 'Renner';
+    padding:15px;
+    font-size: 1.25rem;
+    border-radius: 15px;
+    border:none;
+}
+.FormFilters, .typeFilters{
+    width: 100%;
+}
+
+/* COLORS */
+.item-LightBlue{
+    border-color: rgb(0, 164, 170);
+    color: rgb(4, 102, 102);
+    background-color: rgb(209, 255, 255);;
+}
+
+.item-LightPink{
+    border-color: rgb(170, 0, 113);
+    color: rgb(119, 7, 85);
+    background-color: rgb(255, 209, 244);;
+}
+
+.item-Red{
+    border-color: rgb(170, 0, 0);
+    color: rgb(170, 0, 0);
+    background-color: rgb(255, 209, 209);;
+}
+
+.item-Blue{
+    border-color: rgb(0, 26, 170);
+    color: rgb(10, 31, 121);
+    background-color: rgb(209, 227, 255);;
+}
+
+.item-Orange{
+    border-color: rgb(160, 133, 14);
+    color: rgb(94, 81, 9);
+    background-color: rgb(255, 247, 209);;
+}
+
+.item-Green{
+    border-color: rgb(0, 170, 43);
+    color: rgb(10, 121, 19);
+    background-color: rgb(209, 255, 219);;
 }
