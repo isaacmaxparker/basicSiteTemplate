@@ -1,0 +1,113 @@
+html, body{
+    font-family: 'Renner';
+}
+
+.listContainer{
+ width: 100%;
+}
+
+.listScrollContainer{
+    max-height: calc(100% - 15px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.listItem{
+    width: calc(100% - 35px);
+    margin: 10px 10px;
+    border: solid 7px;
+    height: 75px;
+    justify-content: left;
+}
+
+.listItemDetails{
+    justify-content: right;
+    width: 400px;
+    margin-right:25px;
+}
+
+.listItemDetail{
+    font-size: 2rem;
+}
+
+.listItemSpacer{
+    width: 1px;
+    height: 60px;
+    background-color:black;
+    margin: 0px 10px;
+}
+
+.listItemName{
+    width:calc(100% - 425px);
+    margin-left:10px;
+}
+
+.listItemIcon{
+    width: 60px;
+    height: 60px;
+    margin-left: auto;
+}
+
+.listSeparatorLine{
+    background-color: black;
+    width: 100%;
+    height: 2px;
+}
+.listSeparator { 
+    height: 3rem;  
+    font-size: 20px; 
+    padding:0px 10px;
+    font-weight: bold; 
+    margin-bottom:-10px;
+} 
+.preLine { 
+    float: left; 
+    width: 50px; 
+    height: 100%; 
+} 
+.lineSeparatorName{ 
+    float: left; 
+    /* width: 100px;  */
+    padding: 0px 15px;
+    height: 100%; 
+    text-align: center;
+} 
+.postLine { 
+    width: 100%; 
+    height: 100%; 
+} 
+
+.lineContainer{
+    height: 100%;
+}
+
+/* FILTERS ON THE RIGHT */
+
+.listFilters{
+    width: 100%;
+    height: 100%;
+}
+.listFilterContainer{
+    padding: 15px;
+}
+
+.listSearch{
+    margin-top:15px;
+}
+.listSearchTitle{
+    font-size: 1.75rem;
+    margin-bottom:10px;
+}
+.listSearchInput{
+    height: 1.5rem;
+    width: 90%;
+    font-size: 1.2rem;
+    padding:10px;
+    border:none;
+    border-radius: 15px;
+}
+.listFilterSeparator{
+    background-color: black;
+    height: 2px;
+    margin: 5px 20px;
+}

@@ -271,3 +271,22 @@ height: 100%;
     transition:right 1s;
 }
 
+.splitSite{
+    margin: 10px 0px;
+    width: 100vw;
+    height: calc(100vh - 20px);
+}
+
+.mainContent{
+    width: calc(100% - 400px);
+    height: 100%;
+    border:solid black 5px;
+}
+
+.rightSideBar{
+    width: 400px;
+    height: 100%;
+    border:solid black 5px;
+    background-color:lightgrey ;
+}
+
