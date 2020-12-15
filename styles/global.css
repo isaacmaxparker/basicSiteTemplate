@@ -1,6 +1,6 @@
 /* FONTS */
 @font-face {
-    font-family: 'rifficons';
+    font-family: 'icons';
     src: url('fonts/rifftideicons.woff') format('woff'),
          url('fonts/rifftideicons.ttf') format('truetype');
     font-weight: normal;
@@ -272,21 +272,75 @@ height: 100%;
 }
 
 .splitSite{
-    margin: 10px 0px;
+    /* margin: 5px 0px; */
     width: 100vw;
-    height: calc(100vh - 20px);
+    height: calc(100vh - 0px);
 }
 
-.mainContent{
+
+
+.flex-row .mainContent{
     width: calc(100% - 300px);
     height: 100%;
+    /* border:solid black 1px; */
+    border-radius: 15px 0px 0px 15px;
+}
+
+.flex-row .rightSideBar{
+    width: 290px;margin-left: 10px;
+    /* border:solid rgba(32, 61, 37, 0.719) 2px; */
+    height: calc(100%);
+    /* border-right:none; */
+    /* border-radius: 15px 0px 0px 15px; */
+    background-color:rgba(211, 211, 211, 0.63);
+    box-shadow: rgba(128, 128, 128, 0.534) -5px 0px 15px 0px;
+}
+
+.flex-column .mainContent{
+    width: 100%;
+    height: calc(100% - 500px);
     border:solid black 5px;
 }
 
-.rightSideBar{
-    width: 300px;
-    height: 100%;
-    border:solid black 5px;
-    background-color:rgba(211, 211, 211, 0.767) ;
+.splitSite.flex-column{
+    margin: 0px 10px;
 }
 
+
+
+/* COLORS */
+.item-LightBlue{
+    border-color: rgb(0, 164, 170) !important;
+    color: rgb(4, 102, 102);
+    background-color: rgb(209, 255, 255);;
+}
+
+.item-LightPink{
+    border-color: rgb(170, 0, 113) !important;
+    color: rgb(119, 7, 85);
+    background-color: rgb(255, 209, 244);;
+}
+
+.item-Red{
+    border-color: rgb(170, 0, 0) !important;
+    color: rgb(170, 0, 0);
+    background-color: rgb(255, 209, 209);;
+}
+
+.item-Blue{
+    border-color: rgb(0, 26, 170) !important;
+    color: rgb(10, 31, 121);
+    background-color: rgb(209, 227, 255);;
+}
+
+.item-Orange{
+    border-color: rgb(160, 133, 14) !important;
+    color: rgb(94, 81, 9);
+    background-color: rgb(255, 247, 209);;
+}
+
+.item-Green{
+    border-color: rgb(0, 170, 43) !important;
+    color: rgb(10, 121, 19);
+    background-color: rgb(209, 255, 219);;
+}

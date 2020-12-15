@@ -1,15 +1,24 @@
 html, body{
     font-family: 'Renner';
 }
+.centerLoad{
+    margin-left:50%;
+    text-align: center;
+    margin-top:50%;
+    transform: translate(-50%,-50%);
+    font-size: 150%;;
+}
 
 .listContainer{
  width: 100%;
 }
 
 .listScrollContainer{
-    max-height: calc(100% - 15px);
+    max-height: calc(100% - 1px);
     overflow-y: scroll;
     overflow-x: hidden;
+    /* -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.155) 0%, black 10%, black 98%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%) */
 }
 
 .listItem{
@@ -19,6 +28,10 @@ html, body{
     border-radius: 10px;
     height: 75px;
     justify-content: left;
+}
+
+.listItem:hover{
+    opacity: .8;
 }
 
 .listItemIcon img{
@@ -118,12 +131,12 @@ html, body{
     width: 90%;
     font-size: 1.2rem;
     padding:10px;
-    border:none;
+    border:1px solid rgba(58, 58, 58, 0.493);
     border-radius: 15px;
 }
 .listFilterSeparator{
-    background-color: black;
-    height: 2px;
+    background-color: rgba(0, 0, 0, 0.479);
+    height: 1px;
     margin: 5px 20px;
 }
 
@@ -246,39 +259,4 @@ input[type="range"]::-ms-fill-upper {
     width: 100%;
 }
 
-/* COLORS */
-.item-LightBlue{
-    border-color: rgb(0, 164, 170);
-    color: rgb(4, 102, 102);
-    background-color: rgb(209, 255, 255);;
-}
 
-.item-LightPink{
-    border-color: rgb(170, 0, 113);
-    color: rgb(119, 7, 85);
-    background-color: rgb(255, 209, 244);;
-}
-
-.item-Red{
-    border-color: rgb(170, 0, 0);
-    color: rgb(170, 0, 0);
-    background-color: rgb(255, 209, 209);;
-}
-
-.item-Blue{
-    border-color: rgb(0, 26, 170);
-    color: rgb(10, 31, 121);
-    background-color: rgb(209, 227, 255);;
-}
-
-.item-Orange{
-    border-color: rgb(160, 133, 14);
-    color: rgb(94, 81, 9);
-    background-color: rgb(255, 247, 209);;
-}
-
-.item-Green{
-    border-color: rgb(0, 170, 43);
-    color: rgb(10, 121, 19);
-    background-color: rgb(209, 255, 219);;
-}

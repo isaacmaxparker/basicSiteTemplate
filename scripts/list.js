@@ -25,6 +25,12 @@ const List = (function() {
     let sortedRecipies;
     let types = ["entree","side","bread","soup","dessert","drink"];
     let meals = ["breakfast","lunch","dinner","snack"];
+
+    /*------------------------------------------------------------------------
+     *              PUBLIC VARIABLES
+     */
+    let currentRecipie = null;
+    let message = null;
   
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -44,7 +50,9 @@ const List = (function() {
     let loadrecipies;
     let pullrecipies;
     let selectAll;
+    let selectRecipie;
     let sortRecipies;
+
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
      */
@@ -63,7 +71,7 @@ const List = (function() {
             time = time + " minutes"
         }
         let recipieString;
-        recipieString = `<div class='listItem flex-row item-${recipie.color}' data-name="${recipie.name.toLowerCase()}" data-type='${recipie.category}' data-meal='${recipie.meal}' data-submeal='${recipie.submeal}' data-time='${recipie.total_time}'>`
+        recipieString = `<div class='listItem flex-row item-${recipie.color}' data-name="${recipie.name.toLowerCase()}" data-altname="${recipie.alternate_names.toLowerCase()}" data-type='${recipie.category}' data-meal='${recipie.meal}' data-submeal='${recipie.submeal}' data-time='${recipie.total_time}' onclick="selectRecipie(${recipie.id})">`
         recipieString += `<div class='listItemDetail listItemName'>${recipie.name}</div>`
         recipieString += "<div class='listItemDetails flex-row'>"
         recipieString += `<div class='listItemDetail listItemIcon'><img src='images/icons/no-border/${recipie.category}.png'></div>`
@@ -171,12 +179,12 @@ const List = (function() {
         let types = getTypeFilters();
         let meals = getMealFilters();
         let time = determineTime(document.getElementById(TIME_RANGE_ID).value)[1];
-        let search = document.getElementById(SEARCH_BOX_ID).value;
-        console.log(search);
+        let search = document.getElementById(SEARCH_BOX_ID).value.toLowerCase();
+
         if(search != ""){
         for(let i = 0;i<items.length;i++){
            let item = items[i];
-           if(item.getAttribute('data-name').includes(search) && types.includes(item.getAttribute('data-type')) && (meals.includes(item.getAttribute('data-meal')) || meals.includes(item.getAttribute('data-submeal')) ) && item.getAttribute('data-time') <= time){
+           if((item.getAttribute('data-name').includes(search) || item.getAttribute('data-altname').includes(search) ) && types.includes(item.getAttribute('data-type')) && (meals.includes(item.getAttribute('data-meal')) || meals.includes(item.getAttribute('data-submeal')) ) && item.getAttribute('data-time') <= time){
                item.style.display = "flex";
            }
            else{
@@ -268,6 +276,15 @@ const List = (function() {
         filterList()
     }
 
+    selectRecipie = function(recipieID){
+        recipies.forEach(element => {
+            if(element.id == recipieID){
+                return window.location.href = "html/recipie.html?id=" + recipieID;
+            }
+        });
+        currentRecipie = recipie;
+    }
+
     sortRecipies = function(){
         let sortby = document.getElementById(SORT_BY_ID).value
         sortedRecipies = groupByKey(recipies, sortby);
@@ -295,6 +312,8 @@ const List = (function() {
         selectAll,
         filterList,
         sortRecipies,
+        selectRecipie,
+        currentRecipie,
     };
   }());
   
