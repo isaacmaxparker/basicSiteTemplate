@@ -25,6 +25,7 @@ const Global = (function() {
     let htmlDiv;
     let htmlp;
     let init;  
+    let goBack;
     let playGame;
     let getCookie;
     let setCookie;
@@ -59,6 +60,10 @@ const Global = (function() {
         request.onerror = failureCallback;
         request.send();
    };
+
+   goBack = function(){
+    window.history.back();
+    }
 
    htmlDiv = function(id, classes, styles, attr, content){
     let div = `<div ${id ? 'id=' + id : ''} ${classes ? 'class="' + classes +'"' : ''} ${styles ? 'style="' + styles + '"': ''} ${attr ? attr : ''}>${content ? content : ''}</div>`
@@ -145,6 +150,7 @@ const Global = (function() {
         getCookie,
         setCookie,
         toggleAside,
+        goBack,
     };
   }());
   

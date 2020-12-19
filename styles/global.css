@@ -43,6 +43,7 @@
 body{
     overflow-x: hidden;
     overflow-y: hidden;
+    font-family: 'Renner';
 }
 
 .icon{
@@ -307,7 +308,6 @@ height: 100%;
 }
 
 
-
 /* COLORS */
 .item-LightBlue{
     border-color: rgb(0, 164, 170) !important;
@@ -343,4 +343,15 @@ height: 100%;
     border-color: rgb(0, 170, 43) !important;
     color: rgb(10, 121, 19);
     background-color: rgb(209, 255, 219);;
+}
+
+.btn{
+    padding: 10px;
+    border:none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    opacity: .8;
 }

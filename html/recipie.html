@@ -11,35 +11,28 @@
     <body style="margin:0;">
         <div id="spliteSite" class="splitSite flex-row">
             <div id="rightside" class="rightSideBar">
-                <div class="flex-column">
+                <div style="height: 100vh;" class="flex-column">
                     <div id="recipieImage" class="recipieImage">
                         <p class="backArrow" onclick="goBack()">5</p>
                         <img src="../images/foods/chickenRolls.jpg">
                     </div>
-                    <div id="recipieTitle" class="recipieTitle">Chicken Rolls
+                    <div id="recipieTitle" class="recipieTitle"></div>
+                    <div id="recipieInfo" class="recipieInfo"></div>
+                    <div id="notesScroll" class="listScrollContainer">
+                        <div class="notesTitle">Notes:</div>
+                        <hr style="margin-bottom:0px;width: 95%;">
+                        <div id="recipieNotes" class="recipieNotes"></div>
+                        <hr style="margin-top:0px;width: 95%;">
                     </div>
-                    <div class=" recipieNotes listScrollContainer">
-                        <div id="recipieInfo" class="recipieInfo">
-                            <hr style="margin:10px">
-                            <div class="flex-column">
-                                <div class="flex-row">
-                                    <div class="recipieInfoHeader">Type: </div>
-                                    <div class="recipieType" style="margin-left:10px;">Entree</div>
-                                </div>
-                                <div class="flex-row" style="margin-top: 10px;">
-                                    <div class="flex-column">
-                                        <div class="recipieInfoHeader">Total Cooking Time: </div>
-                                        <div>1 hour 45 minutes</div>
-                                    </div>
-                                </div>
-                                <div class="flex-row"></div>
-                            </div>
-                            <hr style="margin:10px">
+                    <div class="recipieMultiplier">
+                        <div class="notesTitle">Multiplier:</div>
+                        <div id="multiplierButtons" class="flex-row multiplierButtons">
+                            <div id="thirdsButton" class="multiplierButton" onclick="changeMultiplier(3,'divide',this)">⅓</div>
+                            <div id="halvesButton" class="multiplierButton" onclick="changeMultiplier(2,'divide',this)">½</div>
+                            <div id="regularButton" class="multiplierButton" onclick="changeMultiplier()">0</div>
+                            <div id="doubleButton" class="multiplierButton" onclick="changeMultiplier(2,'multiply',this)" >x2</div>
+                            <div id="tripleButton" class="multiplierButton" onclick="changeMultiplier(3,'multiply',this)">x3</div>
                         </div>
-                        <div class="listScrollContainer">
-                            <div id="recipieNotes" class="recipieNotes"></div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -112,6 +105,8 @@
         ready(function () {
             Global.init();
             Recipie.init();
-            goBack = Recipie.goBack        });
+            goBack = Recipie.goBack 
+            changeMultiplier = Recipie.changeMultiplier
+        });
     </script>
 </html>

@@ -1,5 +1,5 @@
 html, body{
-    font-family: 'Renner';
+    font-family: 'Renner','Century Gothic','Arial','Helvetica';
 }
 .centerLoad{
     margin-left:50%;
@@ -15,7 +15,7 @@ html, body{
 
 .listScrollContainer{
     max-height: calc(100% - 1px);
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     /* -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.155) 0%, black 10%, black 98%, transparent 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 2%, black 98%, transparent 100%) */

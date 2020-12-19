@@ -25,6 +25,7 @@ const List = (function() {
     let sortedRecipies;
     let types = ["entree","side","bread","soup","dessert","drink"];
     let meals = ["breakfast","lunch","dinner","snack"];
+    let influences = ["american","mexican","italian","chinese","misc"]
 
     /*------------------------------------------------------------------------
      *              PUBLIC VARIABLES
@@ -46,6 +47,7 @@ const List = (function() {
     let groupByKey;
     let getMealFilters;
     let getTypeFilters;
+    let getInfluenceFilters;
     let init;
     let loadrecipies;
     let pullrecipies;
@@ -71,7 +73,7 @@ const List = (function() {
             time = time + " minutes"
         }
         let recipieString;
-        recipieString = `<div class='listItem flex-row item-${recipie.color}' data-name="${recipie.name.toLowerCase()}" data-altname="${recipie.alternate_names.toLowerCase()}" data-type='${recipie.category}' data-meal='${recipie.meal}' data-submeal='${recipie.submeal}' data-time='${recipie.total_time}' onclick="selectRecipie(${recipie.id})">`
+        recipieString = `<div class='listItem flex-row item-${recipie.color}' data-name="${recipie.name.toLowerCase()}" data-altname="${recipie.alternate_names.toLowerCase()}" data-type='${recipie.category}' data-meal='${recipie.meal}' data-submeal='${recipie.submeal}' data-time='${recipie.total_time}' onclick="selectRecipie('${recipie.name}')" data-influence="${recipie.influence.toLowerCase()}">`
         recipieString += `<div class='listItemDetail listItemName'>${recipie.name}</div>`
         recipieString += "<div class='listItemDetails flex-row'>"
         recipieString += `<div class='listItemDetail listItemIcon'><img src='images/icons/no-border/${recipie.category}.png'></div>`
@@ -178,13 +180,14 @@ const List = (function() {
         let items = document.getElementById(LIST_ID).querySelectorAll(LIST_ITEM_CLASS);
         let types = getTypeFilters();
         let meals = getMealFilters();
+        let influences = getInfluenceFilters();
         let time = determineTime(document.getElementById(TIME_RANGE_ID).value)[1];
         let search = document.getElementById(SEARCH_BOX_ID).value.toLowerCase();
 
         if(search != ""){
         for(let i = 0;i<items.length;i++){
            let item = items[i];
-           if((item.getAttribute('data-name').includes(search) || item.getAttribute('data-altname').includes(search) ) && types.includes(item.getAttribute('data-type')) && (meals.includes(item.getAttribute('data-meal')) || meals.includes(item.getAttribute('data-submeal')) ) && item.getAttribute('data-time') <= time){
+           if((item.getAttribute('data-name').includes(search) || item.getAttribute('data-altname').includes(search) ) && types.includes(item.getAttribute('data-type')) && influences.includes(item.getAttribute('data-influence')) && (meals.includes(item.getAttribute('data-meal')) || meals.includes(item.getAttribute('data-submeal')) ) && item.getAttribute('data-time') <= time){
                item.style.display = "flex";
            }
            else{
@@ -195,7 +198,7 @@ const List = (function() {
         else{
             for(let i = 0;i<items.length;i++){
                 let item = items[i];
-                if(types.includes(item.getAttribute('data-type')) && (meals.includes(item.getAttribute('data-meal')) || meals.includes(item.getAttribute('data-submeal')) ) && item.getAttribute('data-time') <= time){
+                if(types.includes(item.getAttribute('data-type')) && influences.includes(item.getAttribute('data-influence')) && (meals.includes(item.getAttribute('data-meal')) || meals.includes(item.getAttribute('data-submeal')) ) && item.getAttribute('data-time') <= time){
                     item.style.display = "flex";
                 }
                 else{
@@ -228,6 +231,16 @@ const List = (function() {
     getMealFilters = function(){
         let returnArray = [];
         meals.forEach(element => {
+            if(document.getElementById("filter-" + element).checked){
+                returnArray.push(element);
+            }
+        });
+        return returnArray;
+    }
+
+    getInfluenceFilters = function(){
+        let returnArray= [];
+        influences.forEach(element => {
             if(document.getElementById("filter-" + element).checked){
                 returnArray.push(element);
             }
@@ -276,10 +289,10 @@ const List = (function() {
         filterList()
     }
 
-    selectRecipie = function(recipieID){
+    selectRecipie = function(recipieName){
         recipies.forEach(element => {
-            if(element.id == recipieID){
-                return window.location.href = "html/recipie.html?id=" + recipieID;
+            if(element.name == recipieName){
+                return window.location.href = "html/recipie.html?id=" + element.name;
             }
         });
         currentRecipie = recipie;

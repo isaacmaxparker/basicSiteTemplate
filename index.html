@@ -141,6 +141,52 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="listFilterSeparator"></div>
+                        <div class="listFilterContainer listTypes flex-column">
+                            <div class="listSearchTitle">
+                                Influence:
+                            </div>
+                            <div class="filterSelectBox">
+                                <p onclick="selectAll('influenceFilters',true)">Select All</p>
+                                <p onclick="selectAll('influenceFilters',false)">Select None</p>
+                            </div>
+                            <div id="influenceFilters" class="typeFilters">
+                                <div class="flex-row filterBoxRow">
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-italian" type="checkbox" name="filter-entree" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/italian.png" onclick="checkFilter('filter-italian')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-american" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/american.png" onclick="checkFilter('filter-american')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-mexican" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/mexican.png" onclick="checkFilter('filter-mexican')">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-row filterBoxRow">
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-chinese" type="checkbox" name="filter-entree" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/chinese.png" onclick="checkFilter('filter-chinese')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-misc" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/misc.png" onclick="checkFilter('filter-misc')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 </div>
