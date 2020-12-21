@@ -68,12 +68,12 @@ const List = (function() {
                 h = " hours "
             }
             let minutes = time % 60;
-            time = hours + h + minutes + " minutes";
+            time = hours + h + "<br>" + minutes + " minutes";
         }else{
             time = time + " minutes"
         }
         let recipieString;
-        recipieString = `<div class='listItem flex-row item-${recipie.color}' data-name="${recipie.name.toLowerCase()}" data-altname="${recipie.alternate_names.toLowerCase()}" data-type='${recipie.category}' data-meal='${recipie.meal}' data-submeal='${recipie.submeal}' data-time='${recipie.total_time}' onclick="selectRecipie('${recipie.name}')" data-influence="${recipie.influence.toLowerCase()}">`
+        recipieString = `<div class='listItem flex-row item-${recipie.color}' data-name="${recipie.name.toLowerCase()}" data-altname="${recipie.alternate_names.toLowerCase()}" data-type='${recipie.category}' data-meal='${recipie.meal}' data-submeal='${recipie.submeal}' data-time='${recipie.total_time}' onclick="selectRecipie('${recipie.id}')" data-influence="${recipie.influence.toLowerCase()}">`
         recipieString += `<div class='listItemDetail listItemName'>${recipie.name}</div>`
         recipieString += "<div class='listItemDetails flex-row'>"
         recipieString += `<div class='listItemDetail listItemIcon'><img src='images/icons/no-border/${recipie.category}.png'></div>`
@@ -289,13 +289,12 @@ const List = (function() {
         filterList()
     }
 
-    selectRecipie = function(recipieName){
+    selectRecipie = function(recipieID){
         recipies.forEach(element => {
-            if(element.name == recipieName){
-                return window.location.href = "html/recipie.html?id=" + element.name;
+            if(element.id == recipieID){
+                return window.location.href = "html/recipie.html?id=" + element.id;
             }
         });
-        currentRecipie = recipie;
     }
 
     sortRecipies = function(){

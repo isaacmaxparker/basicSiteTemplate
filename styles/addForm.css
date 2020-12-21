@@ -1,7 +1,26 @@
+.btn{
+    color:rgb(214, 255, 209);
+    font-size: 150%;
+    text-align: center;
+    font-family: 'Renner';
+}
+
 .btn_download{
-    background-color: green;
+    background-color: rgb(32, 158, 32);
     color:white;
     font-size: 150%;
+}
+
+.btn_ok{
+    background-color: rgb(59, 175, 59);
+    width: 200px;
+    margin:20px;
+}
+
+.btn_cancel{
+    background-color: rgb(74, 110, 74);
+    width: 200px;
+    margin:20px;
 }
 
 .btn_submit{
@@ -9,8 +28,6 @@
     color:rgb(214, 255, 209);
     font-size: 150%;
     width: 300px;
-    text-align: center;
-    font-family: 'Renner';
 }
 
 .newRecipieForm{
@@ -28,7 +45,8 @@
 
 .inactive{
     opacity: .4;
-    filter:saturate(40%)
+    filter:saturate(40%);
+    cursor:not-allowed;
 }
 
 .inactive:hover{
@@ -64,6 +82,7 @@
 }
 
 .formInputSelect{
+    margin: 0px 10px;
     width: 107%;
     font-size: 1.2rem;
     padding:10px;
@@ -113,6 +132,11 @@
 .col-15{
     width: 15%;
 }
+
+.col-30 .formInputSelect,.col-30 .formInput{
+    max-width: 500px;
+}
+
 .timeInputs {
     height: 1.5rem;
     width: 100%;
@@ -139,7 +163,7 @@
     margin:0px 10px;
 }
 
-.ingredientContainer{
+.ingredientContainer, #recipiesToAdd{
     width: 100%;
 }
 
@@ -191,4 +215,116 @@
     margin: 0px;
     color:rgb(10, 90, 34);
     font-family: 'icons';
+}
+
+.recipieCard{
+    /* background-color: rgb(157, 189, 157); */
+    border-radius: 10px;
+    width: 90%; 
+    overflow: hidden;
+    max-height: 50px;
+    margin-bottom: 10px;
+    border: 1px solid;
+}
+
+.recipeCardList{
+    height: calc(100vh - 100px);
+    width: 100%;
+    justify-content: unset;
+}
+
+.recipieCardTitle{
+    height: 40px;
+    font-size: 125%;
+    padding:5px;margin-left: 5px;
+    text-transform: capitalize;
+
+}
+
+.recipeCardButtons div{
+    margin:5px;
+    margin-left: 0px;
+}
+
+.expanded{
+    max-height: none;
+}
+
+.RecipieCardDetails, .RecipeCardDetail{
+    width: 100%;
+    padding-bottom:5px;
+}
+
+.RecipeCardDetail div{
+    width:50%;
+    padding:3px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.cardIcon{
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0px;
+    font-family: 'icons';
+}
+
+.messageContainer{
+    position: absolute;
+    left:0;
+    top:0;
+    background-color: rgba(133, 133, 133, 0.438);
+    width: 100vw;
+    height:  100vh;
+    z-index: 100;
+    font-size: 2rem;
+}
+
+.messageDiv{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    border:green 5px solid;
+    min-height: 40vh;
+    min-width: 40vw;
+}
+
+.messageTitle{
+    font-size: 100%;
+    font-weight: bold;
+    color: rgb(12, 80, 12);
+}
+
+.messageText{
+    font-size: 75%;
+    margin-top:15px;
+    padding:20px;
+    text-align: center;font-family: 'Arial';
+}
+
+.messageOptions{
+    margin-top: 40px;
+    font-size: 50%;
+    
+}
+
+.messageOptions div{
+    cursor: pointer;
+}
+
+.messageOptions div:hover{
+    opacity: .8; 
+}
+
+.messageCloseIcon{
+    position: absolute;
+    right:20px;
+    top:20px;
+    color:rgb(36, 78, 36)
+}
+
+.noshow{
+    display: none;
 }

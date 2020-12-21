@@ -315,6 +315,12 @@ height: 100%;
     background-color: rgb(209, 255, 255);;
 }
 
+.item-Pink{
+    border-color: rgb(170, 0, 113) !important;
+    color: rgb(119, 7, 85);
+    background-color: rgb(255, 209, 244);;
+}
+
 .item-LightPink{
     border-color: rgb(170, 0, 113) !important;
     color: rgb(119, 7, 85);

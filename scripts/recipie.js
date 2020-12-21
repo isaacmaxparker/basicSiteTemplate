@@ -11,7 +11,7 @@ const Recipie = (function() {
      */
     const RECIPIES_JSON_URL = "https://raw.githubusercontent.com/isaacmcdgl/JSON/main/RecipieProject/Recipies.JSON";
     const SPLIT_CONTAINER_ID = "spliteSite";
-    const DIVS_TO_COLOR = ["rightside","mainside","ingredientsTable","ingredientsTableDiv", "thirdsButton", "halvesButton", "regularButton", "doubleButton", "tripleButton"]
+    const DIVS_TO_COLOR = ["rightside","mainside","ingredientsTable","ingredientsTableDiv", "thirdsButton", "halvesButton", "regularButton", "doubleButton", "tripleButton","backArrow"]
     const INGREDIENTS_DIV_ID = "ingredientsTable"
     const INGREDIENTS_TABLE_DIV_ID = "ingredientsTableDiv"
     const MAINSIDE_DIV_ID = "mainside";
@@ -25,12 +25,13 @@ const Recipie = (function() {
     const UPGRADEABLE_MEASUREMENTS = ["Tbsp","tsp"];
     const ACCEPTABLE_FRACTIONS = [1/16, 1/8, 1/6, 1/4, 1/3, 1/2, 2/3, 3/4, 3/8, 5/8, 7/8, 5/6];
     const NOTES_SCOLL_ID = 'notesScroll';
+    const RECIPIE_SERVINGS = 'recipieServings';
 
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
      */
     let currentRecipie;
-    let currentRecipieName;
+    let currentRecipieID;
     let toBold = [];
 
     /*------------------------------------------------------------------------
@@ -85,6 +86,9 @@ const Recipie = (function() {
                         }
 
                     });
+                    if(document.getElementById(RECIPIE_SERVINGS)){
+                        document.getElementById(RECIPIE_SERVINGS).innerHTML = Math.floor(currentRecipie.servings / amount);
+                    }
                     break;
                 case 'multiply':
                     currentRecipie.ingredients.forEach(element => {
@@ -99,7 +103,10 @@ const Recipie = (function() {
                             x = x * amount;
                             let u = checkUpgrade(x, element.secondaryMeasurement);
                             element.secondaryAmount = encodeAmount(u[0]);
-                            element.sescondaryMeasurement = decodeMeasurement(u[0], u[1])
+                            element.secondaryMeasurement = decodeMeasurement(u[0], u[1])
+                        }
+                        if(document.getElementById(RECIPIE_SERVINGS)){
+                            document.getElementById(RECIPIE_SERVINGS).innerHTML = Math.floor(currentRecipie.servings * amount);
                         }
                     });
                     
@@ -111,7 +118,7 @@ const Recipie = (function() {
 
                         if(element.secondaryAmount && element.secondaryMeasurement){
                             let x = decodeAmount(element.secondaryAmount);
-                            element.sescondaryMeasurement = decodeMeasurement(x, element.measurement)
+                            element.secondaryMeasurement = decodeMeasurement(x, element.secondaryMeasurement)
                         }
                     });
     
@@ -345,7 +352,7 @@ const Recipie = (function() {
     }
 
     loadImage = function(){
-        let imageString = `<p class="backArrow" onclick="goBack()">5</p>
+        let imageString = `<p id="backArrow" class="backArrow flex-column" onclick="goBack()">5</p>
                            <img src="../images/foods/${currentRecipie.image}">`
         document.getElementById(RECIPIE_IMAGE_DIV).innerHTML = imageString;
     }
@@ -405,9 +412,9 @@ const Recipie = (function() {
         let i = 0;
         ingredients.forEach(element => {
             if(i % 2 != 0){
-                ingredientsString+=`<div class="ingredient ${element.required ? "" : "ingredient-optional"}" ><b>${element.amount ? element.amount : ""}${element.measurement ? " " + element.measurement : ""}</b><span style="margin-left:7px;">${element.name}</span>${element.secondaryAmount ? "<i> (" + element.secondaryAmount + " " + element.secondaryMeasurement + ")</i>" : ""} <i>${element.notes ? element.notes : ""} ${element.required ? "" : "(optional)"}</i></div>`
+                ingredientsString+=`<div class="ingredient ${element.required ? "" : "ingredient-optional"}" ><b>${element.amount && element.amount != 0 ? element.amount : ""}${element.measurement ? " " + element.measurement : ""}</b><span style="margin-left:7px;">${element.name}</span>${element.secondaryAmount ? "<i> (" + element.secondaryAmount + " " + element.secondaryMeasurement + ")</i>" : ""} <i>${element.notes ? "(" + element.notes + ")": ""} ${element.required ? "" : "(optional)"}</i></div>`
             }else{
-                ingredientsString+=`<div class="ingredient ${element.required ? "" : "ingredient-optional"}" style="border-right: 2px solid;" ><b>${element.amount ? element.amount : ""}${element.measurement ? " " + element.measurement : ""}</b><span style="margin-left:7px;">${element.name}</span>${element.secondaryAmount ? "<i> (" + element.secondaryAmount + " " + element.secondaryMeasurement + ")</i>" : ""} <i>${element.notes ? element.notes : ""} ${element.required ? "" : "(optional)"}</i></div>`
+                ingredientsString+=`<div class="ingredient ${element.required ? "" : "ingredient-optional"}" style="border-right: 2px solid;" ><b>${element.amount && element.amount != 0 ? element.amount : ""}${element.measurement ? " " + element.measurement : ""}</b><span style="margin-left:7px;">${element.name}</span>${element.secondaryAmount ? "<i> (" + element.secondaryAmount + " " + element.secondaryMeasurement + ")</i>" : ""} <i>${element.notes ? "(" + element.notes + ")" : ""} ${element.required ? "" : "(optional)"}</i></div>`
             }
             i = i + 1;
             toBold.push(element.name)
@@ -442,7 +449,7 @@ const Recipie = (function() {
         };
         console.log("Started Recipie init...");
         var queryString = decodeURIComponent(window.location.search);
-        currentRecipieName = queryString.substring(4);
+        currentRecipieID = queryString.substring(4);
         window.scrollTo(0,0)
         pullrecipies();
     };
@@ -466,7 +473,7 @@ const Recipie = (function() {
         Global.ajax(RECIPIES_JSON_URL, function(data)
         {
             data.forEach(element => {
-                if(element.name == currentRecipieName){
+                if(element.id == currentRecipieID){
                     currentRecipie = element;
                 }
             });

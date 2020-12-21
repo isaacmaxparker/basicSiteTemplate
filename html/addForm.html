@@ -8,6 +8,22 @@
         <link rel="stylesheet" href="../styles/addForm.css">
     </head>
     <body style="margin:0;">
+        <div id="messageContainer" class="messageContainer noshow">
+            <div class="messageDiv flex-column">
+                <div class="messageCloseIcon cardIcon" onclick="closePrompt()">*</div>
+                <div class="messageTitle">Message Title</div>
+                <div class="messageText">Here is the message</div>
+                <div class="messageOptions flex-row">
+                    <div class="btn btn_cancel" onclick="closePrompt()">
+                        Cancel
+                    </div>
+                    <div class=" btn btn_ok">
+                        OK
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="spliteSite" class="splitSite flex-row">
             <div id="mainside" class="mainContent">
                 <hr width="95%">
@@ -68,18 +84,18 @@
                         <div class="formInputDiv flex-column col-20">
                             <div class="formInputLabel"><sup class="required">*</sup>Prep Time:</div>
                             <div class="timeInputs flex-row">
-                                <input type="number" id=prepTimeHour name="prepTimeHour" class="formInput" style="text-align: center;" required placeholder=0>
+                                <input type="number" id=prepTimeHour name="prepTimeHour" class="formInput" style="text-align: center;" required placeholder=0 onblur=addForm.defaultValue(this,0) onfocus="addForm.defaultValueRemove(this,0)">
                                 <div>hr</div>
-                                <input type="number" id=prepTimeMinute name="prepTimeMinute" class="formInput" style="text-align: center;" required placeholder=0>
+                                <input type="number" id=prepTimeMinute name="prepTimeMinute" class="formInput" style="text-align: center;" required placeholder=0 onblur=addForm.defaultValue(this,0) onfocus="addForm.defaultValueRemove(this,0)">
                                 <div>min</div>
                             </div>
                         </div>
                         <div class="formInputDiv flex-column col-20">
                             <div class="formInputLabel"><sup class="required">*</sup>Cook Time:</div>
                             <div class="timeInputs flex-row">
-                                <input type="number" id=cookTimeHour name="cookTimeHour" class="formInput" style="text-align: center;" required placeholder=0>
+                                <input type="number" id=cookTimeHour name="cookTimeHour" class="formInput" style="text-align: center;" required placeholder=0 onblur=addForm.defaultValue(this,0) onfocus="addForm.defaultValueRemove(this,0)">
                                 <div>hr</div>
-                                <input type="number" id=cookTimeMinute name="cookTimeMinute" class="formInput" style="text-align: center;" required placeholder=0>
+                                <input type="number" id=cookTimeMinute name="cookTimeMinute" class="formInput" style="text-align: center;" required placeholder=0 onblur=addForm.defaultValue(this,0) onfocus="addForm.defaultValueRemove(this,0)">
                                 <div>min</div>
                             </div>
                         </div>
@@ -115,9 +131,9 @@
                                 <div class="title">Name:</div>
                                 <input class="formInput col-45 ingName" placeholder="Ingredient Name" required>
                                 <div class="title">Amount:</div>
-                                <input type="number" class="formInput col-10 ingWhole" style="text-align: center;" required placeholder=0>
+                                <input type="number" class="formInput col-10 ingWhole" style="text-align: center;" required placeholder=0 onblur=addForm.defaultValue(this,0) onfocus="addForm.defaultValueRemove(this,0)">
                                     <select class="formInputSelect col-15 ingFrac">
-                                        <option value="" disabled selected></option>
+                                        <option value="" selected></option>
                                         <option value="1/8">1/8</option>
                                         <option value="1/4">1/4</option>
                                         <option value="1/3">1/3</option>
@@ -135,92 +151,22 @@
                                         <option value="tsp">tsp</option>
                                         <option value="oz">Oz</option>
                                         <option value="Cube">Cube</option>
+                                        <option value="Can">Can</option>
                                         <option value="Pkg">Pkg</option>
+                                        <option value="Container">Container</option>
                                         <option value="Quart">Quart</option>
                                         <option value="Pint">Pint</option>
                                         <option value="Gallon">Gallon</option>
+                                        <option value="Drop">Drop</option>
                                         <option value=""></option>
                                     </select>
                                 <input class="formInput optional col-30 ingNotes" placeholder="Notes">
                             </div>
                             <div class="deleteIcon" style="width:30px;opacity: 0;" >(</div>
 
-                        </div>
-                        <div class="flex-row ingredientContainer">
-                            <div class="ingredientRow flex-row">
-                                <div class="title">Name:</div>
-                                <input class="formInput col-45 ingName" placeholder="Ingredient Name" required>
-                                <div class="title">Amount:</div>
-                                <input type="number" class="formInput col-10 ingWhole" style="text-align: center;" required placeholder=0>
-                                    <select class="formInputSelect col-15 ingFrac">
-                                        <option value="" disabled selected></option>
-                                        <option value="1/8">1/8</option>
-                                        <option value="1/4">1/4</option>
-                                        <option value="1/3">1/3</option>
-                                        <option value="1/2">1/2</option>
-                                        <option value="5/8">5/8</option>
-                                        <option value="2/3">2/3</option>
-                                        <option value="5/6">5/6</option>
-                                        <option value="3/4">3/4</option>
-                                        <option value="7/8">7/8</option>
-                                        <option value="misc">Other</option>
-                                    </select>
-                                    <select class="formInputSelect col-20 IngMeasurement" required>
-                                        <option value="Cups">Cups</option>
-                                        <option value="Tbsp">Tbsp</option>
-                                        <option value="tsp">tsp</option>
-                                        <option value="oz">Oz</option>
-                                        <option value="Cube">Cube</option>
-                                        <option value="Pkg">Pkg</option>
-                                        <option value="Quart">Quart</option>
-                                        <option value="Pint">Pint</option>
-                                        <option value="Gallon">Gallon</option>
-                                        <option value=""></option>
-                                    </select>
-                                <input class="formInput optional col-30 ingNotes" placeholder="Notes">
-                            </div>
-                            <div class="deleteIcon" style="width:30px;" onclick=removeRow(this.parentElement,false)>(</div>
-
-                        </div>
-                        <div class="flex-row ingredientContainer">
-                            <div class="ingredientRow flex-row">
-                                <div class="title">Name:</div>
-                                <input class="formInput col-45 ingName" placeholder="Ingredient Name" required>
-                                <div class="title">Amount:</div>
-                                <input type="number" class="formInput col-10 ingWhole" style="text-align: center;" required placeholder=0>
-                                    <select class="formInputSelect col-15 ingFrac">
-                                        <option value="" disabled selected></option>
-                                        <option value="1/8">1/8</option>
-                                        <option value="1/4">1/4</option>
-                                        <option value="1/3">1/3</option>
-                                        <option value="1/2">1/2</option>
-                                        <option value="5/8">5/8</option>
-                                        <option value="2/3">2/3</option>
-                                        <option value="5/6">5/6</option>
-                                        <option value="3/4">3/4</option>
-                                        <option value="7/8">7/8</option>
-                                        <option value="misc">Other</option>
-                                    </select>
-                                    <select class="formInputSelect col-20 IngMeasurement" required>
-                                        <option value="Cups">Cups</option>
-                                        <option value="Tbsp">Tbsp</option>
-                                        <option value="tsp">tsp</option>
-                                        <option value="oz">Oz</option>
-                                        <option value="Cube">Cube</option>
-                                        <option value="Pkg">Pkg</option>
-                                        <option value="Quart">Quart</option>
-                                        <option value="Pint">Pint</option>
-                                        <option value="Gallon">Gallon</option>
-                                        <option value=""></option>
-                                    </select>
-                                <input class="formInput optional col-30 ingNotes" placeholder="Notes">
-                            </div>
-                            <div class="deleteIcon" style="width:30px;" onclick=removeRow(this.parentElement,false)>(</div>
-
-                        </div>
-                        
+                        </div>            
                     </div>
-                    <div class="title" style="cursor: pointer;" onclick="addIngredientRow()"><b>+</b> Add Another Ingredient</div>
+                    <div class="title" style="cursor: pointer;" onclick="addIngredientRow()" tabindex="0"><b>+</b> Add Another Ingredient</div>
                     <hr width="95%">
                     <div class="title">Steps:</div>
                     <div id="stepsContainer" class="ingredientsContainer">
@@ -232,24 +178,8 @@
                             <div class="deleteIcon" style="width:30px;opacity: 0;">(</div>
 
                         </div>
-                        <div class="flex-row ingredientContainer">
-                            <div class="ingredientRow flex-row">
-                                <div class="title"><span class="stepNum">2</span>)</div>
-                                <input class="formInput" placeholder="Type step directions here..." required>
-                            </div>
-                            <div class="deleteIcon" style="width:30px;" onclick=removeRow(this.parentElement,true)>(</div>
-
-                        </div>
-                        <div class="flex-row ingredientContainer">
-                            <div class="ingredientRow flex-row">
-                                <div class="title"><span class="stepNum">3</span>)</div>
-                                <input class="formInput" placeholder="Type step directions here..." required>
-                            </div>
-                            <div class="deleteIcon" style="width:30px;" onclick=removeRow(this.parentElement,true)>(</div>
-
-                        </div>
                     </div>
-                    <div class="title" style="cursor: pointer;" onclick="addStepRow()"><b>+</b> Add Another Step</div>
+                    <div class="title" style="cursor: pointer;" onclick="addStepRow()" tabindex="0"><b>+</b> Add Another Step</div>
                     <hr width="95%">
                     <div class="title">Recipie Notes: (optional)</div>
                     <div class="flex-row" style="width: 100%;">
@@ -264,14 +194,18 @@
             <div id="rightside" class="rightSideBar">
                 <div style="height: 100vh; width: 100%;" class="flex-column">
 
-                   <div class="buttons"><div class="btn btn_download inactive" onclick="downloadJSON()">Download JSON</div></div>
+                   <div class="buttons"><div id="downloadRecipieButton" class="btn btn_download inactive" onclick="downloadJSON()">Download JSON</div></div>
                    <a id="downloadAnchorElem" style="display:none"></a>
                    <hr style="width: 85%;">
-                   <div class="title">Recipies Added:</div>
+                   <div class="">Recipies Added:</div>
                    <hr style="width: 85%;">
-                   <div style="height: calc(100vh - 100px)" class="listScrollContainer">
+                   <div class="listScrollContainer recipeCardList flex-column">
+                       
+                        <div id="recipiesToAdd" class="flex-column">
 
+                        </div>
                    </div>
+                   <div id="clearQueue" onclick="addForm.removeAllRecipies(false)" class="title">Clear Queue</div>
                    <hr style="width: 85%;">
                 </div>
             </div>
@@ -293,11 +227,16 @@
             Global.init();
             addForm.init();
             goBack = Global.goBack 
+            defaultValue = addForm.defaultValue
             addNewRecipie = addForm.addNewRecipie
             downloadJSON = addForm.downloadJSON
             addIngredientRow = addForm.addIngredientRow
             removeRow = addForm.removeRow
             addStepRow = addForm.addStepRow
+            removeRecipie = addForm.removeRecipie
+            expandRecipie = addForm.expandRecipie
+            closePrompt = addForm.closePrompt
+            
         });
 
         var form = document.getElementById("recipieForm");
@@ -306,6 +245,9 @@
 
         function updateAlpha(){
             let x = document.getElementById("recipieName").value.charAt(0);
+            if(Number.isInteger(parseInt(x))){
+                x = "#";
+            }
             document.getElementById("recipieAlpha").value = x.toUpperCase();
         }
     </script>

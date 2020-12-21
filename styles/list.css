@@ -47,6 +47,7 @@ html, body{
 
 .listItemTime{
     font-size: 1.25rem !important;
+    line-height: 1.25;
 }
 
 .listItemDetail{
@@ -68,6 +69,7 @@ html, body{
 .listItemName{
     width:calc(100% - 425px);
     margin-left:10px;
+    text-transform: capitalize;
 }
 
 .listItemIcon{

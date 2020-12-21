@@ -89,10 +89,17 @@
     position: absolute;
     font-weight: bold;
     font-size: 25px;
-    left:10px;
-    top:25px;
+    left:2px;
+    top:17px;
+    width: 35px;
+    height: 35px;
     margin: 0px;
     font-family: 'icons';
+    opacity: .75;
+}
+
+.backArrow:hover{
+    opacity: 1;
 }
 
 .recipieIngredients{
