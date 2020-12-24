@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../scripts/global.js"></script>
+        <script src="../scripts/recipie.js"></script>
+        <script src="../scripts/list.js"></script>
+        <link rel="stylesheet" href="../styles/global.css">
+        <link rel="stylesheet" href="../styles/list.css">
+        <link rel="stylesheet" href="../styles/recipie.css">
+    </head>
+    <body style="margin:0;">
+        <div id="spliteSite" class="splitSite flex-row">
+            <div id="rightside" class="rightSideBar">
+                <div style="height: 100vh;" class="flex-column">
+                    <div id="recipieImage" class="recipieImage">
+                        <p id="backArrow" class="backArrow" onclick="goBack()">5</p>
+                        <img src="../images/foods/chickenRolls.jpg">
+                    </div>
+                    <div id="recipieTitle" class="recipieTitle"></div>
+                    <div id="recipieInfo" class="recipieInfo"></div>
+                    <div id="notesScroll" class="listScrollContainer">
+                        <div class="notesTitle">Notes:</div>
+                        <hr style="margin-bottom:0px;width: 95%;">
+                        <div id="recipieNotes" class="recipieNotes"></div>
+                        <hr style="margin-top:0px;width: 95%;">
+                    </div>
+                    <div class="recipieMultiplier">
+                        <div class="notesTitle">Multiplier:</div>
+                        <div id="multiplierButtons" class="flex-row multiplierButtons">
+                            <div id="thirdsButton" class="multiplierButton" onclick="changeMultiplier(3,'divide',this)">⅓</div>
+                            <div id="halvesButton" class="multiplierButton" onclick="changeMultiplier(2,'divide',this)">½</div>
+                            <div id="regularButton" class="multiplierButton" onclick="changeMultiplier()">0</div>
+                            <div id="doubleButton" class="multiplierButton" onclick="changeMultiplier(2,'multiply',this)" >x2</div>
+                            <div id="tripleButton" class="multiplierButton" onclick="changeMultiplier(3,'multiply',this)">x3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mainside" class="mainContent">
+                <div class="flex-column" style="max-height: 100vh;">
+                    <div id="ingredientsTable" class="recipieIngredients">
+                        <div class="ingredientsTitle">Ingredients</div>
+                        <div id="ingredientsTableDiv" class="ingredientsTable flex-column">
+                            <div class="ingredient" style="border-right:solid 2px;"><b>2 pkgs</b> Pillsbury Crescent Roll Dough</span></div><div class="ingredient"><b>2 pkgs</b> Pillsbury Crescent Roll Dough</div>
+                        </div>
+                    </div>
+                    <div class=recipieSteps>
+                        <div class="ingredientsTitle">Instructions</div>
+                        <hr style="width: 95%;">
+                        <div id="stepsScrollContainer" class="listScrollContainer" style="max-height: calc(100% - 200px);">
+                            <div id="stepsList" class="stepsList">
+                                <!-- <div class="stepDiv flex-row">
+                                    <div class="stepNumber">1.)</div>
+                                    <div class="stepText">Melt ¼ cup of butter in a microwaveable bowl.</div>
+                                </div>
+                                <div class="stepDiv flex-row">
+                                    <div class="stepNumber">2.)</div>
+                                    <div class="stepText">Add all other non optional ingredients and stir with a fork until combined.</div>
+                                </div>
+                                <div class="stepDiv flex-row">
+                                    <div class="stepNumber">3.)</div>
+                                    <div class="stepText">Open rolls and fill each triangular piece with a spoon of the chicken mixture.  (use a small cookie scoop)</div>
+                                </div>
+                                <div class="stepDiv flex-row">
+                                    <div class="stepNumber">4.)</div>
+                                    <div class="stepText">Roll up staring at the large end and tucking in sides.</div>
+                                </div>
+                                <div class="stepDiv flex-row">
+                                    <div class="stepNumber">5.)</div>
+                                    <div class="stepText">If desired you can dip each roll in melted butter and then bread crumbs for a different outside texture.</div>
+                                </div>
+                                <div class="stepDiv flex-row">
+                                    <div class="stepNumber">6.)</div>
+                                    <div class="stepText">Place filled rolls on a greased cookie sheet with the small end point facing down.  (this keeps it from lifting open during the baking process.</div>
+                                </div>
+                                <div class="stepDiv flex-row">
+                                    <div class="stepNumber">7.)</div>
+                                    <div class="stepText">Bake at 350° for 15 to 20 minutes until golden brown.</div>
+                                </div>
+                                <div class="stepDiv flex-row">
+                                    <div class="stepNumber">8.)</div>
+                                    <div class="stepText">Serve warm with chicken gravy.</div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <hr style="width: 95%; margin-top: 0px;">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+            Recipie.init();
+            goBack = Recipie.goBack 
+            changeMultiplier = Recipie.changeMultiplier
+        });
+    </script>
+</html>

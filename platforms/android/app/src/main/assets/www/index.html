@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="scripts/global.js"></script>
+        <script src="scripts/list.js"></script>
+        <link rel="stylesheet" href="styles/global.css">
+        <link rel="stylesheet" href="styles/list.css">
+    </head>
+    <body style="margin:0;">
+        <div class="splitSite flex-row">
+            <div class="mainContent">
+                <div class="listScrollContainer">
+                    <div id="RecipieList" class="listContainer">
+                        <p class="centerLoad">Loading Recipies...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rightSideBar">
+                <div class="listScrollContainer">
+                <div class="listFilters">
+                    <div>
+                        <div class="listFilterContainer listSearch flex-column">
+                            <div class="listSearchTitle">
+                                Search:
+                            </div>
+                            <input id="searchbox" type="text" name="search" class="listSearchInput" oninput="filterList()">
+                        </div>
+                        <div class="listFilterSeparator"></div>
+                        <div class="listFilterContainer listTypes flex-column">
+                            <div class="listSearchTitle">
+                                Filters:
+                            </div>
+                            <div class="filterSelectBox">
+                                <p onclick="selectAll('typeFilters',true)">Select All</p>
+                                <p onclick="selectAll('typeFilters',false)">Select None</p>
+                            </div>
+                            <div id="typeFilters" class="typeFilters">
+                                <div class="flex-row filterBoxRow">
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-entree" type="checkbox" name="filter-entree" class="filterCheckbox" checked> 
+                                            <img id="meal_active" class="active_filter_image" src="images/icons/meal.png" onclick="checkFilter('filter-entree')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-side" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img id="grain_active" class="active_filter_image" src="images/icons/side.png" onclick="checkFilter('filter-side')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-bread" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img id="grain_active" class="active_filter_image" src="images/icons/grain.png" onclick="checkFilter('filter-bread')">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-row filterBoxRow">
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-soup" type="checkbox" name="filter-entree" class="filterCheckbox" checked> 
+                                            <img id="meal_active" class="active_filter_image" src="images/icons/soup.png" onclick="checkFilter('filter-soup')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-drink" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img id="grain_active" class="active_filter_image" src="images/icons/drink.png" onclick="checkFilter('filter-drink')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-dessert" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img id="grain_active" class="active_filter_image" src="images/icons/dessert.png" onclick="checkFilter('filter-dessert')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="listFilterSeparator"></div>
+                        <div class="listFilterContainer listTypes flex-column">
+                            <div class="listSearchTitle">
+                                Meal:
+                            </div>
+                            <div class="filterSelectBox">
+                                <p id="MealAll" onclick="selectAll('mealFilters',true)">Select All</p>
+                                <p id="MealNone" onclick="selectAll('mealFilters',false)">Select None</p>
+                            </div>
+                            <div id="mealFilters" class="typeFilters">
+                                <div class="flex-row filterBoxRow mealFilterBoxes">
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-breakfast" type="checkbox" name="filter-entree" class="filterCheckbox" checked> 
+                                            <img id="meal_active" class="active_filter_image" src="images/icons/breakfast.png" onclick="checkFilter('filter-breakfast')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-lunch" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img id="grain_active" class="active_filter_image" src="images/icons/lunch.png" onclick="checkFilter('filter-lunch')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-dinner" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img id="grain_active" class="active_filter_image" src="images/icons/dinner.png" onclick="checkFilter('filter-dinner')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-snack" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img id="grain_active" class="active_filter_image" src="images/icons/snack.png" onclick="checkFilter('filter-snack')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="listFilterSeparator"></div>
+                        <div class="listFilterContainer listTypes flex-column">
+                            <div class="listSearchTitle">
+                                Time:
+                            </div>
+                            <div class="FormFilters">
+                                <div id="timeRangeLabel"class="rangeLabel">0 - <span id="timeRangeUpper">4 hours</span></div>
+                                <input id="timeRange" class="listRange" type="range" min="1" max="9" value="8" onchange="filterList()" oninput="changeTime(this,'timeRangeUpper')">
+                            </div>
+                        </div>
+                        <div class="listFilterSeparator"></div>
+                        <div class="listFilterContainer listTypes flex-column">
+                            <div class="listSearchTitle">
+                                Sort By:
+                            </div>
+                            <div class="typeFilters">
+                                <div class="FormFilters">
+                                    <select name="sortby" id="sortby" onchange="sortRecipies()">
+                                        <option value="alpha">Name (Alphabetically)</option>
+                                        <option value="category">Type</option>
+                                        <option value="meal">Meal</option>
+                                        <option value="time_range">Cooking Time</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="listFilterSeparator"></div>
+                        <div class="listFilterContainer listTypes flex-column">
+                            <div class="listSearchTitle">
+                                Influence:
+                            </div>
+                            <div class="filterSelectBox">
+                                <p onclick="selectAll('influenceFilters',true)">Select All</p>
+                                <p onclick="selectAll('influenceFilters',false)">Select None</p>
+                            </div>
+                            <div id="influenceFilters" class="typeFilters">
+                                <div class="flex-row filterBoxRow">
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-italian" type="checkbox" name="filter-entree" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/italian.png" onclick="checkFilter('filter-italian')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-american" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/american.png" onclick="checkFilter('filter-american')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-mexican" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/mexican.png" onclick="checkFilter('filter-mexican')">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-row filterBoxRow">
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-chinese" type="checkbox" name="filter-entree" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/chinese.png" onclick="checkFilter('filter-chinese')">
+                                        </div>
+                                    </div>
+                                    <div class="filterBox">
+                                        <div class="filterTypeImageDiv">
+                                            <input id="filter-misc" type="checkbox" name="filter-bread" class="filterCheckbox" checked> 
+                                            <img class="active_filter_image" src="images/icons/misc.png" onclick="checkFilter('filter-misc')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+            List.init();
+            checkFilter = List.checkFilter;
+            changeTime = List.changeTime;
+            selectAll = List.selectAll;
+            filterList = List.filterList;
+            sortRecipies = List.sortRecipies;
+            selectRecipie = List.selectRecipie;
+        });
+    </script>
+</html>

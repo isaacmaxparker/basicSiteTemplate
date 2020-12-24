@@ -1,0 +1,176 @@
+.flex-row .mainContent{
+    width: calc(100% - 300px);
+    height: 100%;
+    border-radius: none;
+    background-color: white !important;
+}
+
+.flex-row .rightSideBar{
+    width: 290px;margin-right: 10px;
+    height: calc(100%);
+    background-color:rgba(211, 211, 211, 0.63);
+    box-shadow: rgba(128, 128, 128, 0.534) 5px 0px 15px 0px;
+    margin-left:0px;
+}
+
+
+.recipieImage{
+    margin-bottom:10px;
+    position: relative;
+}
+
+.recipieTitle{
+    font-size: 2rem;
+    margin-bottom:0px;
+    width: 100%;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.recipieInfo{
+    font-size: 1.25rem;
+}
+
+.recipieInfoHeader{
+    font-weight: bold;
+    margin-bottom:3px;
+}
+
+.recipieImage img{
+    margin-top:15px;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border: 2px solid;
+}
+
+.notesTitle{
+    text-align: center;
+    font-weight: bold;
+}
+
+.recipieNotes{
+    height: calc(39vh - 100px);
+    padding: 2px 10px;
+    line-height: 1.25;
+    overflow-y:auto;
+    margin-bottom: auto;
+}
+
+
+.recipieMultiplier{
+    height: 100px;
+    width: 100%;
+    margin-bottom:0px;
+    margin-top: auto;
+}
+
+.multiplierButtons{
+    font-family: 'Helvetica';
+    width: 100%;
+}
+
+.multiplierButton{
+    width: calc(20% - 10px);
+    padding: 9px;
+    text-align: center;
+    margin:5px;
+    border: solid 2px;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.multiplierButton:hover{
+    opacity: .8;
+    cursor: pointer;
+}
+
+.backArrow{
+    position: absolute;
+    font-weight: bold;
+    font-size: 25px;
+    left:2px;
+    top:17px;
+    width: 35px;
+    height: 35px;
+    margin: 0px;
+    font-family: 'icons';
+    opacity: .75;
+}
+
+.backArrow:hover{
+    opacity: 1;
+}
+
+.recipieIngredients{
+    margin:20px;
+    border:2px solid;
+    width: calc(100% - 20px);
+}
+
+.ingredientsTitle{
+    width: 100%;
+    font-size: 1.2rem;
+    padding:5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ingredientsTable{
+    border:solid 2px;
+    margin:15px;
+    border-top:4px solid;
+    display: grid;
+    grid-template-columns:50% 50%;
+    font-size: 130%;
+}
+.ingredient{
+    padding:10px;
+    text-align: center;
+    border-bottom:solid 2px;
+}
+.ingredientRow{
+    width: 100%;
+    border-bottom:solid 2px;
+    font-size:130%;
+}
+.stepDiv, .recipieSteps, .stepText{
+    width: calc(100% - 10px);
+}
+
+.recipieSteps{
+    width: calc(100% - 20px);
+}
+
+.stepNumber{
+    width:50px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-left:15px;
+}
+
+.stepText{
+    font-size:1.75rem;
+    margin-left:10px;
+}
+
+.stepDiv{
+    margin:20px 10px;
+}
+
+#mainside{
+    max-height: 100vh;
+    overflow:hidden;
+}
+
+.ingredient-optional{
+    background-color: rgba(0, 0, 0, 0.089);
+}
+.stepsList{
+    filter:brightness(50%)
+}
+.recipieType{
+    text-transform: capitalize;
+}
+
+.rec

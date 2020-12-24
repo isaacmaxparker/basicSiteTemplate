@@ -1,0 +1,363 @@
+/* FONTS */
+@font-face {
+    font-family: 'icons';
+    src: url('fonts/rifftideicons.woff') format('woff'),
+         url('fonts/rifftideicons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RennerLight';
+    src: url('fonts/renner-light-webfont.woff2') format('woff2'),
+         url('fonts/renner-light-webfont.woff') format('woff');
+    font-weight: lighter;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Renner';
+    src: url('fonts/renner-lightitalic-webfont.woff2') format('woff2'),
+         url('fonts/renner-lightitalic-webfont.woff') format('woff');
+    font-weight: lighter;
+    font-style: italic;
+
+}
+@font-face {
+    font-family: 'Renner';
+    src: url('fonts/renner-medium-webfont.woff2') format('woff2'),
+         url('fonts/renner-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Renner';
+    src: url('fonts/renner-mediumitalic-webfont.woff2') format('woff2'),
+         url('fonts/renner-mediumitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+body{
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: 'Renner';
+}
+
+.icon{
+    font-family: 'rifficons' !important;
+}
+
+.content{
+    position: relative;
+    font-size: 5rem;
+    width: 100vw;
+    height: 100vh;
+}
+
+.pointer{
+    cursor: pointer;
+    opacity: .8;
+}
+.pointer:hover{
+    opacity: 1;
+}
+
+.black_cover{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: black;
+    opacity: .4;
+}
+.white_cover{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: white;
+    opacity: .4;
+}
+
+.color-cover{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity: .4;
+}
+
+.blue{
+    background-color:blue;
+}
+
+/* FLEXES */
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.flex-column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* GRID */ 
+.grid-3 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+.grid-card{
+    border:10px solid;
+    width: 23vw;
+    height: 25vw;
+    background-position: center;
+    background-size:cover;
+    position: relative;
+    text-align: center;
+    margin:20px;
+}
+
+.blue_card{
+    background-image: url('../images/blue_velvet.jpg');
+    border-color: rgba(255, 255, 255, 0.623);
+}
+.red_card{
+    background-image: url('../images/red_velvet.jpg');
+}
+.pink_card{
+    background-image: url('../images/pink_velvet.jpg');
+}
+.orange_card{
+    background-image: url('../images/orange_velvet.jpg');
+}
+.green_card{
+    background-image: url('../images/green_velvet.jpg');
+}
+.white_card{
+    background-image: url('../images/white_velvet.jpg');
+}
+/* HEADERS */
+.header{
+    font-family: 'Renner','RennerLight','Century Gothic';
+}
+
+.xxs{
+    font-size:25%;
+}
+.xs{
+    font-size: 50%;
+}
+.sm{
+    font-size: 85%;
+}
+.md{
+    font-size:100%;
+}
+.lg{
+    font-sizE:125%;
+}
+.xl{
+    font-size: 150%;
+}
+.xxl{
+    font-size: 175%;
+}
+.xxxl{
+    font-size: 200%;
+}
+
+/* COLORS */ 
+/* Set main color themes here:  */
+.white-text{
+    color:white;
+}
+.theme-text-1{
+    color:rgba(207, 180, 27, 0.911);
+}
+.theme-text-2{
+    color:rgb(17, 17, 104)
+}
+
+/* BACKGROUND IMAGES */
+/* Set main backgroudn images here */
+.back-image-1{
+    background-image:url('../images/farstage.jpg');
+    background-position: top;
+    background-size:cover;
+
+}
+.back-image-2{
+    background-image:url('../images/blue_stage.jpg');
+    background-position: top;
+    background-size:cover;
+}
+
+/* CONTENT LAYOUT */ 
+.left-aside{
+    position: absolute;
+    width: 33vw;
+    top:-10px;
+    left: -10px;
+    height: calc(100vh - 20px);
+    transition:left 1s;
+}
+.right-aside{
+    position: absolute;
+    width: 33vw;
+    top:-10px;
+    right: 30px;
+    height: calc(100vh - 20px);
+    transition:right 1s;
+}
+.left-aside-container{
+    border: 10px solid rgb(6, 6, 104);
+    background-color: rgba(0, 0, 0, 0.767);
+width: 100%;
+position: relative;
+height: 100%;
+}
+.left-aside-button{
+    background-color: rgb(6, 6, 104);
+    width:50px;
+    height: 50px;
+    position: absolute;
+    right: -60px;
+    border-radius: 0px 5px 5px 0px;
+    top:0;
+    font-size: 2rem;
+}
+
+.right-aside-button{
+    background-color: rgb(6, 6, 104);
+    width:50px;
+    height: 50px;
+    position: absolute;
+    left: -60px;
+    border-radius: 0px 5px 5px 0px;
+    top:0;
+    font-size: 2rem;
+    font-family: 'Renner';
+}
+
+.left-aside-content{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:-10px;
+}
+
+.hidden-left-aside{
+    left: calc(-33vw - 20px);
+    transition:left 1s;
+}
+
+.hidden-right-aside{
+    right: calc(-33vw + 20px);
+    transition:right 1s;
+}
+
+.splitSite{
+    /* margin: 5px 0px; */
+    width: 100vw;
+    height: calc(100vh - 0px);
+}
+
+
+
+.flex-row .mainContent{
+    width: calc(100% - 300px);
+    height: 100%;
+    /* border:solid black 1px; */
+    border-radius: 15px 0px 0px 15px;
+}
+
+.flex-row .rightSideBar{
+    width: 290px;margin-left: 10px;
+    /* border:solid rgba(32, 61, 37, 0.719) 2px; */
+    height: calc(100%);
+    /* border-right:none; */
+    /* border-radius: 15px 0px 0px 15px; */
+    background-color:rgba(211, 211, 211, 0.63);
+    box-shadow: rgba(128, 128, 128, 0.534) -5px 0px 15px 0px;
+}
+
+.flex-column .mainContent{
+    width: 100%;
+    height: calc(100% - 500px);
+    border:solid black 5px;
+}
+
+.splitSite.flex-column{
+    margin: 0px 10px;
+}
+
+
+/* COLORS */
+.item-LightBlue{
+    border-color: rgb(0, 164, 170) !important;
+    color: rgb(4, 102, 102);
+    background-color: rgb(209, 255, 255);;
+}
+
+.item-Pink{
+    border-color: rgb(170, 0, 113) !important;
+    color: rgb(119, 7, 85);
+    background-color: rgb(255, 209, 244);;
+}
+
+.item-LightPink{
+    border-color: rgb(170, 0, 113) !important;
+    color: rgb(119, 7, 85);
+    background-color: rgb(255, 209, 244);;
+}
+
+.item-Red{
+    border-color: rgb(170, 0, 0) !important;
+    color: rgb(170, 0, 0);
+    background-color: rgb(255, 209, 209);;
+}
+
+.item-Blue{
+    border-color: rgb(0, 26, 170) !important;
+    color: rgb(10, 31, 121);
+    background-color: rgb(209, 227, 255);;
+}
+
+.item-Orange{
+    border-color: rgb(160, 133, 14) !important;
+    color: rgb(94, 81, 9);
+    background-color: rgb(255, 247, 209);;
+}
+
+.item-Green{
+    border-color: rgb(0, 170, 43) !important;
+    color: rgb(10, 121, 19);
+    background-color: rgb(209, 255, 219);;
+}
+
+.btn{
+    padding: 10px;
+    border:none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    opacity: .8;
+}
