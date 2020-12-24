@@ -353,7 +353,7 @@ const Recipie = (function() {
 
     loadImage = function(){
         let imageString = `<p id="backArrow" class="backArrow flex-column" onclick="goBack()">5</p>
-                           <img src="../images/foods/${currentRecipie.image}">`
+                           <img src="https://raw.githubusercontent.com/isaacmcdgl/basicSiteTemplate/Recipe/images/foods/${currentRecipie.image}">`
         document.getElementById(RECIPIE_IMAGE_DIV).innerHTML = imageString;
     }
 
