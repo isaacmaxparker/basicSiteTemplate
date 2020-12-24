@@ -7,11 +7,14 @@
         <link rel="stylesheet" href="../styles/global.css">
         <link rel="stylesheet" href="../styles/list.css">
         <link rel="stylesheet" href="../styles/recipie.css">
-        <link rel="stylesheet" media="(max-width:820px)" href="../styles/recipe-tablet.css">
+        <link rel="stylesheet" media="(max-width:720px)" href="../styles/recipie-tablet.css">
     </head>
     <body style="margin:0;">
-        <div id="spliteSite" class="splitSite flex-row">
-            <div id="rightside" class="rightSideBar">
+        <div id="left-aside" class="left-aside hidden-left-aside">
+            <div class="left-aside-container">
+                <div id="leftbutton" class="left-aside-button whitetext flex"  onclick="Global.toggleAside(this.parentElement.parentElement)">
+                    <p class="icon" style="opacity: .8;">!</p>
+                </div>
                 <div style="height: 100vh;" class="flex-column">
                     <div id="recipieImage" class="recipieImage">
                         <p id="backArrow" class="backArrow" onclick="goBack()">5</p>
@@ -37,18 +40,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="spliteSite" class="splitSite flex-row">
             <div id="mainside" class="mainContent">
                 <div class="flex-column" style="max-height: 100vh;">
                     <div id="recipieTitle" class="recipieTitle mobileRecipeTitle"></div>
                     <div id="ingredientsTable" class="recipieIngredients listScrollContainer">
                         <div class="ingredientsTitle">Ingredients</div>
+                        <hr style="width: 95%;">
                         <div id="ingredientsTableDiv" class="ingredientsTable flex-column">
                             <div class="ingredient" style="border-right:solid 2px;"><b>2 pkgs</b> Pillsbury Crescent Roll Dough</span></div><div class="ingredient"><b>2 pkgs</b> Pillsbury Crescent Roll Dough</div>
                         </div>
                     </div>
+                    <div class="ingredientsTitle">Instructions</div>
+                    <hr style="width: 95%;">
                     <div class=recipieSteps>
-                        <div class="ingredientsTitle">Instructions</div>
-                        <hr style="width: 95%;">
+
                         <div id="stepsScrollContainer" class="listScrollContainer" style="max-height: calc(100% - 200px);">
                             <div id="stepsList" class="stepsList">
                                 <!-- <div class="stepDiv flex-row">

@@ -104,7 +104,8 @@
 
 .recipieIngredients{
     margin:20px;
-    border:2px solid;
+    /* border:2px solid; */
+    background-color: white;
     width: calc(100% - 20px);
     max-height: 39vh;
 }
@@ -174,4 +175,6 @@
     text-transform: capitalize;
 }
 
-.rec
+.mainContent{
+    width: calc(100vw - 100px) !important;
+}

@@ -98,6 +98,10 @@
     opacity: .75;
 }
 
+.icon{
+    font-family: 'icons';
+}
+
 .backArrow:hover{
     opacity: 1;
 }

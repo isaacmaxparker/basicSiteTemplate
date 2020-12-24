@@ -47,7 +47,7 @@ body{
 }
 
 .icon{
-    font-family: 'rifficons' !important;
+    font-family: 'icons' !important;
 }
 
 .content{
@@ -226,13 +226,13 @@ body{
     transition:right 1s;
 }
 .left-aside-container{
-    border: 10px solid rgb(6, 6, 104);
-    background-color: rgba(0, 0, 0, 0.767);
+    background-color: rgba(218, 218, 218, 0.767);
 width: 100%;
 position: relative;
 height: 100%;
 }
 .left-aside-button{
+    font-family: 'icons';
     background-color: rgb(6, 6, 104);
     width:50px;
     height: 50px;

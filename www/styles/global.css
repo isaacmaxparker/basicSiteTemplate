@@ -47,7 +47,7 @@ body{
 }
 
 .icon{
-    font-family: 'rifficons' !important;
+    font-family: 'icons' !important;
 }
 
 .content{
@@ -209,13 +209,18 @@ body{
 }
 
 /* CONTENT LAYOUT */ 
+
 .left-aside{
+    background-color: rgb(153, 153, 153);
     position: absolute;
-    width: 33vw;
-    top:-10px;
+    width: 300px;
+    top:0px;
     left: -10px;
     height: calc(100vh - 20px);
-    transition:left 1s;
+    transition:left .7s;
+    border: 5px solid;
+    z-index: 80;
+    box-shadow: rgba(128, 128, 128, 0.63) 5px 5px 5px;
 }
 .right-aside{
     position: absolute;
@@ -226,21 +231,24 @@ body{
     transition:right 1s;
 }
 .left-aside-container{
-    border: 10px solid rgb(6, 6, 104);
-    background-color: rgba(0, 0, 0, 0.767);
-width: 100%;
+margin-left: 10px;
+width: calc(100% - 10px);
 position: relative;
 height: 100%;
 }
 .left-aside-button{
-    background-color: rgb(6, 6, 104);
+    font-family: 'icons';
+    background-color: rgba(255, 255, 255, 0.685);
     width:50px;
     height: 50px;
     position: absolute;
     right: -60px;
     border-radius: 0px 5px 5px 0px;
-    top:0;
+    top:15px;
     font-size: 2rem;
+    left:289px;
+    border: 5px solid;
+    border-left: none;
 }
 
 .right-aside-button{
@@ -263,8 +271,8 @@ height: 100%;
 }
 
 .hidden-left-aside{
-    left: calc(-33vw - 20px);
-    transition:left 1s;
+    left: -300px;
+    transition:left .7s;
 }
 
 .hidden-right-aside{
