@@ -11,7 +11,7 @@ const Recipie = (function() {
      */
     const RECIPIES_JSON_URL = "https://raw.githubusercontent.com/isaacmcdgl/JSON/main/RecipieProject/Recipies.JSON";
     const SPLIT_CONTAINER_ID = "spliteSite";
-    const DIVS_TO_COLOR = ["rightside","mainside","ingredientsTable","ingredientsTableDiv", "thirdsButton", "halvesButton", "regularButton", "doubleButton", "tripleButton","backArrow"]
+    const DIVS_TO_COLOR = ["mainside","ingredientsTable","ingredientsTableDiv", "thirdsButton", "halvesButton", "regularButton", "doubleButton", "tripleButton","backArrow","leftbutton","left-aside"]
     const INGREDIENTS_DIV_ID = "ingredientsTable"
     const INGREDIENTS_TABLE_DIV_ID = "ingredientsTableDiv"
     const MAINSIDE_DIV_ID = "mainside";
@@ -193,9 +193,7 @@ const Recipie = (function() {
     }
 
     checkOrientation = function(){
-
-        alert("turned");
-        resize()
+        location.reload();
     }
     
     closestTo = function(number){
@@ -439,7 +437,6 @@ const Recipie = (function() {
     }
 
     init = function(onInitializedCallback) {
-        alert("INITTING");
         window.onorientationchange = function(event) { 
             checkOrientation();
         };
@@ -461,7 +458,6 @@ const Recipie = (function() {
         let stepsScroll = document.getElementById(STEPS_DIV_ID);
 
         stepsScroll.style.maxHeight = "0px";
-        alert("PAUSE");
         let bigDiv = document.getElementById(MAINSIDE_DIV_ID);
         let table = document.getElementById(INGREDIENTS_DIV_ID);
         let remainder = bigDiv.offsetHeight - table.clientHeight;

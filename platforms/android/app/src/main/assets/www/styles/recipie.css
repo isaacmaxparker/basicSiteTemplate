@@ -98,17 +98,14 @@
     opacity: .75;
 }
 
-.icon{
-    font-family: 'icons';
-}
-
 .backArrow:hover{
     opacity: 1;
 }
 
 .recipieIngredients{
-    margin:20px;
-    border:2px solid;
+    /* margin:20px; */
+    /* border:2px solid; */
+    background-color: white;
     width: calc(100% - 20px);
     max-height: 39vh;
 }
@@ -178,4 +175,6 @@
     text-transform: capitalize;
 }
 
-.rec
+.mainContent{
+    width: calc(100vw - 100px) !important;
+}
