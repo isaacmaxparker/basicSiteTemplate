@@ -193,14 +193,7 @@ const Recipie = (function() {
     }
 
     checkOrientation = function(){
-        return;
-        if(window.innerWidth > window.innerHeight){
-            document.getElementById(SPLIT_CONTAINER_ID).classList.add('flex-column');
-            document.getElementById(SPLIT_CONTAINER_ID).classList.remove('flex-row');
-        }else{
-            document.getElementById(SPLIT_CONTAINER_ID).classList.remove('flex-column');
-            document.getElementById(SPLIT_CONTAINER_ID).classList.add('flex-row');
-        }
+        resize()
     }
     
     closestTo = function(number){

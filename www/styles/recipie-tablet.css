@@ -1,0 +1,29 @@
+.listItemType, .listItemTime, .listItemSpacer{
+    display: none;
+}
+
+.listItemIcon{
+    margin-left:auto;
+    margin-right: 0px;
+}
+
+.listItemDetails{
+    margin-right: 10px;
+}
+
+.rightSideBar{
+    width: 180px !important;
+}
+
+.mainContent{
+    width: calc(100% - 190px) !important;
+}
+
+.filterSelectBox, #sortby{
+    font-size: 69%;
+}
+
+.ingredientsTable{
+    grid-auto-rows: max-content;
+    grid-template-rows: max-content;
+}
