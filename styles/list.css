@@ -26,8 +26,10 @@ html, body{
     margin: 10px 10px;
     border: solid 3px;
     border-radius: 10px;
-    height: 75px;
+    min-height: 55px;
+    padding: 10px 0px;
     justify-content: left;
+    font-size: 1.7rem;
 }
 
 .listItem:hover{
@@ -46,12 +48,12 @@ html, body{
 }
 
 .listItemTime{
-    font-size: 1.25rem !important;
+    font-size: 75% !important;
     line-height: 1.25;
 }
 
 .listItemDetail{
-    font-size: 2rem;
+    font-size: 100%;
 }
 
 .listItemType{
