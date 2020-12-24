@@ -193,6 +193,8 @@ const Recipie = (function() {
     }
 
     checkOrientation = function(){
+
+        
         resize()
     }
     
@@ -455,10 +457,13 @@ const Recipie = (function() {
     }
 
     resize = function(){
+        let stepsScroll = document.getElementById(STEPS_DIV_ID);
+
+        stepsScroll.style.maxHeight = "0px";
         let bigDiv = document.getElementById(MAINSIDE_DIV_ID);
         let table = document.getElementById(INGREDIENTS_DIV_ID);
         let remainder = bigDiv.offsetHeight - table.clientHeight;
-        let stepsScroll = document.getElementById(STEPS_DIV_ID);
+        
         stepsScroll.style.maxHeight = remainder -  85 + "px";
     }
 
