@@ -462,7 +462,7 @@ const Recipie = (function() {
         let table = document.getElementById(INGREDIENTS_DIV_ID);
         let remainder = bigDiv.offsetHeight - table.clientHeight;
         
-        stepsScroll.style.maxHeight = remainder -  85 + "px";
+        stepsScroll.style.maxHeight = remainder -  125 + "px";
     }
 
     pullrecipies = function(){

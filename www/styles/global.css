@@ -216,7 +216,7 @@ body{
     width: 300px;
     top:0px;
     left: -10px;
-    height: calc(100vh - 20px);
+    height: calc(100vh - 0px);
     transition:left .7s;
     border: 5px solid;
     z-index: 80;

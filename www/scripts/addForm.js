@@ -190,7 +190,7 @@ const addForm = (function () {
                 "amount":amount,
                 "measurement":div.querySelector(".IngMeasurement").value,
                 "name":div.querySelector(".ingName").value,
-                "notes":div.querySelector(".ingNotes").value,
+                "notes":div.querySelector(".ingNotes").value.includes("optional") ? "" : div.querySelector(".ingNotes").value,
                 "required":div.querySelector(".ingNotes").value.includes("optional") ? false : true
             }
             ingredients.push(ing);

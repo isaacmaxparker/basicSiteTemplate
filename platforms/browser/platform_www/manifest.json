@@ -6,7 +6,7 @@
   "scope": "index.html",
   "icons": [
     {
-      "src": "img/logo.png",
+      "src": "images/icons/MC.png",
       "sizes": "192x192",
       "type": "image/png"
     },

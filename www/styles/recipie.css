@@ -61,7 +61,7 @@
 .recipieMultiplier{
     height: 100px;
     width: 100%;
-    margin-bottom:0px;
+    margin-bottom:10px;
     margin-top: auto;
 }
 
@@ -107,7 +107,7 @@
     /* border:2px solid; */
     background-color: white;
     width: calc(100% - 20px);
-    max-height: 39vh;
+    /* max-height: 60vh; */
 }
 
 .ingredientsTitle{
