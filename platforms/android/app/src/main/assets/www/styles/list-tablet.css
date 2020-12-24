@@ -12,13 +12,17 @@
 }
 
 .rightSideBar{
-    width: 180px !important;
+    width: 250px !important;
 }
 
 .mainContent{
-    width: calc(100% - 190px) !important;
+    width: calc(100% - 260px) !important;
 }
 
 .filterSelectBox, #sortby{
-    font-size: 69%;
+    font-size: 78%;
+}
+
+.listItemName{
+    width: calc(100% - 75px);
 }
