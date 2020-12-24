@@ -194,7 +194,7 @@ const Recipie = (function() {
 
     checkOrientation = function(){
 
-        
+        alert("turned");
         resize()
     }
     
@@ -439,6 +439,7 @@ const Recipie = (function() {
     }
 
     init = function(onInitializedCallback) {
+        alert("INITTING");
         window.onorientationchange = function(event) { 
             checkOrientation();
         };
@@ -460,6 +461,7 @@ const Recipie = (function() {
         let stepsScroll = document.getElementById(STEPS_DIV_ID);
 
         stepsScroll.style.maxHeight = "0px";
+        alert("PAUSE");
         let bigDiv = document.getElementById(MAINSIDE_DIV_ID);
         let table = document.getElementById(INGREDIENTS_DIV_ID);
         let remainder = bigDiv.offsetHeight - table.clientHeight;
