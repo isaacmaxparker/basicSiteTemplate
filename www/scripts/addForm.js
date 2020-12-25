@@ -110,6 +110,7 @@ const addForm = (function () {
                                         <option value="Can">Can</option>
                                         <option value="Container">Container</option>
                                         <option value="Pkg">Pkg</option>
+                                        <option value="Lb">Lb</option>
                                         <option value="Quart">Quart</option>
                                         <option value="Pint">Pint</option>
                                         <option value="Gallon">Gallon</option>
