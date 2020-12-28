@@ -139,6 +139,7 @@ text-align: center;
     font-size:70%;
     margin-top:auto;
     margin-bottom:100px;
+    position: relative;
 }
 
 
@@ -201,7 +202,8 @@ text-align: center;
     width: calc(80% - 100px) !important;
     margin-left:10px;
     margin-right:100px;
-    font-size: 25% !important;
+    padding: 2px;
+    font-size: 80% !important;
 }
 #ff_points_1{
     border: 10px solid rgb(6, 6, 104) !important;
@@ -225,4 +227,41 @@ text-align: center;
 }
 .ffNoShow{
     opacity: 0;
+}
+
+.wrongButtons img{
+    width:80px;
+}
+
+.inactiveX{
+    opacity: .6;
+    filter: saturate(20%);
+}
+
+.toolKit{
+    position: absolute;
+    z-index: 1;
+    filter: grayscale(100%) brightness(100%);
+    right:10px;
+    bottom: 0;
+}
+
+.toolKit img{
+    opacity: .4;
+    width: 40px;
+    padding: 5px;
+}
+
+.toolKit img:hover{
+    opacity: .8;
+}
+
+#mainButtons{
+    width: 100%;
+}
+
+.loadScreen{
+    border-image-slice: 1 !important;
+    border-image-source: radial-gradient(#020096, #80c2ff,#031d74) !important;
+    background-color: rgba(4, 19, 59, 0.897);
 }

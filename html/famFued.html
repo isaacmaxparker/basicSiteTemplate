@@ -7,8 +7,20 @@
         <link rel="stylesheet" href="../styles/famFued.css">
     </head>
     <body>
+        <div style="display: none;">
+            <audio  id="rightAudio" controls>
+                <source src="../audios/right.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="wrongAudio" controls>
+                <source src="../audios/buzzer.wav" type="audio/mpeg">
+            </audio>
+        </div>
         <div class="backImage">
             <img src="../images/backgrounds/famFued_back.jpg">
+        </div>
+        <div class="loadScreen flex-column" onclick="Global.hideLoader(this)">
+            <img src="../images/logos/famfued_logo.png">
+            <p class="fakeLink loadLink">Click To Start</p>
         </div>
         <div class="content">
             <div id="left-aside" class="left-aside hidden-left-aside">
@@ -165,13 +177,24 @@
                             </div>
                         </div>
                         <div class="buttons flex-row" style="color: rgb(208, 255, 0);">
-                            <div class="navbutton icon inactive" onclick="switchFFQuestion(false)">9</div>
+                            <div class="navbutton icon" onclick="switchFFQuestion(false)">9</div>
                             <div class="navbutton icon" onclick="switchFFQuestion(true)">!</div>
                         </div>
                     </div>
                     <div class="buttons flex-row" id="mainButtons">
                         <div id="prevButton" class="navbutton icon inactive" onclick="switchQuestion(false)">9</div>
+                        <div id="xDiv" class="wrongButtons flex-row" onclick="toggleX()">
+                            <img src="../images/logos/famfued_x.png" class="inactiveX">
+                            <img src="../images/logos/famfued_x.png" class="inactiveX">
+                            <img src="../images/logos/famfued_x.png" class="inactiveX">
+                        </div>
                         <div id="nextButton" class="navbutton icon" onclick="switchQuestion(true)">!</div>
+                        <div class="toolKit">
+                            <div class="tools flex-row">
+                                <img src="../images/logos/reset.png" onclick="resetAnswers()">
+                                <img src="../images/logos/famfued_x.png" onclick="toggleX(true)">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -214,6 +237,8 @@
             toggleFFAnswer = famFued.toggleFFAnswer
             addFFPoints = famFued.addFFPoints
             savePoints = famFued.savePoints
+            toggleX = famFued.toggleX
+            resetAnswers = famFued.resetAnswers
         });
     </script>
 </html>

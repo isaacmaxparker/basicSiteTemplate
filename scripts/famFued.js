@@ -49,7 +49,7 @@ const famFued = (function() {
     let ff_question = 0;
     let points = [];
     let outstanding_points  = 19;
-
+    
 
   
     /*------------------------------------------------------------------------
@@ -80,6 +80,8 @@ const famFued = (function() {
     let sortNumbers;
     let resetAnswers;
     let toggleFFAnswer;
+    let playSound;
+    let toggleX;
 
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -183,17 +185,29 @@ const famFued = (function() {
             questionsLoaded = true;
             ff = questions.pop().questions;
             console.log(ff)
-            questions = questions.splice(0,questions.length -1)
+            questions = questions.splice(0,questions.length)
             console.log(questions)
             showQuestion();
             })
 
     }
+
+    playSound = function(sound){
+        switch(sound){
+            case "right":
+                document.getElementById('rightAudio').play()
+                break;
+            case "wrong":
+                document.getElementById('wrongAudio').play()
+                break;
+        }
+    }
     removeCover = function(cover){
         let answer = cover.parentElement.children[1];
         cover.classList.add('coverOff');
-        setTimeout(function(){answer.classList.remove('answerOff')},FLIP_DURATION)
-        calcPoints()
+        setTimeout(function(){answer.classList.remove('answerOff')},FLIP_DURATION);
+        calcPoints();
+        playSound("right");
     }
 
     resetAnswers = function(){
@@ -202,7 +216,9 @@ const famFued = (function() {
             answer.querySelector('.answer').classList.add('answerOff');
             setTimeout(function(){answer.querySelector('.answer_cover').classList.remove('coverOff');},FLIP_DURATION)
         }
-
+        toggleX(true);
+        outstanding_points = 0;
+        showOutstandingPoints();
     }
 
     showQuestion = function(){
@@ -292,7 +308,7 @@ const famFued = (function() {
             prevButton.classList.remove('inactive');
             if(current_question == questions.length){
                 nextButton.classList.add('inactive');
-            }else if (current_question == questions.length){
+            }else if (current_question == questions.length -1){
                 nextButton.classList.remove('icon');
                 nextButton.classList.remove('inactive');
                 nextButton.innerHTML = "FF";
@@ -336,6 +352,24 @@ const famFued = (function() {
             answer_div.classList.add("ffNoShow");
         }
     }
+
+    toggleX = function(clearAll=false){
+        let exes = document.getElementById("xDiv").children;
+
+        for (let index = 0; index < exes.length; index++) {
+            const element = exes[index];
+            if(clearAll){
+                element.classList.add("inactiveX");
+            }else{
+                if(element.classList.contains("inactiveX")){
+                    element.classList.remove("inactiveX");
+                    playSound("wrong")
+                    return;
+                }
+            }
+
+        }
+    }
     /*------------------------------------------------------------------------
      *              PUBLIC METHODS
      */
@@ -350,6 +384,8 @@ const famFued = (function() {
         showFFQuestion,
         toggleFFAnswer,
         savePoints,
+        toggleX,
+        resetAnswers,
     };
   }());
   

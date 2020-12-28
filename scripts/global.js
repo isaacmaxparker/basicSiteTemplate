@@ -25,6 +25,7 @@ const Global = (function() {
     let htmlDiv;
     let htmlp;
     let init;  
+    let hideLoader;
     let playGame;
     let getCookie;
     let setCookie;
@@ -64,6 +65,10 @@ const Global = (function() {
     let div = `<div ${id ? 'id=' + id : ''} ${classes ? 'class="' + classes +'"' : ''} ${styles ? 'style="' + styles + '"': ''} ${attr ? attr : ''}>${content ? content : ''}</div>`
     return div
 }
+
+   hideLoader = function(loader){
+    loader.style.display = "none";
+   }
 
    htmlp = function(id, classes, styles, attr, content){
     let div = `<p ${id ? 'id=' + id : ''} ${classes ? 'class="' + classes +'"' : ''} ${styles ? 'style="' + styles + '"': ''} ${attr ? attr : ''}>${content ? content : ''}</p>`
@@ -145,6 +150,7 @@ const Global = (function() {
         getCookie,
         setCookie,
         toggleAside,
+        hideLoader,
     };
   }());
   

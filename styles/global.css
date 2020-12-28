@@ -307,3 +307,36 @@ height: 100%;
     z-index: 0;
     object-fit: cover;
 }
+
+.loadScreen{
+    width: 90vw;
+    height: 90vh;
+    position: absolute;
+    z-index: 1000;
+    border:10px solid;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 0px 25px black;
+}
+
+.loadScreen img{
+    max-width: 90%;
+    height: auto;
+}
+
+.fakeLink{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.fakeLink:hover{
+    opacity: .8;
+}
+
+.loadLink{
+    font-family: 'Renner';
+    color: goldenrod;
+    font-size: 4rem;
+    text-shadow: black 5px 5px 5px;
+}
