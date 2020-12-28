@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../scripts/global.js"></script>
+        <script src="../scripts/famFued.js"></script>
+        <link rel="stylesheet" href="../styles/global.css">
+        <link rel="stylesheet" href="../styles/famFued.css">
+    </head>
+    <body>
+        <div class="backImage">
+            <img src="../images/backgrounds/famFued_back.jpg">
+        </div>
+        <div class="content">
+            <div id="left-aside" class="left-aside hidden-left-aside">
+                <div class="left-aside-container">
+                    <div class="left-aside-button icon whitetext flex"  onclick="Global.toggleAside(this.parentElement.parentElement)">
+                        <p class="icon white-text" style="opacity: .8;">!</p>
+                    </div>
+                    <div class="left-aside-content header flex-column white-text" style="justify-content: flex-start;padding:10px;padding-top:25px;height: 93vh;">
+                        <div>
+                            SCORES
+                        </div>
+                        <hr style="width: 95%; margin-top:none;">
+                        <div class="team_score_container flex-column">
+                            <input id="team_1_name" class="team_name xs team_one_back" value="Team One" onchange="savePoints()">
+                            <input id="team_score_1" class="team_score xl team_one_back" value="0" onchange="savePoints()">
+                        </div>
+                        <div class="spacer" style="margin:20px;"></div>
+                        <div class="team_score_container flex-column" style="margin-top: 10px;">
+                            <input id="team_2_name" class="team_name xs team_two_back" value="Team Two" onchange="savePoints()"> 
+                            <input id="team_score_2" class="team_score xl team_two_back" value="0" onchange="savePoints()" >
+                        </div>
+                        <hr style="width: 95%; margin-top:none;">
+                        <div class="scoreAdder flex-row" style="margin-top: auto; margin-bottom: 20px;">
+                            <div class="scoreText">Available Points: </div>
+                            <div id="scoreToAdd">0</div>
+                        </div>
+                        <hr style="width: 75%; margin:0px; margin-bottom:20px;opacity: .5;">
+                        <div class="scoreAdder flex-row" style="width:  100%;">
+                            <div class="addPoints team1Add" onclick="addPoints(1)">Team 1</div>
+                            <div class="addPoints team2Add" onclick="addPoints(2)">Team 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content header white-text flex">
+                <div class="flex-column" style="width: 100vh;height: 100vh;">
+                    <div id="normalQuestions" class="question_container flex-column">
+                        <div id="question_div" class="question_div">Sample Question Text</div>
+                        <div class="answers_container flex-column">
+                            <div class="answers_row flex-row">
+                                <div id="answer_1" class="answer_div flex-row">
+                                    <img class="answer_cover" src="../images/backgrounds/cover/cover1.png" onclick=removeCover(this)>
+                                    <div class="answer answerOff flex-row">
+                                        <div class="answer_points">25</div>
+                                        <div class="answer_text">Answer 1</div>
+                                    </div>
+                                </div>
+                                <div id="answer_4" class="answer_div flex-row">
+                                    <img class="answer_cover" src="../images/backgrounds/cover/cover4.png" onclick=removeCover(this)>
+                                    <div class="answer answerOff flex-row">
+                                        <div class="answer_points">25</div>
+                                        <div class="answer_text">Answer 4</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="answers_row flex-row">
+                                <div id="answer_2" class="answer_div flex-row">
+                                    <img class="answer_cover" src="../images/backgrounds/cover/cover2.png" onclick=removeCover(this)>
+                                    <div class="answer answerOff flex-row">
+                                        <div class="answer_points">25</div>
+                                        <div class="answer_text">Answer 2</div>
+                                    </div>
+                                </div>
+                                <div id="answer_5" class="answer_div flex-row">
+                                    <img class="answer_cover" src="../images/backgrounds/cover/cover5.png" onclick=removeCover(this)>
+                                    <div class="answer answerOff flex-row">
+                                        <div class="answer_points">25</div>
+                                        <div class="answer_text">Answer 5</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="answers_row flex-row">
+                                <div id="answer_3" class="answer_div flex-row">
+                                    <img class="answer_cover" src="../images/backgrounds/cover/cover3.png" onclick=removeCover(this)>
+                                    <div class="answer answerOff flex-row">
+                                        <div class="answer_points">25</div>
+                                        <div class="answer_text">Answer 3</div>
+                                    </div>
+                                </div>
+                                <div id="answer_6" class="answer_div flex-row">
+                                    <img class="answer_cover" src="../images/backgrounds/cover/cover6.png" onclick=removeCover(this)>
+                                    <div class="answer answerOff flex-row">
+                                        <div class="answer_points">25</div>
+                                        <div class="answer_text">Answer 6</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="finalFued" class="question_container flex-column noShow">
+                        <div class="Final_Title" onclick="showFFQuestion(0)">Final Fued</div>
+                        <div id="ff_question_div" class="question_div" onclick="toggleFFAnswer()">&nbsp;</div>
+                        <div id="ff_answer_div" class="question_div ffNoShow">&nbsp;</div>
+                        <div class="answers_container flex-row">
+                           <div class="ff_column">
+                               <div class="flex-row" style="width: 50%;margin-left: auto;margin-right: 100px;">
+                                <div class="ff_title team1Add" style="margin-left: auto;" onclick="addFFPoints()">Team 1</div>
+                                <input id="ff_points_1">
+                                
+                               </div>
+                               <hr style="width: 85%;margin:10px;">
+                               <div class="ff_answers" style="width: 100%;">
+                                   <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_1" onchange="sumFFPoints(1)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_1" onchange="sumFFPoints(1)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_1" onchange="sumFFPoints(1)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_1" onchange="sumFFPoints(1)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_1" onchange="sumFFPoints(1)">
+                                        <input class="ff_answer">
+                                    </div>
+                               </div>
+                           </div>
+                           <div class="ff_column">
+                                <div class="flex-row" style="width: 50%;margin-left: auto;margin-right: 100px;">
+                                <div class="ff_title team2Add" style="margin-left: auto;" onclick="addFFPoints()">Team 2</div>
+                                <input id="ff_points_2">
+                                
+                                </div>
+                                <hr style="width: 85%;margin:10px;">
+                                <div class="ff_answers" style="width: 100%;">
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_2" onchange="sumFFPoints(2)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_2" onchange="sumFFPoints(2)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_2" onchange="sumFFPoints(2)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_2" onchange="sumFFPoints(2)">
+                                        <input class="ff_answer">
+                                    </div>
+                                    <div class="flex-row" style="width: 100%;margin-bottom:10px;margin-top:10px;">
+                                        <input class="ff_answer_points ff_answer_points_2" onchange="sumFFPoints(2)">
+                                        <input class="ff_answer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons flex-row" style="color: rgb(208, 255, 0);">
+                            <div class="navbutton icon inactive" onclick="switchFFQuestion(false)">9</div>
+                            <div class="navbutton icon" onclick="switchFFQuestion(true)">!</div>
+                        </div>
+                    </div>
+                    <div class="buttons flex-row" id="mainButtons">
+                        <div id="prevButton" class="navbutton icon inactive" onclick="switchQuestion(false)">9</div>
+                        <div id="nextButton" class="navbutton icon" onclick="switchQuestion(true)">!</div>
+                    </div>
+                </div>
+            </div>
+            <div id="right-aside" class="right-aside hidden-right-aside">
+                <div class="left-aside-container">
+                    <div class="right-aside-button whitetext flex"  onclick="Global.toggleAside(this.parentElement.parentElement)">
+                        <p class="white-text" style="opacity: .8;">?</p>
+                    </div>
+                    <div class="left-aside-content header flex-column white-text" style="justify-content: flex-start;padding:10px;padding-top:25px;">
+                        <div class="sm">
+                            HOW TO PLAY:
+                        </div>
+                        <div class="team_score_container xs">
+                            Instructions Go here;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+            famFued.init();
+            switchQuestion  = famFued.switchQuestion
+            removeCover = famFued.removeCover
+            addPoints = famFued.addPoints
+            sumFFPoints = famFued.sumFFPoints
+            switchFFQuestion = famFued.switchFFQuestion 
+            showFFQuestion = famFued.showFFQuestion
+            toggleFFAnswer = famFued.toggleFFAnswer
+            addFFPoints = famFued.addFFPoints
+            savePoints = famFued.savePoints
+        });
+    </script>
+</html>

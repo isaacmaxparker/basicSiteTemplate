@@ -6,31 +6,20 @@
         <link rel="stylesheet" href="styles/home.css">
     </head>
     <body class="back-image-1">
-        <div class="content flex flex-column">
-            <div class="home_title_image flex">
-                <img src="images/Title.png">
-            </div>
-            <div class="header xs theme-text-1" style="margin-top:0px;"> 
-                HOME VERSION
-            </div>
 
-            <div id="play" class="header md white-text" style="margin-top:25px;" onclick="Global.playGame()"> 
-                PLAY
-            </div>
-        </div>
     </body>
     <script type="text/javascript">
-        //let showLocation;
-        function ready(fn) {
-            if (document.readyState != 'loading') {
-                fn();
-            } else {
-                document.addEventListener('DOMContentLoaded', fn);
+            //let showLocation;
+            function ready(fn) {
+                if (document.readyState != 'loading') {
+                    fn();
+                } else {
+                    document.addEventListener('DOMContentLoaded', fn);
+                }
             }
-        }
 
-        ready(function () {
-            Global.init();
-        });
+            ready(function () {
+                window.location = "html/games.html"
+            });
     </script>
 </html>

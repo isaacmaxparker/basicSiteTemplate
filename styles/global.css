@@ -121,15 +121,21 @@ body{
     grid-template-columns: auto auto auto;
     padding: 10px;
 }
+.grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 10px;
+}
 .grid-card{
     border:10px solid;
-    width: 23vw;
-    height: 25vw;
+    width: 90%;
+    height: 400px;
     background-position: center;
     background-size:cover;
     position: relative;
     text-align: center;
     margin:20px;
+    border-radius: 15px;
 }
 
 .blue_card{
@@ -194,6 +200,20 @@ body{
 }
 
 /* BACKGROUND IMAGES */
+.backImage{
+    position: absolute;
+    z-index: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.backImage img{
+    width: 100vw;
+    height: calc(100vh + 10px);
+    margin-top: -10px;
+    object-fit: cover;
+}
 /* Set main backgroudn images here */
 .back-image-1{
     background-image:url('../images/farstage.jpg');
@@ -215,6 +235,7 @@ body{
     left: -10px;
     height: calc(100vh - 20px);
     transition:left 1s;
+    z-index: 100;
 }
 .right-aside{
     position: absolute;
@@ -226,13 +247,15 @@ body{
 }
 .left-aside-container{
     border: 10px solid rgb(6, 6, 104);
-    background-color: rgba(0, 0, 0, 0.767);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#18009e, #93ddff,#18009e);
+    background-color: rgba(0, 0, 0, 0.979);
 width: 100%;
 position: relative;
 height: 100%;
 }
 .left-aside-button{
-    background-color: rgb(6, 6, 104);
+    background-color: #18009e;
     width:50px;
     height: 50px;
     position: absolute;
@@ -240,6 +263,8 @@ height: 100%;
     border-radius: 0px 5px 5px 0px;
     top:0;
     font-size: 2rem;
+    z-index: 800;
+    box-shadow: rgba(0, 0, 0, 0.486) 10px 5px 10px;
 }
 
 .right-aside-button{
@@ -248,7 +273,7 @@ height: 100%;
     height: 50px;
     position: absolute;
     left: -60px;
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 5px 0px 0px 5px;
     top:0;
     font-size: 2rem;
     font-family: 'Renner';
@@ -259,6 +284,7 @@ height: 100%;
     height: 100%;
     position: absolute;
     left:-10px;
+    box-shadow: rgba(0, 0, 0, 0.479) 5px 0px 10px;
 }
 
 .hidden-left-aside{
@@ -271,3 +297,13 @@ height: 100%;
     transition:right 1s;
 }
 
+.videoBack{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top:0;
+    left:0;
+    overflow: hidden;
+    z-index: 0;
+    object-fit: cover;
+}

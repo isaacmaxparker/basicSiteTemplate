@@ -1,0 +1,92 @@
+.card_image img{
+    width: 50%;
+}
+.grid-card{
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .8;
+}
+
+.grid-card:hover{
+    opacity:1;
+}
+
+.videoBack{
+    filter: hue-rotate(180deg);
+}
+
+.card_title{
+    text-shadow:black 5px 5px 5px;
+    font-style: italic;
+    opacity: .9;
+}
+
+.card_select{
+    color:white !important;
+}
+
+
+
+.blue_card{
+    background-image: url("../images/card_backs/blue_back.png");
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#18009e, #93ddff,#18009e);
+    box-shadow:navy 0px 0px 25px;
+    color:rgb(191, 217, 255);
+}
+.blue_card:hover{
+    box-shadow:rgb(74, 74, 221) 0px 0px 25px;
+}
+
+.pink_card{
+    background-image: url("../images/card_backs/pink_back.png");
+    border-image-slice: 5;
+    border-image-source: radial-gradient(#9e0089, #ff93f1,#9e0061);
+    box-shadow:rgb(128, 0, 107) 0px 0px 25px;
+    color:rgb(255, 191, 244);
+}
+.pink_card:hover{
+    box-shadow:rgb(221, 74, 201) 0px 0px 25px;
+}
+.green_card{
+    background-image: url("../images/card_backs/green_back.png");
+    border-image-slice: 5;
+    border-image-source: radial-gradient(#009e22, #93ffaa,#009e15);
+    box-shadow:rgb(0, 128, 32) 0px 0px 25px;
+    color:rgb(191, 255, 207);
+}
+.green_card:hover{
+    box-shadow:rgb(74, 221, 94) 0px 0px 25px;
+}
+.purple_card{
+    background-image: url("../images/card_backs/purple_back.png");
+    border-image-slice: 5;
+    border-image-source: radial-gradient(#6c009e, #d793ff,#52009e);
+    box-shadow:rgb(70, 0, 128) 0px 0px 25px;
+    color:rgb(224, 191, 255);
+}
+.purple_card:hover{
+    box-shadow:rgb(167, 74, 221) 0px 0px 25px;
+}
+
+.red_card{
+    background-image: url("../images/card_backs/red_back.png");
+    border-image-slice: 5;
+    border-image-source: radial-gradient(#9e0000, #ff9393,#9e0000);
+    box-shadow:rgb(128, 0, 0) 0px 0px 25px;
+    color:rgb(255, 191, 191);
+}
+.red_card:hover{
+    box-shadow:rgb(221, 74, 74) 0px 0px 25px;
+}
+
+.orange_card{
+    background-image: url("../images/card_backs/orange_back.png");
+    border-image-slice: 5;
+    border-image-source: radial-gradient(#9e6700, #ffd093,#9e6700);
+    box-shadow:rgb(128, 83, 0) 0px 0px 25px;
+    color:rgb(255, 227, 191);
+}
+.orange_card:hover{
+    box-shadow:rgb(221, 187, 74) 0px 0px 25px;
+}

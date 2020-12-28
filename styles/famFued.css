@@ -1,0 +1,223 @@
+input{
+    width: 80%;
+    text-align: center;
+    margin:0px;
+    padding:10px;
+    border:10px solid rgb(0, 0, 0);
+    color:white;
+    font-family: 'Renner';
+    font-size: 3rem;
+   
+}
+
+.team_score{
+    border-top: 0px none !important;
+}
+
+.team_one_back{
+    background: rgba(53, 52, 0, 0.363);
+    border: 10px solid rgb(6, 6, 104) !important;
+    border-image-slice: 1 !important;
+    border-image-source: radial-gradient(#007f96, #80f7ff,#006172) !important;
+}
+
+.team_two_back{
+    background: rgba(3, 70, 14, 0.363);
+    border: 10px solid rgb(6, 6, 104) !important;
+    border-image-slice: 1 !important;
+    border-image-source: radial-gradient(#009614, #80ff91,#007213) !important;
+}
+
+.team1Add{
+    color:rgba(40, 255, 255, 0.842);
+}
+.team2Add{
+    color:rgba(47, 255, 40, 0.842);
+}
+
+/* QUESTIONS */ 
+.question_div, .answer_div {
+    border: 10px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#2803f8, #0fa4e9,#18009e);
+    background-color: black;
+}
+
+.question_container{
+    padding:10px;
+    width:80vw;
+    margin-top: 12vh;
+}
+.question_div{
+    border: 10px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#f8cb03, #fdff80,#9e9400);
+    width: calc(100% - 65px);
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px;
+    
+}
+.answer_row{
+   width:100%;
+}
+.answer_div{
+    margin:5px;
+    width:50%;
+    position: relative;
+    background-color: rgb(9, 9, 94);
+    perspective: 1000px;
+}
+
+.answer_text{
+    font-size: 3rem;
+}
+
+.scoreAdder{
+    font-size: 30%;
+    width: 100%;
+    opacity: .5;
+}
+
+.addPoints{
+width: 40%;
+text-align: center;
+}
+
+.scoreText{
+    margin-right: 10px;
+}
+
+.answers_container, .answers_row{
+    width: 100%;
+}
+.answer_cover{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 5;
+    transform: rotateX(0deg);
+    transition: transform .2s ease;
+    
+}
+
+.coverOff{
+    transform: rotateX(90deg);
+    transition: transform .2s ease;
+}
+.answerOff{
+    transform: rotateX(-90deg) !important;
+    transition: transform .2s ease !important;
+}
+.answer{
+    background-image: url("../images/backgrounds/cover/answercover.png");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    transform: rotateX(0deg);
+    transition: transform .2s ease;
+    perspective: 1000px;
+    padding:20px;
+    position: relative;
+    min-height: 100px;
+}
+.answer_points{
+    position: absolute;
+    left: 20px;
+    top:50%;
+    transform:translate(0%,-50%);
+    color: gold;
+    opacity: .8;
+    font-style: italic;
+}
+
+.buttons{
+    font-size:70%;
+    margin-top:auto;
+    margin-bottom:100px;
+}
+
+
+.navbutton{
+    opacity: .5;
+    margin:20px;
+}
+.navbutton:hover{
+    opacity: .8;
+}
+
+.navbutton.inactive{
+    opacity: .3;
+    cursor: not-allowed;
+}
+
+.noShow{
+    display: none;
+}
+
+.Final_Title{
+    margin: 0px;
+    font-size: 60%;
+    color:gold;
+    margin-bottom:20px;
+}
+
+#finalFued input{
+    background-color: black;
+    border: 10px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#b1b1b1, #535353,#cecece);
+}
+
+.ff_column{
+    width: 50%;
+}
+
+.ff_column .flex-row input{
+    width:50%;
+}
+.ff_title{
+    font-size: 40%;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.ff_answer_points{
+    width: 50px !important;
+    font-size: 25px !important;
+    border:none !important;
+    background: none !important;
+    height: 100%;
+}
+.ff_answer{
+    width: calc(80% - 100px) !important;
+    margin-left:10px;
+    margin-right:100px;
+}
+#ff_points_1{
+    border: 10px solid rgb(6, 6, 104) !important;
+    border-image-slice: 1 !important;
+    border-image-source: radial-gradient(#007f96, #80f7ff,#006172) !important;
+}
+#ff_points_2{
+    border: 10px solid rgb(6, 6, 104) !important;
+    border-image-slice: 1 !important;
+    border-image-source: radial-gradient(#009619, #80ffb1,#047200) !important;
+}
+#question_div{
+    font-size: 80%;
+}
+#ff_question_div{
+    font-size: 70%;
+}
+#ff_answer_div{
+    font-size: 40%;
+    margin-bottom: 50px;
+}
+.ffNoShow{
+    opacity: 0;
+}
