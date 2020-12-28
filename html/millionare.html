@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../scripts/global.js"></script>
+        <script src="../scripts/millionare.js"></script>
+        <link rel="stylesheet" href="../styles/global.css">
+        <link rel="stylesheet" href="../styles/millionare.css">
+    </head>
+    <body>
+        <div style="display: none;">
+
+        </div>
+        <div class="backImage">
+            <img src="../images/backgrounds/millionare_back.jpg">
+        </div>
+        <div class="content">
+            <div class="flex-row triContent">
+                <div class="leftContent">
+
+                </div>
+                <div class="midContent flex-column">
+                    <div class="questions">
+                        <div class="questionDiv flex-column"><span id="questions_div">Insert First Question Here</span></div>
+                        <div class="answers flex-column">
+                            <div class="answerRow flex-row">
+                                <div class="answerDiv" style="margin-left:0px;"><span>A)</span><span class="answerText">First Option</span></div>
+                                <div class="answerDiv" style="margin-right: 0px;"><span>B)</span><span class="answerText">Second Option</span></div>
+                            </div>
+                            <div class="answerRow flex-row">
+                                <div class="answerDiv" style="margin-left:0px;"><span>C)</span><span class="answerText">Third Option</span></div>
+                                <div class="answerDiv" style="margin-right: 0px;"><span>D)</span><span class="answerText">Fourth Option</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mainButtons" class="buttons flex-row">
+                        <div id="prevButton" class="navbutton icon inactive" onclick="switchQuestion(false)">9</div>
+                        <div id="nextButton" class="navbutton icon" onclick="switchQuestion(true)">!</div>
+                        <div class="toolKit">
+                            <div class="tools flex-row">
+                                <img src="../images/logos/home.png" onclick="Global.goHome()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightContent">
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+            Milli.init();
+            switchQuestion = Milli.switchQuestion;
+        });
+    </script>
+</html>

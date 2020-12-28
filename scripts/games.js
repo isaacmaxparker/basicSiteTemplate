@@ -103,13 +103,12 @@ const Games = (function() {
             if(element.id == id){
                 switch(element.type){
                     case "famFued":
-                        setTimeout(function(){location.replace("famFued.html")},750);
-                        
+                        setTimeout(function(){location.replace("famFued.html")},150);
                         localStorage.setItem("currentGame", JSON.stringify(element))
                         break;
                     case "millionare":
-                        setTimeout(function(){location.replace("famFued.html")},750);
-                        localStorage.setItem("currentGame", element)
+                        setTimeout(function(){location.replace("millionare.html")},150);
+                        localStorage.setItem("currentGame", JSON.stringify(element))
                         break;
                 }
             }

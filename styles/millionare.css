@@ -1,0 +1,93 @@
+.triContent{
+    width: 100vw;
+    height: 100vh;
+}
+
+.leftContent, .rightContent{
+    width: 30vw;
+    height: 100%;
+}
+
+.midContent{
+    width: 60vw;
+    height: 100%;
+}
+.questions{
+    margin-top:50px;
+    width: 100%;
+    padding: 20px;
+}
+
+.questionDiv{
+    border: 10px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#7e7e7e, #ffffff,#919191);
+    background-color: black;
+    font-size: 46px;
+    padding:20px;
+    color:white;
+    text-align: center;
+    min-height: 100px;
+}
+
+.answers{
+    width:100%;
+}
+
+.answerRow{
+    width: 100%;
+}
+
+.answerDiv{
+    width: calc(50%);
+    margin:10px;
+    border: 10px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#3d51ff, #0fa4e9,#4053ff);
+    background-color: black;
+    min-height: 50px;
+    color:white;
+    font-size: 50%;
+    padding:20px;
+}
+
+.answerDiv span{
+    opacity: .6;
+    color: rgb(54, 54, 192);
+}
+.answerDiv .answerText{
+    opacity: 1;
+    color: rgb(255, 255, 255);
+    margin-left:20px;
+}
+
+.buttons{
+    margin-top:20px;
+    margin-bottom:50px;
+    color:white;
+}
+
+.buttons div{
+    opacity: .5;
+}
+
+.buttons div:hover{
+    opacity: .7;
+}
+
+.navbutton{
+    margin:20px;
+}
+
+.inactive{
+    opacity: .2 !important;
+    filter: grayscale(100%);
+    cursor: not-allowed;
+}
+
+.inactive:hover{
+    opacity: .2 !important;
+}
+.toolKit img{
+    opacity: .6;
+}

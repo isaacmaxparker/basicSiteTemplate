@@ -25,6 +25,7 @@ const Global = (function() {
     let htmlDiv;
     let htmlp;
     let init;  
+    let goHome;
     let hideLoader;
     let playGame;
     let getCookie;
@@ -60,6 +61,10 @@ const Global = (function() {
         request.onerror = failureCallback;
         request.send();
    };
+
+   goHome = function(){
+       window.location = "games.html"
+   }
 
    htmlDiv = function(id, classes, styles, attr, content){
     let div = `<div ${id ? 'id=' + id : ''} ${classes ? 'class="' + classes +'"' : ''} ${styles ? 'style="' + styles + '"': ''} ${attr ? attr : ''}>${content ? content : ''}</div>`
@@ -146,6 +151,7 @@ const Global = (function() {
         htmlDiv,
         htmlp,
         init,
+        goHome,
         playGame,
         getCookie,
         setCookie,

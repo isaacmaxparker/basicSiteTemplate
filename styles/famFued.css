@@ -238,27 +238,7 @@ text-align: center;
     filter: saturate(20%);
 }
 
-.toolKit{
-    position: absolute;
-    z-index: 1;
-    filter: grayscale(100%) brightness(100%);
-    right:10px;
-    bottom: 0;
-}
 
-.toolKit img{
-    opacity: .4;
-    width: 40px;
-    padding: 5px;
-}
-
-.toolKit img:hover{
-    opacity: .8;
-}
-
-#mainButtons{
-    width: 100%;
-}
 
 .loadScreen{
     border-image-slice: 1 !important;
