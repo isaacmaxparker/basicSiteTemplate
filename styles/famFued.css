@@ -177,8 +177,12 @@ text-align: center;
     width: 50%;
 }
 
+.ff_column .flex-row{
+    font-size: 50%;
+ }
+
 .ff_column .flex-row input{
-    width:50%;
+   font-size: 60%;
 }
 .ff_title{
     font-size: 40%;
@@ -197,6 +201,7 @@ text-align: center;
     width: calc(80% - 100px) !important;
     margin-left:10px;
     margin-right:100px;
+    font-size: 25% !important;
 }
 #ff_points_1{
     border: 10px solid rgb(6, 6, 104) !important;
@@ -209,14 +214,14 @@ text-align: center;
     border-image-source: radial-gradient(#009619, #80ffb1,#047200) !important;
 }
 #question_div{
-    font-size: 80%;
+    font-size: 60%;
 }
 #ff_question_div{
-    font-size: 70%;
+    font-size: 50%;
 }
 #ff_answer_div{
     font-size: 40%;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 .ffNoShow{
     opacity: 0;
