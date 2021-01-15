@@ -1,15 +1,102 @@
+
+/* CUSTOM SLIDERS */
+
+/*customised range*/ input[type="range"].range
+{
+    cursor: pointer;
+    min-width: 800px !important;
+    -webkit-appearance: none;
+    z-index: 200;
+    width:10px;
+    height: 5px;
+    border: 1px solid #e6e6e6;
+    border-radius: 100px;
+    background-color: #00000085;
+}
+
+/*customised range when focusing on input */ input[type="range"].range:focus
+{
+    border: 0 !important;
+outline: none !important;
+}
+
+/*customised range slider icon*/ input[type="range"].range::-webkit-slider-thumb
+{
+    -webkit-appearance: none;
+    width: 50px;
+    height: 50px;
+background-color: #555;
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4DDBFF), to(#00CCFF));
+    background-image: -webkit-linear-gradient(right, #4DDBFF, #00CCFF);
+    background-image: -moz-linear-gradient(right, #4DDBFF, #00CCFF);
+    background-image: -ms-linear-gradient(right, #4DDBFF, #00CCFF);
+    background-image: -o-linear-gradient(right, #4DDBFF, #00CCFF);
+}
+
+/*setting round corners to the range slider icon*/ input[type="range"].round::-webkit-slider-thumb {
+    -webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+-o-border-radius: 10px;
+}
+
+/* set range from 0 - 1 horizontal as by default */ .horizontal-lowest-first
+{
+    -webkit-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+    -ms-transform:rotate(0deg);
+    transform:rotate(0deg);
+}
+
+/* set range from 1 - 0 horizontal (highest first) */ .horizontal-highest-first
+{
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+
+/* set range from 0 - 1 vertically (lowest on top) */ .vertical-lowest-first
+{
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+}
+
+/* set range from 1 - 0 vertically (highest on top) */ .vertical-heighest-first
+{
+    -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    -o-transform:rotate(270deg);
+    -ms-transform:rotate(270deg);
+    transform:rotate(270deg);
+}
+
+
+
+
+/* ------------------------------------------------------------------- */
+
 .triContent{
     width: 100vw;
     height: 100vh;
+    background-color: rgba(0, 0, 0, 0.507);
 }
 
+.toolKit{
+    filter: grayscale(100%) brightness(200%)
+}
 .leftContent, .rightContent{
     width: 30vw;
     height: 100%;
 }
 
 .midContent{
-    width: 60vw;
+    width: calc(60vw - 20px);
+    margin:20px;
     height: 100%;
 }
 .questions{
@@ -30,6 +117,43 @@
     min-height: 100px;
 }
 
+.timer{
+    width: 100%;
+}
+
+
+#timerDiv{
+    opacity: .6;
+}
+.timerDiv{
+    border: 5px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#7e7e7e, #ffffff,#919191);
+    background-color: black;
+    font-size: 100px;
+    width: 40%;
+    min-width: 100px;
+    padding:20px;
+    color:white;
+    text-align: center;
+    min-height: 100px;
+}
+
+.timerButton{
+    border: 5px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#7e7e7e, #ffffff,#919191);
+    background-color: black;
+    font-size: 40px;
+    width: 50%;
+    padding:20px;
+    color:rgb(124, 124, 124);
+    text-align: center;
+}
+
+.invisible{
+    opacity: 0 !important;
+}
 .answers{
     width:100%;
 }
@@ -90,4 +214,218 @@
 }
 .toolKit img{
     opacity: .6;
+}
+
+.rightAnswer{
+    /* border-image-source: radial-gradient(#039e0b, #0fe921,#40ff40); */
+    filter:hue-rotate(240deg) brightness(105%);
+    transition: filter .5s 
+}
+
+.wrongAnswer{
+    filter:hue-rotate(140deg) brightness(105%) saturate(1.75);
+    transition: filter .5s 
+}
+
+.playerSlidersContainer{
+    width: 100%;
+    height: 100%;
+}
+
+.playerSlider{
+    height: 100%;
+    min-width: 100px;
+    border: solid rgba(0, 0, 0, 0.212);
+    border-width: 0px 2px;
+    background-color: rgba(0, 0, 0, 0.057);
+   
+}
+
+.sliderDiv{
+    height: calc(100% - 250px);
+}
+
+.mySlider{
+    /* background:none !important; */
+    border:none !important;
+}
+.playerActions{
+    width: 100%;
+    height: 50px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.playerActions img{
+    height: 80%;
+    padding:5px;
+    filter: saturate(0) brightness(250%);
+    opacity: .5;
+}
+.playerActions img:hover{
+    opacity: .7;
+}
+.playerName, .playerScore{
+    width: 90%;
+    font-size: 1.6rem;
+    padding:5px;
+    border:none;
+    background: none;
+    text-align: center;
+    margin-top:10px;
+    font-family: 'Renner';
+    font-weight: bold;
+    color: white;
+    opacity: .8;
+}
+
+.infoDiv{
+    width: 90%;
+    max-height: 150px;
+}
+
+.col-5{
+    width: 20%;
+}
+.col-4{
+    width: 25%;
+}
+.col-3{
+    width: 32%;
+}
+.col-2{
+    width: 50%;
+}
+.col-1{
+    width: 100%;
+}
+
+input[type="range"].range.playerBlack::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000000), to(#131313));
+}
+
+.playerBlack{
+    color:rgb(105, 105, 105);
+}
+
+input[type="range"].range.playerPink::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff4df6), to(#ff00ea));
+}
+
+.playerPink{
+    color:rgb(240, 79, 255);
+}
+
+.playerRed{
+    color:rgb(255, 0, 0);
+}
+
+input[type="range"].range.playerRed::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ff4d4d), to(#ff0000));
+}
+
+.playerYellow{
+    color:rgb(217, 255, 0);
+}
+
+input[type="range"].range.playerYellow::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffed4d), to(#ffe600));
+}
+
+.playerOrange{
+    color:rgb(255, 145, 0);
+}
+
+input[type="range"].range.playerOrange::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffb84d), to(#ff9900));
+}
+
+.playerLime{
+    color:rgb(9, 255, 0);
+}
+
+input[type="range"].range.playerLime::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5cff4d), to(#09ff00));
+}
+
+.playerTeal{
+    color:rgb(0, 255, 242);
+}
+
+input[type="range"].range.playerTeal::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4dffb5), to(#00ffc8));
+}
+
+.playerGrey{
+    color:rgb(199, 199, 199);
+}
+
+input[type="range"].range.playerGrey::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8a8a8a), to(#c7c7c7));
+}
+
+.playerBlue{
+    color:rgb(17, 0, 255);
+}
+
+input[type="range"].range.playerBlue::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4d50ff), to(#0004ff));
+}
+
+.playerPuple{
+    color:rgb(162, 0, 255);
+}
+
+input[type="range"].range.playerPurple::-webkit-slider-thumb
+{
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c74dff), to(#8c00ff));
+}
+
+#messageDiv{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 70%;
+    height: 70%;
+    background-color: rgba(0, 0, 0, 0.874);
+    border: 10px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#3d51ff, #0fa4e9,#4053ff);
+    z-index: 10000;
+    color:white;
+}
+
+.messageTitle{
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.hidden{
+    display:none;
+    opacity: 0;
+}
+
+.loadScreen{
+    background-color: rgba(0, 0, 0, 0.856)
+}
+
+.playNum{
+    color:white;
+    font-size: 4rem;
+    padding:20px;
+}
+
+.playNum:hover{
+    opacity: .6;
+    color:rgb(0, 255, 85);
 }

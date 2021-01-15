@@ -131,7 +131,8 @@ body{
 .grid-card{
     border:10px solid;
     width: 90%;
-    height: 400px;
+    min-height: 400px;
+    max-height: 600px;
     background-position: center;
     background-size:cover;
     position: relative;

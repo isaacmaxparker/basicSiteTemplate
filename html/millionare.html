@@ -7,28 +7,138 @@
         <link rel="stylesheet" href="../styles/millionare.css">
     </head>
     <body>
+        <div id="loadScreen" class="loadScreen flex-column">
+            <img src="../images/logos/millionare_logo.png" >
+            <p style="color: white;font-size: 2rem;">How many players?</p>
+            <div class="flex-row" style="width: 80%;">
+                <div class="playNum" onclick=loadPlayers(2)>2</div>
+                <div class="playNum" onclick=loadPlayers(3)>3</div>
+                <div class="playNum" onclick=loadPlayers(4)>4</div>
+                <div class="playNum" onclick=loadPlayers(5)>5</div>
+                <div class="playNum" onclick=loadPlayers(6)>6</div>
+                <div class="playNum" onclick=loadPlayers(7)>7</div>
+                <div class="playNum" onclick=loadPlayers(8)>8</div>
+                <div class="playNum" onclick=loadPlayers(9)>9</div>
+                <div class="playNum" onclick=loadPlayers(10)>10</div>
+            </div>
+        </div>
         <div style="display: none;">
-
+            <audio  id="rightAudio" controls>
+                <source src="../audios/milli_right.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="wrongAudio" controls>
+                <source src="../audios/milli_wrong.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="winnerAudio" controls>
+                <source src="../audios/winner.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="moneyAudio" controls>
+                <source src="../audios/milli_money.mp3" type="audio/mpeg">
+            </audio>
         </div>
         <div class="backImage">
             <img src="../images/backgrounds/millionare_back.jpg">
         </div>
-        <div class="content">
+        <div class="content" style="position: relative">
+            <div id="messageDiv" class="message flex-column hidden" onclick="hideMessage()">
+                <div class="messageTitle">
+                    CHRISTIAN
+                </div>
+                <div class="messageText">
+                    WINS!
+                </div>
+            </div>
             <div class="flex-row triContent">
                 <div class="leftContent">
-
+                    <div id="leftSliderContainer" class="playerSlidersContainer flex-row hidden">
+                        <div id="player_1" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerLime" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerLime" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_2" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerPink" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerPink" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_3" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerOrange" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerOrange" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_4" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerBlue" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerBlue" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_5" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerGrey" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerGrey" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="midContent flex-column">
                     <div class="questions">
                         <div class="questionDiv flex-column"><span id="questions_div">Insert First Question Here</span></div>
-                        <div class="answers flex-column">
+                        <div id="answers" class="answers flex-column invisible">
                             <div class="answerRow flex-row">
-                                <div class="answerDiv" style="margin-left:0px;"><span>A)</span><span class="answerText">First Option</span></div>
-                                <div class="answerDiv" style="margin-right: 0px;"><span>B)</span><span class="answerText">Second Option</span></div>
+                                <div class="answerDiv" style="margin-left:0px;" onclick="showCorrectAnswer(1)"><span>A)</span><span class="answerText">First Option</span></div>
+                                <div class="answerDiv" style="margin-right: 0px;" onclick="showCorrectAnswer(2)"><span>B)</span><span class="answerText">Second Option</span></div>
                             </div>
                             <div class="answerRow flex-row">
-                                <div class="answerDiv" style="margin-left:0px;"><span>C)</span><span class="answerText">Third Option</span></div>
-                                <div class="answerDiv" style="margin-right: 0px;"><span>D)</span><span class="answerText">Fourth Option</span></div>
+                                <div class="answerDiv" style="margin-left:0px;" onclick="showCorrectAnswer(3)"><span>C)</span><span class="answerText">Third Option</span></div>
+                                <div class="answerDiv" style="margin-right: 0px;" onclick="showCorrectAnswer(4)"><span>D)</span><span class="answerText">Fourth Option</span></div>
                             </div>
                         </div>
                     </div>
@@ -37,13 +147,94 @@
                         <div id="nextButton" class="navbutton icon" onclick="switchQuestion(true)">!</div>
                         <div class="toolKit">
                             <div class="tools flex-row">
+                                <img src="../images/logos/reset.png" onclick="clearAnswers()">
                                 <img src="../images/logos/home.png" onclick="Global.goHome()">
                             </div>
                         </div>
                     </div>
+                    <div id="timerDiv" class="timer flex-column invisible">
+                        <div id="timer" class="timerDiv flex-column"><span id="questions_div">15</span></div>
+                        <div class=" flex-row" style="width: 45%;"><div class="timerButton" onclick="startTimer(true)">Start</div><div class="timerButton" onclick="startTimer(false)">Stop</div></div>
+                    </div>
                 </div>
                 <div class="rightContent">
-                    
+                    <div id="rightSliderContainer" class="playerSlidersContainer flex-row hidden">
+                        <div id="player_6" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerTeal" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerTeal" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_7" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerYellow" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerYellow" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_8" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerPurple" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerPurple" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_9" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerRed" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerRed" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player_10" class="playerSlider flex-column">
+                            <div class="goalDiv flex-column">
+                                <input class="playerName playerBlack" maxlength="11" placeholder="Enter Name">
+                                <div class="playerScore">$0</div>
+                            </div>
+                            <div class="sliderDiv flex-column">
+                                <input class="range vertical-lowest-first round mySlider playerBlack" type="range" min="0" max="5" step="1" value="5" onchange="updateScore(this.parentElement.parentElement)">
+                            </div>
+                            <div class="infoDiv flex-column">
+                                <div class="playerActions flex-row">
+                                    <img src="../images/logos/up.png" onclick="movePlayer('up', this.parentElement.parentElement.parentElement)"/>
+                                    <img src="../images/logos/down.png" onclick="movePlayer('reset', this.parentElement.parentElement.parentElement)"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,6 +253,19 @@
             Global.init();
             Milli.init();
             switchQuestion = Milli.switchQuestion;
+            showCorrectAnswer = Milli.showCorrectAnswer;
+            clearAnswers = Milli.clearAnswers;
+            resetPlayer = Milli.resetPlayer;
+            updateScore = Milli.updateScore;
+            movePlayer = Milli.movePlayer;
+            startTimer = Milli.startTimer;
+            loadPlayers = Milli.loadPlayers;
         });
+
+        function hideMessage(){
+            document.getElementById('messageDiv').classList.add('hidden');
+        }
+
+        
     </script>
 </html>
