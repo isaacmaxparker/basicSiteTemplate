@@ -123,6 +123,7 @@
 }
 
 .question{
+    margin-top:1.25%;
     position: absolute;
     width: 95%;
     height: 90vh;
@@ -145,7 +146,7 @@
     height: 100%;
     flex-direction: column;
     text-align: center;
-    font-size: 8rem;
+    font-size: 7.5rem;
 
 }
 .inactiveTile{
@@ -222,11 +223,11 @@
 }
 
 .toolbox img:hover{
-    opacity:.6;
-    filter: grayscale(100%) brightness(150%);
+    opacity:.8;
+    filter: grayscale(100%) brightness(200%);
 }
 
-#mainGrid, #finalGrid{
+#mainGrid, #doubleGrid, #finalGrid{
     opacity: 1;
     transition: opacity .5s ease;
     background-color: rgb(0, 0, 0);

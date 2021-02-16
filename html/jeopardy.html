@@ -49,10 +49,12 @@
                 <div class="mainGrid">
                     <div id="question" class="question flippedDiv" onclick="hideQuestion()">
                         <div class="questionDiv">
-                            <span id="questionText">Question Text LOREM IMSUPASD FAS DFAS DFAS DFASD F</span>
+                            <span id="questionText"></span>
                         </div>
                     </div>
                     <div id="mainGrid" style="max-width: 100%;height: 100%;display: flex;flex-direction: row;">
+                    </div>
+                    <div id="doubleGrid" class="hidden invisible" style="max-width: 100%;height: 100%;display: flex;flex-direction: row;">
                     </div>
                     <div id="finalGrid" class="hidden invisible" style="max-width: 100%;height: 100%;display: flex;flex-direction: column;">
                         <div class="finalQuestion" onclick="document.getElementById('finalQuestion').classList.remove('invisible')"><span id="finalQuestion" style="text-align: center;" class="invisible">Final Question Text</span></div>
@@ -99,9 +101,11 @@
                     </div>
                 </div>
                 <div class="toolbox">
+                    <img src="../images/logos/grid.png" onclick="showGrid()">
+                    <img src="../images/logos/doublejep.png" onclick="showDoubleJeopardy()">
                     <img src="../images/logos/trophy.png" onclick="showFinalJeopardy()">
-                    <img src="../images/logos/grid.png" onclick="showGrid()" style="margin-right: auto;">
-                    <img src="../images/logos/reset.png" onclick="showBoard()">
+                    
+                    <img src="../images/logos/reset.png" onclick="showBoard()" style="margin-left: auto;">
                     <img src="../images/logos/home.png" onclick="Global.goHome()">
                 </div>
             </div>
@@ -127,6 +131,7 @@
         showBoard = Jeop.showBoard;
         showColumn = Jeop.showColumn;
         showFinalJeopardy = Jeop.showFinalJeopardy;
+        showDoubleJeopardy = Jeop.showDoubleJeopardy;
         showGrid = Jeop.showGrid;
     });
 

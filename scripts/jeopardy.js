@@ -16,6 +16,7 @@ const Jeop = (function () {
     ]
 
     const GRID_CONT_ID = "mainGrid";
+    const DOUBLE_GRID_CONT_ID = "doubleGrid";
 
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
@@ -24,7 +25,9 @@ const Jeop = (function () {
     let game;
     let current_teams = [];
     let num_of_teams;
-    let questions;
+    let round_1_questions;
+    let round_2_questions;
+    let final_question;
     let outstanding_points = 0;
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -45,6 +48,7 @@ const Jeop = (function () {
     let showGrid;
     let flipTile;
     let updateFinalJeopardy;
+    let showDoubleJeopardy;
 
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -103,9 +107,11 @@ const Jeop = (function () {
     loadQuestions = function () {
         let url = QUESTIONS_URL_PREFIX + game.json_name + ".json"
         Global.ajax(url, function (data) {
-            questions = data;
+            console.log(data);
+            round_1_questions = data[0].round_one;
+            round_2_questions = data[0].round_two;
+            final_question = data[0].final_question;
             questionsLoaded = true;
-            console.log(questions)
             loadGrid()
         })
 
@@ -113,10 +119,10 @@ const Jeop = (function () {
 
     loadGrid = function () {
         let gridCont = document.getElementById(GRID_CONT_ID);
-        let col = 'col-' + questions.length;
-        questions.forEach(categ => {
+        console.log(round_1_questions)
+        round_1_questions.forEach(categ => {
             let colHTML = '';
-            colHTML += `<div class="mainGridColumn ${col}" >`
+            colHTML += `<div class="mainGridColumn" >`
             colHTML += `<div class="mainGridTile" onclick="showColumn(this.parentElement)">
                             <div class="mainTileText flippedDiv">
                                 <div class="catName">${categ.category_name}</div>
@@ -140,6 +146,35 @@ const Jeop = (function () {
             colHTML += '</div>'
 
             gridCont.innerHTML += colHTML;
+        });
+
+        let doubleGridCont = document.getElementById(DOUBLE_GRID_CONT_ID);
+        round_2_questions.forEach(categ => {
+            let colHTML = '';
+            colHTML += `<div class="mainGridColumn" >`
+            colHTML += `<div class="mainGridTile" onclick="showColumn(this.parentElement)">
+                            <div class="mainTileText flippedDiv">
+                                <div class="catName">${categ.category_name}</div>
+                            </div>
+                        </div>`
+            categ.questions.forEach(quest => {
+                colHTML += `<div class="mainGridTile" onclick="showQuestion(this)">
+                            <div class="mainTileText flippedDiv">
+                            <div class="hidden">
+                                <div class="q">
+                                    ${quest.question}
+                                </div>
+                                <div class="a">
+                                    ${quest.answer}
+                                </div>
+                            </div>
+                            <div class="points">$${quest.points}</div>
+                            </div>
+                        </div>`
+            });
+            colHTML += '</div>'
+
+            doubleGridCont.innerHTML += colHTML;
         });
     }
 
@@ -227,11 +262,24 @@ const Jeop = (function () {
 
     showGrid = function(){
         document.getElementById('finalGrid').classList.add('invisible');
-        
+        document.getElementById('doubleGrid').classList.add('invisible');
         setTimeout(function(){
             document.getElementById('mainGrid').classList.remove('hidden');
+            document.getElementById('doubleGrid').classList.add('hidden');
             document.getElementById('finalGrid').classList.add('hidden');
             setTimeout(function(){document.getElementById('mainGrid').classList.remove('invisible');},250)
+            
+        },250)
+    }
+
+    showDoubleJeopardy = function(){
+        document.getElementById('finalGrid').classList.add('invisible');
+        document.getElementById('mainGrid').classList.add('invisible');
+        setTimeout(function(){
+            document.getElementById('doubleGrid').classList.remove('hidden');
+            document.getElementById('mainGrid').classList.add('hidden');
+            document.getElementById('finalGrid').classList.add('hidden');
+            setTimeout(function(){document.getElementById('doubleGrid').classList.remove('invisible');},250)
             
         },250)
     }
@@ -239,9 +287,11 @@ const Jeop = (function () {
     showFinalJeopardy = function(){
         updateFinalJeopardy()
         document.getElementById('mainGrid').classList.add('invisible');
+        document.getElementById('doubleGrid').classList.add('invisible');
         setTimeout(function(){
             document.getElementById('finalGrid').classList.remove('hidden');
             document.getElementById('mainGrid').classList.add('hidden');
+            document.getElementById('doubleGrid').classList.add('hidden');
             setTimeout(function(){
             document.getElementById('finalGrid').classList.remove('invisible');
             },250)
@@ -269,5 +319,6 @@ const Jeop = (function () {
         showColumn,
         showFinalJeopardy,
         showGrid,
+        showDoubleJeopardy,
     };
 }());
