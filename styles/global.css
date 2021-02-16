@@ -39,6 +39,14 @@
     font-style: italic;
 
 }
+@font-face {
+    font-family: 'Signature';
+    src: url('fonts/authenticsignature-webfont.woff') format('woff'),
+    url('fonts/AuthenticSignature.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 body{
     overflow-x: hidden;

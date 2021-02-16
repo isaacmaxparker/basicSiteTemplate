@@ -58,6 +58,8 @@ const Games = (function() {
                 return "famfued_logo.png"
             case "millionare":
                 return "millionare_logo.png"
+            case "jeopardy":
+                return "jeoparty_logo.png"
         }
     }
 
@@ -108,6 +110,10 @@ const Games = (function() {
                         break;
                     case "millionare":
                         setTimeout(function(){location.replace("millionare.html")},150);
+                        localStorage.setItem("currentGame", JSON.stringify(element))
+                        break;
+                    case "jeopardy":
+                        setTimeout(function(){location.replace("jeopardy.html")},150);
                         localStorage.setItem("currentGame", JSON.stringify(element))
                         break;
                 }
