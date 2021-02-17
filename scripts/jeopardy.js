@@ -47,8 +47,10 @@ const Jeop = (function () {
     let showFinalJeopardy;
     let showGrid;
     let flipTile;
+    let finalPoints;
     let updateFinalJeopardy;
     let showDoubleJeopardy;
+
 
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -68,6 +70,19 @@ const Jeop = (function () {
                 tiles[index].classList.remove('flippedDiv')
                 setTimeout(function(){flipTile(tiles,index+1)},50)
             }
+    }
+
+    finalPoints = function(id, to_add){
+        let wager = parseInt(document.getElementById('team_' + id + '_wager_points').value);
+        let scoreDiv = document.getElementById('team_' + id).querySelector('.team_points');
+
+        if(to_add){
+            scoreDiv.value = parseInt(scoreDiv.value) + wager;
+        }
+        else{
+            scoreDiv.value = parseInt(scoreDiv.value) - wager;
+        }
+
     }
 
     hideQuestion = function(){
@@ -110,7 +125,7 @@ const Jeop = (function () {
             console.log(data);
             round_1_questions = data[0].round_one;
             round_2_questions = data[0].round_two;
-            final_question = data[0].final_question;
+            final_question = data[0].final_questions;
             questionsLoaded = true;
             loadGrid()
         })
@@ -122,7 +137,7 @@ const Jeop = (function () {
         console.log(round_1_questions)
         round_1_questions.forEach(categ => {
             let colHTML = '';
-            colHTML += `<div class="mainGridColumn" >`
+            colHTML += `<div class="mainGridColumn col-${round_1_questions.length}" >`
             colHTML += `<div class="mainGridTile" onclick="showColumn(this.parentElement)">
                             <div class="mainTileText flippedDiv">
                                 <div class="catName">${categ.category_name}</div>
@@ -151,7 +166,7 @@ const Jeop = (function () {
         let doubleGridCont = document.getElementById(DOUBLE_GRID_CONT_ID);
         round_2_questions.forEach(categ => {
             let colHTML = '';
-            colHTML += `<div class="mainGridColumn" >`
+            colHTML += `<div class="mainGridColumn col-${round_1_questions.length}" >`
             colHTML += `<div class="mainGridTile" onclick="showColumn(this.parentElement)">
                             <div class="mainTileText flippedDiv">
                                 <div class="catName">${categ.category_name}</div>
@@ -176,6 +191,8 @@ const Jeop = (function () {
 
             doubleGridCont.innerHTML += colHTML;
         });
+
+        document.getElementById('finalQuestion').innerHTML = final_question;
     }
 
     loadPlayers = function (num_of_players) {
@@ -212,6 +229,7 @@ const Jeop = (function () {
     }
 
     playSound = function (sound) {
+        console.log(sound)
         let soundElement;
         switch (sound) {
             case "right":
@@ -320,5 +338,6 @@ const Jeop = (function () {
         showFinalJeopardy,
         showGrid,
         showDoubleJeopardy,
+        finalPoints,
     };
 }());

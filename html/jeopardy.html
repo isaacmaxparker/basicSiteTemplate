@@ -62,19 +62,27 @@
                         <div class="wagers">
                             <div id="team_1_wagers" class="team">
                                 <input id="team_1_wager_name" class="team_name"> 
-                                <input id="team_1_wager_points" class="team_points" placeholder="0" type="number" min="0"/>
+                                <input id="team_1_wager_points" class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)"/>
+                                <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 
+                                <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(1,true)">i</div><div class="wagerButton icon" onclick="finalPoints(1,false)">*</div></div>
                             </div>
                             <div id="team_2_wagers" class="team">
                                 <input id="team_2_wager_name"class="team_name"> 
-                                <input  id="team_2_wager_points"class="team_points" placeholder="0" type="number" min="0"/>
+                                <input  id="team_2_wager_points"class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)"/>
+                                <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 
+                                <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(2,true)">i</div><div class="wagerButton icon" onclick="finalPoints(2,false)">*</div></div>
                             </div>
                             <div id="team_3_wagers" class="team">
                                 <input id="team_3_wager_name"class="team_name">
-                                <input  id="team_3_wager_points"class="team_points" placeholder="0" type="number" min="0" />
+                                <input  id="team_3_wager_points"class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)" />
+                                <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 
+                                <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(3,true)">i</div><div class="wagerButton icon" onclick="finalPoints(3,false)">*</div></div>
                             </div>
                             <div id="team_4_wagers" class="team">
                                 <input id="team_4_wager_name"class="team_name">
-                                <input  id="team_4_wager_points" class="team_points" placeholder="0" type="number" min="0" />
+                                <input  id="team_4_wager_points" class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)" />
+                                <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 
+                                <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(4,true)">i</div><div class="wagerButton icon" onclick="finalPoints(4,false)">*</div></div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +141,14 @@
         showFinalJeopardy = Jeop.showFinalJeopardy;
         showDoubleJeopardy = Jeop.showDoubleJeopardy;
         showGrid = Jeop.showGrid;
+        finalPoints = Jeop.finalPoints;
     });
+
+    function validateWager(element){
+        if(parseInt(element.value) > parseInt(element.getAttribute("max"))){
+            element.value = element.value.slice(0, -1)
+        }
+    }
 
     function hideMessage() {
         document.getElementById('messageDiv').classList.add('hidden');
