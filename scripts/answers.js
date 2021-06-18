@@ -34,12 +34,12 @@ const Games = (function() {
      */
 
     compare = function( a, b ) {
-        if ( Date.parse(a.date_created) > Date.parse(b.date_created) ){
-            return -1;
-          }
-          if ( Date.parse(a.date_created) < Date.parse(b.date_created) ){
-            return 1;
-          }
+            if ( Date.parse(a.date_created) > Date.parse(b.date_created) ){
+              return -1;
+            }
+            if ( Date.parse(a.date_created) < Date.parse(b.date_created) ){
+              return 1;
+            }
             return 0;
           }
 
@@ -103,20 +103,8 @@ const Games = (function() {
     selectGame = function(id){
         games.forEach(element => {
             if(element.id == id){
-                switch(element.type){
-                    case "famFued":
-                        setTimeout(function(){location.replace("famFued.html")},150);
-                        localStorage.setItem("currentGame", JSON.stringify(element))
-                        break;
-                    case "millionare":
-                        setTimeout(function(){location.replace("millionare.html")},150);
-                        localStorage.setItem("currentGame", JSON.stringify(element))
-                        break;
-                    case "jeopardy":
-                        setTimeout(function(){location.replace("jeopardy.html")},150);
-                        localStorage.setItem("currentGame", JSON.stringify(element))
-                        break;
-                }
+                localStorage.setItem("currentGame", JSON.stringify(element))
+                setTimeout(function(){location.replace("answers/answersList.html")},150);
             }
         });
     }
