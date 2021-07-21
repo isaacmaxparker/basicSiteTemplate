@@ -23,7 +23,6 @@ const Games = (function() {
      */
     let compare;
     let groupByKey;
-    let decodeIamge;
     let init;  
     let loadGames;
     let showGames;
@@ -51,17 +50,6 @@ const Games = (function() {
           return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
         }, {})
      }
-    
-    decodeIamge = function(type){
-        switch(type){
-            case "famFued":
-                return "famfued_logo.png"
-            case "millionare":
-                return "millionare_logo.png"
-            case "jeopardy":
-                return "jeoparty_logo.png"
-        }
-    }
 
     init = function(onInitializedCallback) {
         console.log("Started Games init...");
@@ -83,7 +71,7 @@ const Games = (function() {
             let grid = document.getElementById('games_grid');
             let gridContent = ''
             games.forEach(element =>{ 
-                let image = decodeIamge(element.type)
+                let image = Global.decodeImage(element.type)
                 gridContent += `<div class="grid-card ${element.color}_card header white-text flex-column">
                                     <div class="card_title header xs">${element.name}</div>
                                     <div class="card_image">

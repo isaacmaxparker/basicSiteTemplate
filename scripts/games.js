@@ -52,16 +52,7 @@ const Games = (function() {
         }, {})
      }
     
-    decodeIamge = function(type){
-        switch(type){
-            case "famFued":
-                return "famfued_logo.png"
-            case "millionare":
-                return "millionare_logo.png"
-            case "jeopardy":
-                return "jeoparty_logo.png"
-        }
-    }
+
 
     init = function(onInitializedCallback) {
         console.log("Started Games init...");
@@ -83,7 +74,7 @@ const Games = (function() {
             let grid = document.getElementById('games_grid');
             let gridContent = ''
             games.forEach(element =>{ 
-                let image = decodeIamge(element.type)
+                let image = Global.decodeImage(element.type)
                 gridContent += `<div class="grid-card ${element.color}_card header white-text flex-column">
                                     <div class="card_title header xs">${element.name}</div>
                                     <div class="card_image">
@@ -103,18 +94,19 @@ const Games = (function() {
     selectGame = function(id){
         games.forEach(element => {
             if(element.id == id){
+                localStorage.setItem("currentGame", JSON.stringify(element))
                 switch(element.type){
                     case "famFued":
                         setTimeout(function(){location.replace("famFued.html")},150);
-                        localStorage.setItem("currentGame", JSON.stringify(element))
                         break;
                     case "millionare":
                         setTimeout(function(){location.replace("millionare.html")},150);
-                        localStorage.setItem("currentGame", JSON.stringify(element))
                         break;
                     case "jeopardy":
                         setTimeout(function(){location.replace("jeopardy.html")},150);
-                        localStorage.setItem("currentGame", JSON.stringify(element))
+                        break;
+                    case "price":
+                        setTimeout(function(){location.replace("price.html")},150);
                         break;
                 }
             }

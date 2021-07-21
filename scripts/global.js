@@ -22,6 +22,7 @@ const Global = (function() {
      *              PRIVATE METHOD DECLARATIONS
      */
     let ajax;
+    let decodeImage;
     let htmlDiv;
     let htmlp;
     let init;  
@@ -61,6 +62,19 @@ const Global = (function() {
         request.onerror = failureCallback;
         request.send();
    };
+
+   decodeImage = function(type){
+    switch(type){
+        case "famFued":
+            return "famfued_logo.png"
+        case "millionare":
+            return "millionare_logo.png"
+        case "jeopardy":
+            return "jeoparty_logo.png"
+        case "price":
+            return "price_logo.png"
+    }
+}
 
    goHome = function(){
        window.location = "games.html"
@@ -148,6 +162,7 @@ const Global = (function() {
      */
     return {
         ajax,
+        decodeImage,
         htmlDiv,
         htmlp,
         init,

@@ -155,31 +155,31 @@ const Answers = (function () {
                     </div>  
                 </div> 
                 <div class="answerDiv">
-                    <div class="famAnswerRow">
-                        <div class="question answerBox">
-                            ${element.answer_1.replace("\/","<br>")}
-                        </div>
-                        <div class="answer answerBox">
-                            ${element.answer_2}
-                        </div>
+                <div class="famAnswerRow">
+                    <div class="question answerBox">
+                        ${element.answer_1.replace("\/"," / <br>")}
                     </div>
-                    <div class="famAnswerRow">
-                        <div class="answer answerBox">
-                            ${element.answer_3.replace("\/"," / <br>")}
-                        </div>
-                        <div class="question answerBox ">
-                            ${element.answer_4}
-                        </div>
-                    </div>
-                    <div class="famAnswerRow">
-                        <div class="question answerBox"">
-                            ${element.answer_5}
-                        </div>
-                        <div class="answer answerBox">
-                            ${element.answer_6}
-                        </div>
+                    <div class="answer answerBox">
+                        ${element.answer_4.replace("\/"," / <br>")}
                     </div>
                 </div>
+                <div class="famAnswerRow">
+                    <div class="answer answerBox">
+                        ${element.answer_2.replace("\/"," / <br>")}
+                    </div>
+                    <div class="question answerBox ">
+                        ${element.answer_5.replace("\/"," / <br>")}
+                    </div>
+                </div>
+                <div class="famAnswerRow">
+                    <div class="question answerBox"">
+                        ${element.answer_3.replace("\/"," / <br>")}
+                    </div>
+                    <div class="answer answerBox">
+                        ${element.answer_6.replace("\/"," / <br>")}
+                    </div>
+                </div>
+            </div>
             </div>`
         });
 
