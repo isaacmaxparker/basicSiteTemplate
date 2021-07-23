@@ -37,7 +37,15 @@
             </script>
     </head>
     <body>
-        <div id="loadScreen" class="loadScreen flex-column">
+        <div id="loadDataScreen" class="loadScreen flex-column hidden">
+            <img src="../images/logos/price_logo.png" style="max-height: 60%;">
+            <p style="color: rgba(255, 255, 255, 0.747);font-size: 3rem;margin:0px">You have a saved game, do you want to load that data or restart?</p>
+            <div class="flex-row" style="width: 80%;">
+                <div class="playNum playWord" onclick=loadSavedData()>Load Game</div>
+                <div class="playNum playWord" onclick=clearSavedData()>New Game</div>
+            </div>
+        </div>
+        <div id="loadScreen" class="loadScreen flex-column hidden">
             <img src="../images/logos/price_logo.png" style="max-height: 60%;">
             <p style="color: rgba(255, 255, 255, 0.747);font-size: 4rem;margin:0px">How many teams?</p>
             <div class="flex-row" style="width: 80%;">
@@ -193,31 +201,31 @@
             </div>
             <div id="teams_list" class="teams_div invisible">
                 <div id="team_1" class="team">
-                    <input class="team_name"  placeholder="Team 1"/>
+                    <input id="team_1_price_name" class="team_name"  placeholder="Team 1" onblur="saveTeamData(this)"/>
                     <div class="team_points">
                         $
-                        <input id="team_1_points" value="100" type="number" min="0"/>
+                        <input id="team_1_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
                     </div>
                 </div>
                 <div id="team_2" class="team">
-                    <input class="team_name"  placeholder="Team 2"/>
+                    <input id="team_2_price_name" class="team_name"  placeholder="Team 2" onblur="saveTeamData(this)"/>
                     <div class="team_points">
                         $
-                        <input id="team_2_points" value="100" type="number" min="0"/>
+                        <input id="team_2_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
                     </div>
                 </div>
                 <div id="team_3" class="team">
-                    <input class="team_name"  placeholder="Team 3"/>
+                    <input id="team_3_price_name" class="team_name"  placeholder="Team 3" onblur="saveTeamData(this)"/>
                     <div class="team_points">
                         $
-                        <input id="team_3_points" value="100" type="number" min="0"/>
+                        <input id="team_3_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
                     </div>
                 </div>
                 <div id="team_4" class="team">
-                    <input class="team_name"  placeholder="Team 4"/>
+                    <input id="team_4_price_name" class="team_name"  placeholder="Team 4"onblur="saveTeamData(this)" />
                     <div class="team_points">
                         $
-                        <input id="team_4_points" value="100" type="number" min="0"/>
+                        <input id="team_4_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
                     </div>
                 </div>
             </div>
@@ -257,6 +265,11 @@
             }
         }
 
+        function saveTeamData(element){
+            Global.setValue(element.getAttribute('id'), element.value);
+            Global.setValue('savedPriceData',true);
+        }
+
         ready(function () {
             Global.init();
             Price.init();
@@ -267,6 +280,8 @@
             checkAnswer = Price.checkAnswer;
             respawnImages = Price.respawnImages;
             playSound = Price.playSound;
+            loadSavedData = Price.loadSavedData;
+            clearSavedData = Price.clearSavedData
         });   
     </script>
 </html>

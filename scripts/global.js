@@ -31,6 +31,9 @@ const Global = (function() {
     let playGame;
     let getCookie;
     let setCookie;
+
+    let getValue;
+    let setValue;
     let toggleAside;
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -108,6 +111,23 @@ const Global = (function() {
         }
     }
 
+    getValue = function(name){
+        let val = getCookie(name);
+        if(!val){
+          val = localStorage.getItem(name)
+        }
+        return val
+     },
+ 
+     setValue = function(name, value){
+       setCookie(name,value)
+       if (value == "") {
+         localStorage.removeItem(name)
+       }else{
+         localStorage.setItem(name,value)
+       }
+    },
+
     getCookie = function(cname) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
@@ -172,6 +192,8 @@ const Global = (function() {
         setCookie,
         toggleAside,
         hideLoader,
+        getValue,
+        setValue,
     };
   }());
   

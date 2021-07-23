@@ -10,6 +10,12 @@
     padding:20px;
 }
 
+.playWord{
+    font-size: 4rem !important;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
 .playNum:hover{
     opacity: .6;
     color:rgb(21, 255, 0);
@@ -109,6 +115,7 @@
 
 .items_image_div img{
     width: 100%;
+    filter: brightness(1.1) saturate(1.2);
 }
 
 .items_image_num{
@@ -121,6 +128,7 @@
     transform: translate(-50%,-40%);
     text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.8);
     font-size: 100px;
+    z-index: 9;
 }
 
 
@@ -169,6 +177,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(1.3);
 }
 
 .item_name{

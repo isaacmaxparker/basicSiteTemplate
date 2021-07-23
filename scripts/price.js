@@ -55,6 +55,7 @@ const Price = (function () {
     let playSoundEffect;
     let stopSound;
     
+    let clearSavedData;
     let checkAnswer;
     let decodeBoxColor;
     let cleanScreens;
@@ -67,6 +68,9 @@ const Price = (function () {
     let showPrice;
     let shuffle;
     let respawnImages;
+
+    let loadSavedData;
+    let saveData;
 
 
     /*------------------------------------------------------------------------
@@ -220,6 +224,11 @@ const Price = (function () {
         }
     }
 
+    clearSavedData = () => {
+        document.getElementById('loadDataScreen').classList.add('hidden');
+        document.getElementById('loadScreen').classList.remove('hidden');
+    }
+
     decodeBoxColor = (number) => {
         switch (number % 6) {
             case 0:
@@ -238,6 +247,15 @@ const Price = (function () {
     }
 
     init = function (onInitializedCallback) {
+        let savedData = Global.getValue('savedPriceData');
+        console.log("ASDF")
+        console.log(savedData);
+        if(savedData == 'true'){
+            document.getElementById('loadDataScreen').classList.remove('hidden');
+        }
+        else{
+            document.getElementById('loadScreen').classList.remove('hidden');
+        }
         game = JSON.parse(localStorage.getItem("currentGame"))
         console.log("Started global init...");
         window.scrollTo(0, 0)
@@ -291,8 +309,10 @@ const Price = (function () {
     }
 
     loadPlayers = function (num_of_players) {
+        saveData('price_num_of_teams',num_of_players);
         num_of_teams = num_of_players;
         document.getElementById('loadScreen').classList.add('hidden');
+        document.getElementById('loadDataScreen').classList.add('hidden');
         if (num_of_players == 4) {
             document.getElementById('loadScreen').style.display = "none";
         } else {
@@ -320,7 +340,8 @@ const Price = (function () {
     loadQuestion = (question_id) => {
 
         current_question = items[question_id - 1];
-        opened_boxes.push(question_id)
+        opened_boxes.push(question_id);
+        Global.setValue('price_opened_boxes',opened_boxes);
         //LOAD BIDS
         let element = items[question_id - 1]
         document.getElementById(BID_ITEM_IMAGE_ID).setAttribute('src', element.bid_image_url);
@@ -419,6 +440,19 @@ const Price = (function () {
             </div>`
         }
         showScreen('bid');
+    }
+
+    loadSavedData = () => {
+        let num_of_teams =  Global.getValue('price_num_of_teams');
+        loadPlayers(num_of_teams);
+        //GET TEAM INFO
+        for(let i = 1; i <= num_of_teams; i++){
+            console.log( document.getElementById('team_' + i + '_name'))
+            document.getElementById('team_' + i + '_price_name').value = Global.getValue('team_' + i + '_price_name');
+            document.getElementById('team_' + i + '_price_points').value = Global.getValue('team_' + i + '_price_points');
+        }
+
+        opened_boxes = Global.getValue('price_opened_boxes') ? Global.getValue('price_opened_boxes')  : [] ;
     }
 
     respawnImages = function(){
@@ -541,6 +575,11 @@ const Price = (function () {
 
     }
 
+    saveData = (key, value) =>{
+        Global.setValue(key,value);
+        Global.setValue('savedPriceData',true)
+    }
+
     showScreen = (screenName) => {
 
         cleanScreens(screenName)
@@ -572,5 +611,7 @@ const Price = (function () {
         loadQuestion,
         respawnImages,
         playSound,
+        clearSavedData,
+        loadSavedData,
     };
 }());
