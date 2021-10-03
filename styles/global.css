@@ -160,6 +160,11 @@ body{
     border-radius: 15px;
 }
 
+.overflow-y{
+    height: 100vh;
+    overflow-y: auto;
+}
+
 .blue_card{
     background-image: url('../images/blue_velvet.jpg');
     border-color: rgba(255, 255, 255, 0.623);

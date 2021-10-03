@@ -30,7 +30,7 @@ const Price = (function () {
     const IMAGEMC_ANSWER_DIV = "imagemc_content";
     const AUDIOMC_ANSWER_DIV = "audiomc_content";
 
-    /*------------------------------------------------------------------------
+    /*--------------------------------x----------------------------------------
      *              PRIVATE VARIABLES
      */
     let num_of_teams;
@@ -39,6 +39,8 @@ const Price = (function () {
     let winnning_id;
     let game;
     let order;
+
+    let month;
 
     let current_question;
 
@@ -67,6 +69,7 @@ const Price = (function () {
     let showScreen;
     let showPrice;
     let shuffle;
+    let setUpTheme;
     let respawnImages;
 
     let loadSavedData;
@@ -194,7 +197,7 @@ const Price = (function () {
 
         for (let i = 0; i < boxes.length; i++) {
             if (opened_boxes.includes(i + 1)) {
-                boxes[i].classList.add('off_gift')
+                boxes[i].parentElement.classList.add('off_gift')
             }
         }
 
@@ -213,7 +216,11 @@ const Price = (function () {
         if (screenName == 'question') {
             let bids = document.getElementsByClassName('question_bid');
             for (let i = 1; i <= bids.length; i++) {
-                let max = parseInt(document.getElementById('team_' + i + "_points").value);
+                let max = 50;
+                if(parseInt(document.getElementById('team_' + i + "_points").value) > 0){
+                    max = parseInt(document.getElementById('team_' + i + "_points").value) + 10;
+                }
+               
                 bids[i - 1].children[0].children[0].setAttribute('max', max)
                 if (i == winnning_id) {
                     bids[i - 1].classList.remove('invisible');
@@ -229,27 +236,40 @@ const Price = (function () {
         document.getElementById('loadScreen').classList.remove('hidden');
     }
 
-    decodeBoxColor = (number) => {
+    decodeBoxColor = (number, month) => {
+
         switch (number % 6) {
             case 0:
+                if (month == 10)
+                    return 'orange'
                 return "teal";
             case 1:
+                if (month == 10)
+                    return 'yellow'
                 return "red";
             case 2:
+                if (month == 10)
+                    return 'red'
                 return "yellow";
             case 3:
+                if (month == 10)
+                    return 'orange'
                 return "green";
             case 4:
-                return "orange";
+                if (month == 10)
+                     return 'green'
+                return "orange";        
             default:
+                if (month == 10)
+                     return 'red'
                 return "pink";
         }
     }
 
     init = function (onInitializedCallback) {
-        let savedData = Global.getValue('savedPriceData');
-        console.log("ASDF")
-        console.log(savedData);
+
+        setUpTheme();
+        let savedData = Global.getValue('savedPriceData');;
         if(savedData == 'true'){
             document.getElementById('loadDataScreen').classList.remove('hidden');
         }
@@ -279,22 +299,24 @@ const Price = (function () {
         let row2HTML = '<div class="items_row offset">';
         let row3HTML = '<div class="items_row">';
         let i = 1;
+
+
         items.forEach(element => {
 
             if (i <= ROW_CAP) {
                 row1HTML += `<div class="items_image_div">
                                 <div class="items_image_num">${i}</div>
-                                <img class="items_image" src="../images/logos/price/${decodeBoxColor(i)}_box.png" onclick="loadQuestion(${i})">
+                                <img class="items_image" src="../images/logos/price/${decodeBoxColor(i, month)}_box.png" onclick="loadQuestion(${i})">
                             </div>`;
             } else if (i <= ROW_CAP * 2) {
                 row2HTML += `<div class="items_image_div">
                                 <div class="items_image_num">${i}</div>
-                                <img class="items_image" src="../images/logos/price/${decodeBoxColor(i)}_box.png" onclick="loadQuestion(${i})">
+                                <img class="items_image" src="../images/logos/price/${decodeBoxColor(i, month)}_box.png" onclick="loadQuestion(${i})">
                             </div>`;
             } else {
                 row3HTML += `<div class="items_image_div">
                                 <div class="items_image_num">${i}</div>
-                                <img class="items_image" src="../images/logos/price/${decodeBoxColor(i)}_box.png" onclick="loadQuestion(${i})">
+                                <img class="items_image" src="../images/logos/price/${decodeBoxColor(i, month)}_box.png" onclick="loadQuestion(${i})">
                             </div>`;
             }
 
@@ -309,8 +331,10 @@ const Price = (function () {
     }
 
     loadPlayers = function (num_of_players) {
-        saveData('price_num_of_teams',num_of_players);
+
+        saveData('price_num_of_teams', num_of_players);
         num_of_teams = num_of_players;
+        setUpTheme();
         document.getElementById('loadScreen').classList.add('hidden');
         document.getElementById('loadDataScreen').classList.add('hidden');
         if (num_of_players == 4) {
@@ -340,8 +364,11 @@ const Price = (function () {
     loadQuestion = (question_id) => {
 
         current_question = items[question_id - 1];
+        console.log(typeof(opened_boxes))
+
+        console.log(opened_boxes);
         opened_boxes.push(question_id);
-        Global.setValue('price_opened_boxes',opened_boxes);
+        Global.setValue('price_opened_boxes',JSON.stringify(opened_boxes));
         //LOAD BIDS
         let element = items[question_id - 1]
         document.getElementById(BID_ITEM_IMAGE_ID).setAttribute('src', element.bid_image_url);
@@ -443,16 +470,15 @@ const Price = (function () {
     }
 
     loadSavedData = () => {
-        let num_of_teams =  Global.getValue('price_num_of_teams');
-        loadPlayers(num_of_teams);
+        let num_of_players =  Global.getValue('price_num_of_teams');
+        loadPlayers(num_of_players);
         //GET TEAM INFO
-        for(let i = 1; i <= num_of_teams; i++){
-            console.log( document.getElementById('team_' + i + '_name'))
+        for(let i = 1; i <= num_of_players; i++){
             document.getElementById('team_' + i + '_price_name').value = Global.getValue('team_' + i + '_price_name');
-            document.getElementById('team_' + i + '_price_points').value = Global.getValue('team_' + i + '_price_points');
+            document.getElementById('team_' + i + '_price_points').value = Global.getValue('team_' + i + '_price_points') ? Global.getValue('team_' + i + '_price_points') : 0;
         }
 
-        opened_boxes = Global.getValue('price_opened_boxes') ? Global.getValue('price_opened_boxes')  : [] ;
+        opened_boxes = Global.getValue('price_opened_boxes') ? JSON.parse(Global.getValue('price_opened_boxes'))  : [] ;
     }
 
     respawnImages = function(){
@@ -494,6 +520,33 @@ const Price = (function () {
                 document.getElementById('moneyAudio').play()
                 setTimeout(function(){stopSound(document.getElementById('moneyAudio'))},2000)
                 break;
+        }
+    }
+
+    setUpTheme = function(){
+        
+        let d = new Date(Date.now());
+        month = d.getMonth() + 1;
+        console.log(month);
+
+        console.log(document.getElementById('team_' + 1));
+
+        if(month == 10){
+            document.getElementById('rainbowback').classList.add('hidden');
+            document.getElementById('halloweenback').classList.remove('hidden');
+            document.getElementById('loadScreen').classList.add('october_5');
+            document.getElementById('loadDataScreen').classList.add('october_5');
+            document.getElementById('instructions_round').classList.add('october_2');
+
+            console.log('AdSDF')
+            console.log(num_of_teams);
+            for(let i = 1; i <= num_of_teams; i++){
+                console.log( document.getElementById('team_' + i));
+                    document.getElementById('team_' + i).classList.add('october_' + i);
+                    document.getElementById('team_' + i + '_bid').classList.add('october' + i);
+                    document.getElementById('team_' + i + '_bid_q').classList.add('october' + i);
+
+            }
         }
     }
 
