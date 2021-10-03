@@ -157,8 +157,8 @@ const Price = (function () {
 
         let bid = parseInt(document.getElementById(`team_${winnning_id}_q_bid`).value)
 
-        let current_val = parseInt(document.getElementById('team_' + winnning_id + "_points").value);
-        if (document.getElementById('team_' + winnning_id + "_points").parentElement.classList.contains('negative')) {
+        let current_val = parseInt(document.getElementById('team_' + winnning_id + "_price_points").value);
+        if (document.getElementById('team_' + winnning_id + "_price_points").parentElement.classList.contains('negative')) {
             current_val = current_val * -1;
         }
 
@@ -170,14 +170,14 @@ const Price = (function () {
         }
 
         if (newval < 0) {
-            document.getElementById('team_' + winnning_id + "_points").parentElement.classList.add('negative')
+            document.getElementById('team_' + winnning_id + "_price_points").parentElement.classList.add('negative')
             newval = newval * -1;
         }
         else {
-            document.getElementById('team_' + winnning_id + "_points").parentElement.classList.remove('negative');
+            document.getElementById('team_' + winnning_id + "_price_points").parentElement.classList.remove('negative');
         }
 
-        document.getElementById('team_' + winnning_id + "_points").value = newval;
+        document.getElementById('team_' + winnning_id + "_price_points").value = newval;
 
     }
 
@@ -188,6 +188,7 @@ const Price = (function () {
         document.getElementById(QUESTION_TEXT_ID).classList.remove("right-answer")
 
         for (let i = 1; i <= bids.length; i++) {
+            bids[i - 1].parentElement.parentElement.classList.remove('wrong-bid')
             bids[i - 1].parentElement.parentElement.classList.remove('wrong-bid')
             bids[i - 1].parentElement.parentElement.classList.remove('right-bid')
             bids[i - 1].parentElement.parentElement.classList.remove('warning-bid')
@@ -217,8 +218,8 @@ const Price = (function () {
             let bids = document.getElementsByClassName('question_bid');
             for (let i = 1; i <= bids.length; i++) {
                 let max = 50;
-                if(parseInt(document.getElementById('team_' + i + "_points").value) > 0){
-                    max = parseInt(document.getElementById('team_' + i + "_points").value) + 10;
+                if(parseInt(document.getElementById('team_' + i + "_price_points").value) > 0){
+                    max = parseInt(document.getElementById('team_' + i + "_price_points").value) + 10;
                 }
                
                 bids[i - 1].children[0].children[0].setAttribute('max', max)
@@ -228,6 +229,8 @@ const Price = (function () {
                     bids[i - 1].classList.add('invisible');
                 }
             }
+        }else{
+            document.getElementById('question_cover').classList.remove('turnedCover')
         }
     }
 
@@ -537,14 +540,17 @@ const Price = (function () {
             document.getElementById('loadScreen').classList.add('october_5');
             document.getElementById('loadDataScreen').classList.add('october_5');
             document.getElementById('instructions_round').classList.add('october_2');
+            document.getElementById('question_div').classList.add('october_6');
+            document.getElementById('items_round').classList.add('october_6');
+            document.getElementById('question_cover').classList.add('october_7');
+            document.getElementById('question_text').classList.add('october_7');
 
-            console.log('AdSDF')
-            console.log(num_of_teams);
             for(let i = 1; i <= num_of_teams; i++){
                 console.log( document.getElementById('team_' + i));
                     document.getElementById('team_' + i).classList.add('october_' + i);
-                    document.getElementById('team_' + i + '_bid').classList.add('october' + i);
-                    document.getElementById('team_' + i + '_bid_q').classList.add('october' + i);
+                    console.log(document.getElementById('team_' + i + '_bid'))
+                    document.getElementById('team_' + i + '_bid').classList.add('october_' + i);
+                    document.getElementById('team_' + i + '_bid_q').classList.add('october_' + i);
 
             }
         }
@@ -601,13 +607,13 @@ const Price = (function () {
                 if (winner == i) {
                     bids[i - 1].parentElement.parentElement.classList.add('right-bid')
                     if (bids[i - 1].value == bid_item_price) {
-                        if (document.getElementById('team_' + i + "_points").parentElement.classList.contains('negative')) {
-                            document.getElementById('team_' + i + "_points").value = Math.abs(parseInt(document.getElementById('team_' + i + "_points").value) - bid_item_price);
-                            if (parseInt(document.getElementById('team_' + i + "_points").value) - bid_item_price < 0) {
-                                document.getElementById('team_' + i + "_points").parentElement.classList.remove('negative')
+                        if (document.getElementById('team_' + i + "_price_points").parentElement.classList.contains('negative')) {
+                            document.getElementById('team_' + i + "_price_points").value = Math.abs(parseInt(document.getElementById('team_' + i + "_price_points").value) - bid_item_price);
+                            if (parseInt(document.getElementById('team_' + i + "_price_points").value) - bid_item_price < 0) {
+                                document.getElementById('team_' + i + "_price_points").parentElement.classList.remove('negative')
                             }
                         } else {
-                            document.getElementById('team_' + i + "_points").value = parseInt(document.getElementById('team_' + i + "_points").value) + bid_item_price;
+                            document.getElementById('team_' + i + "_price_points").value = parseInt(document.getElementById('team_' + i + "_price_points").value) + bid_item_price;
                         }
                     }
                 } else {

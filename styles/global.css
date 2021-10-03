@@ -163,6 +163,7 @@ body{
 .overflow-y{
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .blue_card{
