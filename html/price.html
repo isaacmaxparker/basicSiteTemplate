@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../scripts/global.js"></script>
+        <script src="../scripts/price.js"></script>
+        <link rel="stylesheet" href="../styles/global.css">
+        <link rel="stylesheet" href="../styles/price.css">
+        <script>
+            function allowDrop(ev) {
+              ev.preventDefault();
+            }
+            
+            function drag(ev) {
+              ev.dataTransfer.setData("text", ev.target.id);
+            }
+
+            function drop(ev){
+            ev.preventDefault();
+              var data = ev.dataTransfer.getData("text");
+              if(ev.target.children[0]){
+                ev.target.children[0].replaceWith(document.getElementById(data));
+              }else{
+                ev.target.appendChild(document.getElementById(data));
+              }
+              respawnImages();
+            }
+            
+            function imgdrop(ev){
+            ev.preventDefault();
+              var data = ev.dataTransfer.getData("text");
+              let div = ev.target.parentElement;
+                div.innerHTML="";
+                div.appendChild(document.getElementById(data));
+              respawnImages();
+            }
+
+            </script>
+    </head>
+    <body>
+        <div id="loadDataScreen" class="loadScreen flex-column hidden">
+            <img src="../images/logos/price_logo.png" style="max-height: 60%;">
+            <p style="color: rgba(255, 255, 255, 0.747);font-size: 3rem;margin:0px">You have a saved game, do you want to load that data or restart?</p>
+            <div class="flex-row" style="width: 80%;">
+                <div class="playNum playWord" onclick=loadSavedData()>Load Game</div>
+                <div class="playNum playWord" onclick=clearSavedData()>New Game</div>
+            </div>
+        </div>
+        <div id="loadScreen" class="loadScreen flex-column hidden">
+            <img src="../images/logos/price_logo.png" style="max-height: 60%;">
+            <p style="color: rgba(255, 255, 255, 0.747);font-size: 4rem;margin:0px">How many teams?</p>
+            <div class="flex-row" style="width: 80%;">
+                <div class="playNum" onclick=loadPlayers(2)>2</div>
+                <div class="playNum" onclick=loadPlayers(3)>3</div>
+                <div class="playNum" onclick=loadPlayers(4)>4</div>
+            </div>
+        </div>
+        <div style="display: none;">
+            <audio  id="rightAudio" controls>
+                <source src="../audios/milli_right.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="wrongAudio" controls>
+                <source src="../audios/milli_wrong.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="winnerAudio" controls>
+                <source src="../audios/winner.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="moneyAudio" controls>
+                <source src="../audios/milli_money.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+        <div class="backImage">
+            <img src="../images/backgrounds/splatter_back.png">
+        </div>
+        <div class="content" style="position: relative">
+            <div class="toolbox">
+                <img src="../images/logos/home.png" onclick="Global.goHome()">
+                <img src="../images/logos/price/blue_box.png" onclick="showScreen('items')">
+                <img src="../images/logos/dollar.png" onclick="showScreen('bid')">
+                <img src="../images/logos/question.png" onclick="showScreen('question')">
+                <img src="../images/logos/help.png" onclick="showScreen('instructions')">
+            </div>
+            <div class="question_content">
+                <div id="instructions_round" class="instructions invisible round_screen">
+                    <p style="font-size: 200%;">How To Play</p>
+                    <p style="text-align: left;">Each round has two pieces: bidding and wagering<br><br>
+                        <i>Bidding:</i><br>
+                        Each team selects 1 player to be the bidder. An item will be shown on the screen, then starting on the left and working to the right each player will make a bid on the item, previous bids cannot be repeated. The player that gets the closest but doesn't 
+                        go over will win the round. If all players go over then the bids are cleared and the next player on each team comes up to bid. 
+                        <br><br><i>Wagering:</i><br>
+                        The player that wins the wagering round gets to advance to the wagering round. This round will present a question related to the item. The player gets to choose (with their team) how much they want to bid on the question, with a minimum bet of $10 and a 
+                        maximum bet of their current score. If the player gets the question correct then they will get their wager, if they get it wrong they lose their wager
+                    </p>
+                    <p style="font-size: 300%;margin-top:50px;margin-bottom:50px;cursor: pointer;" onclick="showScreen('items')">Start Game</p>
+                </div>
+                <div id="items_round" class="items invisible  hidden round_screen" data-screenname="items">
+                </div>
+                <div id="bidding_round" class="bid_content invisible hidden round_screen" data-screenname="bid">
+                    <div class="item_div">
+                        <div class="item_image_div" onclick="showPrice()">
+                            <div id="bid_item_name" class="item_name">Item Name</div>
+                            <div id="bid_item_price" class="image_price invisible">$67</div>
+                           <img id="bid_item_image" src="../images/card_backs/pink_back.png"> 
+                        </div>
+                    </div>
+                    <div id="bid_list" class="teams_div">
+                        <div id="team_1_bid" class="team">
+                            <div class="team_points team_bid">
+                                $
+                                <input class="team_bid_input" placeholder="" type="number" min="0" />
+                            </div>
+                        </div>
+                        <div id="team_2_bid" class="team">
+                            <div class="team_points team_bid">
+                                $
+                                <input class="team_bid_input" placeholder="" type="number" min="0"/>
+                            </div>
+                        </div>
+                        <div id="team_3_bid" class="team">
+                            <div class="team_points team_bid">
+                                $
+                                <input class="team_bid_input" placeholder="" type="number" min="0"/>
+                            </div>
+                        </div>
+                        <div id="team_4_bid" class="team">
+                            <div class="team_points team_bid">
+                                $
+                                <input class="team_bid_input" placeholder="" type="number" min="0"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="question_round" class="bid_content invisible  hidden round_screen" data-screenname="question">
+                    <div class="question_div">
+                        <div class="question_cover" onclick="this.classList.add('turnedCover')">?</div>
+                        <div id="question_text" class="question_text" onclick="checkAnswer()"></div>
+                        <div class="questions_content">
+                            <div id="matching_content">
+                                <div class="matching_row">
+                                    <div class="matching_answer" onclick="toggleClass(this,'off_answer')">Answer Text</div>
+                                </div>
+                            </div>
+                            <div id="sorting_content">
+                                <div class="origin">
+                                    <div class="origin_row">
+                                        <div class="origin_box"></div>
+                                        <div class="origin_box"></div>
+                                    </div>
+                                    <div class="origin_row">
+                                        <div class="origin_box"></div>
+                                        <div class="origin_box"></div>
+                                    </div>
+                                </div>
+                                <div class="destination">
+                                    <div class="origin">
+                                        <div class="origin_row">
+                                            <div class="origin_box"></div>
+                                            <div class="origin_box"></div>
+                                        </div>
+                                        <div class="origin_row">
+                                            <div class="origin_box"></div>
+                                            <div class="origin_box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="imagemc_content">
+                                
+                            </div>
+                            <div id="audiomc_content">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div id="question_bid_list" class="teams_div">
+                        <div id="team_1_bid_q" class="team question_bid">
+                            <div class="team_points team_bid">
+                                $
+                                <input id="team_1_q_bid" class="team_qbid_input" value = 10  placeholder="" type="number" min="10" onblur="enforceMinMax(this)"/>
+                            </div>
+                        </div>
+                        <div id="team_2_bid_q" class="team question_bid">
+                            <div class="team_points team_bid">
+                                $
+                                <input id="team_2_q_bid" class="team_qbid_input" value = 10  placeholder="" type="number" min="10" onblur="enforceMinMax(this)"/>
+                            </div>
+                        </div>
+                        <div id="team_3_bid_q" class="team question_bid">
+                            <div class="team_points team_bid">
+                                $
+                                <input id="team_3_q_bid" class="team_qbid_input" value = 10  placeholder="" type="number" min="10" onblur="enforceMinMax(this)" />
+                            </div>
+                        </div>
+                        <div id="team_4_bid_q" class="team question_bid">
+                            <div class="team_points team_bid"> 
+                                $
+                                <input id="team_4_q_bid" class="team_qbid_input" value = 10 placeholder="" type="number" min="10" onblur="enforceMinMax(this)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="teams_list" class="teams_div invisible">
+                <div id="team_1" class="team">
+                    <input id="team_1_price_name" class="team_name"  placeholder="Team 1" onblur="saveTeamData(this)"/>
+                    <div class="team_points">
+                        $
+                        <input id="team_1_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
+                    </div>
+                </div>
+                <div id="team_2" class="team">
+                    <input id="team_2_price_name" class="team_name"  placeholder="Team 2" onblur="saveTeamData(this)"/>
+                    <div class="team_points">
+                        $
+                        <input id="team_2_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
+                    </div>
+                </div>
+                <div id="team_3" class="team">
+                    <input id="team_3_price_name" class="team_name"  placeholder="Team 3" onblur="saveTeamData(this)"/>
+                    <div class="team_points">
+                        $
+                        <input id="team_3_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
+                    </div>
+                </div>
+                <div id="team_4" class="team">
+                    <input id="team_4_price_name" class="team_name"  placeholder="Team 4"onblur="saveTeamData(this)" />
+                    <div class="team_points">
+                        $
+                        <input id="team_4_price_points" value="100" type="number" min="0" onchange="saveTeamData(this)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        function enforceMinMax(el){
+            if(el.max <= 0){
+                el.value = 10;
+                return;
+            }
+        if(el.value != ""){
+            if(parseInt(el.value) < parseInt(el.min)){
+            el.value = el.min;
+            }
+            if(parseInt(el.value) > parseInt(el.max)){
+            el.value = el.max;
+            }
+        }
+        }
+
+        function toggleClass(element, className){
+            if(element.classList.contains(className)){
+                element.classList.remove(className);
+            }
+            else{
+                element.classList.add(className)
+            }
+        }
+
+        function saveTeamData(element){
+            Global.setValue(element.getAttribute('id'), element.value);
+            Global.setValue('savedPriceData',true);
+        }
+
+        ready(function () {
+            Global.init();
+            Price.init();
+            showScreen = Price.showScreen;
+            loadPlayers = Price.loadPlayers;
+            showPrice = Price.showPrice;
+            loadQuestion = Price.loadQuestion;
+            checkAnswer = Price.checkAnswer;
+            respawnImages = Price.respawnImages;
+            playSound = Price.playSound;
+            loadSavedData = Price.loadSavedData;
+            clearSavedData = Price.clearSavedData
+        });   
+    </script>
+</html>

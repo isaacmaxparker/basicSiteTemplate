@@ -22,6 +22,7 @@ const Global = (function() {
      *              PRIVATE METHOD DECLARATIONS
      */
     let ajax;
+    let decodeImage;
     let htmlDiv;
     let htmlp;
     let init;  
@@ -30,6 +31,9 @@ const Global = (function() {
     let playGame;
     let getCookie;
     let setCookie;
+
+    let getValue;
+    let setValue;
     let toggleAside;
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -62,6 +66,19 @@ const Global = (function() {
         request.send();
    };
 
+   decodeImage = function(type){
+    switch(type){
+        case "famFued":
+            return "famfued_logo.png"
+        case "millionare":
+            return "millionare_logo.png"
+        case "jeopardy":
+            return "jeoparty_logo.png"
+        case "price":
+            return "price_logo.png"
+    }
+}
+
    goHome = function(){
        window.location = "games.html"
    }
@@ -93,6 +110,23 @@ const Global = (function() {
             setTimeout(function(){location.replace("html/games.html")},750);
         }
     }
+
+    getValue = function(name){
+        let val = getCookie(name);
+        if(!val){
+          val = localStorage.getItem(name)
+        }
+        return val
+     },
+ 
+     setValue = function(name, value){
+       setCookie(name,value)
+       if (value == "") {
+         localStorage.removeItem(name)
+       }else{
+         localStorage.setItem(name,value)
+       }
+    },
 
     getCookie = function(cname) {
         var name = cname + "=";
@@ -148,6 +182,7 @@ const Global = (function() {
      */
     return {
         ajax,
+        decodeImage,
         htmlDiv,
         htmlp,
         init,
@@ -157,6 +192,8 @@ const Global = (function() {
         setCookie,
         toggleAside,
         hideLoader,
+        getValue,
+        setValue,
     };
   }());
   

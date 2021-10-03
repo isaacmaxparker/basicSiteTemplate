@@ -48,11 +48,22 @@
 
 }
 
+@font-face {
+    font-family: 'Pumpkin';
+    src: url('fonts/pumpkincheesecake-webfont.woff2') format('woff2'),
+         url('fonts/pumpkincheesecake-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body{
     overflow-x: hidden;
     overflow-y: hidden;
     margin:0px;
     font-family: 'Renner';
+}
+
+.hidden{
+    display: none !important;
 }
 
 .icon{
@@ -138,9 +149,9 @@ body{
 }
 .grid-card{
     border:10px solid;
-    width: 90%;
-    min-height: 400px;
-    max-height: 600px;
+    width: calc(100% - 60px);
+    padding-top: 50px;
+    padding-bottom: 40px;
     background-position: center;
     background-size:cover;
     position: relative;
@@ -317,6 +328,10 @@ height: 100%;
     overflow: hidden;
     z-index: 0;
     object-fit: cover;
+}
+
+#videoBack{
+    filter: saturate(0) contrast(1.5);
 }
 
 .loadScreen{

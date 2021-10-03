@@ -211,6 +211,7 @@ const famFued = (function() {
     }
 
     resetAnswers = function(){
+        document.getElementById(QUESTION_DIV_ID).innerHTML = '    &nbsp;'
         for(let i = 1;i<NUM_OF_QUESTIONS +1;i++){
             let answer = document.getElementById(ANSWER_DIV_PREFIX + i);
             answer.querySelector('.answer').classList.add('answerOff');

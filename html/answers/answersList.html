@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../scripts/global.js"></script>
+        <script src="../../scripts/answers/answersList.js"></script>
+        <link rel="stylesheet" href="../../styles/global.css">
+        <link rel="stylesheet" href="../../styles/answersList.css">
+    </head>
+    <body>
+        <div class="container">
+            <div id="jepAnswers" class="answersList" style="display: none;">
+                <div id="firstJepGrid" class="jepGrid hidden">
+                    <div class="answersCategory">
+                        <div class="listSeparator"> 
+                            <div class="preLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div> 
+                            <div class="lineSeparatorName"> 
+                                <div class="lineContainer flex-column">
+                                    Category Name
+                                </div>
+                            </div> 
+                            <div class="postLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="answerDiv">
+                            <div class="question answerBox" onclick="toggleAnswer(this.parentElement.children[1])"">
+                                Question
+                            </div>
+                            <div class="answer answerBox hidden">
+                                Answer
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answersCategory">
+                        <div class="listSeparator"> 
+                            <div class="preLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div> 
+                            <div class="lineSeparatorName"> 
+                                <div class="lineContainer flex-column">
+                                    Category Name
+                                </div>
+                            </div> 
+                            <div class="postLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="answerDiv">
+                            <div class="question answerBox" onclick="toggleAnswer(this.parentElement.children[1])"">
+                                Question
+                            </div>
+                            <div class="answer answerBox hidden">
+                                Answer
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answersCategory">
+                        <div class="listSeparator"> 
+                            <div class="preLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div> 
+                            <div class="lineSeparatorName"> 
+                                <div class="lineContainer flex-column">
+                                    Category Name
+                                </div>
+                            </div> 
+                            <div class="postLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="answerDiv">
+                            <div class="question answerBox" onclick="toggleAnswer(this.parentElement.children[1])"">
+                                Question
+                            </div>
+                            <div class="answer answerBox hidden">
+                                Answer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="secondJepGrid" class="jepGrid hidden">
+                    <div class="answersCategory">
+                        <div class="listSeparator"> 
+                            <div class="preLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div> 
+                            <div class="lineSeparatorName"> 
+                                <div class="lineContainer flex-column">
+                                    Category Name
+                                </div>
+                            </div> 
+                            <div class="postLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="answerDiv">
+                            <div class="question answerBox" onclick="toggleAnswer(this.parentElement.children[1])"">
+                                Question
+                            </div>
+                            <div class="answer answerBox hidden">
+                                Answer
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answersCategory">
+                        <div class="listSeparator"> 
+                            <div class="preLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div> 
+                            <div class="lineSeparatorName"> 
+                                <div class="lineContainer flex-column">
+                                    Category Name
+                                </div>
+                            </div> 
+                            <div class="postLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="answerDiv">
+                            <div class="question answerBox" onclick="toggleAnswer(this.parentElement.children[1])"">
+                                Question
+                            </div>
+                            <div class="answer answerBox hidden">
+                                Answer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="finalJepGrid" class="jepGrid hidden">
+                    <div class="answersCategory">
+                        <div class="listSeparator"> 
+                            <div class="preLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div> 
+                            <div class="lineSeparatorName"> 
+                                <div class="lineContainer flex-column">
+                                    Final Jeopardy
+                                </div>
+                            </div> 
+                            <div class="postLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="answerDiv">
+                            <div class="question answerBox" onclick="toggleAnswer(this.parentElement.children[1])"">
+                                Question
+                            </div>
+                            <div class="answer answerBox hidden">
+                                Answer
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div id="fuedAnswers" class="answersList">
+                <div id="famGrid" class="famGrid">
+                    <div class="answersCategory">
+                        <div class="listSeparator"> 
+                            <div class="preLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div> 
+                            <div class="lineSeparatorName"> 
+                                <div class="lineContainer flex-column">
+                                    Category Name
+                                </div>
+                            </div> 
+                            <div class="postLine"> 
+                                <div class="lineContainer flex-column">
+                                    <div class="listSeparatorLine"></div>
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="answerDiv">
+                            <div class="question answerBox" onclick="toggleAnswer(this.parentElement.children[1])"">
+                                Question
+                            </div>
+                            <div class="answer answerBox hidden">
+                                Answer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="toolBar">
+                    <img src="../../images/logos/grid.png" onclick="showGrid(1)">
+                    <img src="../../images/logos/doublejep.png" onclick="showGrid(2)">
+                    <img src="../../images/logos/trophy.png" onclick="showGrid(3)">
+                </div>
+                
+            </div>
+    </body>
+    <script type="text/javascript">
+        //let showLocation;
+        function ready(fn) {
+            if (document.readyState != 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+
+        ready(function () {
+            Global.init();
+            Answers.init();
+            toggleAnswer = Answers.toggleAnswer;
+            showGrid = Answers.showGrid;
+        });
+    </script>
+</html>
