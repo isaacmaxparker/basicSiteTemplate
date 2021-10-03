@@ -33,7 +33,7 @@ const Games = (function() {
      *              PRIVATE METHOD DECLARATIONS
      */
 
-    compare = function( a, b ) {
+    compare = function( b, a ) {
             if ( a.date_created > b.date_created ){
               return -1;
             }
