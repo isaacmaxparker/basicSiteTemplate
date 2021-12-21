@@ -75,7 +75,9 @@ const Global = (function() {
         case "jeopardy":
             return "jeoparty_logo.png"
         case "price":
-            return "price_logo.png"
+            return "price_logo.png";
+        case "wheel":
+            return "wheel_logo.png"
     }
 }
 

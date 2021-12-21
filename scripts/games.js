@@ -10,7 +10,9 @@ const Games = (function() {
      *              CONSTANTS
      */
     const ANIMATION_DURATION = 800;
-    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/games.json'
+    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/games.json';
+    const FILTERS_LENGTH = 5;
+    const TAGS_LENGTH = 3;
   
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
@@ -95,7 +97,7 @@ const Games = (function() {
             let game_cards = document.getElementsByClassName('grid-card')
             var card_array = Array.prototype.slice.call( game_cards )
 
-            if(activestatuses.length == 5){
+            if(activestatuses.length == FILTERS_LENGTH){
                 filter_array.forEach(element => {
                     element.classList.add('active_filter')
                 });
@@ -141,7 +143,7 @@ const Games = (function() {
              let game_cards = document.getElementsByClassName('grid-card')
              var card_array = Array.prototype.slice.call( game_cards )
  
-             if(activestatuses.length == 2){
+             if(activestatuses.length == TAGS_LENGTH){
                  filter_array.forEach(element => {
                      element.classList.add('active_filter')
                  });
@@ -152,7 +154,6 @@ const Games = (function() {
                  });
                  showHideAll(card_array, false)
              }else{
-                 console.log(2)
                  document.getElementById('all_tags_switch').classList.add('active_filter')
                  document.getElementById('none_tags_switch').classList.add('active_filter')
                 card_array.forEach(element => {
@@ -217,6 +218,9 @@ const Games = (function() {
                     case "price":
                         setTimeout(function(){location.replace("price.html")},150);
                         break;
+                    case "wheel":
+                        setTimeout(function(){location.replace("wheel.html")},150);
+                        break;
                 }
             }
         });
@@ -244,7 +248,7 @@ const Games = (function() {
         });
 
         if(status != 'All' && status != 'N'){
-            if(activestatuses.length == 5){
+            if(activestatuses.length == FILTERS_LENGTH){
                 status = 'All';
             }else if(activestatuses.length == 0){
                 status = 'N'
@@ -306,7 +310,7 @@ const Games = (function() {
             }
         });
         if(status != 'All' && status != 'N'){
-            if(activetags.length == 2){
+            if(activetags.length == TAGS_LENGTH){
                 status = 'All';
             }else if(activetags.length == 0){
                 status = 'N'
