@@ -23,6 +23,20 @@
 .shown{
     top:0px;
     transition: top .5s ease;
+    z-index: 1000;
+}
+
+.games_filters{
+    position:relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 25px;
+    color:rgba(69, 88, 194, 0.616);
+    background-color: rgba(0, 0, 66, 0.795);
+    width:100%;
+    box-shadow: black 2px 5px 15px 1px;
+    height: 75px;
 }
 
 .games_filters{
@@ -50,7 +64,7 @@
     margin: 0px 10px;
 }
 
-.filter_button{
+.filter_button, .tag_button{
     color:grey;
     opacity:.8;
 }
@@ -59,7 +73,7 @@
     color:white;
 }
 
-.hidden_card{
+.hidden_card, .hidden_card_tag{
     display: none;
 }
 
@@ -70,6 +84,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     opacity: .8;
+    max-height: 30vh;
 }
 
 .grid-card:hover{

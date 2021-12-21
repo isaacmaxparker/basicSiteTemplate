@@ -14,15 +14,40 @@
         </div>
         <div class="content flex flex-column">
             <div class="sticky_toolbar">
-            <div id="games_filters" class="games_filters">
-                    <div class="menu_button" onclick="toggleFilters(this)">
-                        <div class="icon">F</div>
+                <div id="games_tags" class="games_filters">
+                    <div class="menu_button" style="left: 50px;" onclick="toggleFilters(this)">
+                        <div class="icon">K</div>
                     </div>
-                    <div id="all_switch" style="margin-left: 20px;" data-filter="All" class="filter_button" onclick="toggleFilterButtonPress(this)">
+                    <div id="all_tags_switch" style="margin-left: 20px;" data-tag="All" onclick="toggleTagButtonPress(this)">
                         All
                     </div>
                     <span>|</span>
-                    <div id="none_switch" class="filter_button active_filter" data-filter="N" onclick="toggleFilterButtonPress(this)">
+                    <div id="none_tags_switch" class="active_filter" data-tag="N" onclick="toggleTagButtonPress(this)">
+                        None
+                    </div>
+                    <div id="filters">
+
+                        <div style="margin-left: 50px;" data-tag="Christmas" class="tag_button active_filter" onclick="toggleTagButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
+                            Christmas
+                        </div>
+                        <span>|</span>
+                        <div data-tag="Holiday" class="tag_button active_filter" onclick="toggleTagButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
+                            Holiday
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="sticky_toolbar">
+                <div id="games_filters" class="games_filters">
+                    <div class="menu_button" onclick="toggleFilters(this)">
+                        <div class="icon">F</div>
+                    </div>
+                    <div id="all_switch" style="margin-left: 20px;" data-filter="All"  onclick="toggleFilterButtonPress(this)">
+                        All
+                    </div>
+                    <span>|</span>
+                    <div id="none_switch" class=" active_filter" data-filter="N" onclick="toggleFilterButtonPress(this)">
                         None
                     </div>
                     <div id="filters">
@@ -43,13 +68,14 @@
                             MISMs
                         </div>
                         <span>|</span>
-                        <div class="filter_button active_filter" data-filter="T" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                        <div class="filter_button active_filter" data-filter="T" onclick="toggleFilterButtonPress(this)" >
                             Thirsties
                         </div>
                     </div>
 
                 </div>
             </div>
+
             <div id="games_grid" class="grid-3" style="font-size: 4rem;">
 
             </div>
@@ -70,6 +96,7 @@
             Games.init();
             selectGame = Games.selectGame
             toggleFilterButtonPress = Games.toggleFilterButtonPress
+            toggleTagButtonPress = Games.toggleTagButtonPress
         });
 
         function toggleFilters(button){
