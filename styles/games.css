@@ -1,3 +1,68 @@
+.menu_button{
+    background-color: rgba(0, 0, 66, 0.795);
+    box-shadow: black 2px 5px 15px 1px;
+    width:50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top:65px;
+    color:white;
+}
+
+.sticky_toolbar{
+    position: absolute;
+    top:-65px;
+    left:0;
+    width:100vw;
+    z-index: 100;
+    transition: top .5s ease;
+}
+
+.shown{
+    top:0px;
+    transition: top .5s ease;
+}
+
+.games_filters{
+    position:relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 25px;
+    color:rgba(69, 88, 194, 0.616);
+    background-color: rgba(0, 0, 66, 0.795);
+    width:100%;
+    box-shadow: black 2px 5px 15px 1px;
+    height: 75px;
+}
+
+#filters{
+    position:relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 25px;
+}
+
+.games_filters span{
+    margin: 0px 10px;
+}
+
+.filter_button{
+    color:grey;
+    opacity:.8;
+}
+
+.active_filter{
+    color:white;
+}
+
+.hidden_card{
+    display: none;
+}
+
 .card_image img{
     width: 50%;
 }
@@ -28,6 +93,7 @@
 #games_grid{
     padding-top:50px;
     height: 100%;
+    min-width: 100vw;
     overflow-y: scroll;
 }
 

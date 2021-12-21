@@ -28,6 +28,8 @@ const Games = (function() {
     let loadGames;
     let showGames;
     let selectGame;
+    let toggleFilterButtonPress;
+    let showHideAll;
 
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
@@ -75,7 +77,7 @@ const Games = (function() {
             let gridContent = ''
             games.forEach(element =>{ 
                 let image = Global.decodeImage(element.type)
-                gridContent += `<div class="grid-card ${element.color}_card header white-text flex-column">
+                gridContent += `<div data-status=${element.status} class="grid-card ${element.color}_card header white-text flex-column">
                                     <div class="card_title header xs">${element.name}</div>
                                     <div class="card_image">
                                         <img src="../images/logos/${image}">
@@ -112,6 +114,78 @@ const Games = (function() {
             }
         });
     }
+
+    toggleFilterButtonPress = function(element){
+        let status = element.getAttribute('data-filter');
+        let game_cards = document.getElementsByClassName('grid-card')
+        var card_array = Array.prototype.slice.call( game_cards )
+        let activeswitch = element.classList.contains('active_filter');
+
+        if(activeswitch){
+            element.classList.remove('active_filter')
+        }else{
+            element.classList.add('active_filter')
+        }
+
+        let filter_buttons = document.getElementsByClassName('filter_button');
+        var filter_array = Array.prototype.slice.call( filter_buttons )
+        let activestatuses = [];
+        filter_array.forEach(element => {
+            if(element.classList.contains('active_filter') && element.getAttribute('data-filter') != 'All' && element.getAttribute('data-filter') != 'N'){
+                activestatuses.push(element.getAttribute('data-filter'))
+            }
+        });
+        if(status != 'All' && status != 'N'){
+            if(activestatuses.length == 5){
+                status = 'All';
+            }else if(activestatuses.length == 0){
+                status = 'N'
+            }else{
+                document.getElementById('all_switch').classList.add('active_filter')
+                document.getElementById('none_switch').classList.add('active_filter')
+            }
+        }
+
+        console.log(status)
+        if(status == 'All'){
+            filter_array.forEach(element => {
+                element.classList.add('active_filter')
+            });
+            showHideAll(card_array, true)
+
+        }
+        else if(status == 'N'){
+            filter_array.forEach(element => {
+                element.classList.remove('active_filter')
+            });
+            showHideAll(card_array, false)
+
+        } else {
+            card_array.forEach(element => {
+                if(activestatuses.includes(element.getAttribute('data-status'),status)){
+                    element.classList.remove('hidden_card')
+                }else{
+                    element.classList.add('hidden_card')
+                }
+            });
+        }
+    }
+
+    showHideAll = (cards, show) => {
+        if(show){
+            document.getElementById('all_switch').classList.remove('active_filter')
+            document.getElementById('none_switch').classList.add('active_filter')
+            cards.forEach(element => {
+                element.classList.remove('hidden_card')
+            });
+        }else{
+            document.getElementById('all_switch').classList.add('active_filter')
+            document.getElementById('none_switch').classList.remove('active_filter')
+            cards.forEach(element => {
+                element.classList.add('hidden_card')
+            });
+        }
+    }
   
     /*------------------------------------------------------------------------
      *              PUBLIC METHODS
@@ -119,6 +193,7 @@ const Games = (function() {
     return {
         init,
         selectGame,
+        toggleFilterButtonPress,
     };
   }());
   

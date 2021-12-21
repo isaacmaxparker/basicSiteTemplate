@@ -13,6 +13,43 @@
             </video>
         </div>
         <div class="content flex flex-column">
+            <div class="sticky_toolbar">
+            <div id="games_filters" class="games_filters">
+                    <div class="menu_button" onclick="toggleFilters(this)">
+                        <div class="icon">F</div>
+                    </div>
+                    <div id="all_switch" style="margin-left: 20px;" data-filter="All" class="filter_button" onclick="toggleFilterButtonPress(this)">
+                        All
+                    </div>
+                    <span>|</span>
+                    <div id="none_switch" class="filter_button active_filter" data-filter="N" onclick="toggleFilterButtonPress(this)">
+                        None
+                    </div>
+                    <div id="filters">
+
+                        <div style="margin-left: 50px;" data-filter="A" class="filter_button active_filter" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                            General
+                        </div>
+                        <span>|</span>
+                        <div  class="filter_button active_filter" data-filter="F" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                            Family
+                        </div>
+                        <span>|</span>
+                        <div class="filter_button active_filter" data-filter="G" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                            Gayme Nights
+                        </div>
+                        <span>|</span>
+                        <div class="filter_button active_filter" data-filter="I" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                            MISMs
+                        </div>
+                        <span>|</span>
+                        <div class="filter_button active_filter" data-filter="T" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                            Thirsties
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div id="games_grid" class="grid-3" style="font-size: 4rem;">
 
             </div>
@@ -32,6 +69,18 @@
             Global.init();
             Games.init();
             selectGame = Games.selectGame
+            toggleFilterButtonPress = Games.toggleFilterButtonPress
         });
+
+        function toggleFilters(button){
+            console.log(button)
+            var toolbar = button.parentElement.parentElement;
+            console.log(toolbar)
+            if(toolbar.classList.contains('shown')){
+                toolbar.classList.remove('shown')
+            }else{
+                toolbar.classList.add('shown')
+            }
+        }
     </script>
 </html>
