@@ -65,6 +65,8 @@ const Wheel = (function() {
     let playSound;
     let stopSound;
 
+    let resetLetters;
+
     let wheelClick;
     let wheelStart;
     let wheelStop;
@@ -301,6 +303,7 @@ const Wheel = (function() {
     }
 
     previousPhrase = () => {
+        resetLetters();
         document.getElementById('points').value = "SPIN THE WHEEL";
         current_phrase_id = current_phrase_id - 1;
         loadPhraseBoard(phrases[current_phrase_id].text.toLowerCase());
@@ -308,6 +311,8 @@ const Wheel = (function() {
     }
 
     nextPhrase = () =>{
+        document.getElementById('used_letters_div').classList.remove('used_letters_div_hidden');
+        resetLetters();
         document.getElementById('points').value = "SPIN THE WHEEL";
         current_phrase_id = current_phrase_id + 1;
         if(current_phrase_id == phrases.length - 1){
@@ -322,6 +327,8 @@ const Wheel = (function() {
 
     onKeyPressed = (e) =>{
         console.log(e)
+        console.log(VOWEL_CODES)
+        console.log(VOWEL_CODES.includes('keyA'))
         if(e.code == 'Space'){
             wheelClick(document.getElementById('wheel'));
         } else if (e.code == 'Enter'){
@@ -330,8 +337,7 @@ const Wheel = (function() {
             assignPoints(e.key); 
         } else if (e.code == 'Backslash'){
             playSound('wrong')
-        }
-         else if (VOWEL_CODES.includes(e.key)){
+        } else if (VOWEL_CODES.includes(e.code)){
             showAllLetter(e.key, true)
         } else if(e.code.includes('Key')){
             showAllLetter(e.key, false)
@@ -365,6 +371,14 @@ const Wheel = (function() {
         }
     }
 
+    resetLetters = () =>{
+        let letters = document.getElementsByClassName('used_letter_inactive');
+        var letters_array = Array.prototype.slice.call( letters );
+        letters_array.forEach(element => {
+            toggleLetter(element,true)
+        });
+    }
+
     stopSound = (sound) => {
         switch (sound) {
             case "click":
@@ -386,7 +400,13 @@ const Wheel = (function() {
                 i = i + 1000;
                 setTimeout(function(){showLetterCover(element.children[0])},i)
             });
-            current_points = current_points * letters_array.length;
+            if(isVowel){
+                console.log("ASDF")
+                current_points = 'VOWEL';
+            }else{
+                current_points = current_points * letters_array.length;
+            }
+            console.log(current_points)
         }else{
             playSound('wrong')
         }
@@ -401,8 +421,11 @@ const Wheel = (function() {
         letter_div_cover.classList.remove('board_block_cover_colored')
         letter_div_cover.classList.add('board_block_cover_hidden')
         if(document.getElementsByClassName('board_block_cover_colored').length == 0){
+            console.log(current_points);
             if(Number.isInteger(current_points)){
                 document.getElementById('points').value = '$' + current_points;
+            }else{
+                document.getElementById('points').value = phrases[current_phrase_id].category;
             }
         }
     }

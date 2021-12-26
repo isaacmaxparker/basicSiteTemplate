@@ -166,7 +166,7 @@ const Jeop = (function () {
         let doubleGridCont = document.getElementById(DOUBLE_GRID_CONT_ID);
         round_2_questions.forEach(categ => {
             let colHTML = '';
-            colHTML += `<div class="mainGridColumn col-${round_1_questions.length}" >`
+            colHTML += `<div class="mainGridColumn col-${round_2_questions.length}" >`
             colHTML += `<div class="mainGridTile" onclick="showColumn(this.parentElement)">
                             <div class="mainTileText flippedDiv">
                                 <div class="catName">${categ.category_name}</div>
