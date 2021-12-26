@@ -7,16 +7,128 @@
         <link rel="stylesheet" href="../styles/wheel.css">
     </head>
     <body>
+        <div id="loadScreen" class="loadScreen flex-column">
+            <img src="../images/logos/wheel_logo.png" style="max-height: 60%;"/>
+            <p style="color: rgba(255, 255, 255, 0.747);font-size: 4rem;margin:0px">How many teams?</p>
+            <div class="flex-row" style="width: 80%;">
+                <div class="playNum" onclick=loadTeams(2)>2</div>
+                <div class="playNum" onclick=loadTeams(3)>3</div>
+                <div class="playNum" onclick=loadTeams(4)>4</div>
+                <div class="playNum" onclick=loadTeams(5)>5</div>
+            </div>
+        </div>
         <div style="display: none;">
             <audio  id="rightAudio" controls>
                 <source src="../audios/milli_right.mp3" type="audio/mpeg">
             </audio>
+            <audio id="wrongAudio" controls>
+                <source src="../audios/milli_wrong.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="winnerAudio" controls>
+                <source src="../audios/winner.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="moneyAudio" controls>
+                <source src="../audios/milli_money.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="clickAudio" controls>
+                <source src="../audios/click.mp3" type="audio/mpeg">
+            </audio>
         </div>
         <div class="backImage">
-            <img src="../images/backgrounds/">
+            <img src="../images/backgrounds/wheel_back.png">
         </div>
         <div class="content" style="position: relative">
+            <div id="messageDiv" class="message flex-column hidden" onclick="hideMessage()">
+                <div class="messageTitle">
+                    FINAL ROUND
+                </div>
+                <div class="messageText">
+                    Select Your Challengers
+                </div>
+            </div>
+            <div class="splitContent">
+                <div class="leftSide">
+                    <div class="letters_div">
+                        <div id="prevButton" class="navbutton icon inactive" onclick="previousPhrase()">9</div>
+                        <div class="points">
+                            <input id="points" type="text" value="SPIN WHEEL"/>
+                        </div>
+                        <div id="nextButton" class="navbutton icon" onclick="nextPhrase()">!</div>
+                    </div>
+                    <div class="phrase_board">
+                        <div id="phrase_board_row_1" class="phrase_board_row"></div>
+                        <div id="phrase_board_row_2" class="phrase_board_row"></div>
+                        <div id="phrase_board_row_3" class="phrase_board_row"></div>
+                        <div id="phrase_board_row_4" class="phrase_board_row"></div>
+                    </div>
+                    <div class="wheel_div">
+                        <div class="used_letters_div" onclick="Global.toggleClass(this, 'used_letters_div_hidden')">
+                            <div class="vowels">
+                                <div class="cons_row">
+                                    <div id="A_letter" class="used_letter" onclick="toggleLetter(this)">A</div>
+                                    <div id="E_letter" class="used_letter" onclick="toggleLetter(this)">E</div>
+                                    <div id="I_letter" class="used_letter" onclick="toggleLetter(this)">I</div>
+                                    <div id="O_letter" class="used_letter" onclick="toggleLetter(this)">O</div>
+                                    <div id="U_letter" class="used_letter" onclick="toggleLetter(this)">U</div>
+                                    <div id="Y_letter" class="used_letter" onclick="toggleLetter(this)">Y</div>
+                                </div>
+                            </div>
+                            <div class="consonants">
+                                <div class="cons_row">
+                                    <div id="B_letter" class="used_letter" onclick="toggleLetter(this)">B</div>
+                                    <div id="C_letter" class="used_letter" onclick="toggleLetter(this)">C</div>
+                                    <div id="D_letter" class="used_letter" onclick="toggleLetter(this)">D</div>
+                                    <div id="F_letter" class="used_letter" onclick="toggleLetter(this)">F</div>
+                                    <div id="G_letter" class="used_letter" onclick="toggleLetter(this)">G</div>
+                                   
+                                </div>
+                                <div class="cons_row">
+                                    <div id="H_letter" class="used_letter" onclick="toggleLetter(this)">H</div>
+                                    <div id="J_letter" class="used_letter" onclick="toggleLetter(this)">J</div>
+                                    <div id="K_letter" class="used_letter" onclick="toggleLetter(this)">K</div>
+                                    <div id="L_letter" class="used_letter" onclick="toggleLetter(this)">L</div>
+                                    <div id="M_letter" class="used_letter" onclick="toggleLetter(this)">M</div>
+                                  
+                                </div>
+                                <div class="cons_row">
+                                    <div id="N_letter" class="used_letter" onclick="toggleLetter(this)">N</div>
+                                    <div id="P_letter" class="used_letter" onclick="toggleLetter(this)">P</div>
+                                    <div id="Q_letter" class="used_letter" onclick="toggleLetter(this)">Q</div>
+                                    <div id="R_letter" class="used_letter" onclick="toggleLetter(this)">R</div>
+                                    <div id="S_letter" class="used_letter" onclick="toggleLetter(this)">S</div>
+                                   
+                                </div>
+                                <div class="cons_row">
+                                    <div id="T_letter" class="used_letter" onclick="toggleLetter(this)">T</div>
+                                    <div id="V_letter" class="used_letter" onclick="toggleLetter(this)">V</div>
+                                    <div id="W_letter" class="used_letter" onclick="toggleLetter(this)">W</div>
+                                    <div id="X_letter" class="used_letter" onclick="toggleLetter(this)">X</div>
+                                    <div id="Z_letter" class="used_letter" onclick="toggleLetter(this)">Z</div>
+                                </div>
+                            </div>
+                            <div class="solve">
+                                <div class="cons_row">
+                                    <div class="used_letter" onclick="solvePuzzle()">SOLVE PUZZLE</div>
+                            
+                                </div>
+                            </div>
+                        </div>
+                        <img class="ticker" src="../images/logos/wheel/ticker.png">
+                        <img id="wheel" class="wheel" src="../images/logos/wheel/wheel.png" onclick="wheelClick(this)">
+                    </div>
+                </div>
+                <div class="rightSide">
+                    <div class="teams">
+                        <div id="teams_list" class="teams_list invisible">
 
+                        </div>
+                        <div class="toolbox big_toolbox" style="margin-top: auto;">
+                            <img src="../images/logos/reset.png" onclick="clearBoard()" style="margin-left: auto;">
+                            <img src="../images/logos/home.png" onclick="Global.goHome()">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
     <script type="text/javascript">
@@ -31,7 +143,28 @@
 
         ready(function () {
             Global.init();
-            wheel.init();
+            Wheel.init();
+
+            showLetter = Wheel.showLetter
+            wheelClick = Wheel.wheelClick
+            previousPhrase = Wheel.previousPhrase
+            nextPhrase = Wheel.nextPhrase
+            hideMessage = Wheel.hideMessage
+            clearBoard = Wheel.clearBoard
+            bankrupt = Wheel.bankrupt
+            buyVowel = Wheel.buyVowel
+            finalscore = Wheel.finalscore
+            toggleLetter = Wheel.toggleLetter
+            solvePuzzle = Wheel.solvePuzzle
+            loadTeams = Wheel.loadTeams
+
+            function toggleClass(div, className){
+                if(div.classList.contains(className)){
+                    div.classList.remove(className)
+                }else{
+                    div.classList.add(className)
+                }
+            }
         });   
     </script>
 </html>

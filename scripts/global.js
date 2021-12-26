@@ -35,6 +35,7 @@ const Global = (function() {
     let getValue;
     let setValue;
     let toggleAside;
+    let toggleClass;
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
      */
@@ -178,6 +179,14 @@ const Global = (function() {
           }
       }
 
+      toggleClass = (div, className) => {
+        if(div.classList.contains(className)){
+            div.classList.remove(className)
+        }else{
+            div.classList.add(className)
+        }
+    }
+
 
     /*------------------------------------------------------------------------
      *              PUBLIC METHODS
@@ -196,6 +205,7 @@ const Global = (function() {
         hideLoader,
         getValue,
         setValue,
+        toggleClass,
     };
   }());
   

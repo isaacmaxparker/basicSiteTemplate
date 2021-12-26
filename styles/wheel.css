@@ -1,0 +1,400 @@
+/* LOAD SCREEN */
+.loadScreen{
+    background-color: rgba(0, 0, 0, 0.856)
+}
+
+.playNum{
+    color:white;
+    font-size: 8rem;
+    padding:20px;
+}
+
+.playNum:hover{
+    opacity: .6;
+    color:rgb(0, 255, 85);
+}
+
+/* LAYOUT */
+
+
+.splitContent{
+    width:100vw;
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+}
+.leftSide{
+    height: 100vh;
+    width: 75vw;
+}
+.rightSide{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left:2.5vw;
+    margin-right:2.5vw;
+    width:20vw;
+    height:100vh;
+}
+
+#messageDiv{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 70%;
+    height: 70%;
+    background-color: rgba(0, 0, 0, 0.874);
+    border: 10px solid rgb(6, 6, 104);
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#3d51ff, #0fa4e9,#4053ff);
+    z-index: 10000;
+    color:white;
+}
+
+.messageTitle{
+    font-weight: bold;
+    font-size: 200%;
+}
+
+/* LETTERS */
+.used_letters_div{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.779);
+    left:-10px;
+    top:0;
+
+    border:rgb(255, 208, 55)ridge 10px;
+    padding:15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+    transition: left .5s ease;
+}
+
+.used_letters_div_hidden{
+    left:-245px;
+    transition: left .5s ease;
+}
+
+.vowels, .consonants{
+    border-bottom:1px solid rgb(255, 208, 55);
+    margin-bottom:10px;
+}
+
+.cons_row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.used_letter{
+    color: white;
+    font-size: 25px;
+    margin:10px;
+    text-shadow: 3px 0px 6px #def;
+    cursor: pointer;
+    z-index: 1020;
+}
+
+.used_letter_inactive{
+    color:grey;
+    opacity: .6;
+    text-shadow: 3px 0px 6px rgb(0, 0, 0);
+}
+
+/* HEADER */
+.letters_div{
+    height:10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.points{
+    border:rgb(244, 241, 255)ridge 10px;
+    background-color: rgba(0, 0, 0, 0.89);
+    width:35%;
+    min-height:50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.points input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    color: gold;
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Renner';
+    text-transform: uppercase;
+}
+
+.navbutton{
+    opacity: .5;
+    margin:20px;
+    font-size: 50%;
+    color:white;
+}
+
+/* WHEEL */
+.wheel_div{
+    height:35vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top:10px
+}
+.wheel{
+    height: 225%;
+    top:0px;
+    perspective: 10px;
+    position: absolute;
+}
+.ticker{
+    position: absolute;
+    top:-20px;
+    width:3.5vh;
+    z-index: 20;
+    left:50.25%;
+    transform: translate(-50%);
+}
+
+/* PHRASE BOARD */
+.phrase_board{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: 100%; */
+    max-height: 55vh;
+    padding:50px 20px;
+    padding-top:0px;
+}
+.phrase_board_row{
+    width: 100%;
+    display: flex;
+    height: calc(25% - 25px);
+    flex-direction: row;
+    border:rgb(244, 241, 255)ridge 10px;
+}
+
+#phrase_board_row_1{
+    border-bottom:none;
+}
+
+#phrase_board_row_2, #phrase_board_row_3{
+    margin-bottom: -10px;
+    margin-top: -10px;
+}
+
+#phrase_board_row_4{
+    border-top: none;
+}
+
+#phrase_board_row_1,#phrase_board_row_4{
+    width: 85.71%;
+    /* grid-template-columns: repeat(auto-fill, minmax(100px, 120px)); */
+}
+
+
+.board_block{
+    position: relative;
+    border: 5px solid black;
+    min-height: calc(13.3vh - 10px);
+    max-height: calc(13.3vh - 10px);;
+    width: 100%;
+    background-image: linear-gradient(rgb(255, 255, 255)rgb(232, 255, 249));
+    font-size: 5.8vw;
+    text-align: center;
+    justify-content: center;align-items: center;
+    display: flex;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: white;
+}
+
+.board_block_value{
+    text-transform: capitalize;
+}
+
+.blank_board_block{
+    background-image: linear-gradient(rgb(0, 255, 234), rgb(0, 121, 90));
+}
+
+.board_block_cover{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.board_block_cover_colored{
+    background-image: linear-gradient(rgb(94, 46, 226), rgb(96, 11, 255));
+    border: 5px solid black;
+    top: -5px;
+    left: -5px;
+}
+
+.board_block_cover_hidden{
+    display: none;
+}
+
+/* TEAMS */
+.teams{
+    overflow-y: auto;
+    min-height: 100%;
+    padding-top: 10vh;
+}
+.teams_list{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity .5s ease;
+
+}
+.team{
+    display: flex;
+    flex-direction:column;
+    width: 90%;
+    border:10px white solid;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 10px 10px 10px black;
+    background: rgb(0, 0, 0);
+    max-height: 30vh;
+}
+#team_1>input{
+    background: linear-gradient(217deg, rgba(0, 183, 255, 0.8), rgba(10, 218, 255, 0) 70.71%),
+    linear-gradient(127deg, rgba(6, 218, 255, 0.8), rgba(0, 162, 173, 0) 70.71%),
+    linear-gradient(336deg, rgba(0, 132, 184, 0.8), rgba(41, 252, 241, 0.568) 70.71%); 
+     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    width: 100%;
+    border:none;
+    text-align: center;
+}
+#team_2>input{
+    background: linear-gradient(217deg, rgba(27, 255, 57, 0.8), rgba(4, 255, 16, 0) 70.71%),
+    linear-gradient(127deg, rgba(0, 204, 51, 0.8), rgba(0, 255, 0, 0.377) 70.71%),
+    linear-gradient(336deg, rgba(61, 252, 109, 0.8), rgba(55, 241, 55, 0.411) 70.71%);  
+     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    width: 100%;
+    border:none;
+    text-align: center;
+}
+#team_3>input, #team_3 .team_toolbar{
+    background: linear-gradient(217deg, rgba(240, 255, 27, 0.8), rgba(4, 255, 16, 0) 70.71%),
+    linear-gradient(127deg, rgba(204, 201, 0, 0.8), rgba(255, 230, 0, 0.377) 70.71%),
+    linear-gradient(336deg, rgba(255, 166, 0, 0.8), rgba(255, 217, 0, 0.548) 70.71%); 
+     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    width: 100%;
+    border:none;
+    text-align: center;
+}
+#team_4>input{
+    background: linear-gradient(217deg, rgba(214, 7, 7, 0.8), rgba(255,0,0,0) 70.71%),
+    linear-gradient(127deg, rgba(223, 43, 43, 0.8), rgba(255, 50, 50, 0.616) 70.71%),
+    linear-gradient(336deg, rgba(224, 41, 41, 0.8), rgba(0,0,255,0) 70.71%); 
+     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    width: 100%;
+    border:none;
+    text-align: center;
+}
+
+#team_5>input{
+    background: linear-gradient(217deg, rgba(214, 7, 214, 0.8), rgba(255,0,0,0) 70.71%),
+    linear-gradient(127deg, rgba(223, 43, 214, 0.8), rgba(255, 50, 255, 0.616) 70.71%),
+    linear-gradient(336deg, rgba(224, 41, 209, 0.8), rgba(0,0,255,0) 70.71%); 
+     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    width: 100%;
+    border:none;
+    text-align: center;
+}
+.team_name{
+    font-size: 4rem;
+    border-bottom:rgb(255, 255, 255) 5px solid !important;
+    color: rgb(219, 219, 219) !important;
+    font-family: 'Signature', 'Authentic Signature' !important;
+    padding:15px 0px;
+
+}
+.team_points{
+    font-size: 4.2rem;
+    height: 100%;
+    width: calc(100% - 4px) !important;
+}
+
+.toolbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+
+.team_tools{
+    display: flex;
+    flex-direction: row;
+}
+.team_tools img{
+    z-index: 100;
+    filter: grayscale(90%) brightness(200%) !important;
+    height: 30px !important;
+    opacity: 1;
+}
+
+.big_toolbox{
+    position: absolute;
+    bottom:25px;
+    right: 25px;
+}
+
+.team_tools img:hover{
+    opacity: .9 !important;
+    filter: grayscale(50%) brightness(200%) !important;
+}
+
+.team_toolbar{
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-left:10px;
+}
+
+.toolbox img{
+    max-height: 50px;
+    height: 100%;
+    filter: grayscale(100%) brightness(70%);
+    opacity:.3;
+    padding: 10px;
+}
+
+.toolbox img:hover{
+    opacity:.8;
+    filter: grayscale(100%) brightness(200%);
+}
