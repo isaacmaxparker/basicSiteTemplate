@@ -326,6 +326,9 @@ const Wheel = (function() {
     }
 
     onKeyPressed = (e) =>{
+        if(document.activeElement.classList.contains('team_name')){
+            return;
+        }
         console.log(e)
         console.log(VOWEL_CODES)
         console.log(VOWEL_CODES.includes('keyA'))
