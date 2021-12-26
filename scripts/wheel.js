@@ -329,6 +329,9 @@ const Wheel = (function() {
         if(document.activeElement.classList.contains('team_name')){
             return;
         }
+        if(document.activeElement.classList.contains('team_points')){
+            return;
+        }
         console.log(e)
         console.log(VOWEL_CODES)
         console.log(VOWEL_CODES.includes('keyA'))
