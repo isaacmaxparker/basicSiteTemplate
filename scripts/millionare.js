@@ -20,6 +20,16 @@ const Milli = (function () {
             "right_answer": null
         }
     }
+    const DEMO_QUESTION = {
+        "question_text":"This is a demo question",
+        "answers":{
+            "answer_1":"First Answer",
+            "answer_2":"Second Answer",
+            "answer_3":"Third Answer",
+            "answer_4":"Fourth Answer",
+            "right_answer":1
+        }
+    };
     const LAST_QUESTION = {
         "question_text": "All out of questions for this game",
         "answers": {
@@ -75,6 +85,7 @@ const Milli = (function () {
     let showCorrectAnswer;
     let updateScore;
     let startTimer;
+    let shuffle;
 
     let runTimer;
     /*------------------------------------------------------------------------
@@ -108,8 +119,10 @@ const Milli = (function () {
     loadQuestions = function () {
         let url = QUESTIONS_URL_PREFIX + game.json_name + ".json"
         Global.ajax(url, function (data) {
-            questions = data;
+            questions = shuffle(data);
+            questions.unshift(DEMO_QUESTION)
             questions.unshift(FIRST_QUESTION)
+
             questions.push(LAST_QUESTION)
             questionsLoaded = true;
             console.log(questions)
@@ -117,6 +130,25 @@ const Milli = (function () {
         })
 
     }
+
+    shuffle = function(array) {
+        let currentIndex = array.length,  randomIndex;
+      
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+      
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+      
+        return array;
+      }
+      
 
     loadPlayers = function(num_of_players){
         document.getElementById('loadScreen').classList.add('hidden');

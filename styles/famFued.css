@@ -142,6 +142,22 @@ text-align: center;
     position: relative;
 }
 
+.homeLink{
+    width:100%;
+    text-align: center;
+    opacity: .5;
+    font-size: .8;
+    cursor: pointer;
+}
+
+.homeLink:hover{
+    opacity: .8;
+}
+
+.instructions{
+    font-size: 70%;
+    padding:20px;
+}
 
 .navbutton{
     opacity: .5;

@@ -60,6 +60,14 @@
     font-size: 25px;
 }
 
+.active_filter{
+    cursor: pointer;
+}
+
+.active_filter:hover{
+    opacity: .4;
+}
+
 .games_filters span{
     margin: 0px 10px;
 }
@@ -84,7 +92,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     opacity: .8;
-    max-height: 30vh;
+    min-height: 40vh;
 }
 
 .grid-card:hover{
@@ -184,4 +192,15 @@
 }
 .orange_card:hover{
     box-shadow:rgb(221, 187, 74) 0px 0px 25px;
+}
+
+.yellow_card{
+    background-image: url("../images/card_backs/yellow_back.png");
+    border-image-slice: 5;
+    border-image-source: radial-gradient(#9e9400, #fffd93,#9e8e00);
+    box-shadow:rgb(128, 115, 0) 0px 0px 25px;
+    color:rgb(255, 227, 191);
+}
+.yellow_card:hover{
+    box-shadow:rgb(221, 211, 74) 0px 0px 25px;
 }

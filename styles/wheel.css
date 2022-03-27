@@ -121,7 +121,7 @@
 .points{
     border:rgb(244, 241, 255)ridge 10px;
     background-color: rgba(0, 0, 0, 0.89);
-    width:35%;
+    width:55%;
     min-height:50%;
     display: flex;
     align-items: center;

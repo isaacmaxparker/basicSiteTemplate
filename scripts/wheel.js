@@ -107,9 +107,9 @@ const Wheel = (function() {
         if(!letter){
             return `<div class="board_block blank_board_block"></div>`
         }else{
-            if(letter == '-' || letter == '\''){
-                return `<div class="board_block board_block_letter" data-letter=${letter}>
-                            <div class="board_block_value">${letter}</div>
+            if(letter == '-' || letter == '\'' || letter == ',' || letter == '.' || letter == '&'){
+                return `<div class="board_block board_block_letter" data-letter${letter == "\'" ? "\'" : letter}>
+                            <div class="board_block_value">${letter == "\'" ? "\'" : letter}</div>
                         </div>`
             }
             return `<div class="board_block board_block_letter letter_${letter}" data-letter=${letter}>

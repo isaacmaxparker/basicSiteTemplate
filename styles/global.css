@@ -137,6 +137,11 @@ body{
 }
 
 /* GRID */ 
+.grid-2 {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
 .grid-3 {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -178,6 +183,9 @@ body{
 }
 .orange_card{
     background-image: url('../images/orange_velvet.jpg');
+}
+.yellow_card{
+    background-image: url('../images/yellow_velvet.jpg');
 }
 .green_card{
     background-image: url('../images/green_velvet.jpg');
