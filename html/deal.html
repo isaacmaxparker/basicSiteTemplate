@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../scripts/global.js"></script>
+    <script src="../scripts/deal.js"></script>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/deal.css">
+    <script>
+        function allowDrop(ev) {
+          ev.preventDefault();
+        }
+        
+        function drag(ev) {
+          ev.dataTransfer.setData("text", ev.target.id);
+        }
+        
+        function drop(ev) {
+          ev.preventDefault();
+          var data = ev.dataTransfer.getData("text");
+          ev.target.appendChild(document.getElementById(data));
+        }
+        </script>
+</head>
+
+<body>
+    <div id="loadScreen" class="loadScreen flex-column">
+        <img src="../images/logos/deal_logo.png" style="max-height: 60%;">
+        <p style="color: rgba(255, 255, 255, 0.747);font-size: 4rem;margin:0px">How many teams?</p>
+        <div class="flex-row" style="width: 80%;">
+            <div class="playNum" onclick=loadPlayers(2)>2</div>
+            <div class="playNum" onclick=loadPlayers(3)>3</div>
+            <div class="playNum" onclick=loadPlayers(4)>4</div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <audio id="rightAudio" controls>
+            <source src="../audios/milli_right.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="wrongAudio" controls>
+            <source src="../audios/milli_wrong.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="winnerAudio" controls>
+            <source src="../audios/winner.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="moneyAudio" controls>
+            <source src="../audios/milli_money.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div class="backImage">
+        <img src="../images/backgrounds/jeop_back.png">
+    </div>
+    <div class="content" style="position: relative">
+        <div class="splitContent">
+            <div class="wagerAside">
+                <div id="wager_list" class="teams_list invisible">
+                    <div id="current_points" class="hidden"></div>
+                    <div id="team_1_wager" class="team">
+                        <input class="team_points team_wager" value="0" type="number" min="0"/>
+                    </div>
+                    <div id="team_2_wager" class="team">
+                        <input class="team_points team_wager" value="0" type="number" min="0"/>
+                    </div>
+                    <div id="team_3_wager" class="team">
+                        <input class="team_points team_wager" value="0" type="number" min="0"/>
+                    </div>
+                    <div id="team_4_wager" class="team">
+                        <input class="team_points team_wager" value="0" type="number" min="0" />
+                    </div>
+                </div>
+                <div class="toolbox">
+                    <img src="../images/logos/home.png" onclick="Global.goHome()">
+                </div>
+            </div>
+            <div class="mainSide">
+                <div class="mainGrid">
+                    <div id="case_rows">
+                
+                    </div> 
+                </div>
+            </div>
+            <div class="scoreAside">
+                <div id="teams_list" class="teams_list invisible">
+                    <div id="current_points" class="hidden"></div>
+                    <div id="team_1" class="team">
+                        <input class="team_name"  placeholder="Team 1" onchange="updateTeamWagerName(this,1)"/>
+                        <div id="case_slot_1" class="case_slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div id="team_2" class="team">
+                        <input class="team_name"  placeholder="Team 2" onchange="updateTeamWagerName(this,2)"/>
+                        <div id="case_slot_2" class="case_slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div id="team_3" class="team">
+                        <input class="team_name"  placeholder="Team 3" onchange="updateTeamWagerName(this,3)"/>
+                        <div id="case_slot_3" class="case_slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                    <div id="team_4" class="team">
+                        <input class="team_name"  placeholder="Team 4" onchange="updateTeamWagerName(this,4)"/>
+                        <div id="case_slot_4" class="case_slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    </div>
+                </div>
+                <div class="toolbox">
+                    <img src="../images/logos/home.png" onclick="Global.goHome()">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    //let showLocation;
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    ready(function () {
+        Global.init();
+        Deal.init();
+        loadPlayers = Deal.loadPlayers;
+        showValueScreen = Deal.showValueScreen;
+    });
+
+    function hideMessage() {
+        document.getElementById('messageDiv').classList.add('hidden');
+    }
+
+</script>
+</html>

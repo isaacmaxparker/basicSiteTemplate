@@ -221,6 +221,9 @@ const Games = (function() {
                     case "wheel":
                         setTimeout(function(){location.replace("wheel.html")},150);
                         break;
+                    case "deal":
+                        setTimeout(function(){location.replace("deal.html")},150);
+                        break;
                 }
             }
         });
