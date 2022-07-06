@@ -79,7 +79,9 @@ const Global = (function() {
         case "price":
             return "price_logo.png";
         case "wheel":
-            return "wheel_logo.png"
+            return "wheel_logo.png";
+        case "eyespy":
+            return "eyespy_logo.png";
     }
 }
 

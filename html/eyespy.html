@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../scripts/global.js"></script>
+    <script src="../scripts/eyespy.js"></script>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/eyespy.css">
+</head>
+
+<body>
+    <div id="loadScreen" class="loadScreen flex-column">
+        <img src="../images/logos/eyespy_logo.png" style="max-height: 60%;">
+        <p style="font-size: 4rem;margin:0px">How many teams?</p>
+        <div class="flex-row" style="width: 80%;">
+            <div class="playNum" onclick=loadPlayers(2)>2</div>
+            <div class="playNum" onclick=loadPlayers(3)>3</div>
+            <div class="playNum" onclick=loadPlayers(4)>4</div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <audio id="rightAudio" controls>
+            <source src="../audios/milli_right.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="wrongAudio" controls>
+            <source src="../audios/milli_wrong.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="winnerAudio" controls>
+            <source src="../audios/winner.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="moneyAudio" controls>
+            <source src="../audios/milli_money.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div class="backImage">
+        <img src="../images/backgrounds/eyespy_back.png">
+    </div>
+    <div class="content" style="position: relative">
+        <div id="messageDiv" class="message flex-column hidden" onclick="hideMessage()">
+            <div class="messageTitle">
+                CHRISTIAN
+            </div>
+            <div class="messageText">
+                WINS!
+            </div>
+        </div>
+        <div class="splitContent">
+            <div class="mainSide">
+                <div class="mainGrid ">
+                    <div id="distortion_question" class="question flippedDiv">
+                        <div class="questionDiv">
+                            <span class="questionText">Name the Event and Character</span>
+                            <div class="questionImage">
+                                <div class="dist_images">
+                                    <img id="dist_image_4" class="dist_image" style="z-index:100">
+                                    <img id="dist_image_1" class="dist_image">
+                                    <img id="dist_image_2" class="dist_image">
+                                    <img id="dist_image_3" class="dist_image">
+                                </div>
+                            </div>
+                            <span class="questionCategory"></span>
+                            <div class="meterRange distCase" style="margin-bottom:20px;">
+                                <div class="sliderCase">
+                                  <input id="dist_slider" type="range" min="0" max="3" value="0" class="slider vertical-lowest-first" id="distortionSlider" style="width: calc(20vh + 25px);left:-10vh;" oninput="changeLevel(this.value)">
+                                </div>
+                            </div>
+                            <span class="answerText invisible" onclick="this.classList.remove('invisible');document.getElementById('dist_slider').value = 3;document.getElementById('dist_image_4').classList.remove('hidden');playSound('right')"></span>
+                        </div>
+                    </div>
+                    <div id="character_question" class="question flippedDiv">
+                        <div class="questionDiv">
+                            <span class="questionText">Who is missing?</span>
+                            <div class="questionImage">
+                                <img  class="image_1" id="character_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
+                                <img  class="image_2" id="character_image_2" style="z-index:100">
+                            </div>
+                            <span class="questionCategory"></span>
+                            <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
+                        </div>
+                    </div>
+                    <div id="charloc_question" class="question flippedDiv">
+                        <div class="questionDiv">
+                            <span class="questionText">Who is missing and where is the location?</span>
+                            <div class="questionImage">
+                                <img  class="image_1" id="charloc_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
+                                <img  class="image_2" id="charloc_image_2" style="z-index:100">
+                            </div>
+                            <span class="questionCategory"></span>
+                            <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
+                        </div>
+                    </div>
+                    <div id="location_question" class="question flippedDiv">
+                        <div class="questionDiv">
+                            <span class="questionText">Where was this photo taken and at what event?</span>
+                            <div class="questionImage">
+                                <img  class="image_1" id="location_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
+                                <img  class="image_2" id="location_image_2" style="z-index:100">
+                            </div>
+                            <span class="questionCategory"></span>
+                            <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
+                        </div>
+                    </div>
+                    <div id="mainGrid" class="invisible" style="max-width: 100%;height: 100%;display: flex;flex-direction: row;">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="scoreAside">
+                <div id="teams_list" class="teams_list invisible">
+                    <div id="current_points" class="hidden"></div>
+                    <div id="team_tools_41" class="team_tools">
+                        <div id="team_1" class="team">
+                            <input class="team_name"  placeholder="Team 1"/>
+                            <input class="team_points" value="0" type="number" min="0"/>
+                        </div>
+                        <div class="team_toolbar toolbox">
+                            <img src="../images/logos/eyespy/1_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 3)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/2_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 2)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/3_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 1)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/4_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 0)" style="margin-left: auto;">
+                        </div>
+                    </div>
+                    <div id="team_tools_2" class="team_tools">
+                        <div id="team_2" class="team">
+                            <input class="team_name"  placeholder="Team 2"/>
+                            <input class="team_points" value="0" type="number" min="0"/>
+                        </div>
+                        <div class="team_toolbar toolbox">
+                            <img src="../images/logos/eyespy/1_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 3)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/2_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 2)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/3_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 1)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/4_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 0)" style="margin-left: auto;">
+                        </div>
+                    </div>
+                    <div id="team_tools_3" class="team_tools">
+                        <div id="team_3" class="team">
+                            <input class="team_name"  placeholder="Team 3"/>
+                            <input class="team_points" value="0" type="number" min="0"/>
+                        </div>
+                        <div class="team_toolbar toolbox">
+                            <img src="../images/logos/eyespy/1_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 3)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/2_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 2)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/3_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 1)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/4_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 0)" style="margin-left: auto;">
+                        </div>
+                    </div>
+                    <div  id="team_tools_4" class="team_tools">
+                        <div id="team_4" class="team">
+                            <input class="team_name"  placeholder="Team 4"/>
+                            <input class="team_points" value="0" type="number" min="0"/>
+                        </div>
+                        <div class="team_toolbar toolbox">
+                            <img src="../images/logos/eyespy/1_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 3)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/2_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 2)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/3_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 1)" style="margin-left: auto;">
+                            <img src="../images/logos/eyespy/4_row.png" onclick="pointsInARow(this.parentElement.parentElement.children[0].children[1], 0)" style="margin-left: auto;">
+                        </div>
+                    </div>
+                </div>
+                <div class="toolbox">
+                    <img id="row_1" src="../images/logos/eyespy/1_row.png" onclick="addRowPoints(1)">
+                    <img id="row_2" src="../images/logos/eyespy/2_row.png" onclick="addRowPoints(2)">
+                    <img id="row_3" src="../images/logos/eyespy/3_row.png" onclick="addRowPoints(3)">
+                    <img id="row_4" src="../images/logos/eyespy/4_row.png" onclick="addRowPoints(4)">
+                    <img src="../images/logos/home.png" onclick="Global.goHome()">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    //let showLocation;
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    ready(function () {
+        Global.init();
+        Spy.init();
+        playSound = Spy.playSound;
+        loadPlayers = Spy.loadPlayers;
+        showQuestion = Spy.showQuestion;
+        hideQuestion = Spy.hideQuestion;
+        showGrid = Spy.showGrid;
+        changeLevel = Spy.changeLevel;
+        showAnswerImage = Spy.showAnswerImage;
+        pointsInARow = Spy.pointsInARow;
+        addRowPoints = Spy.addRowPoints;
+    });
+
+
+    function hideMessage() {
+        document.getElementById('messageDiv').classList.add('hidden');
+    }
+
+</script>
+
+</html>

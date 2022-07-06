@@ -224,6 +224,9 @@ const Games = (function() {
                     case "deal":
                         setTimeout(function(){location.replace("deal.html")},150);
                         break;
+                    case "eyespy":
+                        setTimeout(function(){location.replace("eyespy.html")},150);
+                        break;
                 }
             }
         });
