@@ -12,7 +12,7 @@
     <div id="loadScreen" class="loadScreen flex-column">
         <img src="../images/logos/jeoparty_logo2.png" style="max-height: 60%;">
         <p style="color: rgba(255, 255, 255, 0.747);font-size: 4rem;margin:0px">How many teams?</p>
-        <div class="flex-row" style="width: 80%;">
+        <div id="playnumbers" class="flex-row" style="width: 80%;">
             <div class="playNum" onclick=loadPlayers(2)>2</div>
             <div class="playNum" onclick=loadPlayers(3)>3</div>
             <div class="playNum" onclick=loadPlayers(4)>4</div>
@@ -57,9 +57,9 @@
                     <div id="doubleGrid" class="hidden invisible" style="max-width: 100%;height: 100%;display: flex;flex-direction: row;">
                     </div>
                     <div id="finalGrid" class="hidden invisible" style="max-width: 100%;height: 100%;display: flex;flex-direction: column;">
-                        <div class="finalQuestion" onclick="document.getElementById('finalQuestion').classList.remove('invisible')"><span id="finalQuestion" style="text-align: center;" class="invisible">Final Question Text</span></div>
+                        <div id="final_q" class="finalQuestion" onclick="document.getElementById('finalQuestion').classList.remove('invisible')"><span id="finalQuestion" style="text-align: center;" class="invisible">Final Question Text</span></div>
                         <div class="wagerTitle">Place Your Wagers:</div>
-                        <div class="wagers">
+                        <div id="wagers" class="wagers grid-3">
                             <div id="team_1_wagers" class="team">
                                 <input id="team_1_wager_name" class="team_name"> 
                                 <input id="team_1_wager_points" class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)"/>
@@ -79,6 +79,18 @@
                                 <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(3,true)">i</div><div class="wagerButton icon" onclick="finalPoints(3,false)">*</div></div>
                             </div>
                             <div id="team_4_wagers" class="team">
+                                <input id="team_4_wager_name"class="team_name">
+                                <input  id="team_4_wager_points" class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)" />
+                                <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 
+                                <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(4,true)">i</div><div class="wagerButton icon" onclick="finalPoints(4,false)">*</div></div>
+                            </div>
+                            <div id="team_5_wagers" class="team">
+                                <input id="team_4_wager_name"class="team_name">
+                                <input  id="team_4_wager_points" class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)" />
+                                <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 
+                                <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(4,true)">i</div><div class="wagerButton icon" onclick="finalPoints(4,false)">*</div></div>
+                            </div>
+                            <div id="team_6_wagers" class="team">
                                 <input id="team_4_wager_name"class="team_name">
                                 <input  id="team_4_wager_points" class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)" />
                                 <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 

@@ -180,7 +180,7 @@ const Spy = (function () {
             console.log(data);
             columns = data[0].columns;
             rows = data[0].rows;
-            questions = data[0].questions;
+            questions = Global.shuffleArray(data[0].questions);
             imagefolder = data[0].foldername + "/";
             loadGrid()
         })
@@ -251,7 +251,7 @@ const Spy = (function () {
         document.getElementById('loadScreen').classList.add('invisible');
         setTimeout(() => { document.getElementById('loadScreen').classList.add('hidden'); }, 550)
         setTimeout(() => { document.getElementById(GRID_CONT_ID).classList.remove('invisible'); }, 550)
-        if (num_of_players == 4) {
+        if (num_of_players == MAX_NUM_OF_TEAMS ) {
 
         } else {
 

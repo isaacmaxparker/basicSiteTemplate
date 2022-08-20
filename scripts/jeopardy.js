@@ -11,9 +11,13 @@ const Jeop = (function () {
      */
     const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Jeopardy/'
     const TEAMS_TO_REMOVE = [
+        [6, 5, 4, 3],
+        [5, 4, 3],
         [4, 3],
         [4],
     ]
+
+    const MAX_NUM_OF_TEAMS = 6
 
     const GRID_CONT_ID = "mainGrid";
     const DOUBLE_GRID_CONT_ID = "doubleGrid";
@@ -56,36 +60,36 @@ const Jeop = (function () {
      *              PRIVATE METHOD DECLARATIONS
      */
 
-    addPoints = function(team_id){
+    addPoints = function (team_id) {
         let div = document.getElementById('team_' + team_id).querySelector(".team_points")
         div.value = parseInt(div.value) + parseInt(outstanding_points);
         console.log(outstanding_points)
         hideQuestion()
     }
 
-    flipTile = function(tiles, index){
+    flipTile = function (tiles, index) {
         console.log(tiles)
         console.log(tiles.length)
-            if(index < tiles.length){
-                tiles[index].classList.remove('flippedDiv')
-                setTimeout(function(){flipTile(tiles,index+1)},50)
-            }
+        if (index < tiles.length) {
+            tiles[index].classList.remove('flippedDiv')
+            setTimeout(function () { flipTile(tiles, index + 1) }, 50)
+        }
     }
 
-    finalPoints = function(id, to_add){
+    finalPoints = function (id, to_add) {
         let wager = parseInt(document.getElementById('team_' + id + '_wager_points').value);
         let scoreDiv = document.getElementById('team_' + id).querySelector('.team_points');
 
-        if(to_add){
+        if (to_add) {
             scoreDiv.value = parseInt(scoreDiv.value) + wager;
         }
-        else{
+        else {
             scoreDiv.value = parseInt(scoreDiv.value) - wager;
         }
 
     }
 
-    hideQuestion = function(){
+    hideQuestion = function () {
         document.getElementById('question').classList.add('flippedDiv')
         outstanding_points = 0;
     }
@@ -94,6 +98,14 @@ const Jeop = (function () {
         console.log("Started Jeopardy init...");
         window.scrollTo(0, 0)
         loadGames();
+
+        let html = '';
+        for (let i = 2; i <= MAX_NUM_OF_TEAMS; i++) {
+            html += `<div class="playNum" onclick=loadPlayers(${i})>${i}</div>`;
+        }
+
+        document.getElementById('playnumbers').innerHTML = html;
+
         // loadPlayers(9);
 
         window.onkeypress = function (event) {
@@ -198,19 +210,33 @@ const Jeop = (function () {
     loadPlayers = function (num_of_players) {
         num_of_teams = num_of_players;
         document.getElementById('loadScreen').classList.add('hidden');
-        if (num_of_players == 4) {
-            
-        }else{
 
-            let players_to_remove = TEAMS_TO_REMOVE[num_of_players - 2];
-            console.log(num_of_players)
-            console.log(players_to_remove)
-            console.log(players_to_remove);
 
-            players_to_remove.forEach(element => {
-                document.getElementById('team_' + element).remove();
-                document.getElementById('team_' + element + '_wagers').remove();
-            });
+        let team_html = '<div id="current_points" class="hidden"></div>';
+        let wager_html = '';
+
+        for (let i = 1; i <= num_of_players; i++) {
+            team_html += `<div id="team_${i}" class="team">
+                                <input class="team_name"  placeholder="Team ${i}" onchange="updateTeamWagerName(this,${i})"/>
+                                <input class="team_points" value="0" type="number" min="0"/>
+                            </div>`;
+
+            wager_html += ` <div id="team_${i}_wagers" class="team">
+                                <input id="team_${i}_wager_name" class="team_name"> 
+                                <input id="team_${i}_wager_points" class="team_points" placeholder="0" type="number" min="0" oninput="validateWager(this)"/>
+                                <input class="team_name" style="border-bottom:none !important;border-top:rgb(32, 32, 90) 5px solid !important;"> 
+                                <div class="wager_buttons"><div class="wagerButton icon" onclick="finalPoints(${i},true)">i</div><div class="wagerButton icon" onclick="finalPoints(${i},false)">*</div></div>
+                            </div>`;
+        }
+
+        document.getElementById('teams_list').innerHTML = team_html;
+        document.getElementById('wagers').innerHTML = wager_html;
+
+
+        if(num_of_players > 4){
+            document.getElementById('wagers').classList.add('grid-two-rows');
+            document.getElementById('final_q').classList.add('small_q');
+            document.getElementById('teams_list').classList.add('grid-two-columns');
         }
 
         switch (num_of_players) {
@@ -223,9 +249,15 @@ const Jeop = (function () {
             case 4:
                 current_teams = [49, 50, 51, 52]
                 break;
+            case 5:
+                current_teams = [49, 50, 51, 52, 53]
+                break;
+            case 6:
+                current_teams = [49, 50, 51, 52, 53, 54]
+                break;
         }
 
-        setTimeout(function(){document.getElementById('teams_list').classList.remove('invisible')},250)
+        setTimeout(function () { document.getElementById('teams_list').classList.remove('invisible') }, 250)
     }
 
     playSound = function (sound) {
@@ -250,76 +282,76 @@ const Jeop = (function () {
         soundElement.play();
     }
 
-    showFinalJeopardy = function(){
+    showFinalJeopardy = function () {
 
     }
-    showGrid = function(){
+    showGrid = function () {
 
     }
 
-    showQuestion = function(oldElement){
+    showQuestion = function (oldElement) {
         let newElement = document.getElementById('question');
 
         document.getElementById('questionText').innerHTML = oldElement.querySelector('.a').innerHTML
-        outstanding_points = oldElement.querySelector('.points').innerHTML.replace('$','')
+        outstanding_points = oldElement.querySelector('.points').innerHTML.replace('$', '')
         oldElement.innerHTML = "";
         oldElement.classList.add("inactiveTile")
         newElement.classList.remove('flippedDiv');
     }
 
-    showColumn = function(column){
+    showColumn = function (column) {
         console.log(column)
         let tiles = column.querySelectorAll('.mainTileText');
-        flipTile(tiles,0)
+        flipTile(tiles, 0)
     }
 
-    showBoard = function(){
+    showBoard = function () {
         let tiles = document.getElementsByClassName('mainTileText');
-        flipTile(tiles,0)
+        flipTile(tiles, 0)
     }
 
-    showGrid = function(){
+    showGrid = function () {
         document.getElementById('finalGrid').classList.add('invisible');
         document.getElementById('doubleGrid').classList.add('invisible');
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementById('mainGrid').classList.remove('hidden');
             document.getElementById('doubleGrid').classList.add('hidden');
             document.getElementById('finalGrid').classList.add('hidden');
-            setTimeout(function(){document.getElementById('mainGrid').classList.remove('invisible');},250)
-            
-        },250)
+            setTimeout(function () { document.getElementById('mainGrid').classList.remove('invisible'); }, 250)
+
+        }, 250)
     }
 
-    showDoubleJeopardy = function(){
+    showDoubleJeopardy = function () {
         document.getElementById('finalGrid').classList.add('invisible');
         document.getElementById('mainGrid').classList.add('invisible');
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementById('doubleGrid').classList.remove('hidden');
             document.getElementById('mainGrid').classList.add('hidden');
             document.getElementById('finalGrid').classList.add('hidden');
-            setTimeout(function(){document.getElementById('doubleGrid').classList.remove('invisible');},250)
-            
-        },250)
+            setTimeout(function () { document.getElementById('doubleGrid').classList.remove('invisible'); }, 250)
+
+        }, 250)
     }
 
-    showFinalJeopardy = function(){
+    showFinalJeopardy = function () {
         updateFinalJeopardy()
         document.getElementById('mainGrid').classList.add('invisible');
         document.getElementById('doubleGrid').classList.add('invisible');
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementById('finalGrid').classList.remove('hidden');
             document.getElementById('mainGrid').classList.add('hidden');
             document.getElementById('doubleGrid').classList.add('hidden');
-            setTimeout(function(){
-            document.getElementById('finalGrid').classList.remove('invisible');
-            },250)
-        },250)
+            setTimeout(function () {
+                document.getElementById('finalGrid').classList.remove('invisible');
+            }, 250)
+        }, 250)
     }
 
-    updateFinalJeopardy = function(){
-        for(let i = 1;i<=num_of_teams;i++){
+    updateFinalJeopardy = function () {
+        for (let i = 1; i <= num_of_teams; i++) {
             let max = parseInt(document.getElementById('team_' + i).querySelector('.team_points').value);
-            document.getElementById('team_' + i +'_wager_points').setAttribute('max',max)
+            document.getElementById('team_' + i + '_wager_points').setAttribute('max', max)
         }
     }
 
