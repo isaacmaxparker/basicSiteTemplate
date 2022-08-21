@@ -1,120 +1,231 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="../scripts/global.js"></script>
-        <script src="../scripts/games.js"></script>
-        <link rel="stylesheet" href="../styles/global.css">
-        <link rel="stylesheet" href="../styles/games.css">
-    </head>
-    <body>
-        <div id="videoBack">
-            <video autoplay muted loop id="lineVideo" class="videoBack" style="height: 100vh;">
-                <source src="../images/videos/boxesAndLines.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="content flex flex-column">
-            <div class="sticky_toolbar">
-                <div id="games_tags" class="games_filters">
-                    <div class="menu_button" style="left: 50px;" onclick="toggleFilters(this)">
-                        <div class="icon">K</div>
-                    </div>
-                    <div id="all_tags_switch" style="margin-left: 20px;" data-tag="All" onclick="toggleTagButtonPress(this)">
-                        All
+
+<head>
+    <script src="../scripts/global.js"></script>
+    <script src="../scripts/games.js"></script>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/games.css">
+</head>
+
+<body>
+    <div id="videoBack">
+        <video autoplay muted loop id="lineVideo" class="videoBack" style="height: 100vh;">
+            <source src="../images/videos/boxesAndLines.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="content flex flex-column">
+        <div class="sticky_toolbar">
+            <div id="games_years" class="games_filters">
+                <div class="menu_button" style="left: 150px;" onclick="toggleFilters(this)">
+                    <div class="icon">a</div>
+                </div>
+                <div id="filters" style="padding-left:0px;">\
+                    <div id="1month" data-tag="any" class="year_button active_filter"
+                        onclick="toggleYearButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleYearButtonPress(this);">
+                        Anytime
+                    </div> <span>|</span>
+                    <div id="1month" data-tag="1mo" class="year_button"
+                        onclick="toggleYearButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleYearButtonPress(this);">
+                        This Month
                     </div>
                     <span>|</span>
-                    <div id="none_tags_switch" class="active_filter" data-tag="N" onclick="toggleTagButtonPress(this)">
-                        None
-                    </div>
-                    <div id="filters">
-                        <div style="margin-left: 50px;" data-tag="Showdown" class="tag_button active_filter" onclick="toggleTagButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
-                            Showdown
-                        </div>
-                        <span>|</span>
-                        <div  data-tag="Christmas" class="tag_button active_filter" onclick="toggleTagButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
-                            Christmas
-                        </div>
-                        <span>|</span>
-                        <div data-tag="Holiday" class="tag_button active_filter" onclick="toggleTagButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
-                            Holiday
-                        </div>
-                        <span>|</span>
-                        <div data-tag="Misc" class="tag_button active_filter" onclick="toggleTagButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
-                            Misc
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="sticky_toolbar">
-                <div id="games_filters" class="games_filters">
-                    <div class="menu_button" onclick="toggleFilters(this)">
-                        <div class="icon">F</div>
-                    </div>
-                    <div id="all_switch" style="margin-left: 20px;" data-filter="All"  onclick="toggleFilterButtonPress(this)">
-                        All
+                    <div id="3months" data-tag="3mo" class="year_button"
+                        onclick="toggleYearButtonPress(this)"
+                        ondblclick="toggleYearButtonPress(document.getElementById('none_switch'));toggleYearButtonPress(this);">
+                        1-3 months ago
                     </div>
                     <span>|</span>
-                    <div id="none_switch" class=" active_filter" data-filter="N" onclick="toggleFilterButtonPress(this)">
-                        None
+                    <div id="6months" data-tag="6mo" class="year_button"
+                        onclick="toggleYearButtonPress(this)"
+                        ondblclick="toggleYearButtonPress(document.getElementById('none_switch'));toggleYearButtonPress(this);">
+                        3-6 months ago
                     </div>
-                    <div id="filters">
-
-                        <div style="margin-left: 50px;" data-filter="A" class="filter_button active_filter" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
-                            General
-                        </div>
-                        <span>|</span>
-                        <div  class="filter_button active_filter" data-filter="F" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
-                            Family
-                        </div>
-                        <span>|</span>
-                        <div class="filter_button active_filter" data-filter="G" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
-                            Gayme Nights
-                        </div>
-                        <span>|</span>
-                        <div class="filter_button active_filter" data-filter="D" onclick="toggleFilterButtonPress(this)" ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
-                            Development
-                        </div>
-                        <span>|</span>
-                        <div class="filter_button active_filter" data-filter="T" onclick="toggleFilterButtonPress(this)" >
-                            Thirsties
-                        </div>
+                    <span>|</span>
+                    <div id="year" data-tag="year" class="year_button"
+                        onclick="toggleYearButtonPress(this)"
+                        ondblclick="toggleYearButtonPress(document.getElementById('none_switch'));toggleYearButtonPress(this);">
+                        This year
                     </div>
-
+                    <span>|</span>
+                    <div id="earlier" data-tag="earlier" class="year_button"
+                        onclick="toggleYearButtonPress(this)"
+                        ondblclick="toggleYearButtonPress(document.getElementById('none_switch'));toggleYearButtonPress(this);">
+                        Earlier
+                    </div>
                 </div>
-            </div>
-
-            <div id="games_grid" class="grid-3" style="font-size: 4rem;">
 
             </div>
         </div>
-    </body>
-    <script type="text/javascript">
-        //let showLocation;
-        function ready(fn) {
-            if (document.readyState != 'loading') {
-                fn();
-            } else {
-                document.addEventListener('DOMContentLoaded', fn);
-            }
-        }
+        <div class="sticky_toolbar">
+            <div id="games_types" class="games_filters">
+                <div class="menu_button" style="left: 100px;" onclick="toggleFilters(this)">
+                    <div class="icon">u</div>
+                </div>
+                <div id="all_types_switch" style="margin-left: 20px;" data-tag="All"
+                    onclick="toggleTypeButtonPress(this)">
+                    All
+                </div>
+                <span>|</span>
+                <div id="none_types_switch" class=" active_filter" data-tag="N" onclick="toggleTypeButtonPress(this)">
+                    None
+                </div>
+                <div id="filters">
 
-        ready(function () {
-            Global.init();
-            Games.init();
-            selectGame = Games.selectGame
-            toggleFilterButtonPress = Games.toggleFilterButtonPress
-            toggleTagButtonPress = Games.toggleTagButtonPress
-        });
+                    <div style="margin-left: 50px;" data-tag="jeopardy" class="type_button active_filter"
+                        onclick="toggleTypeButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleTypeButtonPress(this);">
+                        Jeoparty
+                    </div>
+                    <span>|</span>
+                    <div data-tag="famFued" class="type_button active_filter" onclick="toggleTypeButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleTypeButtonPress(this);">
+                        Family Fight
+                    </div>
+                    <span>|</span>
+                    <div data-tag="eyespy" class="type_button active_filter" onclick="toggleTypeButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleTypeButtonPress(this);">
+                        Eye Spy
+                    </div>
+                    <span>|</span>
+                    <div data-tag="millionare" class="type_button active_filter" onclick="toggleTypeButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleTypeButtonPress(this);">
+                        McDougillionaire
+                    </div>
+                    <span>|</span>
+                    <div data-tag="wheel" class="type_button active_filter" onclick="toggleTypeButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleTypeButtonPress(this);">
+                        Circle of Good Luck
+                    </div>
+                    <span>|</span>
+                    <div data-tag="price" class="type_button active_filter" onclick="toggleTypeButtonPress(this)"
+                        ondblclick="toggleTypeButtonPress(document.getElementById('none_switch'));toggleTypeButtonPress(this);">
+                        Dollar Amount
+                    </div>
+                </div>
 
-        function toggleFilters(button){
-            console.log(button)
-            var toolbar = button.parentElement.parentElement;
-            console.log(toolbar)
-            if(toolbar.classList.contains('shown')){
-                toolbar.classList.remove('shown')
-            }else{
-                toolbar.classList.add('shown')
-            }
+            </div>
+        </div>
+        <div class="sticky_toolbar">
+            <div id="games_tags" class="games_filters">
+                <div class="menu_button" style="left: 50px;" onclick="toggleFilters(this)">
+                    <div class="icon">K</div>
+                </div>
+                <div id="all_tags_switch" style="margin-left: 20px;" data-tag="All"
+                    onclick="toggleTagButtonPress(this)">
+                    All
+                </div>
+                <span>|</span>
+                <div id="none_tags_switch" class="active_filter" data-tag="N" onclick="toggleTagButtonPress(this)">
+                    None
+                </div>
+                <div id="filters">
+                    <div style="margin-left: 50px;" data-tag="Showdown" class="tag_button active_filter"
+                        onclick="toggleTagButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
+                        Showdown
+                    </div>
+                    <span>|</span>
+                    <div data-tag="Christmas" class="tag_button active_filter" onclick="toggleTagButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
+                        Christmas
+                    </div>
+                    <span>|</span>
+                    <div data-tag="Holiday" class="tag_button active_filter" onclick="toggleTagButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
+                        Holiday
+                    </div>
+                    <span>|</span>
+                    <div data-tag="Misc" class="tag_button active_filter" onclick="toggleTagButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_tags_switch'));toggleTagButtonPress(this);">
+                        Misc
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="sticky_toolbar">
+            <div id="games_filters" class="games_filters">
+                <div class="menu_button" onclick="toggleFilters(this)">
+                    <div class="icon">F</div>
+                </div>
+                <div id="all_switch" style="margin-left: 20px;" data-filter="All"
+                    onclick="toggleFilterButtonPress(this)">
+                    All
+                </div>
+                <span>|</span>
+                <div id="none_switch" class=" active_filter" data-filter="N" onclick="toggleFilterButtonPress(this)">
+                    None
+                </div>
+                <div id="filters">
+
+                    <div style="margin-left: 50px;" data-filter="A" class="filter_button active_filter"
+                        onclick="toggleFilterButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                        General
+                    </div>
+                    <span>|</span>
+                    <div class="filter_button active_filter" data-filter="F" onclick="toggleFilterButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                        Family
+                    </div>
+                    <span>|</span>
+                    <div class="filter_button active_filter" data-filter="G" onclick="toggleFilterButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                        Gayme Nights
+                    </div>
+                    <span>|</span>
+                    <div class="filter_button active_filter" data-filter="D" onclick="toggleFilterButtonPress(this)"
+                        ondblclick="toggleFilterButtonPress(document.getElementById('none_switch'));toggleFilterButtonPress(this);">
+                        Development
+                    </div>
+                    <span>|</span>
+                    <div class="filter_button active_filter" data-filter="T" onclick="toggleFilterButtonPress(this)">
+                        Thirsties
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="games_grid" class="grid-3" style="font-size: 4rem;">
+
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    //let showLocation;
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
         }
-    </script>
+    }
+
+    ready(function () {
+        Global.init();
+        Games.init();
+        selectGame = Games.selectGame
+        toggleFilterButtonPress = Games.toggleFilterButtonPress
+        toggleTagButtonPress = Games.toggleTagButtonPress
+        toggleYearButtonPress = Games.toggleYearButtonPress
+        toggleTypeButtonPress = Games.toggleTypeButtonPress
+    });
+
+    function toggleFilters(button) {
+        console.log(button)
+        var toolbar = button.parentElement.parentElement;
+        console.log(toolbar)
+        if (toolbar.classList.contains('shown')) {
+            toolbar.classList.remove('shown')
+        } else {
+            toolbar.classList.add('shown')
+        }
+    }
+</script>
+
 </html>

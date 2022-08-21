@@ -3,9 +3,9 @@
 */
 
 
-const Games = (function() {
+const Games = (function () {
     "use strict";
-  
+
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
@@ -13,263 +13,360 @@ const Games = (function() {
     const GAMES_URL = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/games.json';
     const FILTERS_LENGTH = 5;
     const TAGS_LENGTH = 3;
-  
+    const TYPES_LENGTH = 6;
+    const YEARS_LENGTH = 6;
+
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
      */
     let games;
     let gamesLoaded = false;
-  
+
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
      */
     let compare;
     let groupByKey;
-    let decodeIamge;
-    let init;  
+    let init;
     let loadGames;
     let showGames;
     let selectGame;
     let toggleFilterButtonPress;
     let toggleTagButtonPress;
+    let toggleYearButtonPress;
+    let toggleTypeButtonPress;
     let loadFilters;
     let loadTags;
+    let loadTypes;
+    let loadYears;
     let showHideAll;
     let showHideAllTags;
+    let showHideAllTypes;
+    let showHideAllYears;
 
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
      */
 
-    compare = function( a, b ) {
-        if ( Date.parse(a.date_created) > Date.parse(b.date_created) ){
+    compare = function (a, b) {
+        if (Date.parse(a.date_created) > Date.parse(b.date_created)) {
             return -1;
-          }
-          if ( Date.parse(a.date_created) < Date.parse(b.date_created) ){
+        }
+        if (Date.parse(a.date_created) < Date.parse(b.date_created)) {
             return 1;
-          }
-            return 0;
-          }
+        }
+        return 0;
+    }
 
     groupByKey = function (array, key) {
 
         return array
-        .reduce((hash, obj) => {
-          if(obj[key] === undefined) return hash; 
-          return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
-        }, {})
-     }
-    
+            .reduce((hash, obj) => {
+                if (obj[key] === undefined) return hash;
+                return Object.assign(hash, { [obj[key]]: (hash[obj[key]] || []).concat(obj) })
+            }, {})
+    }
 
 
-    init = function(onInitializedCallback) {
+
+    init = function (onInitializedCallback) {
         console.log("Started Games init...");
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         loadGames();
     };
 
-    loadGames = function(){
-        Global.ajax(GAMES_URL, function(data) {
+    loadGames = function () {
+        Global.ajax(GAMES_URL, function (data) {
             games = data;
             games.sort(compare)
             console.log(games)
             gamesLoaded = true;
             showGames();
-            })
+        })
     }
 
-    loadFilters = () =>{
-       let activestatuses = Global.getValue('filters');
-       if (activestatuses){
-           activestatuses = activestatuses.split(",")
-           console.log(activestatuses)
+    loadFilters = () => {
+        let activestatuses = Global.getValue('filters');
+        if (activestatuses) {
+            activestatuses = activestatuses.split(",")
+            console.log(activestatuses)
 
-           let filter_buttons = document.getElementsByClassName('filter_button');
-           var filter_array = Array.prototype.slice.call( filter_buttons )
-           filter_array.forEach(element => {
-               if(activestatuses.includes(element.getAttribute('data-filter'))){
-                 element.classList.add('active_filter');
-               }else{
-                 element.classList.remove('active_filter');
-               }
-           });
+            let filter_buttons = document.getElementsByClassName('filter_button');
+            var filter_array = Array.prototype.slice.call(filter_buttons)
+            filter_array.forEach(element => {
+                if (activestatuses.includes(element.getAttribute('data-filter'))) {
+                    element.classList.add('active_filter');
+                } else {
+                    element.classList.remove('active_filter');
+                }
+            });
 
             let game_cards = document.getElementsByClassName('grid-card')
-            var card_array = Array.prototype.slice.call( game_cards )
+            var card_array = Array.prototype.slice.call(game_cards)
 
-            if(activestatuses.length == FILTERS_LENGTH){
+            if (activestatuses.length == FILTERS_LENGTH) {
                 filter_array.forEach(element => {
                     element.classList.add('active_filter')
                 });
                 showHideAll(card_array, true)
-            }else if(activestatuses.length == 0){
+            } else if (activestatuses.length == 0) {
                 filter_array.forEach(element => {
                     element.classList.remove('active_filter')
                 });
                 showHideAll(card_array, false)
-            }else{
+            } else {
                 console.log(1)
                 document.getElementById('all_switch').classList.add('active_filter')
                 document.getElementById('none_switch').classList.add('active_filter')
                 activestatuses.forEach(status => {
                     card_array.forEach(element => {
-                        if(activestatuses.includes(element.getAttribute('data-status'),status)){
+                        if (activestatuses.includes(element.getAttribute('data-status'), status)) {
                             element.classList.remove('hidden_card')
-                        }else{
+                        } else {
                             element.classList.add('hidden_card')
                         }
                     });
                 });
             }
-        } 
+        }
     }
 
-    loadTags = () =>{
+    loadTags = () => {
         let activestatuses = Global.getValue('tags');
-        if (activestatuses){
+        if (activestatuses) {
             activestatuses = activestatuses.split(",")
             console.log(activestatuses)
- 
+
             let filter_buttons = document.getElementsByClassName('tag_button');
-            var filter_array = Array.prototype.slice.call( filter_buttons )
+            var filter_array = Array.prototype.slice.call(filter_buttons)
             filter_array.forEach(element => {
-                if(activestatuses.includes(element.getAttribute('data-tag'))){
-                  element.classList.add('active_filter');
-                }else{
-                  element.classList.remove('active_filter');
+                if (activestatuses.includes(element.getAttribute('data-tag'))) {
+                    element.classList.add('active_filter');
+                } else {
+                    element.classList.remove('active_filter');
                 }
             });
- 
-             let game_cards = document.getElementsByClassName('grid-card')
-             var card_array = Array.prototype.slice.call( game_cards )
- 
-             if(activestatuses.length == TAGS_LENGTH){
-                 filter_array.forEach(element => {
-                     element.classList.add('active_filter')
-                 });
-                 showHideAll(card_array, true)
-             }else if(activestatuses.length == 0){
-                 filter_array.forEach(element => {
-                     element.classList.remove('active_filter')
-                 });
-                 showHideAll(card_array, false)
-             }else{
-                 document.getElementById('all_tags_switch').classList.add('active_filter')
-                 document.getElementById('none_tags_switch').classList.add('active_filter')
+
+            let game_cards = document.getElementsByClassName('grid-card')
+            var card_array = Array.prototype.slice.call(game_cards)
+
+            if (activestatuses.length == TAGS_LENGTH) {
+                filter_array.forEach(element => {
+                    element.classList.add('active_filter')
+                });
+                showHideAll(card_array, true)
+            } else if (activestatuses.length == 0) {
+                filter_array.forEach(element => {
+                    element.classList.remove('active_filter')
+                });
+                showHideAll(card_array, false)
+            } else {
+                document.getElementById('all_tags_switch').classList.add('active_filter')
+                document.getElementById('none_tags_switch').classList.add('active_filter')
                 card_array.forEach(element => {
-                let show = false;
-                let element_tags = element.getAttribute('data-tags').split(",");
+                    let show = false;
+                    let element_tags = element.getAttribute('data-tags').split(",");
                     activestatuses.forEach(tag => {
-                        if(element_tags.includes(tag)){
+                        if (element_tags.includes(tag)) {
                             show = true;
                         }
                     });
 
 
-                if(show){
-                    element.classList.remove('hidden_card_tag')
-                }else{
-                    element.classList.add('hidden_card_tag')
+                    if (show) {
+                        element.classList.remove('hidden_card_tag')
+                    } else {
+                        element.classList.add('hidden_card_tag')
+                    }
+                });
+            }
+        }
+    }
+
+    loadTypes = () => {
+        let activestatuses = Global.getValue('types');
+        if (activestatuses) {
+            activestatuses = activestatuses.split(",")
+            console.log(activestatuses)
+
+            let filter_buttons = document.getElementsByClassName('type_button');
+            var filter_array = Array.prototype.slice.call(filter_buttons)
+            filter_array.forEach(element => {
+                if (activestatuses.includes(element.getAttribute('data-tag'))) {
+                    element.classList.add('active_filter');
+                } else {
+                    element.classList.remove('active_filter');
                 }
             });
-             }
-         } 
-     }
- 
 
-    showGames = function(){
-        if(gamesLoaded){
+            let game_cards = document.getElementsByClassName('grid-card')
+            var card_array = Array.prototype.slice.call(game_cards)
+
+            if (activestatuses.length == TAGS_LENGTH) {
+                filter_array.forEach(element => {
+                    element.classList.add('active_filter')
+                });
+                showHideAll(card_array, true)
+            } else if (activestatuses.length == 0) {
+                filter_array.forEach(element => {
+                    element.classList.remove('active_filter')
+                });
+                showHideAll(card_array, false)
+            } else {
+                document.getElementById('all_types_switch').classList.add('active_filter')
+                document.getElementById('none_types_switch').classList.add('active_filter')
+                card_array.forEach(element => {
+                    let show = false;
+                    let element_tags = element.getAttribute('data-type');
+                    activestatuses.forEach(tag => {
+                        if (element_tags.includes(tag)) {
+                            show = true;
+                        }
+                    });
+
+
+                    if (show) {
+                        element.classList.remove('hidden_card_type')
+                    } else {
+                        element.classList.add('hidden_card_type')
+                    }
+                });
+            }
+        }
+    }
+
+    loadYears = () => {
+        let activestatuses = Global.getValue('year');
+        if (activestatuses) {
+            activestatuses = activestatuses.split(",")
+            console.log(activestatuses)
+
+            let filter_buttons = document.getElementsByClassName('type_button');
+            var filter_array = Array.prototype.slice.call(filter_buttons)
+            filter_array.forEach(element => {
+                if (activestatuses.includes(element.getAttribute('data-tag'))) {
+                    element.classList.add('active_filter');
+                } else {
+                    element.classList.remove('active_filter');
+                }
+            });
+
+            let game_cards = document.getElementsByClassName('grid-card')
+            var card_array = Array.prototype.slice.call(game_cards)
+
+            card_array.forEach(element => {
+                let show = false;
+                let element_tags = element.getAttribute('data-type');
+                activestatuses.forEach(tag => {
+                    if (element_tags.includes(tag)) {
+                        show = true;
+                    }
+                });
+
+
+                if (show) {
+                    element.classList.remove('hidden_card_type')
+                } else {
+                    element.classList.add('hidden_card_type')
+                }
+            });
+        }
+    }
+
+    showGames = function () {
+        if (gamesLoaded) {
             let grid = document.getElementById('games_grid');
             let gridContent = ''
-            games.forEach(element =>{ 
+            games.forEach(element => {
                 let image = Global.decodeImage(element.type)
-                gridContent += `<div data-status=${element.status} data-tags="${element.tags ? element.tags : ''}" class="grid-card ${element.color}_card header white-text flex-column">
+                gridContent += `<div data-status=${element.status} data-tags="${element.tags ? element.tags : ''}" data-type="${element.type}" data-year="${element.date_created}" class="grid-card ${element.color}_card header white-text flex-column">
                                     <div class="card_title header xs">${element.name}</div>
                                     <div class="card_image">
                                         <img src="../images/logos/${image}">
                                     </div>
                                     <p class="card_select header xs pointer" onclick="selectGame(${element.id})" style="margin-bottom: 0px;">Select</p>
-                                </div>` 
+                                </div>`
             });
             grid.innerHTML = gridContent;
             loadFilters();
             loadTags();
+            loadTypes();
         }
-        else{
+        else {
             loadGames()
         }
 
     }
-    
-    selectGame = function(id){
+
+    selectGame = function (id) {
         games.forEach(element => {
-            if(element.id == id){
+            if (element.id == id) {
                 localStorage.setItem("currentGame", JSON.stringify(element))
-                switch(element.type){
+                switch (element.type) {
                     case "famFued":
-                        setTimeout(function(){location.replace("famFued.html")},150);
+                        setTimeout(function () { location.replace("famFued.html") }, 150);
                         break;
                     case "millionare":
-                        setTimeout(function(){location.replace("millionare.html")},150);
+                        setTimeout(function () { location.replace("millionare.html") }, 150);
                         break;
                     case "jeopardy":
-                        setTimeout(function(){location.replace("jeopardy.html")},150);
+                        setTimeout(function () { location.replace("jeopardy.html") }, 150);
                         break;
                     case "price":
-                        setTimeout(function(){location.replace("price.html")},150);
+                        setTimeout(function () { location.replace("price.html") }, 150);
                         break;
                     case "wheel":
-                        setTimeout(function(){location.replace("wheel.html")},150);
+                        setTimeout(function () { location.replace("wheel.html") }, 150);
                         break;
                     case "deal":
-                        setTimeout(function(){location.replace("deal.html")},150);
+                        setTimeout(function () { location.replace("deal.html") }, 150);
                         break;
                     case "eyespy":
-                        setTimeout(function(){location.replace("eyespy.html")},150);
+                        setTimeout(function () { location.replace("eyespy.html") }, 150);
                         break;
                 }
             }
         });
     }
 
-    toggleFilterButtonPress = function(element){
+    toggleFilterButtonPress = function (element) {
         let status = element.getAttribute('data-filter');
         let game_cards = document.getElementsByClassName('grid-card')
-        var card_array = Array.prototype.slice.call( game_cards )
+        var card_array = Array.prototype.slice.call(game_cards)
         let activeswitch = element.classList.contains('active_filter');
 
-        if(activeswitch){
+        if (activeswitch) {
             element.classList.remove('active_filter')
-        }else{
+        } else {
             element.classList.add('active_filter')
         }
 
         let filter_buttons = document.getElementsByClassName('filter_button');
-        var filter_array = Array.prototype.slice.call( filter_buttons )
+        var filter_array = Array.prototype.slice.call(filter_buttons)
         let activestatuses = [];
         filter_array.forEach(element => {
-            if(element.classList.contains('active_filter') && element.getAttribute('data-filter') != 'All' && element.getAttribute('data-filter') != 'N'){
+            if (element.classList.contains('active_filter') && element.getAttribute('data-filter') != 'All' && element.getAttribute('data-filter') != 'N') {
                 activestatuses.push(element.getAttribute('data-filter'))
             }
         });
 
-        if(status != 'All' && status != 'N'){
-            if(activestatuses.length == FILTERS_LENGTH){
+        if (status != 'All' && status != 'N') {
+            if (activestatuses.length == FILTERS_LENGTH) {
                 status = 'All';
-            }else if(activestatuses.length == 0){
+            } else if (activestatuses.length == 0) {
                 status = 'N'
-            }else{
+            } else {
                 document.getElementById('all_switch').classList.add('active_filter')
                 document.getElementById('none_switch').classList.add('active_filter')
             }
         }
 
         console.log(status)
-        if(status == 'All'){
+        if (status == 'All') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
 
-                if(!activestatuses.includes(element.getAttribute('data-filter'))){
+                if (!activestatuses.includes(element.getAttribute('data-filter'))) {
                     activestatuses.push(element.getAttribute('data-filter'))
                 }
 
@@ -277,7 +374,7 @@ const Games = (function() {
             showHideAll(card_array, true)
 
         }
-        else if(status == 'N'){
+        else if (status == 'N') {
             filter_array.forEach(element => {
                 element.classList.remove('active_filter')
             });
@@ -285,61 +382,61 @@ const Games = (function() {
             activestatuses = [];
         } else {
             card_array.forEach(element => {
-                if(activestatuses.includes(element.getAttribute('data-status'),status)){
+                if (activestatuses.includes(element.getAttribute('data-status'), status)) {
                     element.classList.remove('hidden_card')
-                }else{
+                } else {
                     element.classList.add('hidden_card')
                 }
             });
         }
-        Global.setValue('filters',activestatuses.join(","))
+        Global.setValue('filters', activestatuses.join(","))
     }
 
-    toggleTagButtonPress = function(element){
+    toggleTagButtonPress = function (element) {
         let status = element.getAttribute('data-tag');
         let game_cards = document.getElementsByClassName('grid-card')
-        var card_array = Array.prototype.slice.call( game_cards )
+        var card_array = Array.prototype.slice.call(game_cards)
         let activeswitch = element.classList.contains('active_filter');
 
-        if(activeswitch){
+        if (activeswitch) {
             element.classList.remove('active_filter')
-        }else{
+        } else {
             element.classList.add('active_filter')
         }
 
         let filter_buttons = document.getElementsByClassName('tag_button');
-        var filter_array = Array.prototype.slice.call( filter_buttons )
+        var filter_array = Array.prototype.slice.call(filter_buttons)
         let activetags = [];
         filter_array.forEach(element => {
-            if(element.classList.contains('active_filter') && element.getAttribute('data-tag') != 'All' && element.getAttribute('data-tag') != 'N'){
+            if (element.classList.contains('active_filter') && element.getAttribute('data-tag') != 'All' && element.getAttribute('data-tag') != 'N') {
                 activetags.push(element.getAttribute('data-tag'))
             }
         });
-        if(status != 'All' && status != 'N'){
-            if(activetags.length == TAGS_LENGTH){
+        if (status != 'All' && status != 'N') {
+            if (activetags.length == TAGS_LENGTH) {
                 status = 'All';
-            }else if(activetags.length == 0){
+            } else if (activetags.length == 0) {
                 status = 'N'
-            }else{
+            } else {
                 document.getElementById('all_tags_switch').classList.add('active_filter')
                 document.getElementById('none_tags_switch').classList.add('active_filter')
             }
         }
-        Global.setValue('tags',activetags.join(","))
+        Global.setValue('tags', activetags.join(","))
 
         console.log(status)
-        if(status == 'All'){
+        if (status == 'All') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
             });
             showHideAllTags(card_array, true);
 
-            if(!activetags.includes(element.getAttribute('data-tag'))){
+            if (!activetags.includes(element.getAttribute('data-tag'))) {
                 activetags.push(element.getAttribute('data-tag'))
             }
 
         }
-        else if(status == 'N'){
+        else if (status == 'N') {
             filter_array.forEach(element => {
                 element.classList.remove('active_filter')
             });
@@ -350,30 +447,222 @@ const Games = (function() {
             card_array.forEach(element => {
                 let show = false;
                 let element_tags = element.getAttribute('data-tags').split(",");
-                    activetags.forEach(tag => {
-                        if(element_tags.includes(tag)){
-                            show = true;
-                        }
-                    });
+                activetags.forEach(tag => {
+                    if (element_tags.includes(tag)) {
+                        show = true;
+                    }
+                });
 
 
-                if(show){
+                if (show) {
                     element.classList.remove('hidden_card_tag')
-                }else{
+                } else {
                     element.classList.add('hidden_card_tag')
                 }
             });
         }
     }
 
+    toggleTypeButtonPress = function (element) {
+        let status = element.getAttribute('data-tag');
+        let game_cards = document.getElementsByClassName('grid-card')
+        var card_array = Array.prototype.slice.call(game_cards)
+        let activeswitch = element.classList.contains('active_filter');
+
+        if (activeswitch) {
+            element.classList.remove('active_filter')
+        } else {
+            element.classList.add('active_filter')
+        }
+
+        let filter_buttons = document.getElementsByClassName('type_button');
+        var filter_array = Array.prototype.slice.call(filter_buttons)
+        let activetags = [];
+        filter_array.forEach(element => {
+            if (element.classList.contains('active_filter') && element.getAttribute('data-tag') != 'All' && element.getAttribute('data-tag') != 'N') {
+                activetags.push(element.getAttribute('data-tag'))
+            }
+        });
+        if (status != 'All' && status != 'N') {
+            if (activetags.length == TYPES_LENGTH) {
+                status = 'All';
+            } else if (activetags.length == 0) {
+                status = 'N'
+            } else {
+                document.getElementById('all_types_switch').classList.add('active_filter')
+                document.getElementById('none_types_switch').classList.add('active_filter')
+            }
+        }
+        Global.setValue('types', activetags.join(","))
+        console.log(Global.getValue('types'))
+        console.log(status)
+        if (status == 'All') {
+            filter_array.forEach(element => {
+                element.classList.add('active_filter')
+            });
+            showHideAllTypes(card_array, true);
+
+            if (!activetags.includes(element.getAttribute('data-tag'))) {
+                activetags.push(element.getAttribute('data-tag'))
+            }
+
+        }
+        else if (status == 'N') {
+            filter_array.forEach(element => {
+                element.classList.remove('active_filter')
+            });
+            showHideAllTypes(card_array, false)
+
+        } else {
+            console.log("ACTIVE TAGEs")
+            console.log(activetags)
+            card_array.forEach(element => {
+                let show = false;
+                let element_tags = element.getAttribute('data-type');
+                activetags.forEach(tag => {
+                    if (element_tags.includes(tag)) {
+                        show = true;
+                    }
+                });
+
+
+                if (show) {
+                    element.classList.remove('hidden_card_type')
+                } else {
+                    element.classList.add('hidden_card_type')
+                }
+            });
+        }
+    }
+
+    toggleYearButtonPress = function (element) {
+        let game_cards = document.getElementsByClassName('grid-card')
+        var card_array = Array.prototype.slice.call(game_cards)
+        let activeswitch = element.classList.contains('active_filter');
+
+        if (activeswitch) {
+            element.classList.remove('active_filter')
+        } else {
+            element.classList.add('active_filter')
+        }
+
+        let filter_buttons = document.getElementsByClassName('year_button');
+        var filter_array = Array.prototype.slice.call(filter_buttons)
+        let activetags = [];
+        filter_array.forEach(subelement => {
+            if (subelement.classList.contains('active_filter')) {
+                if (subelement.getAttribute('data-tag') != element.getAttribute('data-tag')) {
+                    subelement.classList.remove('active_filter')
+                }
+                activetags.push(element.getAttribute('data-tag'))
+            }
+        });
+        card_array.forEach(card => {
+            let show = false;
+            let card_year = card.getAttribute('data-year').substring(card.getAttribute('data-year').length - 4, card.getAttribute('data-year').length);
+            let card_month = card.getAttribute('data-year').substring(0, card.getAttribute('data-year').indexOf('-'));
+            let card_day = card.getAttribute('data-year').substring(card.getAttribute('data-year').indexOf('-'), findNthOccurence(card.getAttribute('data-year'), 2, '-'));
+            let card_time = new Date(card_year, card_month, card_day);
+
+            const today = new Date()
+            const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+            const threeMonthAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
+            const sixMonthAgo = new Date(today.getFullYear(), today.getMonth() - 6, today.getDate());
+            const thisYearStart = new Date(today.getFullYear(), 0, 1);
+            const thisYearEnd = new Date(today.getFullYear(), 11, 31);
+
+            console.log(thisYearStart);
+            console.log(typeof (today))
+
+            console.log(element.getAttribute('data-tag'));
+            switch (element.getAttribute('data-tag')) {
+                case "any":
+                    show = true;
+                    break;
+                case "1mo":
+                    if (card_time >= oneMonthAgo) {
+                        show = true;
+                    }
+                    break;
+                case "3mo":
+                    if (card_time >= threeMonthAgo && card_time <= oneMonthAgo) {
+                        show = true;
+                    }
+                    break;
+                case "6mo":
+                    if (card_time >= sixMonthAgo && card_time <= threeMonthAgo) {
+                        show = true;
+                    }
+                    break;
+                case "year":
+                    if (card_time >= thisYearStart && card_time <= thisYearEnd) {
+                        show = true;
+                    }
+                    break;
+                case "earlier":
+                    if (card_time <= thisYearStart) {
+                        show = true;
+                    }
+                    break;
+            }
+
+            if (show) {
+                card.classList.remove('hidden_card_year')
+            } else {
+                card.classList.add('hidden_card_year')
+            }
+        });
+    }
+
+    const findNthOccurence = (string, nth, char) => {
+        let index = 0
+        for (let i = 0; i < nth; i += 1) {
+            if (index !== -1) index = string.indexOf(char, index + 1)
+        }
+        return index
+    }
+
+    showHideAllYears = (cards, show) => {
+        if (show) {
+            document.getElementById('all_years_switch').classList.remove('active_filter')
+            document.getElementById('none_years_switch').classList.add('active_filter')
+            cards.forEach(element => {
+                element.classList.remove('hidden_card_year')
+            });
+        } else {
+            document.getElementById('all_years_switch').classList.add('active_filter')
+            document.getElementById('none_years_switch').classList.remove('active_filter')
+            cards.forEach(element => {
+                element.classList.add('hidden_card_year')
+            });
+        }
+    }
+
+
+    showHideAllTypes = (cards, show) => {
+        if (show) {
+            document.getElementById('all_types_switch').classList.remove('active_filter')
+            document.getElementById('none_types_switch').classList.add('active_filter')
+            cards.forEach(element => {
+                element.classList.remove('hidden_card_type')
+            });
+        } else {
+            document.getElementById('all_types_switch').classList.add('active_filter')
+            document.getElementById('none_types_switch').classList.remove('active_filter')
+            cards.forEach(element => {
+                element.classList.add('hidden_card_ype')
+            });
+        }
+    }
+
     showHideAllTags = (cards, show) => {
-        if(show){
+        if (show) {
             document.getElementById('all_tags_switch').classList.remove('active_filter')
             document.getElementById('none_tags_switch').classList.add('active_filter')
             cards.forEach(element => {
                 element.classList.remove('hidden_card_tag')
             });
-        }else{
+        } else {
             document.getElementById('all_tags_switch').classList.add('active_filter')
             document.getElementById('none_tags_switch').classList.remove('active_filter')
             cards.forEach(element => {
@@ -383,13 +672,13 @@ const Games = (function() {
     }
 
     showHideAll = (cards, show) => {
-        if(show){
+        if (show) {
             document.getElementById('all_switch').classList.remove('active_filter')
             document.getElementById('none_switch').classList.add('active_filter')
             cards.forEach(element => {
                 element.classList.remove('hidden_card')
             });
-        }else{
+        } else {
             document.getElementById('all_switch').classList.add('active_filter')
             document.getElementById('none_switch').classList.remove('active_filter')
             cards.forEach(element => {
@@ -397,7 +686,7 @@ const Games = (function() {
             });
         }
     }
-  
+
     /*------------------------------------------------------------------------
      *              PUBLIC METHODS
      */
@@ -406,6 +695,8 @@ const Games = (function() {
         selectGame,
         toggleFilterButtonPress,
         toggleTagButtonPress,
+        toggleTypeButtonPress,
+        toggleYearButtonPress,
+        showHideAllYears,
     };
-  }());
-  
+}());

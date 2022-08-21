@@ -71,14 +71,17 @@ const Games = (function() {
             let grid = document.getElementById('games_grid');
             let gridContent = ''
             games.forEach(element =>{ 
-                let image = Global.decodeImage(element.type)
-                gridContent += `<div class="grid-card ${element.color}_card header white-text flex-column">
-                                    <div class="card_title header xs">${element.name}</div>
-                                    <div class="card_image">
-                                        <img src="../images/logos/${image}">
-                                    </div>
-                                    <p class="card_select header xs pointer" onclick="selectGame(${element.id})" style="margin-bottom: 0px;">Select</p>
-                                </div>` 
+                if(element.type == 'jeopardy' || element.type == 'famFued'){
+                    let image = Global.decodeImage(element.type)
+                    gridContent += `<div class="grid-card ${element.color}_card header white-text flex-column">
+                                        <div class="card_title header xs">${element.name}</div>
+                                        <div class="card_image">
+                                            <img src="../images/logos/${image}">
+                                        </div>
+                                        <p class="card_select header xs pointer" onclick="selectGame(${element.id})" style="margin-bottom: 0px;">Select</p>
+                                    </div>` 
+                }
+               
             });
             grid.innerHTML = gridContent;
         }

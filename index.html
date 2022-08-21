@@ -8,7 +8,8 @@
     <body class="back-image-1">
         <div style="display: flex;flex-direction: column;margin:50px;align-items: center;justify-content: center;height: 100%;">
             <a style="margin:50px;font-size: 400%;" href="html/games.html">Games</a>
-            <a style="margin:50px;font-size: 400%;" href="html/gameAnswers.html">Answers</a>
+            <input placeholder="ENTER PASSWORD FOR ANSWERS" oninput="checkPassword(this.value)"/>
+            <a id="answers_link" class="hidden" style="margin:50px;font-size: 400%;" href="html/gameAnswers.html">Answers</a>
         </div>
     </body>
     <script type="text/javascript">
@@ -18,6 +19,14 @@
                     fn();
                 } else {
                     document.addEventListener('DOMContentLoaded', fn);
+                }
+            }
+
+            function checkPassword(password){
+                if(password == 'isaaconly'){
+                    document.getElementById('answers_link').classList.remove('hidden')
+                }else{
+                    document.getElementById('answers_link').classList.add('hidden')
                 }
             }
 
