@@ -130,6 +130,20 @@
     overflow-y: scroll;
 }
 
+.white_card {
+    background-image: url("../images/card_backs/white_back.png");
+    border-image-slice: 1;
+    border-image-source: radial-gradient(#ffffff, #a9a9a9, #ffffff);
+    box-shadow: rgb(255, 255, 255) 0px 0px 25px;
+    color: rgb(255, 255, 255);
+    filter: brightness(140%);
+}
+
+.white_card:hover {
+    box-shadow: rgb(255, 255, 255) 0px 0px 25px;
+}
+
+
 .blue_card {
     background-image: url("../images/card_backs/blue_back.png");
     border-image-slice: 1;
