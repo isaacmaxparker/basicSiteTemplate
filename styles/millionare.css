@@ -1,10 +1,13 @@
+html{
+    zoom:100%;
+}
 
 /* CUSTOM SLIDERS */
 
 /*customised range*/ input[type="range"].range
 {
     cursor: pointer;
-    min-width: 800px !important;
+    min-width: 600px !important;
     -webkit-appearance: none;
     z-index: 200;
     width:10px;
@@ -100,8 +103,8 @@ background-color: #555;
     height: 100%;
 }
 .questions{
-    margin-top:50px;
-    width: 100%;
+    margin-top: 10px;
+    width: calc(100% - 40px);
     padding: 20px;
 }
 
@@ -110,7 +113,7 @@ background-color: #555;
     border-image-slice: 1;
     border-image-source: radial-gradient(#7e7e7e, #ffffff,#919191);
     background-color: black;
-    font-size: 46px;
+    font-size: 30px;
     padding:20px;
     color:white;
     text-align: center;
@@ -124,19 +127,19 @@ background-color: #555;
 
 #timerDiv{
     opacity: .6;
+    font-size: 100%;
 }
 .timerDiv{
     border: 5px solid rgb(6, 6, 104);
     border-image-slice: 1;
     border-image-source: radial-gradient(#7e7e7e, #ffffff,#919191);
     background-color: black;
-    font-size: 100px;
+    font-size: 50%;
     width: 40%;
     min-width: 100px;
-    padding:20px;
+    padding:10px;
     color:white;
     text-align: center;
-    min-height: 100px;
 }
 
 .timerButton{
@@ -144,9 +147,9 @@ background-color: #555;
     border-image-slice: 1;
     border-image-source: radial-gradient(#7e7e7e, #ffffff,#919191);
     background-color: black;
-    font-size: 40px;
+    font-size: 25%;
     width: 50%;
-    padding:20px;
+    padding:10px;
     color:rgb(124, 124, 124);
     text-align: center;
 }
@@ -162,6 +165,10 @@ background-color: #555;
     width: 100%;
 }
 
+#mainButtons{
+font-size: 70%;
+}
+
 .answerDiv{
     width: calc(50%);
     margin:10px;
@@ -171,8 +178,8 @@ background-color: #555;
     background-color: black;
     min-height: 50px;
     color:white;
-    font-size: 50%;
-    padding:20px;
+    font-size: 30%;
+    padding:10px;
 }
 
 .answerDiv span{
@@ -187,7 +194,7 @@ background-color: #555;
 
 .buttons{
     margin-top:20px;
-    margin-bottom:50px;
+    margin-bottom:10px;
     color:white;
 }
 
@@ -267,7 +274,7 @@ background-color: #555;
 }
 .playerName, .playerScore{
     width: 90%;
-    font-size: 1.6rem;
+    font-size: 1.1rem;
     padding:5px;
     border:none;
     background: none;
