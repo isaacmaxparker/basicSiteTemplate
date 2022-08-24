@@ -82,20 +82,21 @@
 }
 
 .mainSide{
-    width: 70%;
+    width: calc(70% - 50px);
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .scoreAside{
-    width: 30%;
+    margin-left:15px;
+    width: calc(30% - 10px);
     height: 100vh;
 }
 
 /* QUESTIONS BOARD */
 .mainGrid{
-    width: 95%;
+    width: 100%;
     height: 95%;
     display: flex;
     flex-direction: row;
@@ -131,7 +132,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background: linear-gradient(217deg, rgba(0, 5, 73, 0.8), rgba(255,0,0,0) 70.71%),
             linear-gradient(127deg, rgba(0, 217, 255, 0.8), rgba(0,255,0,0) 70.71%),
             linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
@@ -228,7 +229,7 @@
     text-align: center;
 }
 .team_name{
-    font-size: 4rem;
+    font-size: 3.25rem;
     border-bottom:rgb(32, 32, 90) 5px solid !important;
     color: rgb(219, 219, 219) !important;
     font-family: 'Signature', 'Authentic Signature' !important;
@@ -236,7 +237,7 @@
 
 }
 .team_points{
-    font-size: 7rem;
+    font-size: 5rem;
     height: 100%;
 }
 
