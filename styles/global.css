@@ -361,8 +361,8 @@ height: 100%;
 }
 
 .loadScreen img{
-    max-width: 90%;
-    height: auto;
+    max-height: 60%;
+    width: auto;
 }
 
 .fakeLink{
