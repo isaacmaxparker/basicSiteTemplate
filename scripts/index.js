@@ -48,12 +48,24 @@ const Index = (function() {
     };
 
     loadScreen = function(screentype) {
+        let newLocation = null;
         if(screentype == 'Games'){
-            window.location = window.location.href.replace('index.html','html/games.html');
+           if(window.location.href.includes('index.html')){
+               newLocation = window.location.href.replace('index.html','html/games.html');
+           } else{
+               newLocation =  window.location.href + 'html/games.html';
+           }
         }else if (screentype == 'AnswersGo'){
-            window.location = window.location.href.replace('index.html','html/gameAnswers.html');
+                      if(window.location.href.includes('index.html')){
+               newLocation = window.location.href.replace('gameAnswers.html','html/games.html');
+           } else{
+               newLocation =  window.location.href + 'html/gameAnswers.html';
+           }
         }else{
             showPasswordPrompt(true)
+        }
+        if(newLocation){
+            window.location = newLocation
         }
     };
 
