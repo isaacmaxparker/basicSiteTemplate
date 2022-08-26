@@ -1,0 +1,68 @@
+#loadingScreen{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    z-index: 1000;
+    flex-direction: column;
+    background-color: black;
+    top:0;
+    position:relative;
+}
+
+.loadVideoDiv{
+    position: relative;
+    height:70vh;
+}
+
+.loadVideo{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+p{
+    color:rgba(255, 255, 255, 0.542);
+    font-size: 4.2rem;
+    padding: 50px;
+    text-shadow: white 0px 0px 5px;
+    text-align: center;
+}
+
+.links p:hover{
+    cursor: pointer;
+    color:aqua;
+    text-shadow: aqua 0px 0px 15px;
+}
+
+#password-prompt{
+    width: 50vw;
+    height: 50vh;
+    background-color: #000000a3;
+    position: absolute;
+    z-index: 1000;
+    border: 10px rgba(102, 255, 0, 0.555) solid;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+input{
+    width: 90%;
+    font-size: 3rem;
+    border: white solid 2px;
+    background: #00000087;
+    font-family: 'Renner';
+    padding: 15px;
+    color:white;
+}

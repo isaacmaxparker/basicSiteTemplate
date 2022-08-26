@@ -152,7 +152,7 @@ const Jeop = (function () {
             colHTML += `<div class="mainGridColumn col-${round_1_questions.length}" >`
             colHTML += `<div class="mainGridTile" onclick="showColumn(this.parentElement)">
                             <div class="mainTileText flippedDiv">
-                                <div class="catName">${categ.category_name}</div>
+                                <div class="catName ${round_1_questions.length < 8 && categ.category_name.length > 20 ? 'smallerText' : '' }">${categ.category_name}</div>
                             </div>
                         </div>`
             categ.questions.forEach(quest => {
@@ -181,7 +181,7 @@ const Jeop = (function () {
             colHTML += `<div class="mainGridColumn col-${round_2_questions.length}" >`
             colHTML += `<div class="mainGridTile" onclick="showColumn(this.parentElement)">
                             <div class="mainTileText flippedDiv">
-                                <div class="catName">${categ.category_name}</div>
+                                <div class="catName ${round_2_questions.length < 8 && categ.category_name.length > 20 ? 'smallerText' : '' }">${categ.category_name}</div>
                             </div>
                         </div>`
             categ.questions.forEach(quest => {

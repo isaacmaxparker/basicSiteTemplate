@@ -345,7 +345,7 @@ height: 100%;
 }
 
 #videoBack{
-    filter: saturate(0) contrast(1.5);
+    /* filter: saturate(0) contrast(1.5); */
 }
 
 .loadScreen{

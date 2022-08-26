@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="scripts/global.js"></script>
-        <link rel="stylesheet" href="styles/global.css">
-        <link rel="stylesheet" href="styles/home.css">
-    </head>
-    <body class="back-image-1">
-        <div style="display: flex;flex-direction: column;margin:50px;align-items: center;justify-content: center;height: 100%;">
-            <a style="margin:50px;font-size: 400%;" href="html/games.html">Games</a>
-            <input placeholder="ENTER PASSWORD FOR ANSWERS" oninput="checkPassword(this.value)"/>
-            <a id="answers_link" class="hidden" style="margin:50px;font-size: 400%;" href="html/gameAnswers.html">Answers</a>
+
+<head>
+    <script src="scripts/global.js"></script>
+    <script src="scripts/index.js"></script>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+    <div id="loadingScreen">
+        <div class="loadVideoDiv" onclick="showPasswordPrompt(false)">
+            <video autoplay muted id="loadVideo" class="loadVideo" style="height: 70vh;">
+                <!-- <source src="../images/videos/boxesAndLines.mp4" type="video/mp4"> -->
+                <source src="images/videos/tv-load.mp4" type="video/mp4">
+            </video>
+            <video muted loop id="loopVideo" class="loadVideo hidden" style="height: 70vh;">
+                <!-- <source src="../images/videos/boxesAndLines.mp4" type="video/mp4"> -->
+                <source src="images/videos/tv-loop.mp4" type="video/mp4">
+            </video>
         </div>
-    </body>
-    <script type="text/javascript">
-            //let showLocation;
-            function ready(fn) {
-                if (document.readyState != 'loading') {
-                    fn();
-                } else {
-                    document.addEventListener('DOMContentLoaded', fn);
-                }
-            }
+        <div id="links" class="links hidden">
+            <p onclick="loadScreen('Games')">Play Games</p>
+            <p onclick="loadScreen('Answers')">Show Answers</p>
+        </div>
+    </div>
+    <div id="password-prompt" class="hidden">
+        <p>Enter an Admin password to see the Answers</p>
+        <input type="password" placeholder="Admin Password" oninput="checkPassword(this.value, 'answers')" />
+        <a id="answers_link" class="hidden" style="margin:50px;font-size: 400%;" onclick="">Answers</a>
+    </div>
+</body>
+<script type="text/javascript">
+    //let showLocation;
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
 
-            function checkPassword(password){
-                if(password == 'isaaconly'){
-                    document.getElementById('answers_link').classList.remove('hidden')
-                }else{
-                    document.getElementById('answers_link').classList.add('hidden')
-                }
+    function checkPassword(password, link) {
+        if (password == 'isaaconly') {
+            if (link == 'answers') {
+                loadScreen('AnswersGo');
             }
+        }
+    }
 
-            ready(function () {
-               // window.location = "html/games.html"
-            });
-    </script>
+        ready(function () {
+            Index.init();
+            loadScreen = Index.loadScreen;
+            showPasswordPrompt = Index.showPasswordPrompt;
+        });
+</script>
+
 </html>

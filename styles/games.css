@@ -1,3 +1,4 @@
+
 .menu_button {
     background-color: rgba(0, 0, 66, 0.795);
     box-shadow: black 2px 5px 15px 1px;
@@ -114,7 +115,7 @@
 }
 
 .card_title {
-    text-shadow: black 5px 5px 5px;
+    text-shadow: black 1px 2px 5px;
     font-style: italic;
     opacity: .9;
 }
@@ -135,9 +136,18 @@
     border-image-slice: 1;
     border-image-source: radial-gradient(#ffffff, #a9a9a9, #ffffff);
     box-shadow: rgb(255, 255, 255) 0px 0px 25px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     filter: brightness(140%);
 }
+
+.white_card .card_title, .white_card .card_select{
+    text-shadow: #000000 1px 2px 5px;
+}
+
+.white_card .card_select{
+     color: black !important
+}
+
 
 .white_card:hover {
     box-shadow: rgb(255, 255, 255) 0px 0px 25px;
@@ -239,3 +249,20 @@
 .yellow_card:hover {
     box-shadow: rgb(221, 211, 74) 0px 0px 25px;
 }
+
+.rainbow {
+    
+    animation: colorRotate 5s linear 0s infinite;
+  }
+  
+  @keyframes colorRotate {
+    from {
+      filter: hue-rotate(0deg)
+    }
+    50% {
+        filter: hue-rotate(360deg)
+    }
+    100% {
+        filter: hue-rotate(720deg)
+    }
+  }
