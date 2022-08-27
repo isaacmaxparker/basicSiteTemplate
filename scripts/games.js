@@ -237,39 +237,65 @@ const Games = (function () {
 
     loadYears = () => {
         let activestatuses = Global.getValue('year');
+        let game_cards = document.getElementsByClassName('grid-card')
+        var card_array = Array.prototype.slice.call(game_cards)
+        console.log(activestatuses);
         if (activestatuses) {
-            activestatuses = activestatuses.split(",")
-            console.log(activestatuses)
-
-            let filter_buttons = document.getElementsByClassName('type_button');
-            var filter_array = Array.prototype.slice.call(filter_buttons)
-            filter_array.forEach(element => {
-                if (activestatuses.includes(element.getAttribute('data-tag'))) {
-                    element.classList.add('active_filter');
-                } else {
-                    element.classList.remove('active_filter');
-                }
-            });
-
-            let game_cards = document.getElementsByClassName('grid-card')
-            var card_array = Array.prototype.slice.call(game_cards)
-
-            card_array.forEach(element => {
+            console.log(document.querySelector('[data-tag="' + activestatuses + '"]'));
+            document.querySelector('[data-tag="' + activestatuses + '"]').classList.add('active_filter')
+            card_array.forEach(card => {
                 let show = false;
-                let element_tags = element.getAttribute('data-type');
-                activestatuses.forEach(tag => {
-                    if (element_tags.includes(tag)) {
+                let card_year = card.getAttribute('data-year').substring(card.getAttribute('data-year').length - 4, card.getAttribute('data-year').length);
+                let card_month = card.getAttribute('data-year').substring(0, card.getAttribute('data-year').indexOf('-'));
+                let card_day = card.getAttribute('data-year').substring(card.getAttribute('data-year').indexOf('-'), findNthOccurence(card.getAttribute('data-year'), 2, '-'));
+                let card_time = new Date(card_year, card_month, card_day);
+    
+                const today = new Date()
+                const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+                const threeMonthAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
+                const sixMonthAgo = new Date(today.getFullYear(), today.getMonth() - 6, today.getDate());
+                const thisYearStart = new Date(today.getFullYear(), 0, 1);
+                const thisYearEnd = new Date(today.getFullYear(), 11, 31);
+
+                switch (activestatuses) {
+                    case "any":
                         show = true;
-                    }
-                });
-
-
+                        break;
+                    case "1mo":
+                        if (card_time >= oneMonthAgo) {
+                            show = true;
+                        }
+                        break;
+                    case "3mo":
+                        if (card_time >= threeMonthAgo && card_time <= oneMonthAgo) {
+                            show = true;
+                        }
+                        break;
+                    case "6mo":
+                        if (card_time >= sixMonthAgo && card_time <= threeMonthAgo) {
+                            show = true;
+                        }
+                        break;
+                    case "year":
+                        if (card_time >= thisYearStart && card_time <= thisYearEnd) {
+                            show = true;
+                        }
+                        break;
+                    case "earlier":
+                        if (card_time <= thisYearStart) {
+                            show = true;
+                        }
+                        break;
+                }
+    
                 if (show) {
-                    element.classList.remove('hidden_card_type')
+                    card.classList.remove('hidden_card_year')
                 } else {
-                    element.classList.add('hidden_card_type')
+                    card.classList.add('hidden_card_year')
                 }
             });
+        }else{
+            document.getElementById('1month').classList.add('active_filter')
         }
     }
 
@@ -291,6 +317,7 @@ const Games = (function () {
             loadFilters();
             loadTags();
             loadTypes();
+            loadYears();
         }
         else {
             loadGames()
@@ -573,6 +600,8 @@ const Games = (function () {
 
             console.log(thisYearStart);
             console.log(typeof (today))
+
+            Global.setValue('year',element.getAttribute('data-tag'));
 
             console.log(element.getAttribute('data-tag'));
             switch (element.getAttribute('data-tag')) {
