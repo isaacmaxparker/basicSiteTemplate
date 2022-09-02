@@ -102,6 +102,21 @@
     width: 50%;
 }
 
+.card_rating{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 5px;
+    font-size: 50%;
+    filter: brightness(1.2) saturate(900%);
+    opacity: .5;
+}
+
+.card_icon{
+    margin:0px;
+    text-shadow: rgba(0, 0, 0, 0.557) 1px 1px 5px;
+}
+
 .grid-card {
     background-repeat: no-repeat;
     background-size: cover;
@@ -199,7 +214,7 @@
     border-image-slice: 5;
     border-image-source: radial-gradient(#00999e, #93ffed, #009e9e);
     box-shadow: rgb(0, 128, 122) 0px 0px 25px;
-    color: rgb(191, 255, 207);
+    color: rgb(191, 255, 242);
 }
 
 .teal_card:hover {
@@ -234,8 +249,8 @@
     background-image: url("../images/card_backs/orange_back.png");
     border-image-slice: 5;
     border-image-source: radial-gradient(#9e6700, #ffd093, #9e6700);
-    box-shadow: rgb(128, 83, 0) 0px 0px 25px;
-    color: rgb(255, 227, 191);
+    box-shadow: rgb(181, 85, 7) 0px 0px 25px;
+    color: rgb(255, 184, 155);
 }
 
 .orange_card:hover {
@@ -247,7 +262,7 @@
     border-image-slice: 5;
     border-image-source: radial-gradient(#9e9400, #fffd93, #9e8e00);
     box-shadow: rgb(128, 115, 0) 0px 0px 25px;
-    color: rgb(255, 227, 191);
+    color: rgb(255, 253, 191);
 }
 
 .yellow_card:hover {

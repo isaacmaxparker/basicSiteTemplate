@@ -16,6 +16,7 @@ const Games = (function () {
     const TYPES_LENGTH = 6;
     const RATES_LENGTH = 5;
     const YEARS_LENGTH = 6;
+    const RATE_OPTIONS = ['1','2','3','4','5'];
 
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
@@ -28,6 +29,7 @@ const Games = (function () {
      */
     let compare;
     let groupByKey;
+    let getRatingTab;
     let init;
     let checkRating;
     let loadGames;
@@ -56,13 +58,21 @@ const Games = (function () {
     checkRating = (card, rating_to_check) =>{
         if(rating_to_check == 'All'){
             return true;
-        }else if (rating_to_check == 'Rated'){
-            return card.getAttribute('data-rate') != null;
-        }else if (rating_to_check == 'Unrated'){
-            return card.getAttribute('data-rate') == null;
         }else{
+            console.log(rating_to_check)
+            console.log(card.getAttribute('data-rate'))
+            console.log(rating_to_check.includes(card.getAttribute('data-rate')))
             return rating_to_check.includes(card.getAttribute('data-rate'));
         }
+    }
+
+    getRatingTab = (rating) =>{
+        let html = "<div>";
+        for(let i = 0;i < rating;i++){
+            html += "<span class=\"icon-close card_icon\"></span>";
+        }
+        html += "</div>";
+        return html;
     }
 
     compare = function (a, b) {
@@ -166,14 +176,15 @@ const Games = (function () {
 
             let game_cards = document.getElementsByClassName('grid-card')
             var card_array = Array.prototype.slice.call(game_cards)
-            card_array.forEach(element => {
-                if (checkRating(element,activestatuses)) {
-                    element.classList.remove('hidden_card_rate')
-                } else {
-                    element.classList.add('hidden_card_rate')
-                }
-            });
-
+            if(activestatuses.length != RATES_LENGTH){
+                card_array.forEach(element => {
+                    if (checkRating(element,activestatuses)) {
+                        element.classList.remove('hidden_card_rate')
+                    } else {
+                        element.classList.add('hidden_card_rate')
+                    }
+                });
+            }
         }
     }
 
@@ -363,8 +374,9 @@ const Games = (function () {
             let gridContent = ''
             games.forEach(element => {
                 let image = Global.decodeImage(element.type)
-                gridContent += `<div data-status=${element.status} data-tags="${element.tags ? element.tags : ''}" data-type="${element.type}" data-year="${element.date_created}" data-rate="${element.rating ? element.rating : null}" class="grid-card ${element.color}_card header white-text flex-column">
-                                    <div class="card_title header xs">${element.name}</div>
+                gridContent += `<div data-status=${element.status} data-tags="${element.tags ? element.tags : ''}" data-type="${element.type}" data-year="${element.date_created}" data-rate="${element.rating ? element.rating : 'unrated'}" class="grid-card ${element.color}_card header white-text flex-column">
+                                <div class="card_rating ${element.rating ? '' : 'hidden_card_rate'}">${getRatingTab(element.rating)}</div>                    
+                <div class="card_title header xs">${element.name}</div>
                                     <div class="card_image">
                                         <img src="../images/logos/${image}">
                                     </div>
@@ -501,7 +513,8 @@ const Games = (function () {
                 activetags.push(element.getAttribute('data-tag'))
             }
         });
-        if (status != 'All' && status != 'Rated') {
+        console.log(status)
+        if (status != 'All' && status != 'Rated' && status != 'Unrated') {
             if (activetags.length == RATES_LENGTH) {
                 status = 'All';
             }
@@ -519,32 +532,53 @@ const Games = (function () {
         if (status == 'All') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
+                if (!activetags.includes(element.getAttribute('data-tag'))) {
+                    activetags.push(element.getAttribute('data-tag'))
+                }
             });
-            showHideAllTags(card_array, 'All');
-
-            if (!activetags.includes(element.getAttribute('data-tag'))) {
-                activetags.push(element.getAttribute('data-tag'))
-            }
+            card_array.forEach(element => {
+                let show = checkRating(element,status)
+                
+                if (show) {
+                    element.classList.remove('hidden_card_rate')
+                } else {
+                    element.classList.add('hidden_card_rate')
+                }
+            });
 
         }
         else if (status == 'Rated') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
+                if (!activetags.includes(element.getAttribute('data-tag'))) {
+                    activetags.push(element.getAttribute('data-tag'))
+                }
             });
-            showHideAllTags(card_array, 'Rated');
-
-            if (!activetags.includes(element.getAttribute('data-tag'))) {
-                activetags.push(element.getAttribute('data-tag'))
-            }
+            card_array.forEach(card => {
+                let show = checkRating(card,RATE_OPTIONS)
+                
+                if (show) {
+                    card.classList.remove('hidden_card_rate')
+                } else {
+                    card.classList.add('hidden_card_rate')
+                }
+            });
 
         }
         else if (status == 'Unrated') {
             filter_array.forEach(element => {
                 element.classList.remove('active_filter')
             });
-            showHideAllTags(card_array, 'Unrated');
-
             activetags = [];
+            Global.setValue('rates',[]);
+            card_array.forEach(card => {
+                let show = checkRating(card,['unrated'])
+                if (show) {
+                    card.classList.remove('hidden_card_rate')
+                } else {
+                    card.classList.add('hidden_card_rate')
+                }
+            });
 
         } else {
             console.log("ACTIVE TAGS")
@@ -556,13 +590,12 @@ const Games = (function () {
                     element.classList.remove('active_filter');
                 }
             });
-            card_array.forEach(element => {
-                let show = checkRating(element,activetags)
-                
+            card_array.forEach(card => {
+                let show = checkRating(card,activetags)
                 if (show) {
-                    element.classList.remove('hidden_card_tag')
+                    card.classList.remove('hidden_card_rate')
                 } else {
-                    element.classList.add('hidden_card_tag')
+                    card.classList.add('hidden_card_rate')
                 }
             });
         }
@@ -804,31 +837,6 @@ const Games = (function () {
             if (index !== -1) index = string.indexOf(char, index + 1)
         }
         return index
-    }
-
-
-    showHideAllRates = (cards, show) => {
-        if (show == 'All') {
-            document.getElementById('all_rates_switch').classList.remove('active_filter')
-            document.getElementById('all_rated_switch').classList.add('active_filter')
-            document.getElementById('none_rates_switch').classList.add('active_filter')
-            cards.forEach(element => {
-                element.classList.remove('hidden_card_rate')
-            });
-        } else if (show == 'Rated'){
-            document.getElementById('all_rates_switch').classList.remove('active_filter')
-            document.getElementById('all_rated_switch').classList.add('active_filter')
-            document.getElementById('none_rates_switch').classList.add('active_filter')
-            cards.forEach(element => {
-                checkRating(element, 'rated');
-            });
-        }else {
-            document.getElementById('all_years_switch').classList.add('active_filter')
-            document.getElementById('none_years_switch').classList.remove('active_filter')
-            cards.forEach(element => {
-                element.classList.add('hidden_card_rate')
-            });
-        }
     }
 
     showHideAllYears = (cards, show) => {
