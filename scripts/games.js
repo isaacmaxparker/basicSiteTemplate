@@ -59,9 +59,6 @@ const Games = (function () {
         if(rating_to_check == 'All'){
             return true;
         }else{
-            console.log(rating_to_check)
-            console.log(card.getAttribute('data-rate'))
-            console.log(rating_to_check.includes(card.getAttribute('data-rate')))
             return rating_to_check.includes(card.getAttribute('data-rate'));
         }
     }
@@ -106,7 +103,6 @@ const Games = (function () {
         Global.ajax(GAMES_URL, function (data) {
             games = data;
             games.sort(compare)
-            console.log(games)
             gamesLoaded = true;
             showGames();
         })
@@ -116,7 +112,6 @@ const Games = (function () {
         let activestatuses = Global.getValue('filters');
         if (activestatuses) {
             activestatuses = activestatuses.split(",")
-            console.log(activestatuses)
 
             let filter_buttons = document.getElementsByClassName('filter_button');
             var filter_array = Array.prototype.slice.call(filter_buttons)
@@ -142,7 +137,6 @@ const Games = (function () {
                 });
                 showHideAll(card_array, false)
             } else {
-                console.log(1)
                 document.getElementById('all_switch').classList.add('active_filter')
                 document.getElementById('none_switch').classList.add('active_filter')
                 activestatuses.forEach(status => {
@@ -162,7 +156,6 @@ const Games = (function () {
         let activestatuses = Global.getValue('rates');
         if (activestatuses) {
             activestatuses = activestatuses.split(",")
-            console.log(activestatuses)
 
             let filter_buttons = document.getElementsByClassName('rate_button');
             var filter_array = Array.prototype.slice.call(filter_buttons)
@@ -192,7 +185,6 @@ const Games = (function () {
         let activestatuses = Global.getValue('tags');
         if (activestatuses) {
             activestatuses = activestatuses.split(",")
-            console.log(activestatuses)
 
             let filter_buttons = document.getElementsByClassName('tag_button');
             var filter_array = Array.prototype.slice.call(filter_buttons)
@@ -244,7 +236,6 @@ const Games = (function () {
         let activestatuses = Global.getValue('types');
         if (activestatuses) {
             activestatuses = activestatuses.split(",")
-            console.log(activestatuses)
 
             let filter_buttons = document.getElementsByClassName('type_button');
             var filter_array = Array.prototype.slice.call(filter_buttons)
@@ -296,9 +287,8 @@ const Games = (function () {
         let activestatuses = Global.getValue('year');
         let game_cards = document.getElementsByClassName('grid-card')
         var card_array = Array.prototype.slice.call(game_cards)
-        console.log(activestatuses);
+
         if (activestatuses) {
-            console.log(document.querySelector('[data-tag="' + activestatuses + '"]'));
             document.querySelector('[data-tag="' + activestatuses + '"]').classList.add('active_filter')
             card_array.forEach(card => {
                 let show = false;
@@ -321,7 +311,6 @@ const Games = (function () {
                         break;
                     case "1wk":
                         if (card_time >= oneWeekAgo) {
-                            console.log(card_time)
                             show = true;
                         }
                         break;
@@ -459,7 +448,6 @@ const Games = (function () {
             }
         }
 
-        console.log(status)
         if (status == 'All') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
@@ -500,8 +488,6 @@ const Games = (function () {
         let activetags = [];
 
         if(status != 'All' && status != 'Rated' && status != 'Unrated' && element.classList.contains('active_filter')){
-            console.log("OOH");
-            console.log(element);
             element.classList.remove('active_filter');
         }else{
             element.classList.add('active_filter');
@@ -509,11 +495,9 @@ const Games = (function () {
         
         filter_array.forEach(element => {
             if (element.classList.contains('active_filter') && element.getAttribute('data-tag') != 'All' && element.getAttribute('data-tag') != 'N') {
-                console.log('PUSH IT');
                 activetags.push(element.getAttribute('data-tag'))
             }
         });
-        console.log(status)
         if (status != 'All' && status != 'Rated' && status != 'Unrated') {
             if (activetags.length == RATES_LENGTH) {
                 status = 'All';
@@ -528,7 +512,6 @@ const Games = (function () {
             }
         });
 
-        console.log(status)
         if (status == 'All') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
@@ -581,8 +564,6 @@ const Games = (function () {
             });
 
         } else {
-            console.log("ACTIVE TAGS")
-            console.log(activetags)
             filter_array.forEach(element => {
                 if(activetags.includes(element.getAttribute('data-tag'))){
                     element.classList.add('active_filter');
@@ -632,8 +613,6 @@ const Games = (function () {
             }
         }
         Global.setValue('tags', activetags.join(","))
-
-        console.log(status)
         if (status == 'All') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
@@ -652,7 +631,6 @@ const Games = (function () {
             showHideAllTags(card_array, false)
 
         } else {
-            console.log(activetags)
             card_array.forEach(element => {
                 let show = false;
                 let element_tags = element.getAttribute('data-tags').split(",");
@@ -703,8 +681,6 @@ const Games = (function () {
             }
         }
         Global.setValue('types', activetags.join(","))
-        console.log(Global.getValue('types'))
-        console.log(status)
         if (status == 'All') {
             filter_array.forEach(element => {
                 element.classList.add('active_filter')
@@ -723,8 +699,6 @@ const Games = (function () {
             showHideAllTypes(card_array, false)
 
         } else {
-            console.log("ACTIVE TAGEs")
-            console.log(activetags)
             card_array.forEach(element => {
                 let show = false;
                 let element_tags = element.getAttribute('data-type');
