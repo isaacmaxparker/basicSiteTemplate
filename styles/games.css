@@ -76,6 +76,9 @@
 .games_filters span {
     margin: 0px 10px;
 }
+.games_filters span.icon-* {
+    margin: 0px;
+}
 
 .filter_button,
 .tag_button {
@@ -90,7 +93,8 @@
 .hidden_card,
 .hidden_card_tag,
 .hidden_card_type,
-.hidden_card_year {
+.hidden_card_year,
+.hidden_card_rate {
     display: none;
 }
 
@@ -266,3 +270,13 @@
         filter: hue-rotate(720deg)
     }
   }
+
+  .redicon
+{
+    color:rgba(131, 7, 7, 0.618);
+}
+
+.active_filter .redicon
+{
+    color:red !important;
+}

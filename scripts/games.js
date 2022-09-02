@@ -14,6 +14,7 @@ const Games = (function () {
     const FILTERS_LENGTH = 5;
     const TAGS_LENGTH = 3;
     const TYPES_LENGTH = 6;
+    const RATES_LENGTH = 5;
     const YEARS_LENGTH = 6;
 
     /*------------------------------------------------------------------------
@@ -28,6 +29,7 @@ const Games = (function () {
     let compare;
     let groupByKey;
     let init;
+    let checkRating;
     let loadGames;
     let showGames;
     let selectGame;
@@ -35,18 +37,33 @@ const Games = (function () {
     let toggleTagButtonPress;
     let toggleYearButtonPress;
     let toggleTypeButtonPress;
+    let toggleRateButtonPress;
     let loadFilters;
     let loadTags;
     let loadTypes;
     let loadYears;
+    let loadRates;
     let showHideAll;
     let showHideAllTags;
     let showHideAllTypes;
     let showHideAllYears;
+    let showHideAllRates;
 
     /*------------------------------------------------------------------------
      *              PRIVATE METHOD DECLARATIONS
      */
+
+    checkRating = (card, rating_to_check) =>{
+        if(rating_to_check == 'All'){
+            return true;
+        }else if (rating_to_check == 'Rated'){
+            return card.getAttribute('data-rate') != null;
+        }else if (rating_to_check == 'Unrated'){
+            return card.getAttribute('data-rate') == null;
+        }else{
+            return rating_to_check.includes(card.getAttribute('data-rate'));
+        }
+    }
 
     compare = function (a, b) {
         if (Date.parse(a.date_created) > Date.parse(b.date_created)) {
@@ -128,6 +145,35 @@ const Games = (function () {
                     });
                 });
             }
+        }
+    }
+
+    loadRates = () => {
+        let activestatuses = Global.getValue('rates');
+        if (activestatuses) {
+            activestatuses = activestatuses.split(",")
+            console.log(activestatuses)
+
+            let filter_buttons = document.getElementsByClassName('rate_button');
+            var filter_array = Array.prototype.slice.call(filter_buttons)
+            filter_array.forEach(element => {
+                if (activestatuses.includes(element.getAttribute('data-tag'))) {
+                    element.classList.add('active_filter');
+                } else {
+                    element.classList.remove('active_filter');
+                }
+            });
+
+            let game_cards = document.getElementsByClassName('grid-card')
+            var card_array = Array.prototype.slice.call(game_cards)
+            card_array.forEach(element => {
+                if (checkRating(element,activestatuses)) {
+                    element.classList.remove('hidden_card_rate')
+                } else {
+                    element.classList.add('hidden_card_rate')
+                }
+            });
+
         }
     }
 
@@ -245,12 +291,13 @@ const Games = (function () {
             document.querySelector('[data-tag="' + activestatuses + '"]').classList.add('active_filter')
             card_array.forEach(card => {
                 let show = false;
-                let card_year = card.getAttribute('data-year').substring(card.getAttribute('data-year').length - 4, card.getAttribute('data-year').length);
-                let card_month = card.getAttribute('data-year').substring(0, card.getAttribute('data-year').indexOf('-'));
-                let card_day = card.getAttribute('data-year').substring(card.getAttribute('data-year').indexOf('-'), findNthOccurence(card.getAttribute('data-year'), 2, '-'));
-                let card_time = new Date(card_year, card_month, card_day);
-    
-                const today = new Date()
+                const card_year = card.getAttribute('data-year').substring(card.getAttribute('data-year').length - 4, card.getAttribute('data-year').length);
+                const card_month = card.getAttribute('data-year').substring(0, card.getAttribute('data-year').indexOf('-'));
+                const card_day = card.getAttribute('data-year').substring(card.getAttribute('data-year').indexOf('-') + 1, findNthOccurence(card.getAttribute('data-year'), 2, '-'));
+                const card_time = new Date(card_year, card_month - 1, card_day);
+                const today = new Date();
+                const oneWeekAgo = new Date(today.setDate(today.getDate() - 7));
+                const twoWeeksAgo = new Date(today.setDate(today.getDate() - 14));
                 const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
                 const threeMonthAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
                 const sixMonthAgo = new Date(today.getFullYear(), today.getMonth() - 6, today.getDate());
@@ -260,6 +307,17 @@ const Games = (function () {
                 switch (activestatuses) {
                     case "any":
                         show = true;
+                        break;
+                    case "1wk":
+                        if (card_time >= oneWeekAgo) {
+                            console.log(card_time)
+                            show = true;
+                        }
+                        break;
+                    case "2wk":
+                        if (card_time >= twoWeeksAgo) {
+                            show = true;
+                        }
                         break;
                     case "1mo":
                         if (card_time >= oneMonthAgo) {
@@ -287,14 +345,14 @@ const Games = (function () {
                         }
                         break;
                 }
-    
+
                 if (show) {
                     card.classList.remove('hidden_card_year')
                 } else {
                     card.classList.add('hidden_card_year')
                 }
             });
-        }else{
+        } else {
             document.getElementById('1month').classList.add('active_filter')
         }
     }
@@ -305,7 +363,7 @@ const Games = (function () {
             let gridContent = ''
             games.forEach(element => {
                 let image = Global.decodeImage(element.type)
-                gridContent += `<div data-status=${element.status} data-tags="${element.tags ? element.tags : ''}" data-type="${element.type}" data-year="${element.date_created}" class="grid-card ${element.color}_card header white-text flex-column">
+                gridContent += `<div data-status=${element.status} data-tags="${element.tags ? element.tags : ''}" data-type="${element.type}" data-year="${element.date_created}" data-rate="${element.rating ? element.rating : null}" class="grid-card ${element.color}_card header white-text flex-column">
                                     <div class="card_title header xs">${element.name}</div>
                                     <div class="card_image">
                                         <img src="../images/logos/${image}">
@@ -318,6 +376,7 @@ const Games = (function () {
             loadTags();
             loadTypes();
             loadYears();
+            loadRates();
         }
         else {
             loadGames()
@@ -417,6 +476,96 @@ const Games = (function () {
             });
         }
         Global.setValue('filters', activestatuses.join(","))
+    }
+
+    toggleRateButtonPress = (element) =>{
+        let status = element.getAttribute('data-tag');
+        let game_cards = document.getElementsByClassName('grid-card')
+        var card_array = Array.prototype.slice.call(game_cards)
+        let activeswitch = element.classList.contains('active_filter');
+        let filter_buttons = document.getElementsByClassName('rate_button');
+        var filter_array = Array.prototype.slice.call(filter_buttons)
+        let activetags = [];
+
+        if(status != 'All' && status != 'Rated' && status != 'Unrated' && element.classList.contains('active_filter')){
+            console.log("OOH");
+            console.log(element);
+            element.classList.remove('active_filter');
+        }else{
+            element.classList.add('active_filter');
+        }
+        
+        filter_array.forEach(element => {
+            if (element.classList.contains('active_filter') && element.getAttribute('data-tag') != 'All' && element.getAttribute('data-tag') != 'N') {
+                console.log('PUSH IT');
+                activetags.push(element.getAttribute('data-tag'))
+            }
+        });
+        if (status != 'All' && status != 'Rated') {
+            if (activetags.length == RATES_LENGTH) {
+                status = 'All';
+            }
+        }
+        Global.setValue('rates', activetags.join(","))
+
+
+        activetags.forEach(tag => {
+            if (checkRating(element,tag)) {
+                show = true;
+            }
+        });
+
+        console.log(status)
+        if (status == 'All') {
+            filter_array.forEach(element => {
+                element.classList.add('active_filter')
+            });
+            showHideAllTags(card_array, 'All');
+
+            if (!activetags.includes(element.getAttribute('data-tag'))) {
+                activetags.push(element.getAttribute('data-tag'))
+            }
+
+        }
+        else if (status == 'Rated') {
+            filter_array.forEach(element => {
+                element.classList.add('active_filter')
+            });
+            showHideAllTags(card_array, 'Rated');
+
+            if (!activetags.includes(element.getAttribute('data-tag'))) {
+                activetags.push(element.getAttribute('data-tag'))
+            }
+
+        }
+        else if (status == 'Unrated') {
+            filter_array.forEach(element => {
+                element.classList.remove('active_filter')
+            });
+            showHideAllTags(card_array, 'Unrated');
+
+            activetags = [];
+
+        } else {
+            console.log("ACTIVE TAGS")
+            console.log(activetags)
+            filter_array.forEach(element => {
+                if(activetags.includes(element.getAttribute('data-tag'))){
+                    element.classList.add('active_filter');
+                }else{
+                    element.classList.remove('active_filter');
+                }
+            });
+            card_array.forEach(element => {
+                let show = checkRating(element,activetags)
+                
+                if (show) {
+                    element.classList.remove('hidden_card_tag')
+                } else {
+                    element.classList.add('hidden_card_tag')
+                }
+            });
+        }
     }
 
     toggleTagButtonPress = function (element) {
@@ -586,27 +735,33 @@ const Games = (function () {
         });
         card_array.forEach(card => {
             let show = false;
-            let card_year = card.getAttribute('data-year').substring(card.getAttribute('data-year').length - 4, card.getAttribute('data-year').length);
-            let card_month = card.getAttribute('data-year').substring(0, card.getAttribute('data-year').indexOf('-'));
-            let card_day = card.getAttribute('data-year').substring(card.getAttribute('data-year').indexOf('-'), findNthOccurence(card.getAttribute('data-year'), 2, '-'));
-            let card_time = new Date(card_year, card_month, card_day);
-
-            const today = new Date()
+            const card_year = card.getAttribute('data-year').substring(card.getAttribute('data-year').length - 4, card.getAttribute('data-year').length);
+            const card_month = card.getAttribute('data-year').substring(0, card.getAttribute('data-year').indexOf('-'));
+            const card_day = card.getAttribute('data-year').substring(card.getAttribute('data-year').indexOf('-') + 1, findNthOccurence(card.getAttribute('data-year'), 2, '-'));
+            const card_time = new Date(card_year, card_month - 1, card_day);
+            const today = new Date();
+            const oneWeekAgo = new Date(today.setDate(today.getDate() - 7));
+            const twoWeeksAgo = new Date(today.setDate(today.getDate() - 14));
             const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
             const threeMonthAgo = new Date(today.getFullYear(), today.getMonth() - 3, today.getDate());
             const sixMonthAgo = new Date(today.getFullYear(), today.getMonth() - 6, today.getDate());
             const thisYearStart = new Date(today.getFullYear(), 0, 1);
             const thisYearEnd = new Date(today.getFullYear(), 11, 31);
 
-            console.log(thisYearStart);
-            console.log(typeof (today))
-
-            Global.setValue('year',element.getAttribute('data-tag'));
-
-            console.log(element.getAttribute('data-tag'));
+            Global.setValue('year', element.getAttribute('data-tag'));
             switch (element.getAttribute('data-tag')) {
                 case "any":
                     show = true;
+                    break;
+                case "1wk":
+                    if (card_time >= oneWeekAgo) {
+                        show = true;
+                    }
+                    break;
+                case "2wk":
+                    if (card_time >= twoWeeksAgo) {
+                        show = true;
+                    }
                     break;
                 case "1mo":
                     if (card_time >= oneMonthAgo) {
@@ -649,6 +804,31 @@ const Games = (function () {
             if (index !== -1) index = string.indexOf(char, index + 1)
         }
         return index
+    }
+
+
+    showHideAllRates = (cards, show) => {
+        if (show == 'All') {
+            document.getElementById('all_rates_switch').classList.remove('active_filter')
+            document.getElementById('all_rated_switch').classList.add('active_filter')
+            document.getElementById('none_rates_switch').classList.add('active_filter')
+            cards.forEach(element => {
+                element.classList.remove('hidden_card_rate')
+            });
+        } else if (show == 'Rated'){
+            document.getElementById('all_rates_switch').classList.remove('active_filter')
+            document.getElementById('all_rated_switch').classList.add('active_filter')
+            document.getElementById('none_rates_switch').classList.add('active_filter')
+            cards.forEach(element => {
+                checkRating(element, 'rated');
+            });
+        }else {
+            document.getElementById('all_years_switch').classList.add('active_filter')
+            document.getElementById('none_years_switch').classList.remove('active_filter')
+            cards.forEach(element => {
+                element.classList.add('hidden_card_rate')
+            });
+        }
     }
 
     showHideAllYears = (cards, show) => {
@@ -727,5 +907,6 @@ const Games = (function () {
         toggleTypeButtonPress,
         toggleYearButtonPress,
         showHideAllYears,
+        toggleRateButtonPress,
     };
 }());
