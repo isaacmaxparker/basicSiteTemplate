@@ -96,7 +96,7 @@ const famFued = (function() {
 
     addFFPoints = function(){
         document.getElementById(TEAM_SCORE_PREFIX+1).value = parseInt( document.getElementById(TEAM_SCORE_PREFIX+1).value) + parseInt( document.getElementById("ff_points_" + 1).value)
-        document.getElementById(TEAM_SCORE_PREFIX+1).value = parseInt( document.getElementById(TEAM_SCORE_PREFIX+1).value) + parseInt( document.getElementById("ff_points_" + 2).value)
+        document.getElementById(TEAM_SCORE_PREFIX+2).value = parseInt( document.getElementById(TEAM_SCORE_PREFIX+2).value) + parseInt( document.getElementById("ff_points_" + 2).value)
 
         document.getElementById("ff_points_" + 1).value = 0;
         document.getElementById("ff_points_" + 2).value = 0;
@@ -118,6 +118,7 @@ const famFued = (function() {
         let points_left = 100;
         for(let i = 0;i<NUM_OF_QUESTIONS;i++){
             let x;
+            console.log(i)
             if(i == 0){
                 x = getRandomInt(40);
                 points_left = points_left - x;
@@ -132,10 +133,16 @@ const famFued = (function() {
             }
             else if(i == NUM_OF_QUESTIONS){
                 x = Math.abs(points_left);
+                if(x <= 0){
+                    x = 1;
+                }
             }
             else{
                 x = getRandomInt(points_left - 6)
                 points_left = points_left - x;
+                if(x < 0){
+                    x = 12 - (i + 1);
+                }
             }
             points.push(x)
             

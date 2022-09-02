@@ -152,7 +152,12 @@ const Milli = (function () {
 
     loadPlayers = function(num_of_players){
         document.getElementById('loadScreen').classList.add('hidden');
+        
         if(num_of_players == 10){
+            let right = document.getElementById(RIGHT_SLIDE);
+            let left = document.getElementById(LEFT_SLIDE);
+            left.classList.remove('hidden');
+            right.classList.remove('hidden');
             return;
         }
         let players_to_remove = PLAYERS_TO_REMOVE[num_of_players - 2];

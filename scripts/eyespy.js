@@ -19,6 +19,7 @@ const Spy = (function () {
     const GRID_CONT_ID = "mainGrid"
     const ROW_POINTS = 4000;
     const LOSE_POINTS_VALUE = 500;
+    const MAX_NUM_OF_TEAMS = 4;
 
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
