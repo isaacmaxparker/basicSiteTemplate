@@ -89,9 +89,14 @@ const Jeop = (function () {
 
     }
 
-    hideQuestion = function () {
-        document.getElementById('question').classList.add('flippedDiv')
-        outstanding_points = 0;
+    hideQuestion = function (double=false) {
+        if(double){
+            document.getElementById('dailydouble').classList.add('flippedDiv')
+        }else{
+            document.getElementById('question').classList.add('flippedDiv')
+            outstanding_points = 0;
+        }
+
     }
 
     init = function (onInitializedCallback) {
@@ -146,7 +151,13 @@ const Jeop = (function () {
 
     loadGrid = function () {
         let gridCont = document.getElementById(GRID_CONT_ID);
-        console.log(round_1_questions)
+        
+        let shuffled_column = Global.shuffleArray(round_1_questions);
+        let random_int = Math.round(Math.random() * (5 - 1) + 1)
+        console.log(random_int)
+        console.log(shuffled_column[1].questions[random_int]);
+        shuffled_column[1].questions[random_int].double = true;
+
         round_1_questions.forEach(categ => {
             let colHTML = '';
             colHTML += `<div class="mainGridColumn col-${round_1_questions.length}" >`
@@ -165,6 +176,7 @@ const Jeop = (function () {
                                 <div class="a">
                                     ${quest.answer}
                                 </div>
+                                <div class="d" data-double="${quest.double ? true : false}"></div>
                             </div>
                             <div class="points">$${quest.points}</div>
                             </div>
@@ -174,7 +186,9 @@ const Jeop = (function () {
 
             gridCont.innerHTML += colHTML;
         });
-
+        shuffled_column = Global.shuffleArray(round_2_questions);
+        random_int = Math.round(Math.random() * (5 - 1) + 1)
+        shuffled_column[1].questions[random_int].double = true;
         let doubleGridCont = document.getElementById(DOUBLE_GRID_CONT_ID);
         round_2_questions.forEach(categ => {
             let colHTML = '';
@@ -194,6 +208,7 @@ const Jeop = (function () {
                                 <div class="a">
                                     ${quest.answer}
                                 </div>
+                                <div class="d" data-double="${quest.double ? true : false}"></div>
                             </div>
                             <div class="points">$${quest.points}</div>
                             </div>
@@ -291,9 +306,14 @@ const Jeop = (function () {
 
     showQuestion = function (oldElement) {
         let newElement = document.getElementById('question');
-
+        console.log(oldElement.querySelector('.d').getAttribute('data-double'));
+        if(oldElement.querySelector('.d').getAttribute('data-double') == true || oldElement.querySelector('.d').getAttribute('data-double') == 'true'){
+            document.getElementById('dailydouble').classList.remove('flippedDiv');
+            outstanding_points = parseInt(oldElement.querySelector('.points').innerHTML.replace('$', '')) * 2;
+        }else{
+            outstanding_points = oldElement.querySelector('.points').innerHTML.replace('$', '')
+        }
         document.getElementById('questionText').innerHTML = oldElement.querySelector('.a').innerHTML
-        outstanding_points = oldElement.querySelector('.points').innerHTML.replace('$', '')
         oldElement.innerHTML = "";
         oldElement.classList.add("inactiveTile")
         newElement.classList.remove('flippedDiv');

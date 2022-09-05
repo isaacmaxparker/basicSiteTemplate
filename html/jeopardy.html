@@ -10,7 +10,7 @@
 
 <body>
     <div id="loadScreen" class="loadScreen flex-column">
-        <img src="../images/logos/jeoparty_logo2.png" style="max-height: 60%;">
+        <img src="../images/logos/jeoparty_logo.png" style="max-height: 60%;">
         <p style="color: rgba(255, 255, 255, 0.747);font-size: 4rem;margin:0px">How many teams?</p>
         <div id="playnumbers" class="flex-row" style="width: 80%;">
             <div class="playNum" onclick=loadPlayers(2)>2</div>
@@ -47,6 +47,11 @@
         <div class="splitContent">
             <div class="mainSide">
                 <div class="mainGrid">
+                    <div id="dailydouble" class="question flippedDiv"  style="z-index: 12000;" onclick="hideQuestion(true)">
+                        <div class="questionDiv">
+                            <img src="../images/logos/double.png" style="max-height: 60%;">
+                        </div>
+                    </div>
                     <div id="question" class="question flippedDiv" onclick="hideQuestion()">
                         <div class="questionDiv">
                             <span id="questionText"></span>
