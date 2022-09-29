@@ -145,6 +145,21 @@
     content: "\e900";
 }
 
+.invisible-animate{
+    opacity: 0 !important;
+    transition: .5s opacity ease;
+}
+
+
+.visible-animate{
+    opacity: 1;
+    transition: .5s opacity ease;
+}
+
+.hidden{
+    display: none;
+}
+
 body {
     overflow-x: hidden;
     overflow-y: hidden;
@@ -350,7 +365,7 @@ body {
 
 /* BACKGROUND IMAGES */
 .backImage {
-    position: absolute;
+    position: absolute !important;
     z-index: 0;
     width: 100vw;
     height: 100vh;

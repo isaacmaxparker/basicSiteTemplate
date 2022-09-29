@@ -32,6 +32,9 @@ const Global = (function() {
     let getCookie;
     let setCookie;
     let shuffleArray;
+    let hideElementFade;
+    let showElementFade;
+    let playSound;
 
     let getValue;
     let setValue;
@@ -82,6 +85,8 @@ const Global = (function() {
             return "wheel_logo.png";
         case "eyespy":
             return "eyespy_logo.png";
+        case "scatter":
+            return "scatter_logo.png";
     }
 }
 
@@ -97,6 +102,30 @@ const Global = (function() {
    hideLoader = function(loader){
     loader.style.display = "none";
    }
+
+   hideElementFade = (element, timer = 500) =>{
+    if(element.classList.contains('visible-animate')){
+        element.classList = 'invisible-animate';
+    }else{
+        element.classList.add('invisible-animate');
+    }
+
+        setTimeout(()=>{element.classList.add('hidden');},timer);
+   }
+
+   showElementFade = (element, timer = 500) =>{
+        element.classList.remove('hidden');
+        element.classList.add('visible-animate');
+        setTimeout(() => {
+            if(element.classList.contains('invisible-animate')){
+                element.classList = 'visible-animate';
+            }else{
+                element.classList.remove('invisible-animate');
+            }
+        },timer)
+
+    }
+
 
    htmlp = function(id, classes, styles, attr, content){
     let div = `<p ${id ? 'id=' + id : ''} ${classes ? 'class="' + classes +'"' : ''} ${styles ? 'style="' + styles + '"': ''} ${attr ? attr : ''}>${content ? content : ''}</p>`
@@ -208,6 +237,30 @@ const Global = (function() {
         return array;
     }
 
+    playSound = function (sound) {
+        console.log(sound)
+        let soundElement;
+        switch (sound) {
+            case "right":
+                soundElement = document.getElementById('rightAudio')
+                break;
+            case "wrong":
+                soundElement = document.getElementById('wrongAudio')
+                break;
+            case "winner":
+                soundElement = document.getElementById('winnerAudio')
+                break;
+            case "money":
+                soundElement = document.getElementById('moneyAudio')
+                break;
+            case "click":
+                soundElement = document.getElementById('clickAudio')
+                break;
+        }
+        soundElement.pause();
+        soundElement.currentTime = 0;
+        soundElement.play();
+    }
 
     /*------------------------------------------------------------------------
      *              PUBLIC METHODS
@@ -228,6 +281,9 @@ const Global = (function() {
         setValue,
         toggleClass,
         shuffleArray,
+        hideElementFade,
+        showElementFade,
+        playSound,
     };
   }());
   

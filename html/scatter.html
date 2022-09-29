@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../scripts/global.js"></script>
+    <script src="../scripts/scatter.js"></script>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/scatter.css">
+</head>
+
+<body>
+    <div id="loadScreen" class="loadScreen flex-column">
+        <div id="initial_content">
+            <img src="../images/logos/scatter_logo.png" style="max-height: 60%;">
+            <p style="color: rgba(255, 255, 255, 0.747);font-size: 4rem;margin:0px">How Many Players?</p>
+            <div class="flex-row" style="width: 80%;">
+                <div class="playNum" onclick=loadPlayers(3)>3</div>
+                <div class="playNum" onclick=loadPlayers(4)>4</div>
+                <div class="playNum" onclick=loadPlayers(5)>5</div>
+                <div class="playNum" onclick=loadPlayers(6)>6</div>
+                <div class="playNum" onclick=loadPlayers(7)>7</div>
+                <div class="playNum" onclick=loadPlayers(8)>8</div>
+                <div class="playNum" onclick=loadPlayers(9)>9</div>
+                <div class="playNum" onclick=loadPlayers(10)>10</div>
+            </div>
+        </div>
+        <div id="player_names" class="invisible-animate hidden">
+            <p>Enter Player Names</p>
+            <div id="player_name_inputs">
+
+            </div>
+            <p class="playNum" onclick="loadPlayerNames(false)">Let's Go!</p>
+        </div>
+    </div>
+    <div style="display: none;">
+        <audio id="rightAudio" controls>
+            <source src="../audios/milli_right.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="wrongAudio" controls>
+            <source src="../audios/milli_wrong.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="winnerAudio" controls>
+            <source src="../audios/winner.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="moneyAudio" controls>
+            <source src="../audios/milli_money.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="clickAudio" controls>
+            <source src="../audios/click.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div id="scores_overlay" class="hidden_score_overlay">
+        <div style="position:relative;">
+            <div class="backImage">
+                <img src="../images/backgrounds/scatter_curtain.jpg">
+            </div>
+            <div id="scores_info" class="visible-animate">
+                <p id="scores_title" class="title" onclick="hideScores()">5 Rounds Left</p>
+                <div class="score_overlay_rankings">
+                    <div class="champions">
+                        <div id="third_place">
+                            <div class="champ_name">THIRD TEAM</div>
+                            <div class="stantion">
+                                <div class="champ_points">100</div>
+                            </div>
+                        </div>
+                        <div id="first_place">
+                            <div class="champ_name">FIRST TEAM</div>
+                            <div class="stantion">
+                                <div class="champ_points">100</div>
+                            </div>
+                        </div>
+                        <div id="second_place">
+                            <div class="champ_name">SECOND TEAM</div>
+                            <div class="stantion">
+                                <div class="champ_points">100</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="loser_divs"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="backImage">
+        <img src="../images/backgrounds/scatter_back.jpg">
+    </div>
+    <div class="splitContent">
+        <div id="letterGrid" class="letterGrid" style="opacity: 0;">
+            <div id="main_letter">
+                <p></p>
+            </div>
+            <div id="bonus_letter">
+                <p></p>
+            </div>
+            <hr width="90%" style="border:rgba(255, 195, 83, 0.516) 2px solid">
+            <div class="letter_buttons">
+                <div onclick="loadRound()">New Round</div>
+                <div onclick="updateScores()">Update Scores</div>
+            </div>
+            <hr width="90%" style="border:rgba(255, 195, 83, 0.516) 2px solid">
+            <div id="timer" class="hidden">
+                <p id="timer_input">0</p>
+            </div>
+            <div class="toolbox">
+                <img id="row_4" src="../images/logos/trophy.png" onclick="showScores()">
+                <img src="../images/logos/home.png" onclick="Global.goHome()">
+            </div>
+        </div>
+        <div id="categoryGrid" class="categoryGrid visible-animate">
+            
+        </div>
+        <div class="scoreGrid">
+            <div class="scoreInputsDiv">
+                <div id="scoreInputs" class="scoreInputs">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript">
+    //let showLocation;
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    ready(function () {
+        Global.init();
+        Scatter.init();
+        loadPlayers = Scatter.loadPlayers;
+        loadPlayerNames = Scatter.loadPlayerNames;
+        loadRound = Scatter.loadRound;
+        updateScores = Scatter.updateScores;
+        adjustScore = Scatter.adjustScore;
+        showScores = Scatter.showScores;
+        hideScores = Scatter.hideScores;
+        startTimer = Scatter.startTimer;
+    });
+
+    function hideMessage() {
+        document.getElementById('messageDiv').classList.add('hidden');
+    }
+
+    function showTimer(element){
+        element.classList.remove('category-animate');
+        console.log(document.getElementsByClassName('category-animate').length == 0)
+        if(document.getElementsByClassName('category-animate').length == 0){
+            setTimeout(()=>{startTimer();},2500);
+        }
+    }
+
+
+</script>
+
+</html>

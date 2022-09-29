@@ -411,6 +411,9 @@ const Games = (function () {
                     case "eyespy":
                         setTimeout(function () { location.replace("eyespy.html") }, 150);
                         break;
+                    case "scatter":
+                        setTimeout(function () { location.replace("scatter.html") }, 150);
+                        break;
                 }
             }
         });
