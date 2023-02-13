@@ -39,6 +39,26 @@
 
 <body>
     <!-- <div style="display: none;"> -->
+    <div id="notesContainer" style="display: none;">
+        <audio id="cNote" controls>
+            <source src="../audios/notes/c.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="dNote" controls>
+            <source src="../audios/notes/d.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="eNote" controls>
+            <source src="../audios/notes/e.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="fNote" controls>
+            <source src="../audios/notes/f.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="gNote" controls>
+            <source src="../audios/notes/g.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="aNote" controls>
+            <source src="../audios/notes/a.mp3" type="audio/mpeg">
+        </audio>
+    </div>
     <div id="audiosContainer" style="display: none;">
         <audio id="rightAudio" controls>
             <source src="../audios/right.mp3" type="audio/mpeg">
@@ -50,25 +70,25 @@
     <div class="backImage">
         <img src="../images/backgrounds/voice_back.png">
     </div>
-    <div class="loadScreen flex-column" onclick="Global.hideLoader(this)">
+    <div class="loadScreen flex-column" onclick="Global.hideLoader(this);LoadScreen()">
         <img id="logo_image" src="../images/logos/voice_logo_horizontal.png">
         <div id="loading_players_div" class="flex-row">
-            <div class="loading_player_div">
+            <div class="loading_player_div" onmouseenter="playNote('c')">
                 <img src="../images/characters/red_glow.png">
             </div>
-            <div class="loading_player_div">
+            <div class="loading_player_div" onmouseenter="playNote('d')">
                 <img src="../images/characters/orange_glow.png">
             </div>
-            <div class="loading_player_div">
+            <div class="loading_player_div" onmouseenter="playNote('e')">
                 <img src="../images/characters/yellow_glow.png">
             </div>
-            <div class="loading_player_div">
+            <div class="loading_player_div" onmouseenter="playNote('f')">
                 <img src="../images/characters/green_glow.png">
             </div>
-            <div class="loading_player_div">
+            <div class="loading_player_div" onmouseenter="playNote('g')">
                 <img src="../images/characters/blue_glow.png">
             </div>
-            <div class="loading_player_div">
+            <div class="loading_player_div" onmouseenter="playNote('a')">
                 <img src="../images/characters/pink_glow.png">
             </div>
         </div>
@@ -76,13 +96,31 @@
     </div>
     <div class="content">
         <div id="left_side">
+            <div class="karaoke_machine">
+
+            </div>
+            <div class="stage">
+                <div id="contestants" class="contestants">
+                    <div class="contestant" data-name="red" onclick="toggleContestant(this, 'red')">
+                        <img src="../images/characters/red_glow.png">
+                        <div class="contestant_name" style="color:red;text-shadow: rgb(255, 0, 0) 1px 0 10px;">LaCoochie Queef Watkins</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="right_side" class="flex-column">
             <div id="episodeContainer" class="episodes">
             </div>
             <div id="nextEpisodeButton" class="hidden" onclick="nextEpisode()">Next Episode</div>
             <div class="audience">
-                
+                <div id="audienceButton" class="audience_button" onclick="askTheAudience()">
+                    <div style="position: relative;" cla>
+                        <p class="audience_button_text">Ask The Audience!</p>
+                        <img src="../images/characters/audience.png" class="audience_button_image">
+                    </div> 
+                </div>
+                <div id="audiencePoll"></div>
+                <div style="height:20px;" onclick="hidePolls()"></div>
             </div>
         </div>
     </div>
@@ -100,9 +138,16 @@
     ready(function () {
         Global.init();
         Voice.init();
+        playNote = Global.playNote
+        stopNote = Global.stopNote
         nextEpisode = Voice.nextEpisode
         checkNextEpisode = Voice.checkNextEpisode
-    });
+        askTheAudience = Voice.askTheAudience
+        showVotes = Voice.showVotes
+        hidePolls = Voice.hidePolls
+        LoadScreen = Voice.loadScreen
+        toggleContestant = Voice.toggleContestant
+});
 </script>
 
 </html>
