@@ -87,6 +87,8 @@ const Global = (function() {
             return "eyespy_logo.png";
         case "scatter":
             return "scatter_logo.png";
+        case "voice":
+            return "voice_logo.png";
     }
 }
 

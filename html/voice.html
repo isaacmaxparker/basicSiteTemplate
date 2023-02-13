@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../scripts/global.js"></script>
+    <script src="../scripts/voice.js"></script>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/voice.css">
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            if (ev.target.children[0]) {
+                ev.target.children[0].replaceWith(document.getElementById(data));
+            } else {
+                ev.target.appendChild(document.getElementById(data));
+            }
+            checkNextEpisode()
+        }
+
+        function imgdrop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            let div = ev.target.parentElement;
+            div.innerHTML = "";
+            checkNextEpisode()
+            div.appendChild(document.getElementById(data));
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <div style="display: none;"> -->
+    <div id="audiosContainer" style="display: none;">
+        <audio id="rightAudio" controls>
+            <source src="../audios/right.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="wrongAudio" controls>
+            <source src="../audios/buzzer.wav" type="audio/mpeg">
+        </audio>
+    </div>
+    <div class="backImage">
+        <img src="../images/backgrounds/voice_back.png">
+    </div>
+    <div class="loadScreen flex-column" onclick="Global.hideLoader(this)">
+        <img id="logo_image" src="../images/logos/voice_logo_horizontal.png">
+        <div id="loading_players_div" class="flex-row">
+            <div class="loading_player_div">
+                <img src="../images/characters/red_glow.png">
+            </div>
+            <div class="loading_player_div">
+                <img src="../images/characters/orange_glow.png">
+            </div>
+            <div class="loading_player_div">
+                <img src="../images/characters/yellow_glow.png">
+            </div>
+            <div class="loading_player_div">
+                <img src="../images/characters/green_glow.png">
+            </div>
+            <div class="loading_player_div">
+                <img src="../images/characters/blue_glow.png">
+            </div>
+            <div class="loading_player_div">
+                <img src="../images/characters/pink_glow.png">
+            </div>
+        </div>
+        <p class="fakeLink loadLink">Click To Start</p>
+    </div>
+    <div class="content">
+        <div id="left_side">
+        </div>
+        <div id="right_side" class="flex-column">
+            <div id="episodeContainer" class="episodes">
+            </div>
+            <div id="nextEpisodeButton" class="hidden" onclick="nextEpisode()">Next Episode</div>
+            <div class="audience">
+                
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    //let showLocation;
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    ready(function () {
+        Global.init();
+        Voice.init();
+        nextEpisode = Voice.nextEpisode
+        checkNextEpisode = Voice.checkNextEpisode
+    });
+</script>
+
+</html>

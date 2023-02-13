@@ -1,0 +1,152 @@
+.content{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction:row;
+}
+
+.loadScreen{
+    background-color: rgba(0, 0, 0, 0.824);
+}
+
+#loading_players_div{
+    width: 90%;
+    height:80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.loading_player_div{
+    height:100%;
+    box-shadow: inset white 0px 0px 5px  5px;
+    padding:5px;
+    background: rgba(0, 0, 0, 0.76);
+}
+
+.loading_player_div img{
+
+    max-width: 100%;
+    height:100%;
+    max-height: unset;
+    object-fit: cover;
+}
+
+.loadLink{
+    color:white;
+}
+
+.loading_player_div img:hover{
+    opacity: .9;
+}
+#audiosContainer{
+    display: hidden;
+}
+
+#left_side{
+    width: 75vw;
+    
+}
+
+#right_side{
+    width:25vw;
+    background:rgba(0, 0, 0, 0.735);
+    border: solid 10px rgb(91, 0, 0);
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-items: flex-start;
+}
+
+.player_icon{
+    width:3.5vw;
+    height:3.5vw;
+    position: absolute;
+  top: 0%;
+  left: 0%;
+}
+
+.origin_box{
+    width:3.5vw;
+    height:3.5vw;
+    border: solid rgba(152, 152, 152, 0.329) 1px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.destination_box{
+    width:3.5vw;
+    position: relative;
+    height:3.5vw;
+    border: solid rgb(255, 196, 0) 2px;
+    border-radius: 5px;
+    margin:2px;
+}
+
+.destination_box > img{
+    filter: unset
+}
+
+.episode_members{
+    padding:5px
+}
+
+.episode_advancements{
+    margin-bottom:10px;
+}
+
+.episode_title{
+    padding:1vw;
+    align-self: flex-start;
+    justify-self: flex-start;
+    font-size: 25%;
+    color:rgba(255, 255, 255, 0.854);
+    width:90%;
+    margin-bottom:10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.61);
+}
+
+.episode{
+    padding:1vw;
+    margin-bottom:1vw;
+
+}
+
+.episode_header{
+    width: 100%;
+}
+
+.episode_container{
+    display: flex;
+    flex-direction: column;
+    border: solid rgb(223, 223, 223) 2px;
+    padding-bottom: 1vh;
+}
+
+.episodes{
+    min-width: 100%;
+    overflow-y: auto;
+    margin-bottom: auto;
+}
+
+.inactive_icon{
+    filter: brightness(.8) saturate(0);
+}
+
+.box-width{
+    width:3.5vw;
+    height:3.5vw;
+}
+
+#nextEpisodeButton{
+    color: gold;
+    font-size: 30%;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    margin-bottom:30px;
+}
+
+.hidden{
+    display: none;
+}

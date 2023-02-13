@@ -414,6 +414,9 @@ const Games = (function () {
                     case "scatter":
                         setTimeout(function () { location.replace("scatter.html") }, 150);
                         break;
+                    case "voice":
+                        setTimeout(function () { location.replace("voice.html") }, 150);
+                        break;
                 }
             }
         });
