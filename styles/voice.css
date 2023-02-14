@@ -33,6 +33,7 @@
 
 .loadLink{
     color:white;
+    font-size: 170%;
 }
 
 .loading_player_div img:hover{
@@ -48,6 +49,12 @@
     
 }
 
+.hiddenToRight{
+    transform: translate(100%) !important;
+    transition: all 2.5s ease-in-out;
+}
+
+
 #right_side{
     max-height: 100vh;
     width:25vw;
@@ -56,6 +63,8 @@
     overflow-y: auto;
     overflow-x: hidden;
     align-items: flex-start;
+    transform: none;
+    transition: all 2.5s ease-in-out;
 }
 
 .player_icon{
@@ -82,6 +91,7 @@
     border-radius: 5px;
     margin:2px;
 }
+
 
 .destination_box > img{
     filter: unset
@@ -251,6 +261,7 @@
 }
 
 .contestants{
+    position: relative;
     width: 100%;
     height: 100%;
     padding:50px;
@@ -260,14 +271,22 @@
     justify-content: center;
 }
 
+.hiddenToBottom{
+    transform:translate(0%, 100%) !important;
+    transition: all 2.5s ease-in-out
+}
+
 .contestant{
+    margin-top:15px;
     width:11vw;
     height: 100%;
     padding:10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    transform:translate(0%, 0%);
+    transition: all 2.5s ease-out
 }
 
 .contestant img{
@@ -277,7 +296,103 @@
 .contestant_name{
     font-family: 'Signature', 'Authentic Signature' !important;
     text-align: center;
-    font-size: 55%;
+    font-size: 45%;
+    width: 90%;
+    word-break: break-word;
+    padding-top:25px;
+    padding: 10px;
+    background: black;
+    box-shadow: inset white 0px 0px 2px 5px;
+}
+
+#karaoke_machine{
+    position: absolute;
+    z-index: 1000;
+    width: 75vw;
+    transform: translate(0);
+    transition: all 3.5s ease-in-out
+}
+
+#tvScreen{
+    max-width: 100%;
+    position: relative;
+
+}
+
+.hiddenTV{
+    transform: translate(0, -100%) !important;
+    transition: all 2.8s ease !important;
+}
+
+.hiddenFade{
+    opacity: 0 !important;
+    transition: all .4s ease;
+}
+
+#tvScreen>img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    /*filter: brightness(.8);*/
+}
+
+#tvContentContainer>img{
+    height: 100%;
     width: 100%;
 }
 
+#tvContent{
+    padding: 100px;
+    opacity: 1;
+    transition: all 1s ease;
+    width: calc(100% - 200px);
+    height: 100%;
+    margin-top: 180px;
+    max-height: calc(100% - 450px);
+    max-width: 100%;
+    flex-direction: column;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 100;
+    font-family: 'Pixeboy';
+    color: gold;
+}
+
+.tvArtist{
+    width: 100%;
+    text-align: center;
+    color:rgb(221, 142, 255);
+    -webkit-text-stroke: 2px rgb(79, 0, 110);
+}
+
+.tvLyric{
+    color: white;
+    text-align: center;
+    position: absolute;
+    max-width: 80%;
+    font-size: 110%
+    /* -webkit-text-stroke: 2px rgba(255, 255, 255, 0.654); */
+}
+
+.tvTitle{
+    width: 100%;
+    text-align: center;
+    color:gold;
+    font-size: 200%;
+    -webkit-text-stroke: 2px rgb(48, 0, 114);
+}
+
+.tvText{
+    color:white;
+    text-align: left;
+    /* -webkit-text-stroke: 2px rgba(255, 255, 255, 0.654); */
+}
+
+#tvContentContainer{
+    width: 100%;
+    height: 100%;
+
+}

@@ -23,9 +23,12 @@ const Voice = (function () {
 
     const VOTE_CAP = 3000
 
-    const FNAME_ARRAY = ["Taylor", "Addison", "Aspen","Ash","Charlie","Drew","Casey","Hayden","Jessie","Jordan","Morgan","Sam", "Robyn","Sasha","Toni","Max","Marley","Jaydon","Briar","Bellamy","Brighton","Cove","Cypress","Jupiter","Hollis","Rory","Lux","Emery"]
-    const MNAME_ARRAY = ["La Coochie", "Limp Biscuit","Glizzy Gobbler", "Cluck Flucker","La Queefy Greens","MILF Milker","Titty Twister", "Abalababala","Cum Biscuit","Turd Burgling","Creamed Corn", "Ducked Tape"]
-    const LNAME_ARRAY = ["Watkins","Johnson","Sorenson","Young","Smith","Anderson","Cummingham","Andrews","Marley","Adamson","Radwell","Jeffries","St. Claire", "III", "Peterson", "Jackson", "Willingham", "Boroughsby"]
+    const TV_CONTENT_ID = "tvContent"
+    const TV_SCREEN_ID = "karaoke_machine"
+
+    const FNAME_ARRAY = ["Taylor", "Addison", "Aspen", "Ash", "Charlie", "Drew", "Casey", "Hayden", "Jessie", "Jordan", "Morgan", "Sam", "Robyn", "Sasha", "Toni", "Max", "Marley", "Jaydon", "Briar", "Bellamy", "Brighton", "Cove", "Cypress", "Jupiter", "Hollis", "Rory", "Lux", "Emery"]
+    const MNAME_ARRAY = ["La Coochie", "Limp Biscuit", "Glizzy Gobbler", "Cluck Flucker", "La Queefy Greens", "Mommy Milkers", "Titty Twister", "Abalababala", "Cum Gurgling", "Turd Burgling", "Creamed Corn", "Ducked Tape"]
+    const LNAME_ARRAY = ["Watkins", "Johnson", "Sorenson", "Young", "Smith", "Anderson", "Cummingham", "Andrews", "Marley", "Adamson", "Radwell", "Jeffries", "St. Claire", "III", "Peterson", "Jackson", "Willingham", "Boroughsby"]
 
     const DEMO = {
         "title": "Demo (Penis Song)",
@@ -33,7 +36,8 @@ const Voice = (function () {
         "key": "penis_song",
         "file": "penis_song.mp3",
         "lyrics": [
-            "This is my penis son",
+            "(intro)",
+            "This is my penis song",
             "I wish that I had a bigger shlong",
             "One that was quite a bit more",
             "_____ ___ ___ ____ ____"
@@ -45,8 +49,13 @@ const Voice = (function () {
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES
      */
+
+    let currentAnimatedPiece = 0;
+    let usedNames = [];
     let currentEpisode = 1;
     let game;
+    let songIndex = 0;
+    let screenIndex = 0;
     let highestVote = 0;
     let questions = [];
     let players_that_passed = [];
@@ -88,6 +97,8 @@ const Voice = (function () {
      *              PRIVATE METHOD DECLARATIONS
      */
 
+    let advanceScreen;
+    let animateInPiece;
     let askTheAudience;
     let checkNextEpisode;
     let getPlayerPadding;
@@ -105,6 +116,9 @@ const Voice = (function () {
     let setupKeyPress;
     let showPolls;
     let showVotes;
+    let showTV;
+    let hideTV;
+    let loadTVContent;
     let incrementVotes;
     let showWinner;
     let nextEpisode;
@@ -114,6 +128,27 @@ const Voice = (function () {
      *              PRIVATE METHOD DECLARATIONS
      */
 
+    advanceScreen = () =>{
+        if(screenIndex == 0){
+            let element = questions[songIndex - 1];
+            let soundElement = document.getElementById(`${element.key}_audio`);
+            soundElement.pause();
+            soundElement.currentTime = 0;
+            soundElement.play();
+        }
+        document.getElementById(TV_CONTENT_ID).children[screenIndex].classList.add('hidden')
+        screenIndex += 1;
+        document.getElementById(TV_CONTENT_ID).children[screenIndex].classList.remove('hidden')
+    }
+
+    animateInPiece = () => {
+        if (currentAnimatedPiece < 6) {
+            document.getElementById(CONTESTANTS_PLATFORM_ID).children[currentAnimatedPiece].classList.remove('hiddenToBottom')
+        } else {
+            document.getElementById("right_side").classList.remove("hiddenToRight")
+        }
+        currentAnimatedPiece += 1;
+    }
 
     askTheAudience = () => {
         eligible_players = []
@@ -131,18 +166,18 @@ const Voice = (function () {
         players.forEach(element => {
             if (eligible_players.includes(element.name)) {
                 element.votes = Math.floor((Math.random() * 5) * Math.floor(Math.random() * VOTE_CAP));
-                if(element.votes > VOTE_CAP){
+                if (element.votes > VOTE_CAP) {
                     element.votes = Math.floor((Math.random() * 3) * Math.floor(Math.random() * (VOTE_CAP * .75)));
-                    if(element.votes > (VOTE_CAP * .75)){
+                    if (element.votes > (VOTE_CAP * .75)) {
                         element.votes = Math.floor((Math.random() * 1) * Math.floor(Math.random() * (VOTE_CAP * .5)));
                     }
                 }
 
-                if(element.votes < 200){
+                if (element.votes < 200) {
                     element.votes = element.votes + 1234
                 }
 
-                if(element.votes > highestVote){
+                if (element.votes > highestVote) {
                     highestVote = element.votes
                 }
 
@@ -161,11 +196,11 @@ const Voice = (function () {
         if (currentEpisode == 4) {
             let winningplayer = document.getElementById("episode-" + currentEpisode).children[0].children[2].children[0].children[0].getAttribute('data-name');
             players.forEach(element => {
-                if(element.name == winningplayer){
+                if (element.name == winningplayer) {
                     showWinner(element.stage_name)
                 }
             });
-            
+
         } else {
             let destinationBoxes = document.getElementById("episode-" + currentEpisode).children[0].children[2].children;
             console.log(destinationBoxes)
@@ -194,30 +229,37 @@ const Voice = (function () {
 
     }
 
-    getRandomPlayerName = () =>{
-        let firstName =  FNAME_ARRAY[Math.floor(Math.random()*FNAME_ARRAY.length)];
-        let lastName = LNAME_ARRAY[Math.floor(Math.random()*LNAME_ARRAY.length)];
-        let middleName= MNAME_ARRAY[Math.floor(Math.random()*MNAME_ARRAY.length)];
+    getRandomPlayerName = () => {
+        let firstName = FNAME_ARRAY[Math.floor(Math.random() * FNAME_ARRAY.length)];
+        let lastName = LNAME_ARRAY[Math.floor(Math.random() * LNAME_ARRAY.length)];
+        let middleName = MNAME_ARRAY[Math.floor(Math.random() * MNAME_ARRAY.length)];
+        if (usedNames.includes(firstName) || usedNames.includes(lastName) || usedNames.includes(middleName)) {
+            return getRandomPlayerName()
+        } else {
+            usedNames.push(firstName)
+            usedNames.push(lastName)
+            usedNames.push(middleName)
+        }
         return `${firstName} "${middleName}" ${lastName}`
     }
 
 
-    getPlayerPadding = (name) =>{
-        if(name == "red"|| name == "pink"){
-            return "margin-top: 7vh;"
+    getPlayerPadding = (name) => {
+        if (name == "red" || name == "pink") {
+            return "height:30%"
         }
-        else if (name == "orange" || name == "blue"){
-            return "margin-top: -8vh;"
+        else if (name == "orange" || name == "blue") {
+            return "height:45%"
         }
-        else if(name == "green"){
-            return "margin-top: -1vh;"
+        else if (name == "green") {
+            return "height:36%"
         }
         else {
-            return "margin-top: 3vh;"
+            return "height:28%"
         }
     }
 
-    getPlayerVotes = (name) =>{
+    getPlayerVotes = (name) => {
         switch (name) {
             case 'red':
                 return players[0].votes
@@ -303,7 +345,7 @@ const Voice = (function () {
             if (players_that_passed.includes(element.name)) {
                 element.active = true
             }
-            if(currentEpisode > 1){
+            if (currentEpisode > 1) {
                 element.active = !element.active
                 toggleContestant(element.name)
             }
@@ -341,14 +383,16 @@ const Voice = (function () {
 
         players.forEach(player => {
             html += `
-                <div class="contestant" id="contestant=${player.name}" data-name="${player.name}" onclick="toggleContestant('${player.name}')">
-                    <img src="../images/characters/${player.name}_glow.png" style="${getPlayerPadding(player.name)}">
-                    <div class="contestant_name" style="color:${getPlayerColor(player.name)};text-shadow:${getPlayerColor(player.name)} 1px 0 10px;">${player.stage_name}</div>
+                <div class="contestant hiddenToBottom" id="contestant=${player.name}" data-name="${player.name}" onclick="toggleContestant('${player.name}')">
+                    <img src="../images/characters/${player.name}_glow.png">
+                    <div class="contestant_name" style="color:${getPlayerColor(player.name)};${getPlayerPadding(player.name)};text-shadow:${getPlayerColor(player.name)} 1px 0 10px; box-shadow: inset ${getPlayerColor(player.name)} 0px 0px 2px 5px;">${player.stage_name}</div>
                 </div>
 `
         });
 
         document.getElementById(CONTESTANTS_PLATFORM_ID).innerHTML = html;
+
+        showTV()
     }
 
     loadSongs = (data) => {
@@ -365,6 +409,24 @@ const Voice = (function () {
                      </audio>`
         });
         document.getElementById(AUDIO_DIV_CONTAINER_ID).innerHTML = html
+    }
+
+    loadTVContent = () =>{
+        screenIndex = 0;
+        let element = questions[songIndex]
+        let html = `
+        <div class="tvLyric">
+            <div class="tvTitle">${element.title}</div>
+            <div class="tvArtist">${element.artist}</div>
+        </div>
+        `
+        element.lyrics.forEach(el => {
+            html += `<div class="tvLyric hidden">${el}</div>`
+        });
+
+        document.getElementById(TV_CONTENT_ID).innerHTML = html
+        songIndex += 1
+        showTV()
     }
 
     init = function () {
@@ -388,19 +450,29 @@ const Voice = (function () {
     setupKeyPress = () => {
         window.onkeypress = function (event) {
             console.log(event.keyCode)
-            if (current_teams.includes(event.keyCode)) {
-                addPoints(current_teams.indexOf(event.keyCode) + 1);
-                return
-            }
-            else {
-                switch (event.keyCode) {
-                    case 13:
-                        playSound("right")
-                        break;
-                    case 47:
-                        playSound("wrong")
-                        break;
-                }
+            switch (event.keyCode) {
+                case 13:
+                    Global.playSound("right")
+                    break;
+                case 32:
+                    event.preventDefault();
+                    advanceScreen();
+                    break;
+                case 92:
+                    Global.playSound("wrong")
+                    break;
+                case 105:
+                    loadTVContent()
+                    break;
+                case 110:
+                    animateInPiece()
+                    break;
+                case 111:
+                    hideTV()
+                    break;
+                case 112:
+                    showTV()
+                    break;
             }
         }
     }
@@ -411,40 +483,40 @@ const Voice = (function () {
         let bar = document.getElementById(`contestant=${name}`)
 
         players.forEach(element => {
-            if(element.name == name){
-                if(element.active){
+            if (element.name == name) {
+                if (element.active) {
                     off = true
-                }else{
+                } else {
                     off = false
                 }
                 element.active = !off
             }
         });
-        if(off){
-            bar.style="filter:saturate(0) brightness(.6)"
-        }else{
-            bar.style="";
+        if (off) {
+            bar.style = "filter:saturate(0) brightness(.6)"
+        } else {
+            bar.style = "";
         }
-       
+
     }
 
     incrementVotes = (bar, text, i, cap) => {
-        if(i>cap){
+        if (i > cap) {
             i = cap
         }
-        bar.style.height = Math.floor((i/highestVote) * 100) + "%"
+        bar.style.height = Math.floor((i / highestVote) * 100) + "%"
         text.innerHTML = `${i}`
-        if(i < cap){
-            if(i > 250){
-                setTimeout(function(){incrementVotes(bar,text,i+5,cap)},.1)
-            }else if(i>500){
-                setTimeout(function(){incrementVotes(bar,text,i+10,cap)},.001)
+        if (i < cap) {
+            if (i > 250) {
+                setTimeout(function () { incrementVotes(bar, text, i + 5, cap) }, .1)
+            } else if (i > 500) {
+                setTimeout(function () { incrementVotes(bar, text, i + 10, cap) }, .001)
             }
-            else if(i>1000){
-                setTimeout(function(){incrementVotes(bar,text,i+15,cap)},.001)
+            else if (i > 1000) {
+                setTimeout(function () { incrementVotes(bar, text, i + 15, cap) }, .001)
             }
-            else{
-                setTimeout(function(){incrementVotes(bar,text,i+1,cap)},.1)
+            else {
+                setTimeout(function () { incrementVotes(bar, text, i + 1, cap) }, .1)
             }
         }
     }
@@ -457,16 +529,16 @@ const Voice = (function () {
         text.innerHTML = 0
 
         let votes = 10;
-        if(element.getAttribute('data-votes')){
+        if (element.getAttribute('data-votes')) {
             votes = element.getAttribute('data-votes')
         }
 
-        incrementVotes(bar,text,0,votes)
+        incrementVotes(bar, text, 0, votes)
     }
 
-    hidePolls = () =>{
+    hidePolls = () => {
         document.getElementById(AUDIENCE_COVER_ID).classList.remove('hidden')
-        document.getElementById(AUDIENCE_POLL_CONTAINER).innerHTML ="";
+        document.getElementById(AUDIENCE_POLL_CONTAINER).innerHTML = "";
     }
 
     showPolls = () => {
@@ -487,11 +559,22 @@ const Voice = (function () {
 
     }
 
+    hideTV = () => {
+        screenIndex = 0;
+        document.getElementById(TV_SCREEN_ID).classList.add('hiddenTV')
+        setTimeout(function () { document.getElementById(TV_CONTENT_ID).classList.add("hiddenFade") }, 4000)
+    }
+    showTV = () => {
+        document.getElementById(TV_SCREEN_ID).classList.remove('hiddenTV')
+        setTimeout(function () { document.getElementById(TV_CONTENT_ID).classList.remove("hiddenFade") }, 4000)
+    }
+
     showWinner = (winner) => {
         alert(winner + " WON!")
     }
 
     nextEpisode = () => {
+        hideTV()
         currentEpisode += 1;
         hidePolls()
         loadEpisodeCard()

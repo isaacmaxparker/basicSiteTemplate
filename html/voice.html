@@ -96,19 +96,40 @@
     </div>
     <div class="content">
         <div id="left_side">
-            <div class="karaoke_machine">
-
-            </div>
-            <div class="stage">
-                <div id="contestants" class="contestants">
-                    <div class="contestant" data-name="red" onclick="toggleContestant(this, 'red')">
-                        <img src="../images/characters/red_glow.png">
-                        <div class="contestant_name" style="color:red;text-shadow: rgb(255, 0, 0) 1px 0 10px;">LaCoochie Queef Watkins</div>
+            <div id="karaoke_machine"  class="hiddenTV">
+                <div id="tvScreen">
+                    <img src="../images/characters/tv_screen.png">
+                    <div id="tvContent" class="hiddenFade">
+                        <div class="tvTitle" style="margin-top:700px">How to Play</div>
+                        <div class="tvText" style="font-size: 70%;">Welcome to The Vocal Chords! Here it doesn't matter if you sing well, you just have to sing it right!</div>
+                        <div class="tvText" style="font-size: 40%;">This game features six contestants competing in four episodes to win the competition!
+                            <br>
+                            <br>
+                            <b>Round Rules:</b><br>
+                            A contestant will be randomly selected to perform first. This tv will lower and show the name and artist of a song from the game's theme.
+                            Then the emcee will press play and a random selection of the song will play. The song will play for 10-30 seconds with the lyrics on the screen. 
+                            Only the current contestant can sing along to the song. Then the song's lyrics will cut out and blanks will be shown on screen. The instrumental will continue playing.
+                            <br><br>
+                            If the contestant can sing the missing words before the song runs out then they are chosen to advance to the next round! If they are not able to, then the song is up for an all play. 
+                            This means that any player still in the round can buzz in. They must immediately sing the correct words after buzzing in. If they are correct then they will advance in place of the contestant. The round continues until the slots are all taken. Any leftover contestants are eliminated from the reality show!
+                            <br><br>
+                            <b>Special Rules:</b><br>
+                            Each eliminated contestant is given one 'Golden Buzzer' per competition. If the current performing contestant fails their challenge, then an eliminated contestant can buzz in and sing the correct lyrics. If they get the answer correct then they are brought back into the competition and take one of the advancement spots for the next round.
+                            <br><br>
+                            For the final round each non-eliminated contestant is given two chances to guess correctly before an eliminated player can buzz in
+                            <br>
+                            <br>
+                            <b>Lets Play!</b>
+                        </div>
                     </div>
+                    <img style="position: relative;opacity: 0;" src="../images/characters/tv_screen.png">
                 </div>
             </div>
+            <div class="stage">
+                <div id="contestants" class="contestants"></div>
+            </div>
         </div>
-        <div id="right_side" class="flex-column">
+        <div id="right_side" class="flex-column hiddenToRight">
             <div id="episodeContainer" class="episodes">
             </div>
             <div id="nextEpisodeButton" class="hidden" onclick="nextEpisode()">Next Episode</div>
