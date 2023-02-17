@@ -624,7 +624,8 @@ const Voice = (function () {
     }
 
     showWinner = (winner) => {
-        alert(winner + " WON!")
+        document.getElementById('winners').classList.remove('hidden')
+        setTimeout(function () {document.getElementById('winners').classList.remove('hiddenFade')},50)
     }
 
     nextEpisode = () => {

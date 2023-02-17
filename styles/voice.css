@@ -417,3 +417,13 @@
     height: 100%;
 
 }
+
+#winners{
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    opacity: 1;
+    z-index: 10000;
+    transition: all .5s ease-in-out;
+}
