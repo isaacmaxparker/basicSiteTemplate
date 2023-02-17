@@ -101,6 +101,7 @@ const Voice = (function () {
     let animateInPiece;
     let askTheAudience;
     let checkNextEpisode;
+    let choosePlayer;
     let getPlayerPadding;
     let getPlayerColor;
     let getRandomPlayerName;
@@ -112,6 +113,7 @@ const Voice = (function () {
     let loadScreen;
     let hidePolls;
     let init;
+    let playerShow;
     let toggleContestant;
     let setupKeyPress;
     let showPolls;
@@ -128,8 +130,8 @@ const Voice = (function () {
      *              PRIVATE METHOD DECLARATIONS
      */
 
-    advanceScreen = () =>{
-        if(screenIndex == 0){
+    advanceScreen = () => {
+        if (screenIndex == 0) {
             let element = questions[songIndex - 1];
             let soundElement = document.getElementById(`${element.key}_audio`);
             soundElement.pause();
@@ -226,7 +228,53 @@ const Voice = (function () {
                 document.getElementById(NEXT_EPISODE_BUTTON).classList.remove('hidden')
             }
         }
+    }
 
+    choosePlayer = () =>{
+
+        let activeElement;
+        let playerIndex = 0;
+        let i = 0;
+        let pickablePlayers = []
+        players.forEach(element => {
+            i++;
+            let char = document.getElementsByClassName('player-' + i)[0];
+            if(!char.parentElement.classList.contains('inactive-icon')){
+                if(!players_that_passed.includes(element.name)){
+                    pickablePlayers.push(char)
+                }
+            }
+        });
+
+        let index = Global.getRandInt(pickablePlayers.length *10,(pickablePlayers.length *10) + 15)
+
+        console.log(pickablePlayers)
+        playerShow(0,index,pickablePlayers)
+    }
+
+    playerShow = (i, cap, players) =>{
+        if(i<players.length){
+            if(i>0){
+                players[i-1].classList.remove('chosenPlayer')
+            }
+           players[i].classList.add('chosenPlayer')
+        }else{
+            cap = cap - players.length;
+            i = 0;
+            players[players.length - 1].classList.remove('chosenPlayer')
+            players[i].classList.add('chosenPlayer')
+        }
+        if(i<cap){
+            setTimeout(function(){playerShow(i+1, cap, players)},65)
+        }else{
+            
+            let flash = 500
+            setTimeout(function(){players[i].classList.remove('chosenPlayer');Global.playSound("right")},flash)
+            setTimeout(function(){players[i].classList.add('chosenPlayer')},flash*2)
+            setTimeout(function(){players[i].classList.remove('chosenPlayer');Global.playSound("right")},flash*3)
+            setTimeout(function(){players[i].classList.add('chosenPlayer')},flash*4)
+            setTimeout(function(){players[i].classList.remove('chosenPlayer');Global.playSound("right")},flash*5)
+        }
     }
 
     getRandomPlayerName = () => {
@@ -380,11 +428,12 @@ const Voice = (function () {
 
     loadScreen = () => {
         let html = "";
-
+        let i = 0;
         players.forEach(player => {
+            i++;
             html += `
                 <div class="contestant hiddenToBottom" id="contestant=${player.name}" data-name="${player.name}" onclick="toggleContestant('${player.name}')">
-                    <img src="../images/characters/${player.name}_glow.png">
+                    <img class="playerimg player-${i}" src="../images/characters/${player.name}_glow.png">
                     <div class="contestant_name" style="color:${getPlayerColor(player.name)};${getPlayerPadding(player.name)};text-shadow:${getPlayerColor(player.name)} 1px 0 10px; box-shadow: inset ${getPlayerColor(player.name)} 0px 0px 2px 5px;">${player.stage_name}</div>
                 </div>
 `
@@ -411,7 +460,7 @@ const Voice = (function () {
         document.getElementById(AUDIO_DIV_CONTAINER_ID).innerHTML = html
     }
 
-    loadTVContent = () =>{
+    loadTVContent = () => {
         screenIndex = 0;
         let element = questions[songIndex]
         let html = `
@@ -473,6 +522,9 @@ const Voice = (function () {
                 case 112:
                     showTV()
                     break;
+                case 117:
+                    choosePlayer()
+                    break;
             }
         }
     }
@@ -493,8 +545,10 @@ const Voice = (function () {
             }
         });
         if (off) {
+            bar.classList.add('inactive-icon')
             bar.style = "filter:saturate(0) brightness(.6)"
         } else {
+            bar.classList.remove('inactive-icon')
             bar.style = "";
         }
 

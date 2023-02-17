@@ -28,6 +28,7 @@ const Global = (function () {
     let init;
     let goHome;
     let hideLoader;
+    let getRandInt;
     let playGame;
     let getCookie;
     let setCookie;
@@ -95,6 +96,10 @@ const Global = (function () {
     goHome = function () {
         window.location = "games.html"
     }
+
+    getRandInt = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
+      }
 
     htmlDiv = function (id, classes, styles, attr, content) {
         let div = `<div ${id ? 'id=' + id : ''} ${classes ? 'class="' + classes + '"' : ''} ${styles ? 'style="' + styles + '"' : ''} ${attr ? attr : ''}>${content ? content : ''}</div>`
@@ -302,6 +307,7 @@ const Global = (function () {
         htmlp,
         init,
         goHome,
+        getRandInt,
         playGame,
         getCookie,
         setCookie,
