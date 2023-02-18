@@ -30,7 +30,7 @@ const Voice = (function () {
     const MNAME_ARRAY = ["La Coochie", "Limp Biscuit", "Glizzy Gobbler", "Cluck Flucker", "La Queefy Greens", "Mommy Milkers", "Titty Twister", "Abalababala", "Cum Gurgling", "Turd Burgling", "Creamed Corn", "Ducked Tape"]
     const LNAME_ARRAY = ["Watkins", "Johnson", "Sorenson", "Young", "Smith", "Anderson", "Cummingham", "Andrews", "Marley", "Adamson", "Radwell", "Jeffries", "St. Claire", "III", "Peterson", "Jackson", "Willingham", "Boroughsby"]
 
-    const PLACES = ["1st","2nd","3rd","4th","5th","6th"]
+    const PLACES = ["1st", "Runner Up", "3rd Place", "4th Place", "5th Place", "6th Place"]
 
     const STORIES = [
         "Briefly had an affair with the married technical producer of the show to try and score a chance to get back on the show. Contracted Chlamydia",
@@ -47,7 +47,7 @@ const Voice = (function () {
         "Addicted to fame, but ultimately talentless, they break into a sperm bank and use turkey basters to impregnate monkeys. Creates mutants that will one day take over",
         "Accidentally took the wrong door out of the studio and is teleported to an alternate dimension where they must watch their parents have sex on repeat. Can't die.",
         "Says 'Fuck it' after getting eliminated and climbs up in the rafters waiting for the final ceremony. Drops a taco bell shit on the winners head.",
-        "After the show they accidentally witness a gang murder. After testifying are put in witness protection. Will be on next season with their new identity" 
+        "After the show they accidentally witness a gang murder. After testifying are put in witness protection. Will be on next season with their new identity"
     ]
 
     const WINNING_STORIES = [
@@ -93,55 +93,55 @@ const Voice = (function () {
             "name": "red",
             "active": true,
             "votes": 0,
-            "outorder":null,
-            "first_name":"",
-            "last_name":"",
-            "stage_name":""
+            "outorder": null,
+            "first_name": "",
+            "last_name": "",
+            "stage_name": ""
         },
         {
             "name": "orange",
             "active": true,
             "votes": 0,
-            "outorder":null,
-            "first_name":"",
-            "last_name":"",
-            "stage_name":""
+            "outorder": null,
+            "first_name": "",
+            "last_name": "",
+            "stage_name": ""
         },
         {
             "name": "yellow",
             "active": true,
             "votes": 0,
-            "outorder":null,
-            "first_name":"",
-            "last_name":"",
-            "stage_name":""
+            "outorder": null,
+            "first_name": "",
+            "last_name": "",
+            "stage_name": ""
         },
         {
             "name": "green",
             "active": true,
             "votes": 0,
-            "outorder":null,
-            "first_name":"",
-            "last_name":"",
-            "stage_name":""
+            "outorder": null,
+            "first_name": "",
+            "last_name": "",
+            "stage_name": ""
         },
         {
             "name": "blue",
             "active": true,
             "votes": 0,
-            "outorder":null,
-            "first_name":"",
-            "last_name":"",
-            "stage_name":""
+            "outorder": null,
+            "first_name": "",
+            "last_name": "",
+            "stage_name": ""
         },
         {
             "name": "pink",
             "active": true,
             "votes": 0,
-            "outorder":null,
-            "first_name":"",
-            "last_name":"",
-            "stage_name":""
+            "outorder": null,
+            "first_name": "",
+            "last_name": "",
+            "stage_name": ""
         },
     ]
 
@@ -193,9 +193,9 @@ const Voice = (function () {
         }
         document.getElementById(TV_CONTENT_ID).children[screenIndex].classList.add('hidden')
         console.log(document.getElementById(TV_CONTENT_ID).children[screenIndex + 1])
-        if(document.getElementById(TV_CONTENT_ID).children[screenIndex + 1] == undefined){
+        if (document.getElementById(TV_CONTENT_ID).children[screenIndex + 1] == undefined) {
             screenIndex = 0
-        }else{
+        } else {
             screenIndex += 1;
         }
         document.getElementById(TV_CONTENT_ID).children[screenIndex].classList.remove('hidden')
@@ -257,7 +257,7 @@ const Voice = (function () {
             let winningplayer = document.getElementById("episode-" + currentEpisode).children[0].children[2].children[0].children[0].getAttribute('data-name');
             players.forEach(element => {
                 console.log(element.name + " - " + element.outorder)
-                if(element.outorder == null){
+                if (element.outorder == null) {
                     outOrder += 1;
                     element.outorder = outOrder;
                 }
@@ -296,50 +296,58 @@ const Voice = (function () {
         }
     }
 
-    choosePlayer = () =>{
-
+    choosePlayer = () => {
         let activeElement;
         let playerIndex = 0;
         let i = 0;
         let pickablePlayers = []
+        console.log(players)
         players.forEach(element => {
+            console.log(element)
             i++;
             let char = document.getElementsByClassName('player-' + i)[0];
-            if(!char.parentElement.classList.contains('inactive-icon')){
-                if(!players_that_passed.includes(element.name)){
+            if (!char.parentElement.classList.contains('inactive-icon')) {
+                if (!players_that_passed.includes(element.name)) {
                     pickablePlayers.push(char)
                 }
             }
         });
 
-        let index = Global.getRandInt(pickablePlayers.length *10,(pickablePlayers.length *10) + 15)
+        let index = Global.getRandInt(pickablePlayers.length * 10, (pickablePlayers.length * 10) + 15)
 
         console.log(pickablePlayers)
-        playerShow(0,index,pickablePlayers)
+        playerShow(0, index, pickablePlayers)
     }
 
-    playerShow = (i, cap, players) =>{
-        if(i<players.length){
-            if(i>0){
-                players[i-1].classList.remove('chosenPlayer')
+    playerShow = (i, cap, players) => {
+        console.log(players)
+        let activeBar = document.getElementsByClassName('chosenPlayer')[0];
+        if (i < players.length) {
+            if (i > 0) {
+                if(activeBar){
+                    activeBar.classList.remove('chosenPlayer')
+                }
             }
-           players[i].classList.add('chosenPlayer')
-        }else{
+            players[i].classList.add('chosenPlayer')
+        } else {
             cap = cap - players.length;
             i = 0;
-            players[players.length - 1].classList.remove('chosenPlayer')
+            if(activeBar){
+                activeBar.classList.remove('chosenPlayer')
+            }
             players[i].classList.add('chosenPlayer')
         }
-        if(i<cap){
-            setTimeout(function(){playerShow(i+1, cap, players)},65)
-        }else{
-            
+        if (i < cap) {
+            Global.playSound('click')
+            setTimeout(function () { playerShow(i + 1, cap, players) }, 65)
+        } else {
+
             let flash = 500
-            setTimeout(function(){players[i].classList.remove('chosenPlayer');Global.playSound("right")},flash)
-            setTimeout(function(){players[i].classList.add('chosenPlayer')},flash*2)
-            setTimeout(function(){players[i].classList.remove('chosenPlayer');Global.playSound("right")},flash*3)
-            setTimeout(function(){players[i].classList.add('chosenPlayer')},flash*4)
-            setTimeout(function(){players[i].classList.remove('chosenPlayer');Global.playSound("right")},flash*5)
+            setTimeout(function () { players[i].classList.remove('chosenPlayer'); Global.playSound("right") }, flash)
+            setTimeout(function () { players[i].classList.add('chosenPlayer') }, flash * 2)
+            setTimeout(function () { players[i].classList.remove('chosenPlayer'); Global.playSound("right") }, flash * 3)
+            setTimeout(function () { players[i].classList.add('chosenPlayer') }, flash * 4)
+            setTimeout(function () { players[i].classList.remove('chosenPlayer'); Global.playSound("right") }, flash * 5)
         }
     }
 
@@ -361,7 +369,7 @@ const Voice = (function () {
 
     getRandomStory = (i) => {
         let array = STORIES
-        if(i == 1){
+        if (i == 1) {
             array = WINNING_STORIES
         }
         let story = array[Math.floor(Math.random() * array.length)];
@@ -494,6 +502,7 @@ const Voice = (function () {
                             </div>`
 
         document.getElementById(EPISODE_CONTAINER_ID).innerHTML += episode_card_html
+        players_that_passed = [];
     }
 
     loadQuestions = () => {
@@ -527,8 +536,11 @@ const Voice = (function () {
 
     loadSongs = (data) => {
         let html =
-            `<audio id="rightAudio" controls>
+        `<audio id="rightAudio" controls>
             <source src="../audios/correct.wav" type="audio/mpeg">
+        </audio>
+        <audio id="clickAudio" controls>
+            <source src="../audios/click.mp3" type="audio/mpeg">
         </audio>
         <audio id="wrongAudio" controls>
             <source src="../audios/buzzer.wav" type="audio/mpeg">
@@ -605,6 +617,10 @@ const Voice = (function () {
                 case 112:
                     showTV()
                     break;
+                case 113:
+                    songIndex = songIndex - 2;
+                    loadTVContent();
+                    break;
                 case 117:
                     choosePlayer()
                     break;
@@ -620,7 +636,7 @@ const Voice = (function () {
             if (element.name == name) {
                 if (element.active) {
                     off = true
-                    if(element.outorder == null){
+                    if (element.outorder == null) {
                         outOrder += 1;
                         element.outorder = outOrder;
                     }
@@ -716,9 +732,9 @@ const Voice = (function () {
 
 
         players.forEach(element => {
-            if(element.outorder){
-                
-            }else{
+            if (element.outorder) {
+
+            } else {
                 element.outorder = 95
             }
         });
@@ -726,12 +742,21 @@ const Voice = (function () {
         let orderedPlayers = players.sort(compare)
         console.log(orderedPlayers)
         let i = 6;
-        let html = ``;
+        let html = `            <div class="resultTitle">
+        <p onclick="window.scrollBy(0,window.clientHeight)">&rsaquo;</p>
+        <div style="background-color: #ff1100"><p>R</p></div>
+        <div style="background-color: #ff9d00"><p>E</p></div>
+        <div style="background-color: #ebe834"><p>S</p></div>
+        <div style="background-color: #40eb34"><p>U</p></div>
+        <div style="background-color: #34deeb"><p>L</p></div>
+        <div style="background-color: #eb34ab"><p>T</p></div>
+        <div style="background-color: #ba34eb"><p>S</p></div>
+    </div>`;
         orderedPlayers.forEach(element => {
             let color = getPlayerColor(element.name)
-            if(i == 1){
-                html+=
-                `<div class="result">
+            if (i == 1) {
+                html +=
+                    `<div class="result">
                     <div class="resultBack" style="color:${color};background-color:${color};">
                     </div>
                     <div class="resultDiv" style="border-color:${color};width:85vw;align-self:flex-end;margin-bottom:50px;justify-self:center;">
@@ -745,10 +770,10 @@ const Voice = (function () {
                         </div>
                     </div>
                 </div>`
-            }else{
-                if(i%2 == 0){
-                    html+=
-                    `<div class="result">
+            } else {
+                if (i % 2 == 0) {
+                    html +=
+                        `<div class="result">
                         <div class="resultBack" style="color:${color};background-color:${color};" onclick="this.parentElement.children[1].classList.remove('hiddenToLeft')">
                         <p class="resultArrow"  style="color:white;">&raquo;</p>
                         </div>
@@ -756,21 +781,21 @@ const Voice = (function () {
                             <img class="resultImg" src="../images/characters/${element.name}_glow.png">
                             <div class="resultText">
                                 <div class="resultName" style="color:${color};">${element.stage_name}</div>
-                                <div class="resultPlace" style="color:${color};">${PLACES[i-1]}</div>
+                                <div class="resultPlace" style="color:${color};">${PLACES[i - 1]}</div>
                                 <div class="resultStory" style="color:${color};">${getRandomStory(i)}</div>
                             </div>
                         </div>
                     </div>`
-                }else{
+                } else {
                     html +=
-                    `<div class="result">
+                        `<div class="result">
                         <div class="resultBack" style="color:red;background-color:${color};" onclick="this.parentElement.children[1].classList.remove('hiddenToRight')">
                         <p class="resultArrow"  style="color:white;">&laquo;</p>
                         </div>
                         <div class="resultDiv hiddenToRight" style="border-color:${color};transform:translate(5%);margin-right:50px;">
                             <div class="resultText">
                                 <div class="resultName" style="color:${color};">${element.stage_name}</div>
-                                <div class="resultPlace" style="color:${color};">${PLACES[i-1]}</div>
+                                <div class="resultPlace" style="color:${color};">${PLACES[i - 1]}</div>
                                 <div class="resultStory" style="color:${color};">${getRandomStory(i)}</div>
                             </div>
                             <img class="resultImg" src="../images/characters/${element.name}_glow.png">
@@ -779,26 +804,26 @@ const Voice = (function () {
                 }
                 i--;
             }
-            
+
         });
 
-        div.innerHTML += html;
+        div.innerHTML = html;
         div.classList.remove('hidden')
-        setTimeout(function () {div.classList.remove('hiddenFade')},50)
+        setTimeout(function () { div.classList.remove('hiddenFade') }, 50)
 
-        
+
     }
 
-    function compare( a, b ) {
-        if ( a.outorder > b.outorder ){
-          return -1;
+    function compare(a, b) {
+        if (a.outorder < b.outorder) {
+            return -1;
         }
-        if ( a.outorder < b.outorder ){
-          return 1;
+        if (a.outorder > b.outorder) {
+            return 1;
         }
         return 0;
-      }
-      
+    }
+
     nextEpisode = () => {
         hideTV()
         currentEpisode += 1;
