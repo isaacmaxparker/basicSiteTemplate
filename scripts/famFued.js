@@ -150,9 +150,7 @@ const famFued = (function() {
         points.sort(sortNumbers)
     }
 
-    sortNumbers = function(a, b) {
-        return b - a;
-    }
+
 
     getRandomInt = function(max) {
         return Math.floor(Math.random() * Math.floor(max) + 6);

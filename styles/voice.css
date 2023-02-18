@@ -49,8 +49,13 @@
     
 }
 
+.hiddenToLeft{
+    transform: translate(-110%) !important;
+    transition: all 2.5s ease-in-out;
+}
+
 .hiddenToRight{
-    transform: translate(100%) !important;
+    transform: translate(110%) !important;
     transition: all 2.5s ease-in-out;
 }
 
@@ -424,6 +429,125 @@
     height: 100vh;
     position: absolute;
     opacity: 1;
-    z-index: 10000;
+    z-index: 9000;
     transition: all .5s ease-in-out;
+    overflow-y: auto;
+}
+
+.resultTitle{
+    position: relative;
+    height:100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.resultTitle>p{
+    position: absolute;
+    margin-top:120vh;
+    margin-left:4vh;
+    font-size:45vh;
+    opacity: .8;
+    z-index: 10001;
+    color:white;
+    transform: rotate(90deg);
+}
+
+.resultTitle div{
+    height:100%;
+    width: 100%;
+    color:white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    filter: brightness(.95);
+}
+
+.resultTitle div>p{
+    font-size: 55vh;
+    text-align: left;
+    margin-left: -5vh;
+    overflow: hidden;
+}
+
+.result{
+    position: relative;
+    height:150vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.resultBack{
+    opacity: .6;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100vw;
+}
+
+.resultDiv{
+    width: 90vw;
+    height: 50vh;
+    position: absolute;
+    border: solid 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding:4vw;
+    background-color: rgba(255, 255, 255, 0.973);
+    transition: all 2s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.29) 20px 20px 20px 20px;
+}
+
+.resultImg{
+    height:100%;
+    margin-left:5vw;
+}
+
+.resultText{
+    font-size:7vh;
+    margin:5vw;
+    margin-top:0;
+    margin-right: 0px;
+}
+
+.resultName{
+    font-size:200%;
+    font-weight: bold;
+    filter:brightness(.8)
+}
+.resultPlace{
+    font-size:100%;
+    font-weight: bold;
+}
+
+.resultArrow{
+    font-size:1020%;
+    font-weight: bold;
+    opacity: 1;
+    /* filter: brightness(.5) saturate(300); */
+}
+
+.resultArrow:hover{
+    opacity: .8;
+    font-size:1120%;
+}
+
+.resultStory{
+    font-style: italic;
+    margin-top: 30px;
+    font-size: 65%;
+    padding-left:50px;
+    filter:brightness(.3)
 }
