@@ -371,5 +371,6 @@ const Spy = (function () {
         changeLevel,
         showAnswerImage,
         pointsInARow,
+        addPoints,
     };
 }());

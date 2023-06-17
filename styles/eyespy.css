@@ -167,10 +167,11 @@
 .question{
     margin-top:1.25%;
     position: absolute;
-    width: 95%;
+    width: 75%;
+    left: 6%;
     height: 90vh;
     background: rgb(255, 255, 255);
-
+    border:black solid 10px;
     line-height: 1.2;
     color: rgb(0, 0, 0);
     transform: rotateX(0deg);
@@ -188,8 +189,8 @@
     height: 100%;
     flex-direction: column;
     text-align: center;
-    font-size: 2.5rem;
-    border: 10px solid black;
+    /* font-size: 2.5rem;
+    border: 10px solid black; */
     /* border-image: linear-gradient(to bottom right, #000000 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
     border-image-slice: 1; */
 
@@ -232,10 +233,19 @@
 #questionText{
     margin:40px
 }
+
+.questionText{
+    font-size:2rem !important;
+}
+
+.answerText{
+    font-size:3rem !important;
+}
+
 /* TEAMS */
 .teams_list{
     width: 95%;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -318,33 +328,27 @@
 
 }
 .team_points{
-    font-size: 7rem;
+    font-size: 5rem;
     height: 100%;
     width: calc(100% - 5px) !important;
 }
 
-.toolbox{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    height: 10vh;
-    width: 90%;
+.toolbar {
+    filter: grayscale(0%) brightness(100%) hue-rotate(226deg);
+    margin-right: 20px;
+    width:10vw;
 }
 
-.toolbox img{
-    max-height: 50px;
-    height: 100%;
-    filter: grayscale(100%) brightness(700%);
-    opacity:.8;
-    padding: 10px;
-    cursor: pointer;
+.toolbar img {
+    opacity: .8;
+    width:60%;
+    padding: 5px;
 }
 
-.toolbox img:hover{
-    opacity:1;
-    filter: grayscale(100%) brightness(900%);
+.toolbar img:hover, .toolbar img:focus {
+    opacity: 1;
 }
+
 
 .team_tools{
     display: flex;
@@ -352,20 +356,54 @@
 }
 .team_tools img{
     z-index: 100;
-    filter: grayscale(100%) brightness(700%) !important;
     height: 30px !important;
-    opacity: .5;
+    opacity: .8;
+}
+
+#team_tools_1 img{
+    filter: grayscale(70%) brightness(900%) hue-rotate(120deg);
+    padding:5px;
+}
+
+#team_tools_2 img{
+    filter: grayscale(70%) brightness(900%) hue-rotate(190deg);
+    padding:5px;
+}
+
+#team_tools_3 img{
+    filter: grayscale(70%) brightness(900%) hue-rotate(0deg);
+    padding:5px;
+}
+
+#team_tools_4 img{
+    filter: grayscale(70%) brightness(900%) hue-rotate(50deg);
+    padding:5px;
+}
+
+#team_1_button{
+    filter: grayscale(20%) brightness(1500%) hue-rotate(280deg) saturate(300%);
+    padding:5px;
+}
+
+#team_2_button{
+    filter: grayscale(20%) brightness(1500%) hue-rotate(341deg) saturate(300%);
+    padding:5px;
+}
+
+#team_3_button{
+    filter: grayscale(0%) brightness(800%) hue-rotate(131deg) saturate(300%);
+    padding:5px;
+}
+
+#team_4_button{
+    filter: grayscale(30%) brightness(1500%) hue-rotate(190deg) saturate(300%) ;
+    padding:5px;
 }
 
 .big_toolbox{
     position: absolute;
     bottom:25px;
     right: 25px;
-}
-
-.team_tools img:hover{
-    opacity: .9 !important;
-    filter:  grayscale(100%) brightness(900%); !important;
 }
 
 .team_toolbar{

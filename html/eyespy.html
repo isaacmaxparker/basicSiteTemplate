@@ -35,7 +35,7 @@
     <div class="backImage">
         <img src="../images/backgrounds/eyespy_back.png">
     </div>
-    <div class="content" style="position: relative">
+    <div class="content flex-row" style="position: relative">
         <div id="messageDiv" class="message flex-column hidden" onclick="hideMessage()">
             <div class="messageTitle">
                 CHRISTIAN
@@ -44,71 +44,70 @@
                 WINS!
             </div>
         </div>
-        <div class="splitContent">
+        <div class="splitContent" style="width:90vw;">
             <div class="mainSide">
+                <div id="distortion_question" class="question flippedDiv">
+                    <div class="questionDiv">
+                        <span class="questionText">Name the Event and Character</span>
+                        <div class="questionImage">
+                            <div class="dist_images">
+                                <img id="dist_image_4" class="dist_image" style="z-index:100">
+                                <img id="dist_image_1" class="dist_image">
+                                <img id="dist_image_2" class="dist_image">
+                                <img id="dist_image_3" class="dist_image">
+                            </div>
+                        </div>
+                        <span class="questionCategory"></span>
+                        <div class="meterRange distCase" style="margin-bottom:20px;">
+                            <div class="sliderCase">
+                            <input id="dist_slider" type="range" min="0" max="3" value="0" class="slider vertical-lowest-first" id="distortionSlider" style="width: calc(20vh + 25px);left:-10vh;" oninput="changeLevel(this.value)">
+                            </div>
+                        </div>
+                        <span class="answerText invisible" onclick="this.classList.remove('invisible');document.getElementById('dist_slider').value = 3;document.getElementById('dist_image_4').classList.remove('hidden');playSound('right')"></span>
+                    </div>
+                </div>
+                <div id="character_question" class="question flippedDiv">
+                    <div class="questionDiv">
+                        <span class="questionText">Who is missing?</span>
+                        <div class="questionImage">
+                            <img  class="image_1" id="character_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
+                            <img  class="image_2" id="character_image_2" style="z-index:100">
+                        </div>
+                        <span class="questionCategory"></span>
+                        <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
+                    </div>
+                </div>
+                <div id="charloc_question" class="question flippedDiv">
+                    <div class="questionDiv">
+                        <span class="questionText">Who is missing and where is the location?</span>
+                        <div class="questionImage">
+                            <img  class="image_1" id="charloc_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
+                            <img  class="image_2" id="charloc_image_2" style="z-index:100">
+                        </div>
+                        <span class="questionCategory"></span>
+                        <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
+                    </div>
+                </div>
+                <div id="location_question" class="question flippedDiv">
+                    <div class="questionDiv">
+                        <span class="questionText">Where was this photo taken and at what event?</span>
+                        <div class="questionImage">
+                            <img  class="image_1" id="location_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
+                            <img  class="image_2" id="location_image_2" style="z-index:100">
+                        </div>
+                        <span class="questionCategory"></span>
+                        <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
+                    </div>
+                </div>
                 <div class="mainGrid ">
-                    <div id="distortion_question" class="question flippedDiv">
-                        <div class="questionDiv">
-                            <span class="questionText">Name the Event and Character</span>
-                            <div class="questionImage">
-                                <div class="dist_images">
-                                    <img id="dist_image_4" class="dist_image" style="z-index:100">
-                                    <img id="dist_image_1" class="dist_image">
-                                    <img id="dist_image_2" class="dist_image">
-                                    <img id="dist_image_3" class="dist_image">
-                                </div>
-                            </div>
-                            <span class="questionCategory"></span>
-                            <div class="meterRange distCase" style="margin-bottom:20px;">
-                                <div class="sliderCase">
-                                  <input id="dist_slider" type="range" min="0" max="3" value="0" class="slider vertical-lowest-first" id="distortionSlider" style="width: calc(20vh + 25px);left:-10vh;" oninput="changeLevel(this.value)">
-                                </div>
-                            </div>
-                            <span class="answerText invisible" onclick="this.classList.remove('invisible');document.getElementById('dist_slider').value = 3;document.getElementById('dist_image_4').classList.remove('hidden');playSound('right')"></span>
-                        </div>
-                    </div>
-                    <div id="character_question" class="question flippedDiv">
-                        <div class="questionDiv">
-                            <span class="questionText">Who is missing?</span>
-                            <div class="questionImage">
-                                <img  class="image_1" id="character_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
-                                <img  class="image_2" id="character_image_2" style="z-index:100">
-                            </div>
-                            <span class="questionCategory"></span>
-                            <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
-                        </div>
-                    </div>
-                    <div id="charloc_question" class="question flippedDiv">
-                        <div class="questionDiv">
-                            <span class="questionText">Who is missing and where is the location?</span>
-                            <div class="questionImage">
-                                <img  class="image_1" id="charloc_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
-                                <img  class="image_2" id="charloc_image_2" style="z-index:100">
-                            </div>
-                            <span class="questionCategory"></span>
-                            <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
-                        </div>
-                    </div>
-                    <div id="location_question" class="question flippedDiv">
-                        <div class="questionDiv">
-                            <span class="questionText">Where was this photo taken and at what event?</span>
-                            <div class="questionImage">
-                                <img  class="image_1" id="location_image_1" onclick="showAnswerImage(this.parentElement.parentElement)">
-                                <img  class="image_2" id="location_image_2" style="z-index:100">
-                            </div>
-                            <span class="questionCategory"></span>
-                            <span class="answerText invisible" onclick="this.classList.remove('invisible');"></span>
-                        </div>
-                    </div>
                     <div id="mainGrid" class="invisible" style="max-width: 100%;height: 100%;display: flex;flex-direction: row;">
-                    
                     </div>
                 </div>
             </div>
             <div class="scoreAside">
                 <div id="teams_list" class="teams_list invisible">
                     <div id="current_points" class="hidden"></div>
-                    <div id="team_tools_41" class="team_tools">
+                    <div id="team_tools_1" class="team_tools">
                         <div id="team_1" class="team">
                             <input class="team_name"  placeholder="Team 1"/>
                             <input class="team_points" value="0" type="number" min="0"/>
@@ -157,14 +156,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="toolbox">
-                    <img id="row_1" src="../images/logos/eyespy/1_row.png" onclick="addRowPoints(1)">
-                    <img id="row_2" src="../images/logos/eyespy/2_row.png" onclick="addRowPoints(2)">
-                    <img id="row_3" src="../images/logos/eyespy/3_row.png" onclick="addRowPoints(3)">
-                    <img id="row_4" src="../images/logos/eyespy/4_row.png" onclick="addRowPoints(4)">
-                    <img src="../images/logos/home.png" onclick="Global.goHome()">
-                </div>
             </div>
+        </div>
+        <div id="toolbar" class="toolbar flex-column" style="flex: 1;height: 100vh;">
+            <img id="team_1_button" style="margin-top:25px;" src="../images/logos/team_1.png" onclick="addPoints(1)">
+            <img id="team_2_button" src="../images/logos/team_2.png" onclick="addPoints(2)">
+            <img id="team_3_button" src="../images/logos/team_3.png" onclick="addPoints(3)">
+            <img id="team_4_button" src="../images/logos/team_4.png" onclick="addPoints(4)">
+            <hr width="90%" style="border:rgba(216, 216, 216, 0.516) 2px solid">
+            <img style="margin-top:auto;margin-bottom:25px;filter: grayscale(100%) brightness(900%) hue-rotate(190deg);" src="../images/logos/home.png" onclick="Global.goHome()">
         </div>
     </div>
 </body>
@@ -190,6 +190,7 @@
         showAnswerImage = Spy.showAnswerImage;
         pointsInARow = Spy.pointsInARow;
         addRowPoints = Spy.addRowPoints;
+        addPoints = Spy.addPoints;
     });
 
 
