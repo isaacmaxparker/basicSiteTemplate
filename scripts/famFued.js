@@ -113,7 +113,7 @@ const famFued = (function() {
         showOutstandingPoints();
     }
 
-    createPoints = function(){
+    createPoints = () => {
         points.length = 0;
         let points_left = 100;
         for(let i = 0;i<NUM_OF_QUESTIONS;i++){
@@ -121,6 +121,9 @@ const famFued = (function() {
             console.log(i)
             if(i == 0){
                 x = getRandomInt(40);
+                if(x < 25 || x > 45){
+                    x = 30 + getRandomInt(17);
+                }
                 points_left = points_left - x;
             }
             else if(i == 1){
@@ -144,10 +147,30 @@ const famFued = (function() {
                     x = 12 - (i + 1);
                 }
             }
+            console.log(x)
             points.push(x)
             
         }
-        points.sort(sortNumbers)
+        points.sort(function(a, b){return b - a});
+        if(points[NUM_OF_QUESTIONS - 2] <= points[NUM_OF_QUESTIONS-1] && points[NUM_OF_QUESTIONS-1] > 1){
+            points[NUM_OF_QUESTIONS - 2] += 1
+            points[NUM_OF_QUESTIONS - 1] -= 1
+        }else if (points[NUM_OF_QUESTIONS-1] == 0){
+            points[NUM_OF_QUESTIONS - 2] += 1
+            points[NUM_OF_QUESTIONS - 1] += 1
+            if(points[NUM_OF_QUESTIONS - 3] < points[NUM_OF_QUESTIONS - 2]){
+                points[NUM_OF_QUESTIONS - 3] += 1
+            }
+            if(points[NUM_OF_QUESTIONS - 4] < points[NUM_OF_QUESTIONS - 3]){
+                points[NUM_OF_QUESTIONS - 4] += 1
+            }
+            if(points[NUM_OF_QUESTIONS - 5] < points[NUM_OF_QUESTIONS - 4]){
+                points[NUM_OF_QUESTIONS - 5] += 1
+            }
+            if(points[NUM_OF_QUESTIONS - 6] < points[NUM_OF_QUESTIONS - 5]){
+                points[NUM_OF_QUESTIONS - 6] += 1
+            }
+        }
     }
 
 

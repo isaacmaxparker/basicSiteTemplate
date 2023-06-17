@@ -27,7 +27,7 @@ const Voice = (function () {
     const TV_SCREEN_ID = "karaoke_machine"
 
     const FNAME_ARRAY = ["Taylor", "Addison", "Aspen", "Ash", "Charlie", "Drew", "Casey", "Hayden", "Jessie", "Jordan", "Morgan", "Sam", "Robyn", "Sasha", "Toni", "Max", "Marley", "Jaydon", "Briar", "Bellamy", "Brighton", "Cove", "Cypress", "Jupiter", "Hollis", "Rory", "Lux", "Emery"]
-    const MNAME_ARRAY = ["La Coochie", "Limp Biscuit", "Glizzy Gobbler", "Cluck Flucker", "La Queefy Greens", "Mommy Milkers", "Titty Twister", "Abalababala", "Cum Gurgling", "Turd Burgling", "Creamed Corn", "Ducked Tape"]
+    const MNAME_ARRAY = ["De La Coochie", "Limp Biscuit", "Glizzy Gobbler", "Cluck Flucker", "La Queefy Greens", "Mommy Milkers", "Shitty Titties", "Sperm Slurping", "Turd Burgling", "Creamed Corn", "Ducked Tape", "Sissy Slut","The Tiny Twink","The Knob Slobber","Fried Chicken","Drunkie the Clown","Willy Wanker", "Grassy Ass Blaster"]
     const LNAME_ARRAY = ["Watkins", "Johnson", "Sorenson", "Young", "Smith", "Anderson", "Cummingham", "Andrews", "Marley", "Adamson", "Radwell", "Jeffries", "St. Claire", "III", "Peterson", "Jackson", "Willingham", "Boroughsby"]
 
     const PLACES = ["1st", "Runner Up", "3rd Place", "4th Place", "5th Place", "6th Place"]
@@ -555,10 +555,12 @@ const Voice = (function () {
 
     loadTVContent = () => {
         screenIndex = 0;
+        console.log(questions)
+        console.log(questions[songIndex])
         let element = questions[songIndex]
         let html = `
         <div class="tvLyric">
-            <div class="tvTitle">${element.title}</div>
+            <div class="tvTitle" style="${element.title.length > 17 ? "font-size:120%;":""}">${element.title}</div>
             <div class="tvArtist">${element.artist}</div>
         </div>
         `

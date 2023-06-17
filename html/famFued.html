@@ -42,21 +42,23 @@
                             <input id="team_2_name" class="team_name xs team_two_back" value="Team Two" onchange="savePoints()"> 
                             <input id="team_score_2" class="team_score xl team_two_back" value="0" onchange="savePoints()" >
                         </div>
-                        <hr style="width: 95%; margin-top:none;">
-                        <div class="scoreAdder flex-row" style="margin-top: auto; margin-bottom: 20px;">
-                            <div class="scoreText">Available Points: </div>
-                            <div id="scoreToAdd">0</div>
-                        </div>
-                        <hr style="width: 75%; margin:0px; margin-bottom:20px;opacity: .5;">
-                        <div class="scoreAdder flex-row" style="width:  100%;">
-                            <div class="addPoints team1Add" onclick="addPoints(1)">Team 1</div>
-                            <div class="addPoints team2Add" onclick="addPoints(2)">Team 2</div>
+                        <div style="display:none">
+                            <hr style="width: 95%; margin-top:none;">
+                            <div class="scoreAdder flex-row" style="margin-top: auto; margin-bottom: 20px;">
+                                <div class="scoreText">Available Points: </div>
+                                <div id="scoreToAdd">0</div>
+                            </div>
+                            <hr style="width: 75%; margin:0px; margin-bottom:20px;opacity: .5;">
+                            <div class="scoreAdder flex-row" style="width:  100%;">
+                                <div class="addPoints team1Add" onclick="addPoints(1)">Team 1</div>
+                                <div class="addPoints team2Add" onclick="addPoints(2)">Team 2</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="main-content header white-text flex">
-                <div class="flex-column" style="width: 100vh;height: 100vh;">
+                <div class="flex-column" style="flex: 9;height: 100vh;">
                     <div id="normalQuestions" class="question_container flex-column">
                         <div id="question_div" class="question_div">Sample Question Text</div>
                         <div class="answers_container flex-column">
@@ -189,17 +191,20 @@
                             <img src="../images/logos/famfued_x.png" class="inactiveX">
                         </div>
                         <div id="nextButton" class="navbutton icon" onclick="switchQuestion(true)">!</div>
-                        <div class="toolKit">
-                            <div class="tools flex-row">
-                                <img src="../images/logos/reset.png" onclick="resetAnswers()">
-                                <img src="../images/logos/famfued_x.png" onclick="toggleX(true)">
-                                <img src="../images/logos/home.png" onclick="Global.goHome()">
-                            </div>
-                        </div>
                     </div>
                 </div>
+                <div id="toolbar" class="toolbar flex-column" style="flex: 1;height: 100vh;">
+
+                    <img src="../images/logos/reset.png" onclick="resetAnswers()">
+                    <img src="../images/logos/famfued_x.png" onclick="toggleX(true)">
+                    <hr width="90%" style="border:rgba(255, 0, 0, 0.516) 1px solid">
+                    <img src="../images/logos/team_1.png" onclick="addPoints(1)">
+                    <img src="../images/logos/team_2.png" onclick="addPoints(2)">
+                    <hr width="90%" style="border:rgba(255, 0, 0, 0.516) 1px solid">
+                    <img src="../images/logos/home.png" onclick="Global.goHome()">
+                </div>
             </div>
-            <div id="right-aside" class="right-aside hidden-right-aside">
+            <!-- <div id="right-aside" class="right-aside hidden-right-aside">
                 <div class="left-aside-container">
                     <div class="right-aside-button whitetext flex"  onclick="Global.toggleAside(this.parentElement.parentElement)">
                         <p class="white-text" style="opacity: .8;">?</p>
@@ -215,7 +220,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </body>
     <script type="text/javascript">

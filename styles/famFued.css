@@ -36,6 +36,11 @@ input{
 }
 
 /* QUESTIONS */ 
+
+.answer{
+    justify-content: flex-start;
+}
+
 .question_div, .answer_div {
     border: 10px solid rgb(6, 6, 104);
     border-image-slice: 1;
@@ -127,10 +132,10 @@ text-align: center;
     min-height: 100px;
 }
 .answer_points{
-    position: absolute;
+    /* position: absolute; */
     left: 20px;
-    top:50%;
-    transform:translate(0%,-50%);
+    /* top:50%; */
+    /* transform:translate(0%,-50%); */
     color: gold;
     opacity: .8;
     font-style: italic;
@@ -261,4 +266,19 @@ text-align: center;
     border-image-slice: 1 !important;
     border-image-source: radial-gradient(#020096, #80c2ff,#031d74) !important;
     background-color: rgba(4, 19, 59, 0.897);
+}
+
+.toolbar {
+    filter: grayscale(0%) brightness(100%) hue-rotate(226deg);
+    margin-right: 20px;
+}
+
+.toolbar img {
+    opacity: .6;
+    width:60%;
+    padding: 5px;
+}
+
+.toolbar img:hover, .toolbar img:focus {
+    opacity: 1;
 }
