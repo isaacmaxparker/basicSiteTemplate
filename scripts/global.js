@@ -90,6 +90,10 @@ const Global = (function () {
                 return "scatter_logo.png";
             case "voice":
                 return "voice_logo.png";
+            case "cards":
+                return "throw_sentence_logo.png";
+            case "throw":
+                return "throw_sentence_logo.png";
         }
     }
 
@@ -262,6 +266,9 @@ const Global = (function () {
                 break;
             case "click":
                 soundElement = document.getElementById('clickAudio')
+                break;
+            case "flip":
+                soundElement = document.getElementById('flipAudio')
                 break;
         }
         soundElement.pause();

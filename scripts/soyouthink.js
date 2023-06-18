@@ -9,8 +9,8 @@ const Spy = (function () {
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
-    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/EyeSpy/'
-    const IMAGE_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/EyeSpy/images/'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/EyeSpy/'
+    const IMAGE_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/EyeSpy/images/'
     const TEAMS_TO_REMOVE = [
         [4, 3],
         [4],

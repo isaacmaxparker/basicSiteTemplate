@@ -9,7 +9,7 @@ const Jeop = (function () {
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
-    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Jeopardy/'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Jeopardy/'
     const TEAMS_TO_REMOVE = [
         [6, 5, 4, 3],
         [5, 4, 3],

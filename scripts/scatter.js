@@ -9,7 +9,7 @@ const Scatter = (function() {
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
-    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Scatter/'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Scatter/'
     const DEFAULT_ADJECTIVES = [
         'SEXY',
         'DADDY',

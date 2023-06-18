@@ -9,8 +9,8 @@ const Voice = (function () {
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
-    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Voice/'
-    const AUDIO_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Voice/audios/'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Voice/'
+    const AUDIO_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Voice/audios/'
 
     const AUDIO_DIV_CONTAINER_ID = "audiosContainer"
     const EPISODE_CONTAINER_ID = "episodeContainer"

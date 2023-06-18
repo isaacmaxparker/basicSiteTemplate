@@ -9,9 +9,9 @@ const Answers = (function () {
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
-    const JEOPARDY_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Jeopardy/'
-    const FAMFUED_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/FamFued/'
-    const MILLIONAIRE_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Millionare/'
+    const JEOPARDY_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Jeopardy/'
+    const FAMFUED_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/FamFued/'
+    const MILLIONAIRE_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Millionare/'
 
     const FAM_ASNWERS_LIST_ID = "famGrid";
 

@@ -10,7 +10,7 @@ const Games = (function() {
      *              CONSTANTS
      */
     const ANIMATION_DURATION = 800;
-    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/games.json'
+    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/games.json'
   
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES

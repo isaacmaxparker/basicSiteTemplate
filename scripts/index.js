@@ -10,7 +10,7 @@ const Index = (function() {
      *              CONSTANTS
      */
     const ANIMATION_DURATION = 7000;
-    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/games.json'
+    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/games.json'
     const LOAD_LOOP_VIDEO_ID = 'loopVideo';
     const LOAD_VIDEO_ID = 'loadVideo';
     const LINKS_ID = 'links';

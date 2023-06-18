@@ -10,7 +10,7 @@ const Games = (function () {
      *              CONSTANTS
      */
     const ANIMATION_DURATION = 800;
-    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/games.json';
+    const GAMES_URL = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/games.json';
     const FILTERS_LENGTH = 5;
     const TAGS_LENGTH = 3;
     const TYPES_LENGTH = 6;
@@ -416,6 +416,12 @@ const Games = (function () {
                         break;
                     case "voice":
                         setTimeout(function () { location.replace("voice.html") }, 150);
+                        break;
+                    case "cards":
+                        setTimeout(function () { location.replace("cards.html") }, 150);
+                        break;
+                    case "throw":
+                        setTimeout(function () { location.replace("cards.html") }, 150);
                         break;
                 }
             }

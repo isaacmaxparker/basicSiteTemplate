@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../scripts/global.js"></script>
+    <script src="../scripts/cards.js"></script>
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/cards.css">
+</head>
+
+<body>
+    <div id="loadScreen" class="loadScreen flex-column">
+        <div id="initial_content">
+            <img src="../images/logos/throw_sentence_logo.png" style="max-height: 40%;">
+            <p style="color: rgb(0, 0, 0);font-size: 4rem;margin:0px; margin-top:25px;">How Many Players?</p>
+            <div class="flex-row" style="width: 80%;">
+                <div class="playNum" style="color:red" onclick=loadPlayers(3)>2</div>
+                <div class="playNum" style="color:orange" onclick=loadPlayers(3)>3</div>
+                <div class="playNum" style="color:greenyellow" onclick=loadPlayers(4)>4</div>
+                <div class="playNum" style="color:lime" onclick=loadPlayers(5)>5</div>
+                <div class="playNum" style="color:aqua" onclick=loadPlayers(6)>6</div>
+                <div class="playNum" style="color:rgb(0, 187, 255)" onclick=loadPlayers(7)>7</div>
+                <div class="playNum" style="color:rgb(117, 104, 255)" onclick=loadPlayers(8)>8</div>
+                <div class="playNum" style="color:rgb(255, 0, 111)" onclick=loadPlayers(9)>9</div>
+            </div>
+            <div class="flex-row" style="width: 80%;margin-top:-25px;">
+                <div class="playNum" style="color:red" onclick=loadPlayers(10)>10</div>
+                <div class="playNum" style="color:orange" onclick=loadPlayers(11)>11</div>
+                <div class="playNum" style="color:lime" onclick=loadPlayers(12)>12</div>
+                <div class="playNum" style="color:rgb(0, 204, 255)" onclick=loadPlayers(13)>13</div>
+                <div class="playNum" style="color:rgb(117, 104, 255)" onclick=loadPlayers(14)>14</div>
+                <div class="playNum" style="color:rgb(255, 0, 111)" onclick=loadPlayers(15)>15</div>
+            </div>
+        </div>
+    </div>
+    <div id="playerNameScreen" class="hidden invisible-content loadScreen flex-column">
+        <div id="player_content">
+            <div id="player_tile_container"></div>
+            <p class="player_continue_text" onclick="savePlayerNames()">Continue</p>
+        </div>
+    </div>
+    <div id="playerSelectScreen" class="hidden invisible-content loadScreen flex-column">
+        <div id="player_selection_tile_container">
+            <div class="player_selection_tile">
+                <img id="image_one" src="../images/characters/character_icons/angela.png">
+            </div>
+            <div class="player_selection_tile">
+                <img id="image_two" src="../images/characters/character_icons/circe.png">
+            </div>
+            <div class="player_selection_tile">
+                <img id="image_three" src="../images/characters/character_icons/angela.png">
+            </div>
+            <div class="player_selection_tile">
+                <img id="image_four" src="../images/characters/character_icons/angela.png">
+            </div>
+        </div>
+        <p class="player_continue_text" onclick="hidePlayerSelection()">Continue</p>
+    </div>
+    <div style="display: none;">
+        <audio id="rightAudio" controls>
+            <source src="../audios/milli_right.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="wrongAudio" controls>
+            <source src="../audios/milli_wrong.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="flipAudio" controls>
+            <source src="../audios/flip.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div id="flippedCard" class="card_gone flex-column" ondrag="console.log('drag');this.classList.remove('card_hidden')" ondblclick="alert(1);this.classList.remove('card_hidden')">
+        <p id="flipped_card_phrase">Here is a sample phrase</p>
+        <div class="card_actions" class="flex-row">
+            <p onclick="this.parentElement.parentElement.classList.add('card_hidden')">Hide Card</p>
+            <p>|</p>
+            <p onclick="this.parentElement.parentElement.classList.add('card_gone')">Discard Card</p>
+            <p>|</p>
+            <p onclick="correctAnswer()">Correct Answer</p>
+        </div>
+    </div>
+    <div class="backImage">
+        <img src="../images/backgrounds/cards_back.png">
+    </div>
+    <div class="splitContent">
+        <div class="main_div">
+
+            <div class="card_table flex-row">
+                <div id="easy_card_stack" class="cardStack">
+                </div>
+                <div id="medium_card_stack" class="cardStack">
+                </div>
+                <div id="hard_card_stack" class="cardStack">
+                </div>
+            </div>
+            <div class="toolbox flex-row">
+                <img src="../images/logos/reset.png" onclick="loadPlayerSelectionScreen()">
+                <img src="../images/logos/home.png" onclick="Global.goHome()">
+                <img src="../images/logos/down.png" onclick="document.getElementById('flippedCard').classList.remove('card_hidden')">
+            </div>
+        </div>
+        <div id="scoreList" class="scores"></div>
+    </div>
+
+</body>
+<script type="text/javascript">
+    //let showLocation;
+    function ready(fn) {
+        if (document.readyState != 'loading') {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    ready(function () {
+        Global.init();
+        Cards.init();
+        loadPlayers = Cards.loadPlayers;
+        savePlayerNames = Cards.savePlayerNames;
+        loadPlayerSelectionScreen = Cards.loadPlayerSelectionScreen;
+        hidePlayerSelection = Cards.hidePlayerSelection;
+        chooseCard = Cards.chooseCard
+        correctAnswer = Cards.correctAnswer;
+    });
+
+    function hideMessage() {
+        document.getElementById('messageDiv').classList.add('hidden');
+    }
+
+    function showTimer(element) {
+        element.classList.remove('category-animate');
+        console.log(document.getElementsByClassName('category-animate').length == 0)
+        if (document.getElementsByClassName('category-animate').length == 0) {
+            setTimeout(() => { startTimer(); }, 2500);
+        }
+    }
+</script>
+
+</html>

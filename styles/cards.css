@@ -1,0 +1,231 @@
+.loadScreen{
+    color:black;
+    background-color: rgba(255, 255, 255, 0.656);
+}
+
+.playNum{
+    color:black;
+    font-size: 150%;
+    padding:20px;
+    cursor: pointer;
+}
+
+.playNum:hover{
+    opacity: .6;
+    color:rgb(0, 255, 85);
+}
+.splitContent{
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+#initial_content{
+    font-size:3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#initial_content p{
+    
+    text-align: center;
+}
+
+#player_tile_container{
+    max-height: 80%;
+    padding:50px;
+}
+
+#initial_content .flex-row{
+    width: 100% !important;
+}
+
+.character_name_tile img{
+    max-width: 100%;
+}
+
+.character_name_input{
+    width: 90%;
+    font-family: 'Renner';
+    font-size: 2rem;
+    padding:10px;
+    margin-top: 10px;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 5px;
+}
+
+.player_name_row{
+    display: grid;
+    width: 90%;
+    height: 45%;
+}
+
+.character_name_tile {
+    margin:10px;
+}
+
+::placeholder {
+    color: rgb(188, 188, 188);
+  }
+
+  .player_continue_text{
+    width:100%;
+    color:black;
+    text-align: center;
+    font-size: 1.7rem;
+    margin-top:2px;
+  }
+
+
+  /* CONTENT */
+  .main_div{
+    width: 80vw;
+  }
+
+  .card_table{
+    width: 100%;
+    height: 90vh;
+  }
+
+  .toolbox{
+    width: 100%;
+    height: 10vh;
+    justify-content: flex-start;
+    filter: grayscale(100%) brightness(500%) hue-rotate(226deg);
+  }
+
+  .toolbox img {
+    opacity: .6;
+    height:60%;
+    padding: 5px;
+}
+
+  #player_selection_tile_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width:80%
+  }
+
+  .player_selection_tile{
+    margin: 10px;
+    border-radius: 3.7vw;
+    aspect-ratio: 1;
+    padding-top: 1px;
+    border: black 5px solid;
+  }
+
+  .player_selection_tile img{
+    width:100%;
+    max-height:unset;
+  }
+
+  /* SCORES */
+
+  .scores{
+    width: 20vw;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .playerScore{
+    width:100%;
+    justify-content: flex-start;
+  }
+
+  .playerScore img{
+    height:7vh;
+    margin:5px;
+  }
+
+  #playerSelectScreen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    padding-top:100px;
+    height: fit-content;
+    width: 90vw;
+    position: absolute;
+    z-index: 1000;
+    border: 10px solid;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 0px 25px black;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .cardStack{
+    margin:20px;
+    position:relative;
+    width: 20vw;
+  }
+
+  .cardStack img{
+    position:absolute;
+    top:1px;
+    left:1;
+    z-index: 100;
+    rotate: 0deg;
+    width: 100%;
+    transition: all 1s ease-in;
+    box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.308);
+    border-radius:25px;
+  }
+
+  .flown_out_card{
+    top:-100vh !important;
+    rotate: 90deg !important;
+    transition: all .5s ease-in;
+  }
+
+  #flippedCard{
+    top:0;
+    background-color: white;
+    border-radius: 10vh;
+    position: absolute;
+    box-shadow: 5px 0px 25px black;
+    margin-top: 50vh;
+    margin-left: 50vw;
+    transform: translate(-50%,-50%);
+    width: 80vw;
+    height: 80vh;
+    z-index: 1020;
+    transition: all 1s ease-in;
+  }
+
+   #flipped_card_phrase{
+    text-align: center;
+    padding:10px;
+   }
+
+  #flippedCard p{
+    font-size:5rem;
+  }
+
+  .card_gone{
+    margin-top:-100vh !important;
+    transition: all .5s ease-in;
+  }
+
+  .card_hidden{
+    margin-top:-30vh !important;
+    transition: all .5s ease-in;
+  }
+
+.card_actions{
+    display: flex;
+    justify-content: center;
+    width:100%;font-size:.5rem;align-self:flex-end;align-items:center;margin-bottom:10px;
+}
+.card_actions p{
+    font-size:1rem !important;
+}
+
+.pointsInput{
+    background:none;
+    border:none;
+    font-family: 'Renner';
+}

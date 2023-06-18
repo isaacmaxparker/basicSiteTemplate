@@ -10,7 +10,7 @@ const Price = (function () {
      *              CONSTANTS
      */
 
-    const PRICE_JSON_PREFIX = "https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Price/";
+    const PRICE_JSON_PREFIX = "https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Price/";
 
     const ROW_CAP = 4;
     const TEAMS_TO_REMOVE = [

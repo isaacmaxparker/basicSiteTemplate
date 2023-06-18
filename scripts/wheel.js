@@ -9,7 +9,7 @@ const Wheel = (function() {
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
-    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Wheel/'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Wheel/'
     const VOWEL_CODES = ['KeyA','KeyE','KeyI','KeyU','KeyO','KeyY']
     /*------------------------------------------------------------------------
      *              PRIVATE VARIABLES

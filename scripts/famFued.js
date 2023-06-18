@@ -13,7 +13,7 @@ const famFued = (function() {
     const OUTSTANDING_POINTS_ID = "scoreToAdd"
     const TEAM_SCORE_PREFIX = "team_score_"
     const FLIP_DURATION = 200;
-    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/FamFued/'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/FamFued/'
     const STARTING_QUESTION =     {
         "question_num":0,
         "question_text":"Press Next to start the game!",

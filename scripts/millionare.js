@@ -9,7 +9,7 @@ const Milli = (function () {
     /*------------------------------------------------------------------------
      *              CONSTANTS
      */
-    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmcdgl/JSON/main/Games/Millionare/'
+    const QUESTIONS_URL_PREFIX = 'https://raw.githubusercontent.com/isaacmaxparker/JSON/main/Games/Millionare/'
     const FIRST_QUESTION = {
         "question_text": "Press Next to start the game",
         "answers": {
